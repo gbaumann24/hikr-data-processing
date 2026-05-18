@@ -1,0 +1,13 @@
+{
+  "name": "@hikr/data-pipeline",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./baselayer": "./baselayer/index.ts",
+    "./climbing": "./climbing/index.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  }
+}

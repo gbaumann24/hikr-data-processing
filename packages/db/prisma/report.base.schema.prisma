@@ -11,10 +11,11 @@ datasource db {
 
 model ReportBaseSchema {
   reportId    BigInt    @id @map("report_id")
-  status      String?
+  /// skipped = later handled by another processor; insufficient = will not be processed again.
+  status      String
   activity    String?
-  subActivity String?   @map("sub_activity")
-  canton      String?   @map("kanton")
+  subActivity String?  @map("sub_activity")
+  canton      String?  @map("kanton")
   tourDate    DateTime? @map("tour_date") @db.Date
   region      String?
 
@@ -26,11 +27,4 @@ model ReportBaseSchema {
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   @@map("report_base_schema")
-}
-
-model ClimbingGardenBaseSchema {
-  reportId BigInt           @id @map("report_id")
-  base     ReportBaseSchema @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
-
-  @@map("climbing_garden_base_schema")
 }

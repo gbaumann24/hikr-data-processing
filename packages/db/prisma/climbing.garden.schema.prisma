@@ -1,0 +1,8 @@
+model ClimbingGardenBaseSchema {
+  reportId BigInt @id @map("report_id")
+  name     String
+
+  base ReportBaseSchema @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
+
+  @@map("climbing_garden_base_schema")
+}

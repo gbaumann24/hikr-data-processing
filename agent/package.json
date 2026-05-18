@@ -4,12 +4,7 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/node": "^25.9.0",
     "mastra": "^1.9.3"
-  },
-  "peerDependencies": {
-    "typescript": "^6.0.3"
   },
   "engines": {
     "node": ">=22.13.0"
@@ -17,6 +12,8 @@
   "scripts": {
     "dev": "mastra dev",
     "build": "mastra build",
+    "test": "bun test --pass-with-no-tests",
+    "typecheck": "tsc --noEmit",
     "start": "mastra start"
   },
   "dependencies": {
