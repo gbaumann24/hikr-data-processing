@@ -1,5 +1,5 @@
 model ReportBaseSchema {
-  reportId    Int       @id @map("report_id")
+  reportId    BigInt    @id @map("report_id")
   status      String?
   activity    String?
   subActivity String?   @map("sub_activity")
@@ -7,7 +7,7 @@ model ReportBaseSchema {
   tourDate    DateTime? @map("tour_date") @db.Date
   region      String?
 
-  hikrOrgPostSchema      HikrOrgPostSchema?
+  hikrOrgPostSchema      HikrOrgPostSchema         @relation(fields: [reportId], references: [id], onDelete: Cascade)
   climbingTourBaseSchema ClimbingTourBaseSchema?
   climbingGardenSchema   ClimbingGardenBaseSchema?
 
@@ -17,15 +17,8 @@ model ReportBaseSchema {
   @@map("report_base_schema")
 }
 
-model HikrOrgPostSchema {
-  reportId Int              @id @map("report_id")
-  base     ReportBaseSchema @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
-
-  @@map("hikr_org_post_schema")
-}
-
 model ClimbingGardenBaseSchema {
-  reportId Int              @id @map("report_id")
+  reportId BigInt           @id @map("report_id")
   base     ReportBaseSchema @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
 
   @@map("climbing_garden_base_schema")

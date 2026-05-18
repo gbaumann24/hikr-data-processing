@@ -10,11 +10,12 @@ datasource db {
 }
 
 model ClimbingTourBaseSchema {
-  postId        Int     @id @map("post_id")
-  schemaVersion String  @map("schema_version")
+  reportId      BigInt @id @map("report_id")
+  schemaVersion String @map("schema_version")
   routeName     String @map("route_name")
   summit        String
 
+  base            ReportBaseSchema                   @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
   equipment       ClimbingTourEquipmentSchema?
   timeRequirement ClimbingTourTimeRequirementSchema?
   protection      ClimbingTourProtectionSchema?
@@ -32,8 +33,8 @@ model ClimbingTourBaseSchema {
 }
 
 model ClimbingTourEquipmentSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   ropeTypeValue                   String? @map("rope_type_value")
   ropeLengthMetersValue           Int?    @map("rope_length_meters_value")
@@ -52,8 +53,8 @@ model ClimbingTourEquipmentSchema {
 }
 
 model ClimbingTourTimeRequirementSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   pureClimbingTimeMinutesValue String? @map("pure_climbing_time_minutes_value")
   descentMinutesValue          String? @map("descent_minutes_value")
@@ -63,8 +64,8 @@ model ClimbingTourTimeRequirementSchema {
 }
 
 model ClimbingTourProtectionSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   boltSpacingTypeValue          String? @map("bolt_spacing_type_value")
   belayStationsValue            String? @map("belay_stations_value")
@@ -75,8 +76,8 @@ model ClimbingTourProtectionSchema {
 }
 
 model ClimbingTourFootwearSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   approachFootwearTypeValue String? @map("approach_footwear_type_value")
   climbingFootwearTypeValue String? @map("climbing_footwear_type_value")
@@ -86,22 +87,22 @@ model ClimbingTourFootwearSchema {
 }
 
 model ClimbingTourTerrainSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  routeTypeValue      Json?   @map("route_type_value")
-  exposureValue       String? @map("exposure_value")
-  sunValue            String? @map("sun_value")
-  driesQuicklyValue   String? @map("dries_quickly_value")
-  rockTypeValue       String? @map("rock_type_value")
-  hazards             Json?
+  routeTypeValue    Json?   @map("route_type_value")
+  exposureValue     String? @map("exposure_value")
+  sunValue          String? @map("sun_value")
+  driesQuicklyValue String? @map("dries_quickly_value")
+  rockTypeValue     String? @map("rock_type_value")
+  hazards           Json?
 
   @@map("climbing_tour_terrain_schema")
 }
 
 model ClimbingTourClimbingSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   cruxPresentValue                String? @map("crux_present_value")
   cruxLocationValue               String? @map("crux_location_value")
@@ -126,8 +127,8 @@ model ClimbingTourClimbingSchema {
 }
 
 model ClimbingTourAccessSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   parkingLocationValue             String? @map("parking_location_value")
   parkingCostsValue                String? @map("parking_costs_value")
@@ -141,8 +142,8 @@ model ClimbingTourAccessSchema {
 }
 
 model ClimbingTourApproachDescentSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   descentSummitElevationMetersValue  Int?    @map("descent_summit_elevation_meters_value")
   descentSameAsApproachValue         String? @map("descent_same_as_approach_value")
@@ -158,8 +159,8 @@ model ClimbingTourApproachDescentSchema {
 }
 
 model ClimbingTourSpecialNotesSchema {
-  baseId Int                    @id @map("base_id")
-  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   seasonalityValue String? @map("seasonality_value")
 
