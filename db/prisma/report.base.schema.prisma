@@ -1,3 +1,14 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
 model ReportBaseSchema {
   reportId    BigInt    @id @map("report_id")
   status      String?
