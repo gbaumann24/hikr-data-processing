@@ -1,0 +1,167 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+model ClimbingTourBaseSchema {
+  postId        Int     @id @map("post_id")
+  schemaVersion String  @map("schema_version")
+  routeName     String @map("route_name")
+  summit        String
+
+  equipment       ClimbingTourEquipmentSchema?
+  timeRequirement ClimbingTourTimeRequirementSchema?
+  protection      ClimbingTourProtectionSchema?
+  footwear        ClimbingTourFootwearSchema?
+  terrain         ClimbingTourTerrainSchema?
+  climbing        ClimbingTourClimbingSchema?
+  access          ClimbingTourAccessSchema?
+  approachDescent ClimbingTourApproachDescentSchema?
+  specialNotes    ClimbingTourSpecialNotesSchema?
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("climbing_tour_base_schema")
+}
+
+model ClimbingTourEquipmentSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  ropeTypeValue                   String? @map("rope_type_value")
+  ropeLengthMetersValue           Int?    @map("rope_length_meters_value")
+  mobileProtectionRequiredValue   String? @map("mobile_protection_required_value")
+  mobileFriendsCountPerSizeValue  Json?   @map("mobile_friends_count_per_size_value")
+  mobileFriendsSizesValue         Json?   @map("mobile_friends_sizes_value")
+  mobileNutsCountPerSizeValue     Json?   @map("mobile_nuts_count_per_size_value")
+  mobileNutsSizesValue            Json?   @map("mobile_nuts_sizes_value")
+  mobileSlingsLengthsValue        Json?   @map("mobile_slings_lengths_value")
+  mobileSlingsCountPerLengthValue Json?   @map("mobile_slings_count_per_length_value")
+  mobileQuickdrawsCountValue      Int?    @map("mobile_quickdraws_count_value")
+  mobileProtectionOptionsValue    String? @map("mobile_protection_options_value")
+  additionalEquipmentValue        Json?   @map("additional_equipment_value")
+
+  @@map("climbing_tour_equipment_schema")
+}
+
+model ClimbingTourTimeRequirementSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  pureClimbingTimeMinutesValue String? @map("pure_climbing_time_minutes_value")
+  descentMinutesValue          String? @map("descent_minutes_value")
+  approachMinutesValue         String? @map("approach_minutes_value")
+
+  @@map("climbing_tour_time_requirement_schema")
+}
+
+model ClimbingTourProtectionSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  boltSpacingTypeValue          String? @map("bolt_spacing_type_value")
+  belayStationsValue            String? @map("belay_stations_value")
+  boltConditionTypeValue        String? @map("bolt_condition_type_value")
+  boltConditionDescriptionValue String? @map("bolt_condition_description_value")
+
+  @@map("climbing_tour_protection_schema")
+}
+
+model ClimbingTourFootwearSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  approachFootwearTypeValue String? @map("approach_footwear_type_value")
+  climbingFootwearTypeValue String? @map("climbing_footwear_type_value")
+  descentFootwearTypeValue  String? @map("descent_footwear_type_value")
+
+  @@map("climbing_tour_footwear_schema")
+}
+
+model ClimbingTourTerrainSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  routeTypeValue      Json?   @map("route_type_value")
+  exposureValue       String? @map("exposure_value")
+  sunValue            String? @map("sun_value")
+  driesQuicklyValue   String? @map("dries_quickly_value")
+  rockTypeValue       String? @map("rock_type_value")
+  hazards             Json?
+
+  @@map("climbing_tour_terrain_schema")
+}
+
+model ClimbingTourClimbingSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  cruxPresentValue                String? @map("crux_present_value")
+  cruxLocationValue               String? @map("crux_location_value")
+  cruxDifficultyValue             String? @map("crux_difficulty_value")
+  climbingDifficultyRelationValue String? @map("climbing_difficulty_relation_value")
+  climbingDifficultyReasonValue   String? @map("climbing_difficulty_reason_value")
+  rappellingPossibleValue         String? @map("rappelling_possible_value")
+  rappelCountValue                Int?    @map("rappel_count_value")
+  rappelLengthsValue              String? @map("rappel_lengths_value")
+  rappelToStartValue              String? @map("rappel_to_start_value")
+  rappelRouteValue                String? @map("rappel_route_value")
+  climbingStyleValue              Json?   @map("climbing_style_value")
+  routeFindingValue               String? @map("route_finding_value")
+  routeFindingDescriptionValue    String? @map("route_finding_description_value")
+  exitOptionsValue                String? @map("exit_options_value")
+  exitDescriptionValue            String? @map("exit_description_value")
+  pitchLinkingPossibleValue       String? @map("pitch_linking_possible_value")
+  pitchLinkingDescriptionValue    String? @map("pitch_linking_description_value")
+  pitchDescription                Json?   @map("pitch_description")
+
+  @@map("climbing_tour_climbing_schema")
+}
+
+model ClimbingTourAccessSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  parkingLocationValue             String? @map("parking_location_value")
+  parkingCostsValue                String? @map("parking_costs_value")
+  parkingSpecialFeaturesValue      String? @map("parking_special_features_value")
+  publicTransportTypeValue         String? @map("public_transport_type_value")
+  publicTransportStationValue      String? @map("public_transport_station_value")
+  publicTransportCableCarValue     String? @map("public_transport_cable_car_value")
+  publicTransportRegistrationValue String? @map("public_transport_registration_value")
+
+  @@map("climbing_tour_access_schema")
+}
+
+model ClimbingTourApproachDescentSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  descentSummitElevationMetersValue  Int?    @map("descent_summit_elevation_meters_value")
+  descentSameAsApproachValue         String? @map("descent_same_as_approach_value")
+  descentRefreshmentValue            String? @map("descent_refreshment_value")
+  descentRefreshmentDescriptionValue String? @map("descent_refreshment_description_value")
+  descentDifficultyValue             String? @map("descent_difficulty_value")
+  approachStartElevationMetersValue  Int?    @map("approach_start_elevation_meters_value")
+  approachRouteFindingValue          String? @map("approach_route_finding_value")
+  approachDescriptionValue           String? @map("approach_description_value")
+  approachDifficultyValue            String? @map("approach_difficulty_value")
+
+  @@map("climbing_tour_approach_descent_schema")
+}
+
+model ClimbingTourSpecialNotesSchema {
+  baseId Int                    @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [postId], onDelete: Cascade)
+
+  seasonalityValue String? @map("seasonality_value")
+
+  @@map("climbing_tour_special_notes_schema")
+}

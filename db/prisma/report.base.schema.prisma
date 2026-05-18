@@ -1,0 +1,32 @@
+model ReportBaseSchema {
+  reportId    Int       @id @map("report_id")
+  status      String?
+  activity    String?
+  subActivity String?   @map("sub_activity")
+  canton      String?   @map("kanton")
+  tourDate    DateTime? @map("tour_date") @db.Date
+  region      String?
+
+  hikrOrgPostSchema      HikrOrgPostSchema?
+  climbingTourBaseSchema ClimbingTourBaseSchema?
+  climbingGardenSchema   ClimbingGardenBaseSchema?
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("report_base_schema")
+}
+
+model HikrOrgPostSchema {
+  reportId Int              @id @map("report_id")
+  base     ReportBaseSchema @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
+
+  @@map("hikr_org_post_schema")
+}
+
+model ClimbingGardenBaseSchema {
+  reportId Int              @id @map("report_id")
+  base     ReportBaseSchema @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
+
+  @@map("climbing_garden_base_schema")
+}
