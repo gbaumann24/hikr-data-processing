@@ -2,6 +2,7 @@ import {
   mapHikrOrgPostToPreprocessorInput,
   mapReportBaseToSchemaWrite,
   prepareBaseLayer,
+  PREPROCESSOR_STATUS,
   type BaseLayerPreprocessorOutput,
   type HikrOrgPostBaseLayerInput,
   type HikrPreprocessorInput,
@@ -11,16 +12,21 @@ import {
 import { toAsyncIterable } from '@hikr/utils';
 import { preprocessPreparedBaseLayerForClimbing } from './preprocessor';
 import { createStatusCounts } from './utils';
-import type { BaseDataPipelineDatabase } from '@hikr/db';
+import type { BaseDataPipelineDatabase, MaybePromise } from '@hikr/db';
 import type {
+  ClimbingGardenBasePreprocessorOutput,
   ClimbingPreprocessorOutput,
   ClimbingSubActivityClassifier,
+  ClimbingTourBasePreprocessorOutput,
 } from './types';
 
 export type ClimbingDataPipelineDatabase = BaseDataPipelineDatabase<
   HikrOrgPostBaseLayerInput,
   ReportBaseSchemaWriteInput
->;
+> & {
+  upsertClimbingTourBase: (input: ClimbingTourBasePreprocessorOutput) => MaybePromise<void>;
+  upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => MaybePromise<void>;
+};
 
 export type RunClimbingDataPipelineOptions = {
   database: ClimbingDataPipelineDatabase;
@@ -57,11 +63,21 @@ export async function runClimbingDataPipeline({
 
     const input = mapHikrOrgPostToPreprocessorInput(hikrOrgPost);
     const baseLayer = prepareBaseLayer(input);
-    await database.upsertReportBase(mapReportBaseToSchemaWrite(baseLayer.base));
 
     const climbing = await preprocessPreparedBaseLayerForClimbing(input, baseLayer, {
       classifySubActivity: classifySubActivity ?? undefined,
     });
+
+    await database.upsertReportBase(mapReportBaseToSchemaWrite(climbing.base));
+
+    if (climbing.base.status === PREPROCESSOR_STATUS.READY) {
+      if (climbing.climbingTourBase) {
+        await database.upsertClimbingTourBase(climbing.climbingTourBase);
+      }
+      if (climbing.climbingGardenBase) {
+        await database.upsertClimbingGardenBase(climbing.climbingGardenBase);
+      }
+    }
 
     statusCounts[climbing.base.status] += 1;
     items.push({ hikrOrgPost, input, baseLayer, climbing });

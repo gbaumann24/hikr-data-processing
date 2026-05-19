@@ -6,6 +6,13 @@
     ".": "./src/index.ts"
   },
   "scripts": {
+    "generate": "prisma generate --schema prisma",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "^6"
+  },
+  "devDependencies": {
+    "prisma": "^6"
   }
 }

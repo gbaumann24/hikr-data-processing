@@ -30,9 +30,9 @@ describe('climbing data pipeline', () => {
 					hikrOrgPost(),
 					hikrOrgPost({ id: 43, description: 'zu kurz' }),
 				],
-				upsertReportBase: (input) => {
-					reportBaseWrites.push(input);
-				},
+				upsertReportBase: (input) => { reportBaseWrites.push(input); },
+				upsertClimbingTourBase: () => {},
+				upsertClimbingGardenBase: () => {},
 			},
 			classifySubActivity: async () => ({
 				subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
@@ -57,9 +57,9 @@ describe('climbing data pipeline', () => {
 		expect(reportBaseWrites).toMatchObject([
 			{
 				reportId: 42n,
-				status: PREPROCESSOR_STATUS.SKIPPED,
-				activity: null,
-				subActivity: null,
+				status: PREPROCESSOR_STATUS.READY,
+				activity: 'Klettern',
+				subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
 				canton: 'Obwalden',
 				region: 'Melchtal',
 			},
@@ -87,9 +87,9 @@ describe('climbing data pipeline', () => {
 		const result = await runClimbingDataPipeline({
 			database: {
 				findHikrOrgPostsForClimbingPreprocessing,
-				upsertReportBase: (input) => {
-					reportBaseWrites.push(input);
-				},
+				upsertReportBase: (input) => { reportBaseWrites.push(input); },
+				upsertClimbingTourBase: () => {},
+				upsertClimbingGardenBase: () => {},
 			},
 			limit: 1,
 			classifySubActivity: null,

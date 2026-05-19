@@ -4,8 +4,8 @@ import {
   mapReportBaseToSchemaWrite,
   type PreprocessorStatus,
 } from '../workflows/baselayer';
-import type { ClimbingDataPipelineDatabase } from '../workflows/climbing';
-import type { ClimbingPreprocessorOutput } from '../workflows/climbing';
+import type { ClimbingDataPipelineDatabase, ClimbingPreprocessorOutput } from '../workflows/climbing';
+import { PREPROCESSOR_STATUS } from '../workflows/baselayer';
 
 export type ClimbingPipelineServiceOptions = {
   mastra: Mastra;
@@ -44,6 +44,16 @@ export async function runClimbingPipelineService({
     if (result.status === 'success') {
       const climbing = result.result as ClimbingPreprocessorOutput;
       await database.upsertReportBase(mapReportBaseToSchemaWrite(climbing.base));
+
+      if (climbing.base.status === PREPROCESSOR_STATUS.READY) {
+        if (climbing.climbingTourBase) {
+          await database.upsertClimbingTourBase(climbing.climbingTourBase);
+        }
+        if (climbing.climbingGardenBase) {
+          await database.upsertClimbingGardenBase(climbing.climbingGardenBase);
+        }
+      }
+
       statusCounts[climbing.base.status] += 1;
     }
 

@@ -14,7 +14,11 @@ export { runClimbingPipelineService } from './services/climbing-pipeline-service
 export { ACTIVITY } from './workflows/baselayer';
 export type { HikrOrgPostBaseLayerInput, ReportBaseSchemaWriteInput } from './workflows/baselayer';
 export { runClimbingDataPipeline } from './workflows/climbing';
-export type { ClimbingDataPipelineDatabase } from './workflows/climbing';
+export type {
+  ClimbingDataPipelineDatabase,
+  ClimbingTourBasePreprocessorOutput,
+  ClimbingGardenBasePreprocessorOutput,
+} from './workflows/climbing';
 
 export const mastra = new Mastra({
   agents: {

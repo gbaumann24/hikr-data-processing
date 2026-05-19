@@ -38,9 +38,9 @@ describe('hikr sqlite dataset', () => {
 				database: {
 					findHikrOrgPostsForClimbingPreprocessing: () =>
 						rows.map(mapSqliteReportToBaseLayerInput),
-					upsertReportBase: (input) => {
-						reportBaseWrites.push(input);
-					},
+					upsertReportBase: (input) => { reportBaseWrites.push(input); },
+					upsertClimbingTourBase: () => {},
+					upsertClimbingGardenBase: () => {},
 				},
 				classifySubActivity: null,
 			});

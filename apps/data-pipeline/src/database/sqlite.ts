@@ -45,8 +45,8 @@ export function createSqliteDatabase(db: Database): ClimbingDataPipelineDatabase
       return rows.map(mapRowToPost);
     },
 
-    upsertReportBase(_input: ReportBaseSchemaWriteInput) {
-      // TODO: implement upsert once DB write schema is finalised
-    },
+    upsertReportBase(_input: ReportBaseSchemaWriteInput) {},
+    upsertClimbingTourBase() {},
+    upsertClimbingGardenBase() {},
   };
 }

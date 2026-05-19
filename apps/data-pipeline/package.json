@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@hikr/db": "workspace:*",
     "agent": "workspace:*"
   }
 }
