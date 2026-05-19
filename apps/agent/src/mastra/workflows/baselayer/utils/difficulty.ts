@@ -51,64 +51,26 @@ const UIAA_TO_FRENCH_CLIMBING_GRADE: Record<string, string> = {
   IV: '4a',
   'IV+': '4b',
   'V-': '4c',
-  V: '4c/5a',
+  V: '5a',
   'V+': '5b',
   'VI-': '5c',
-  VI: '5c/6a',
-  'VI+': '6a/6a+',
-  'VII-': '6a+',
-  VII: '6b/6b+',
-  'VII+': '6b+/6c',
-  'VIII-': '6c+',
-  VIII: '7a',
-};
-
-const UNICODE_ROMAN_NUMERALS: Record<string, string> = {
-  'Ⅰ': 'I',
-  'Ⅱ': 'II',
-  'Ⅲ': 'III',
-  'Ⅳ': 'IV',
-  'Ⅴ': 'V',
-  'Ⅵ': 'VI',
-  'Ⅶ': 'VII',
-  'Ⅷ': 'VIII',
-  'Ⅸ': 'IX',
-  'Ⅹ': 'X',
-  'Ⅺ': 'XI',
-  'Ⅻ': 'XII',
-  'ⅰ': 'I',
-  'ⅱ': 'II',
-  'ⅲ': 'III',
-  'ⅳ': 'IV',
-  'ⅴ': 'V',
-  'ⅵ': 'VI',
-  'ⅶ': 'VII',
-  'ⅷ': 'VIII',
-  'ⅸ': 'IX',
-  'ⅹ': 'X',
-  'ⅺ': 'XI',
-  'ⅻ': 'XII',
-};
-
-const UIAA_ARABIC_TO_ROMAN_GRADE: Record<string, string> = {
-  '1': 'I',
-  '2': 'II',
-  '3': 'III',
-  '3+': 'III+',
-  '4-': 'IV-',
-  '4': 'IV',
-  '4+': 'IV+',
-  '5-': 'V-',
-  '5': 'V',
-  '5+': 'V+',
-  '6-': 'VI-',
-  '6': 'VI',
-  '6+': 'VI+',
-  '7-': 'VII-',
-  '7': 'VII',
-  '7+': 'VII+',
-  '8-': 'VIII-',
-  '8': 'VIII',
+  VI: '6a',
+  'VI+': '6a+',
+  'VII-': '6b',
+  VII: '6b+',
+  'VII+': '6c',
+  'VIII-': '7a',
+  VIII: '7a+',
+  'VIII+': '7b',
+  'IX-': '7c',
+  IX: '7c+',
+  'IX+': '8a',
+  'X-': '8a+',
+  X: '8b',
+  'X+': '8b+',
+  'XI-': '8c',
+  XI: '8c+',
+  'XI+': '9a',
 };
 
 function normalizeClimbingDifficultyValue(value: string | null | undefined): string | null {
@@ -117,31 +79,10 @@ function normalizeClimbingDifficultyValue(value: string | null | undefined): str
     return null;
   }
 
-  return convertUiaaClimbingGradeToFrench(normalized) ?? normalized;
-}
-
-export function convertUiaaClimbingGradeToFrench(value: string): string | null {
-  const gradeKey = normalizeUiaaGradeKey(value);
-  return gradeKey ? (UIAA_TO_FRENCH_CLIMBING_GRADE[gradeKey] ?? null) : null;
-}
-
-function normalizeUiaaGradeKey(value: string): string | null {
-  const normalized = replaceUnicodeRomanNumerals(value)
-    .replace(/[−–—]/g, '-')
-    .replace(/^UIAA\s+/i, '')
-    .replace(/\s*([+-])\s*$/u, '$1')
+  const uiaaGrade = normalized
+    .replace(/\s*\(\s*UIAA\s*[-–—]\s*Skala\s*\)\s*$/i, '')
     .trim()
     .toUpperCase();
 
-  if (/^[IVX]+[+-]?$/.test(normalized)) {
-    return normalized;
-  }
-
-  return UIAA_ARABIC_TO_ROMAN_GRADE[normalized] ?? null;
-}
-
-function replaceUnicodeRomanNumerals(value: string): string {
-  return value.replace(/[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹⅺⅻ]/g, (character) => {
-    return UNICODE_ROMAN_NUMERALS[character] ?? character;
-  });
+  return UIAA_TO_FRENCH_CLIMBING_GRADE[uiaaGrade] ?? normalized;
 }
