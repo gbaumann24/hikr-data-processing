@@ -1,5 +1,5 @@
 {
-  "name": "@hikr/db",
+  "name": "@hikr/types",
   "private": true,
   "type": "module",
   "exports": {

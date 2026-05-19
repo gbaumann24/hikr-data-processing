@@ -2,12 +2,12 @@
   "name": "@hikr/data-pipeline",
   "private": true,
   "type": "module",
-  "exports": {
-    "./baselayer": "./baselayer/index.ts",
-    "./climbing": "./climbing/index.ts"
-  },
   "scripts": {
+    "run": "bun src/run.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "agent": "workspace:*"
   }
 }

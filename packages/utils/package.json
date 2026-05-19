@@ -1,0 +1,15 @@
+{
+  "name": "@hikr/utils",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./async-iterable": "./src/async-iterable.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hikr/types": "workspace:*"
+  }
+}

@@ -16,3 +16,5 @@ coverage
 *.log
 *.db
 *.db-*
+*.sqlite
+*.sqlite-*
