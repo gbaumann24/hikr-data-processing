@@ -26,9 +26,13 @@ run limit="":
 db-generate:
     bun run --cwd packages/db generate
 
-# Run Prisma migrations
+# Push schema to DB (syncs without migration history, safe for dev)
+db-push:
+    bun run --cwd packages/db node_modules/.bin/prisma db push --schema prisma
+
+# Run Prisma migrations (for production)
 db-migrate:
-    prisma migrate dev --schema packages/db/prisma
+    bun run --cwd packages/db node_modules/.bin/prisma migrate deploy --schema prisma
 
 # ── Quality ────────────────────────────────────────────────────────────────────
 
