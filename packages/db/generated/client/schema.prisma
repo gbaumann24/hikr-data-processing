@@ -10,10 +10,10 @@ model ClimbingGardenBaseSchema {
 model ClimbingTourBaseSchema {
   reportId      BigInt @id @map("report_id")
   schemaVersion String @map("schema_version")
-  routeName     String @map("route_name")
-  summit        String
+  routeId       BigInt @map("route_id")
 
   base            ReportBaseSchema                   @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
+  route           RouteSchema                        @relation(fields: [routeId], references: [id], onDelete: Restrict)
   equipment       ClimbingTourEquipmentSchema?
   timeRequirement ClimbingTourTimeRequirementSchema?
   protection      ClimbingTourProtectionSchema?
@@ -27,6 +27,7 @@ model ClimbingTourBaseSchema {
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
 
+  @@index([routeId], map: "climbing_tour_base_schema_route_id_idx")
   @@map("climbing_tour_base_schema")
 }
 
@@ -305,4 +306,22 @@ model ReportBaseSchema {
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   @@map("report_base_schema")
+}
+
+model RouteSchema {
+  id         BigInt  @id @default(autoincrement())
+  activity   String
+  routeName  String? @map("route_name")
+  startPoint String? @map("start_point")
+  summitName String  @map("summit_name")
+  canton     String
+
+  climbingTourBaseSchemas ClimbingTourBaseSchema[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([activity, routeName, summitName, canton], name: "activityRouteNameSummitCanton", map: "routes_activity_route_name_summit_canton_key")
+  @@unique([activity, startPoint, summitName, canton], name: "activityStartPointSummitCanton", map: "routes_activity_start_point_summit_canton_key")
+  @@map("routes")
 }

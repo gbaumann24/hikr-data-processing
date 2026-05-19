@@ -4,4 +4,5 @@ export type {
   ClimbingTourBaseSchema,
   Prisma,
   ReportBaseSchema,
+  RouteSchema,
 } from '../generated/client';

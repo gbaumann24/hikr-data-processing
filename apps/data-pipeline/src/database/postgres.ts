@@ -41,19 +41,48 @@ export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipeli
     },
 
     async upsertClimbingTourBase(input: ClimbingTourBasePreprocessorOutput): Promise<void> {
-      await prisma.climbingTourBaseSchema.upsert({
-        where: { reportId: input.reportId },
-        create: {
-          reportId: input.reportId,
-          schemaVersion: input.schemaVersion,
-          routeName: input.routeName,
-          summit: input.summit,
-        },
-        update: {
-          schemaVersion: input.schemaVersion,
-          routeName: input.routeName,
-          summit: input.summit,
-        },
+      await prisma.$transaction(async (tx) => {
+        const reportBase = await tx.reportBaseSchema.findUnique({
+          where: { reportId: input.reportId },
+          select: { activity: true, canton: true },
+        });
+
+        if (!reportBase?.activity || !reportBase.canton) {
+          throw new Error(
+            `Cannot persist climbing tour route for report ${input.reportId.toString()} without activity and canton`,
+          );
+        }
+
+        const route = await tx.routeSchema.upsert({
+          where: {
+            activityRouteNameSummitCanton: {
+              activity: reportBase.activity,
+              routeName: input.routeName,
+              summitName: input.summit,
+              canton: reportBase.canton,
+            },
+          },
+          create: {
+            activity: reportBase.activity,
+            routeName: input.routeName,
+            summitName: input.summit,
+            canton: reportBase.canton,
+          },
+          update: {},
+        });
+
+        await tx.climbingTourBaseSchema.upsert({
+          where: { reportId: input.reportId },
+          create: {
+            reportId: input.reportId,
+            schemaVersion: input.schemaVersion,
+            routeId: route.id,
+          },
+          update: {
+            schemaVersion: input.schemaVersion,
+            routeId: route.id,
+          },
+        });
       });
     },
 

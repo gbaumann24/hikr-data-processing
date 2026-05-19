@@ -129,8 +129,7 @@ exports.Prisma.ClimbingGardenBaseSchemaScalarFieldEnum = {
 exports.Prisma.ClimbingTourBaseSchemaScalarFieldEnum = {
   reportId: 'reportId',
   schemaVersion: 'schemaVersion',
-  routeName: 'routeName',
-  summit: 'summit',
+  routeId: 'routeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -316,6 +315,17 @@ exports.Prisma.ReportBaseSchemaScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.RouteSchemaScalarFieldEnum = {
+  id: 'id',
+  activity: 'activity',
+  routeName: 'routeName',
+  startPoint: 'startPoint',
+  summitName: 'summitName',
+  canton: 'canton',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -367,7 +377,8 @@ exports.Prisma.ModelName = {
   HikrWaypointSchema: 'HikrWaypointSchema',
   HikrReportWaypointSchema: 'HikrReportWaypointSchema',
   HikrScraperProgressSchema: 'HikrScraperProgressSchema',
-  ReportBaseSchema: 'ReportBaseSchema'
+  ReportBaseSchema: 'ReportBaseSchema',
+  RouteSchema: 'RouteSchema'
 };
 
 /**

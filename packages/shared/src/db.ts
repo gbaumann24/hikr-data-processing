@@ -3,6 +3,7 @@ import type {
   ClimbingTourBaseSchema,
   Prisma,
   ReportBaseSchema,
+  RouteSchema,
 } from '@hikr/db';
 import type { CLIMBING_PREPROCESSOR_SCHEMA_VERSION } from './domain';
 
@@ -33,7 +34,12 @@ export type ReportBaseSchemaWriteInput = Pick<
 
 export type ClimbingTourBaseSchemaWriteInput = Pick<
   ClimbingTourBaseSchema,
-  'reportId' | 'schemaVersion' | 'routeName' | 'summit'
+  'reportId' | 'schemaVersion' | 'routeId'
+>;
+
+export type RouteSchemaWriteInput = Pick<
+  RouteSchema,
+  'activity' | 'routeName' | 'startPoint' | 'summitName' | 'canton'
 >;
 
 export type ClimbingGardenBaseSchemaWriteInput = Pick<
@@ -41,11 +47,13 @@ export type ClimbingGardenBaseSchemaWriteInput = Pick<
   'reportId' | 'name'
 >;
 
-export type ClimbingTourBasePreprocessorOutput = Omit<
-  ClimbingTourBaseSchemaWriteInput,
-  'schemaVersion'
+export type ClimbingTourBasePreprocessorOutput = Pick<
+  ClimbingTourBaseSchema,
+  'reportId'
 > & {
   schemaVersion: typeof CLIMBING_PREPROCESSOR_SCHEMA_VERSION;
+  routeName: string;
+  summit: string;
 };
 
 export type ClimbingGardenBasePreprocessorOutput = ClimbingGardenBaseSchemaWriteInput;
