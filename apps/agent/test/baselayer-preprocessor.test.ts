@@ -24,10 +24,11 @@ function climbingGrade(climbingDifficulty: string | null): string | undefined {
 
 describe('baselayer preprocessor', () => {
   test('converts UIAA climbing grades to French grades', () => {
-    expect(climbingGrade('V- (UIAA-Skala)')).toBe('4c');
-    expect(climbingGrade('VI+ (UIAA-Skala)')).toBe('6a+');
-    expect(climbingGrade('XI+ (UIAA-Skala)')).toBe('9a');
-    expect(climbingGrade('vi')).toBe('6a');
+    expect(climbingGrade('III (UIAA-Skala)')).toBe('3');
+    expect(climbingGrade('V (UIAA-Skala)')).toBe('4c');
+    expect(climbingGrade('VI+ (UIAA-Skala)')).toBe('6a');
+    expect(climbingGrade('XI+ (UIAA-Skala)')).toBe('9a+');
+    expect(climbingGrade('vi')).toBe('5c');
   });
 
   test('keeps existing French climbing grades unchanged', () => {
