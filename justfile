@@ -30,9 +30,13 @@ db-generate:
 db-push:
     bun run --cwd packages/db node_modules/.bin/prisma db push --schema prisma
 
-# Run Prisma migrations (for production)
+# Apply pending migrations
 db-migrate:
     bun run --cwd packages/db node_modules/.bin/prisma migrate deploy --schema prisma
+
+# Create a new migration (name required: just db-create-migration add-my-table)
+db-create-migration name:
+    bun run --cwd packages/db node_modules/.bin/prisma migrate dev --schema prisma --name {{ name }}
 
 # ── Quality ────────────────────────────────────────────────────────────────────
 
