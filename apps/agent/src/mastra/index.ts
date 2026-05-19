@@ -13,14 +13,14 @@ export { climbingPipelineWorkflow } from './workflows/climbing';
 export { skiTouringPipelineWorkflow } from './workflows/ski-touring';
 export { runClimbingPipelineService } from './services/climbing-pipeline-service';
 
-export { ACTIVITY } from './workflows/baselayer';
-export type { HikrOrgPostBaseLayerInput, ReportBaseSchemaWriteInput } from './workflows/baselayer';
+export { ACTIVITY } from '@hikr/shared';
+export type { HikrOrgPostBaseLayerInput, ReportBaseSchemaWriteInput } from '@hikr/shared';
 export { runClimbingDataPipeline } from './workflows/climbing';
 export type {
   ClimbingDataPipelineDatabase,
   ClimbingTourBasePreprocessorOutput,
   ClimbingGardenBasePreprocessorOutput,
-} from './workflows/climbing';
+} from '@hikr/shared';
 
 export const mastra = new Mastra({
   agents: {

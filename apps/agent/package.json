@@ -22,7 +22,7 @@
     "start": "mastra start"
   },
   "dependencies": {
-    "@hikr/db": "workspace:*",
+    "@hikr/shared": "workspace:*",
     "@hikr/utils": "workspace:*",
     "@mastra/core": "^1.35.0",
     "@mastra/duckdb": "^1.3.2",

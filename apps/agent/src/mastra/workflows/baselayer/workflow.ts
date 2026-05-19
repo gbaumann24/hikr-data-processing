@@ -1,10 +1,10 @@
 import { createWorkflow } from '@mastra/core/workflows';
-import { baseLayerOutputSchema, baseLayerStep, hikrOrgPostSchema } from './preprocessor';
+import { baseLayerInputSchema, baseLayerOutputSchema, baseLayerStep } from './preprocessor';
 
 export const baseLayerWorkflow = createWorkflow({
   id: 'baselayer',
   description: 'Processes a single HIKR post through baselayer normalisation',
-  inputSchema: hikrOrgPostSchema,
+  inputSchema: baseLayerInputSchema,
   outputSchema: baseLayerOutputSchema,
 })
   .then(baseLayerStep)

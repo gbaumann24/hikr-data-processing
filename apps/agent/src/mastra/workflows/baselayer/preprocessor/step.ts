@@ -1,31 +1,17 @@
 import { createStep } from '@mastra/core/workflows';
 import { z } from 'zod';
 import { mapHikrOrgPostToPreprocessorInput } from '../utils';
-import type { BaseLayerPreprocessorOutput } from '../types';
+import type { BaseLayerPreprocessorOutput, HikrOrgPostBaseLayerInput } from '../types';
 import { prepareBaseLayer } from './preprocessor';
 
-export const hikrOrgPostSchema = z.object({
-  id: z.union([z.bigint(), z.number(), z.string()]),
-  title: z.string().nullable().optional(),
-  regionPathCsv: z.string().nullable().optional(),
-  description: z.string().nullable().optional(),
-  tourDate: z.union([z.date(), z.string()]).nullable().optional(),
-  hikingDifficulty: z.string().nullable().optional(),
-  alpineTourDifficulty: z.string().nullable().optional(),
-  climbingDifficulty: z.string().nullable().optional(),
-  snowshoeTourDifficulty: z.string().nullable().optional(),
-  viaFerrataDifficulty: z.string().nullable().optional(),
-  skiDifficulty: z.string().nullable().optional(),
-  iceClimbingDifficulty: z.string().nullable().optional(),
-  mountainBikeDifficulty: z.string().nullable().optional(),
-});
-
+// Mastra needs a schema object; the input shape itself comes from Prisma.
+export const baseLayerInputSchema = z.custom<HikrOrgPostBaseLayerInput>();
 export const baseLayerOutputSchema = z.custom<BaseLayerPreprocessorOutput>();
 
 export const baseLayerStep = createStep({
   id: 'base-layer-preprocessor',
   description: 'Normalise raw HIKR post into base-layer preprocessor output',
-  inputSchema: hikrOrgPostSchema,
+  inputSchema: baseLayerInputSchema,
   outputSchema: baseLayerOutputSchema,
   execute: async ({ inputData }) => {
     const input = mapHikrOrgPostToPreprocessorInput(inputData);

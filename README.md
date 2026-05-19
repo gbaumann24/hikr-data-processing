@@ -7,6 +7,7 @@ Turbo/Bun monorepo for processing HIKR exports.
 - `agent`: Mastra agents.
 - `apps/data-pipeline`: Stateless preprocessing logic.
 - `packages/db`: Prisma schema files for the enriched database.
+- `packages/shared`: Cross-app contracts and constants derived from the DB schema.
 
 ## Commands
 

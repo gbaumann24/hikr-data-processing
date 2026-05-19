@@ -1,6 +1,9 @@
 import { Database } from 'bun:sqlite';
-import type { ClimbingDataPipelineDatabase } from 'agent/mastra';
-import type { HikrOrgPostBaseLayerInput, ReportBaseSchemaWriteInput } from 'agent/mastra';
+import type {
+  ClimbingDataPipelineDatabase,
+  HikrOrgPostBaseLayerInput,
+  ReportBaseSchemaWriteInput,
+} from '@hikr/shared';
 
 type HikrSqliteRow = {
   id: number;
@@ -20,11 +23,11 @@ type HikrSqliteRow = {
 
 function mapRowToPost(row: HikrSqliteRow): HikrOrgPostBaseLayerInput {
   return {
-    id: row.id,
+    id: BigInt(row.id),
     title: row.title,
     regionPathCsv: row.region_path_csv,
     description: row.description,
-    tourDate: row.tour_date,
+    tourDate: parseSqliteDateOnly(row.tour_date),
     hikingDifficulty: row.wandern_schwierigkeit,
     alpineTourDifficulty: row.hochtouren_schwierigkeit,
     climbingDifficulty: row.klettern_schwierigkeit,
@@ -34,6 +37,10 @@ function mapRowToPost(row: HikrSqliteRow): HikrOrgPostBaseLayerInput {
     iceClimbingDifficulty: row.eisklettern_schwierigkeit,
     mountainBikeDifficulty: row.mountainbike_schwierigkeit,
   };
+}
+
+function parseSqliteDateOnly(value: string | null): Date | null {
+  return value ? new Date(`${value}T00:00:00.000Z`) : null;
 }
 
 export function createSqliteDatabase(db: Database): ClimbingDataPipelineDatabase {

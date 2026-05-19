@@ -1,12 +1,11 @@
 import { createStep } from '@mastra/core/workflows';
 import { z } from 'zod';
-import { baseLayerOutputSchema, hikrOrgPostSchema } from '../../baselayer/preprocessor';
+import { baseLayerOutputSchema } from '../../baselayer/preprocessor';
 import { mapHikrOrgPostToPreprocessorInput } from '../../baselayer';
 import { createMastraClimbingSubActivityClassifier } from './agent-caller';
 import { preprocessPreparedBaseLayerForClimbing } from './preprocessor';
+import type { HikrOrgPostBaseLayerInput } from '../../baselayer';
 import type { ClimbingPreprocessorOutput } from './types';
-
-type HikrOrgPostInput = z.infer<typeof hikrOrgPostSchema>;
 
 export const climbingPreprocessorOutputSchema = z.custom<ClimbingPreprocessorOutput>();
 
@@ -16,7 +15,7 @@ export const climbingPreprocessorStep = createStep({
   inputSchema: baseLayerOutputSchema,
   outputSchema: climbingPreprocessorOutputSchema,
   execute: async ({ inputData: baseLayer, getInitData, mastra }) => {
-    const post = getInitData<HikrOrgPostInput>();
+    const post = getInitData<HikrOrgPostBaseLayerInput>();
     const input = mapHikrOrgPostToPreprocessorInput(post);
 
     const agent = mastra.getAgent('climbing-subactivity-agent');

@@ -1,17 +1,23 @@
 import type {
+  ClimbingGardenBasePreprocessorOutput,
+  ClimbingSubActivity,
+  ClimbingTourBasePreprocessorOutput,
+} from '@hikr/shared';
+import {
+  CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
+  CLIMBING_SUB_ACTIVITY,
+} from '@hikr/shared';
+import type {
   BaseLayerPreprocessorReason,
   ReportBasePreprocessorOutput,
 } from '../../baselayer';
 
-export const CLIMBING_PREPROCESSOR_SCHEMA_VERSION = 'climbing-preprocessor-v1';
-
-export const CLIMBING_SUB_ACTIVITY = {
-  CLIMBING_TOUR: 'Klettertour',
-  CLIMBING_GARDEN: 'Klettergarten',
-} as const;
-
-export type ClimbingSubActivity =
-  (typeof CLIMBING_SUB_ACTIVITY)[keyof typeof CLIMBING_SUB_ACTIVITY];
+export { CLIMBING_PREPROCESSOR_SCHEMA_VERSION, CLIMBING_SUB_ACTIVITY };
+export type {
+  ClimbingGardenBasePreprocessorOutput,
+  ClimbingSubActivity,
+  ClimbingTourBasePreprocessorOutput,
+};
 
 export type ClimbingSubActivityClassifierInput = {
   title: string;
@@ -55,18 +61,6 @@ export type ClimbingSubActivityClassification =
 export type ClimbingSubActivityClassifier = (
   input: ClimbingSubActivityClassifierInput,
 ) => Promise<unknown>;
-
-export type ClimbingTourBasePreprocessorOutput = {
-  reportId: bigint;
-  schemaVersion: typeof CLIMBING_PREPROCESSOR_SCHEMA_VERSION;
-  routeName: string;
-  summit: string;
-};
-
-export type ClimbingGardenBasePreprocessorOutput = {
-  reportId: bigint;
-  name: string;
-};
 
 export type ClimbingPreprocessorReason =
   | BaseLayerPreprocessorReason

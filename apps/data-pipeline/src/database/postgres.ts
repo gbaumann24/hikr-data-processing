@@ -1,51 +1,20 @@
 import { PrismaClient } from '@hikr/db';
-import type { ClimbingDataPipelineDatabase } from 'agent/mastra';
+import { HIKR_ORG_POST_BASE_LAYER_SELECT } from '@hikr/shared';
 import type {
+  ClimbingDataPipelineDatabase,
+  ClimbingGardenBasePreprocessorOutput,
+  ClimbingTourBasePreprocessorOutput,
   HikrOrgPostBaseLayerInput,
   ReportBaseSchemaWriteInput,
-} from 'agent/mastra';
-import type {
-  ClimbingTourBasePreprocessorOutput,
-  ClimbingGardenBasePreprocessorOutput,
-} from 'agent/mastra';
+} from '@hikr/shared';
 
 export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipelineDatabase {
   return {
     async findHikrOrgPostsForClimbingPreprocessing(): Promise<HikrOrgPostBaseLayerInput[]> {
-      const rows = await prisma.hikrOrgPostSchema.findMany({
-        select: {
-          id: true,
-          title: true,
-          regionPathCsv: true,
-          tourDate: true,
-          hikingDifficulty: true,
-          alpineTourDifficulty: true,
-          climbingDifficulty: true,
-          snowshoeTourDifficulty: true,
-          viaFerrataDifficulty: true,
-          skiDifficulty: true,
-          iceClimbingDifficulty: true,
-          mountainBikeDifficulty: true,
-          description: true,
-        },
+      return prisma.hikrOrgPostSchema.findMany({
+        select: HIKR_ORG_POST_BASE_LAYER_SELECT,
         orderBy: { id: 'asc' },
       });
-
-      return rows.map((row) => ({
-        id: row.id,
-        title: row.title,
-        regionPathCsv: row.regionPathCsv,
-        description: row.description,
-        tourDate: row.tourDate,
-        hikingDifficulty: row.hikingDifficulty,
-        alpineTourDifficulty: row.alpineTourDifficulty,
-        climbingDifficulty: row.climbingDifficulty,
-        snowshoeTourDifficulty: row.snowshoeTourDifficulty,
-        viaFerrataDifficulty: row.viaFerrataDifficulty,
-        skiDifficulty: row.skiDifficulty,
-        iceClimbingDifficulty: row.iceClimbingDifficulty,
-        mountainBikeDifficulty: row.mountainBikeDifficulty,
-      }));
     },
 
     async upsertReportBase(input: ReportBaseSchemaWriteInput): Promise<void> {

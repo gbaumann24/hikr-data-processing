@@ -7,26 +7,17 @@ import {
   type HikrOrgPostBaseLayerInput,
   type HikrPreprocessorInput,
   type PreprocessorStatus,
-  type ReportBaseSchemaWriteInput,
 } from '../../baselayer';
 import { toAsyncIterable } from '@hikr/utils';
 import { preprocessPreparedBaseLayerForClimbing } from './preprocessor';
 import { createStatusCounts } from './utils';
-import type { BaseDataPipelineDatabase, MaybePromise } from '@hikr/db';
+import type { ClimbingDataPipelineDatabase } from '@hikr/shared';
 import type {
-  ClimbingGardenBasePreprocessorOutput,
   ClimbingPreprocessorOutput,
   ClimbingSubActivityClassifier,
-  ClimbingTourBasePreprocessorOutput,
 } from './types';
 
-export type ClimbingDataPipelineDatabase = BaseDataPipelineDatabase<
-  HikrOrgPostBaseLayerInput,
-  ReportBaseSchemaWriteInput
-> & {
-  upsertClimbingTourBase: (input: ClimbingTourBasePreprocessorOutput) => MaybePromise<void>;
-  upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => MaybePromise<void>;
-};
+export type { ClimbingDataPipelineDatabase } from '@hikr/shared';
 
 export type RunClimbingDataPipelineOptions = {
   database: ClimbingDataPipelineDatabase;

@@ -10,12 +10,19 @@ const longDescription = 'Kletterbericht '.repeat(150);
 
 function hikrOrgPost(overrides: Partial<HikrOrgPostBaseLayerInput> = {}): HikrOrgPostBaseLayerInput {
 	return {
-		id: 42,
+		id: 42n,
 		title: 'Gross Turm - Südgrat',
 		regionPathCsv: 'Welt, Schweiz, Obwalden, Melchtal',
 		description: longDescription,
-		tourDate: '2024-08-10',
+		tourDate: new Date('2024-08-10T00:00:00.000Z'),
+		hikingDifficulty: null,
+		alpineTourDifficulty: null,
 		climbingDifficulty: '5a',
+		snowshoeTourDifficulty: null,
+		viaFerrataDifficulty: null,
+		skiDifficulty: null,
+		iceClimbingDifficulty: null,
+		mountainBikeDifficulty: null,
 		...overrides,
 	};
 }
@@ -28,7 +35,7 @@ describe('climbing data pipeline', () => {
 			database: {
 				findHikrOrgPostsForClimbingPreprocessing: () => [
 					hikrOrgPost(),
-					hikrOrgPost({ id: 43, description: 'zu kurz' }),
+					hikrOrgPost({ id: 43n, description: 'zu kurz' }),
 				],
 				upsertReportBase: (input) => { reportBaseWrites.push(input); },
 				upsertClimbingTourBase: () => {},
@@ -80,8 +87,8 @@ describe('climbing data pipeline', () => {
 		const reportBaseWrites: ReportBaseSchemaWriteInput[] = [];
 
 		async function* findHikrOrgPostsForClimbingPreprocessing() {
-			yield hikrOrgPost({ id: 1 });
-			yield hikrOrgPost({ id: 2 });
+			yield hikrOrgPost({ id: 1n });
+			yield hikrOrgPost({ id: 2n });
 		}
 
 		const result = await runClimbingDataPipeline({
@@ -96,7 +103,7 @@ describe('climbing data pipeline', () => {
 		});
 
 		expect(result.total).toBe(1);
-		expect(result.items[0].input.reportId).toBe(1);
+		expect(result.items[0].input.reportId).toBe(1n);
 		expect(result.items[0].climbing.reasons).toEqual(['missing_sub_activity_classifier']);
 		expect(reportBaseWrites.map((write) => write.reportId)).toEqual([1n]);
 	});

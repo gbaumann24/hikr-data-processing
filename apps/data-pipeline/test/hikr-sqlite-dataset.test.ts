@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { Database } from 'bun:sqlite';
 import { describe, expect, test } from 'bun:test';
-import { ACTIVITY, type HikrOrgPostBaseLayerInput } from 'agent/mastra';
+import { ACTIVITY, type HikrOrgPostBaseLayerInput } from '@hikr/shared';
 import { runClimbingDataPipeline } from 'agent/mastra';
 
 const sqlitePath = fileURLToPath(new URL('../../../hikr.sqlite', import.meta.url));
@@ -72,11 +72,11 @@ describe('hikr sqlite dataset', () => {
 
 function mapSqliteReportToBaseLayerInput(row: HikrSqliteReportRow): HikrOrgPostBaseLayerInput {
 	return {
-		id: row.id,
+		id: BigInt(row.id),
 		title: row.title,
 		regionPathCsv: row.region_path_csv,
 		description: row.description,
-		tourDate: row.tour_date,
+		tourDate: row.tour_date ? new Date(`${row.tour_date}T00:00:00.000Z`) : null,
 		hikingDifficulty: row.wandern_schwierigkeit,
 		alpineTourDifficulty: row.hochtouren_schwierigkeit,
 		climbingDifficulty: row.klettern_schwierigkeit,

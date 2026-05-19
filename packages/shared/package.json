@@ -1,15 +1,15 @@
 {
-  "name": "@hikr/data-pipeline",
+  "name": "@hikr/shared",
   "private": true,
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "scripts": {
-    "run": "bun src/run.ts",
-    "test": "bun test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hikr/db": "workspace:*",
-    "@hikr/shared": "workspace:*",
-    "agent": "workspace:*"
+    "@hikr/types": "workspace:*"
   }
 }
