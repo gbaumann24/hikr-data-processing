@@ -9,10 +9,10 @@ export { climbingSubActivityAgent } from './agents/climbing-subactivity-agent';
 export { climbingPipelineWorkflow } from './workflows/climbing-pipeline-workflow';
 export { runClimbingPipelineService } from './services/climbing-pipeline-service';
 
-export { ACTIVITY } from '../pipeline/baselayer';
-export type { HikrOrgPostBaseLayerInput, ReportBaseSchemaWriteInput } from '../pipeline/baselayer';
-export { runClimbingDataPipeline } from '../pipeline/climbing/pipeline';
-export type { ClimbingDataPipelineDatabase } from '../pipeline/climbing/pipeline';
+export { ACTIVITY } from './workflows/baselayer';
+export type { HikrOrgPostBaseLayerInput, ReportBaseSchemaWriteInput } from './workflows/baselayer';
+export { runClimbingDataPipeline } from './workflows/climbing/pipeline';
+export type { ClimbingDataPipelineDatabase } from './workflows/climbing/pipeline';
 
 export const mastra = new Mastra({
   agents: {

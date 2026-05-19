@@ -3,9 +3,9 @@ import { toAsyncIterable } from '@hikr/utils';
 import {
   mapReportBaseToSchemaWrite,
   type PreprocessorStatus,
-} from '../../pipeline/baselayer';
-import type { ClimbingDataPipelineDatabase } from '../../pipeline/climbing/pipeline';
-import type { ClimbingPreprocessorOutput } from '../../pipeline/climbing';
+} from '../workflows/baselayer';
+import type { ClimbingDataPipelineDatabase } from '../workflows/climbing/pipeline';
+import type { ClimbingPreprocessorOutput } from '../workflows/climbing';
 
 export type ClimbingPipelineServiceOptions = {
   mastra: Mastra;

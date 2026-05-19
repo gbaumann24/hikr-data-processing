@@ -4,7 +4,7 @@ import {
   mapHikrOrgPostToPreprocessorInput,
   prepareBaseLayer,
   type BaseLayerPreprocessorOutput,
-} from '../../../pipeline/baselayer';
+} from '.';
 
 export const hikrOrgPostSchema = z.object({
   id: z.union([z.bigint(), z.number(), z.string()]),

@@ -1,6 +1,6 @@
 import { createWorkflow } from '@mastra/core/workflows';
-import { baselayerStep, hikrOrgPostSchema } from './steps/baselayer-step';
-import { climbingStep, climbingOutputSchema } from './steps/climbing-step';
+import { baselayerStep, hikrOrgPostSchema } from './baselayer/step';
+import { climbingStep, climbingOutputSchema } from './climbing/step';
 
 export const climbingPipelineWorkflow = createWorkflow({
   id: 'climbing-pipeline',

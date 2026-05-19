@@ -4,9 +4,9 @@ import {
   preprocessPreparedBaseLayerForClimbing,
   createMastraClimbingSubActivityClassifier,
   type ClimbingPreprocessorOutput,
-} from '../../../pipeline/climbing';
-import { mapHikrOrgPostToPreprocessorInput } from '../../../pipeline/baselayer';
-import { baseLayerOutputSchema, hikrOrgPostSchema } from './baselayer-step';
+} from '.';
+import { mapHikrOrgPostToPreprocessorInput } from '../baselayer';
+import { baseLayerOutputSchema, hikrOrgPostSchema } from '../baselayer/step';
 
 type HikrOrgPostInput = z.infer<typeof hikrOrgPostSchema>;
 

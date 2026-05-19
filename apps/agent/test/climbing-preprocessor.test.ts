@@ -4,12 +4,12 @@ import {
 	normalizeDescription,
 	parseRegionPath,
 	type HikrPreprocessorInput,
-} from '../src/pipeline/baselayer';
+} from '../src/mastra/workflows/baselayer';
 import {
 	CLIMBING_SUB_ACTIVITY,
 	classifyActivity,
 	preprocessHikrReportForClimbing,
-} from '../src/pipeline/climbing';
+} from '../src/mastra/workflows/climbing';
 
 const longDescription = 'Kletterbericht '.repeat(150);
 

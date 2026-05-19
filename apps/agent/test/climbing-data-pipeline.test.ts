@@ -3,8 +3,8 @@ import {
 	PREPROCESSOR_STATUS,
 	type HikrOrgPostBaseLayerInput,
 	type ReportBaseSchemaWriteInput,
-} from '../src/pipeline/baselayer';
-import { CLIMBING_SUB_ACTIVITY, runClimbingDataPipeline } from '../src/pipeline/climbing';
+} from '../src/mastra/workflows/baselayer';
+import { CLIMBING_SUB_ACTIVITY, runClimbingDataPipeline } from '../src/mastra/workflows/climbing';
 
 const longDescription = 'Kletterbericht '.repeat(150);
 
