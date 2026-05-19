@@ -1,22 +1,20 @@
 import { createStep } from '@mastra/core/workflows';
 import { z } from 'zod';
-import {
-  preprocessPreparedBaseLayerForClimbing,
-  createMastraClimbingSubActivityClassifier,
-  type ClimbingPreprocessorOutput,
-} from '.';
-import { mapHikrOrgPostToPreprocessorInput } from '../baselayer';
-import { baseLayerOutputSchema, hikrOrgPostSchema } from '../baselayer/step';
+import { baseLayerOutputSchema, hikrOrgPostSchema } from '../../baselayer/preprocessor';
+import { mapHikrOrgPostToPreprocessorInput } from '../../baselayer';
+import { createMastraClimbingSubActivityClassifier } from './agent-caller';
+import { preprocessPreparedBaseLayerForClimbing } from './preprocessor';
+import type { ClimbingPreprocessorOutput } from './types';
 
 type HikrOrgPostInput = z.infer<typeof hikrOrgPostSchema>;
 
-export const climbingOutputSchema = z.custom<ClimbingPreprocessorOutput>();
+export const climbingPreprocessorOutputSchema = z.custom<ClimbingPreprocessorOutput>();
 
-export const climbingStep = createStep({
-  id: 'climbing',
+export const climbingPreprocessorStep = createStep({
+  id: 'climbing-preprocessor',
   description: 'Classify climbing sub-activity using baselayer output and AI agent',
   inputSchema: baseLayerOutputSchema,
-  outputSchema: climbingOutputSchema,
+  outputSchema: climbingPreprocessorOutputSchema,
   execute: async ({ inputData: baseLayer, getInitData, mastra }) => {
     const post = getInitData<HikrOrgPostInput>();
     const input = mapHikrOrgPostToPreprocessorInput(post);
@@ -29,3 +27,6 @@ export const climbingStep = createStep({
     });
   },
 });
+
+// Temporary compatibility export for older climbing imports.
+export const climbingStep = climbingPreprocessorStep;

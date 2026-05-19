@@ -4,7 +4,7 @@ import {
   mapReportBaseToSchemaWrite,
   type PreprocessorStatus,
 } from '../workflows/baselayer';
-import type { ClimbingDataPipelineDatabase } from '../workflows/climbing/pipeline';
+import type { ClimbingDataPipelineDatabase } from '../workflows/climbing';
 import type { ClimbingPreprocessorOutput } from '../workflows/climbing';
 
 export type ClimbingPipelineServiceOptions = {

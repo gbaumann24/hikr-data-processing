@@ -4,7 +4,7 @@ import {
   type DifficultyScaleExtraction,
   type HikrDifficultyScale,
   type HikrPreprocessorInput,
-} from './types';
+} from '../types';
 
 const DIFFICULTY_FIELDS: Array<{
   scale: HikrDifficultyScale;

@@ -1,10 +1,8 @@
 import { createStep } from '@mastra/core/workflows';
 import { z } from 'zod';
-import {
-  mapHikrOrgPostToPreprocessorInput,
-  prepareBaseLayer,
-  type BaseLayerPreprocessorOutput,
-} from '.';
+import { mapHikrOrgPostToPreprocessorInput } from '../utils';
+import type { BaseLayerPreprocessorOutput } from '../types';
+import { prepareBaseLayer } from './preprocessor';
 
 export const hikrOrgPostSchema = z.object({
   id: z.union([z.bigint(), z.number(), z.string()]),
@@ -24,8 +22,8 @@ export const hikrOrgPostSchema = z.object({
 
 export const baseLayerOutputSchema = z.custom<BaseLayerPreprocessorOutput>();
 
-export const baselayerStep = createStep({
-  id: 'baselayer',
+export const baseLayerStep = createStep({
+  id: 'base-layer-preprocessor',
   description: 'Normalise raw HIKR post into base-layer preprocessor output',
   inputSchema: hikrOrgPostSchema,
   outputSchema: baseLayerOutputSchema,
@@ -34,3 +32,6 @@ export const baselayerStep = createStep({
     return prepareBaseLayer(input);
   },
 });
+
+// Keep the old spelling available while imports move to baseLayerStep.
+export const baselayerStep = baseLayerStep;

@@ -3,8 +3,8 @@ import type {
   HikrPreprocessorInput,
   ReportBasePreprocessorOutput,
   ReportBaseSchemaWriteInput,
-} from './types';
-import { normalizeDateOnly } from './utils';
+} from '../types';
+import { normalizeDateOnly } from './date';
 
 export function mapHikrOrgPostToPreprocessorInput(
   post: HikrOrgPostBaseLayerInput,

@@ -1,6 +1,4 @@
-import { extractDifficultyScales } from './difficulty';
-import { normalizeDescription } from './normalization';
-import { parseRegionPath } from './region';
+import { extractDifficultyScales, normalizeDescription, parseRegionPath } from '../utils';
 import {
   MIN_DESCRIPTION_LENGTH,
   PREPROCESSOR_STATUS,
@@ -8,7 +6,7 @@ import {
   type BaseLayerPreprocessorReason,
   type HikrPreprocessorInput,
   type ReportBasePreprocessorOutput,
-} from './types';
+} from '../types';
 
 export function prepareBaseLayer(input: HikrPreprocessorInput): BaseLayerPreprocessorOutput {
   const reportId = normalizeReportId(input.reportId);

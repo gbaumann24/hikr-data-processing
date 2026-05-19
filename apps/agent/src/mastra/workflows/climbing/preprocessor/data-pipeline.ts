@@ -9,13 +9,13 @@ import {
   type ReportBaseSchemaWriteInput,
 } from '../../baselayer';
 import { toAsyncIterable } from '@hikr/utils';
-import { preprocessPreparedBaseLayerForClimbing } from '../pre-processor/preprocessor';
+import { preprocessPreparedBaseLayerForClimbing } from './preprocessor';
 import { createStatusCounts } from './utils';
 import type { BaseDataPipelineDatabase } from '@hikr/db';
 import type {
   ClimbingPreprocessorOutput,
   ClimbingSubActivityClassifier,
-} from '../pre-processor/types';
+} from './types';
 
 export type ClimbingDataPipelineDatabase = BaseDataPipelineDatabase<
   HikrOrgPostBaseLayerInput,
