@@ -33,7 +33,7 @@ describe('climbing data pipeline', () => {
 
 		const result = await runClimbingDataPipeline({
 			database: {
-				findHikrOrgPostsForClimbingPreprocessing: () => [
+				findHikrOrgPostsForPreprocessing: () => [
 					hikrOrgPost(),
 					hikrOrgPost({ id: 43n, description: 'zu kurz' }),
 				],
@@ -86,14 +86,14 @@ describe('climbing data pipeline', () => {
 	test('supports async database cursors and limits processed rows', async () => {
 		const reportBaseWrites: ReportBaseSchemaWriteInput[] = [];
 
-		async function* findHikrOrgPostsForClimbingPreprocessing() {
+		async function* findHikrOrgPostsForPreprocessing() {
 			yield hikrOrgPost({ id: 1n });
 			yield hikrOrgPost({ id: 2n });
 		}
 
 		const result = await runClimbingDataPipeline({
 			database: {
-				findHikrOrgPostsForClimbingPreprocessing,
+				findHikrOrgPostsForPreprocessing,
 				upsertReportBase: (input) => { reportBaseWrites.push(input); },
 				upsertClimbingTourBase: () => {},
 				upsertClimbingGardenBase: () => {},

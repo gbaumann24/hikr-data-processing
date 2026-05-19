@@ -24,7 +24,7 @@ export async function runClimbingPipelineService({
   limit,
 }: ClimbingPipelineServiceOptions): Promise<ClimbingPipelineServiceResult> {
   const workflow = mastra.getWorkflow('climbing-pipeline');
-  const source = await database.findHikrOrgPostsForClimbingPreprocessing();
+  const source = await database.findHikrOrgPostsForPreprocessing();
 
   let total = 0;
   const statusCounts: Record<PreprocessorStatus, number> = {

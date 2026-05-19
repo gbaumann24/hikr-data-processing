@@ -43,7 +43,7 @@ export async function runClimbingDataPipeline({
   classifySubActivity,
   limit,
 }: RunClimbingDataPipelineOptions): Promise<ClimbingDataPipelineResult> {
-  const source = await database.findHikrOrgPostsForClimbingPreprocessing();
+  const source = await database.findHikrOrgPostsForPreprocessing();
   const items: ClimbingDataPipelineItem[] = [];
   const statusCounts = createStatusCounts();
 

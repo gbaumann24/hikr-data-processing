@@ -17,3 +17,12 @@ bun run typecheck
 bun run test
 bun run build
 ```
+
+Run data-pipeline workflows separately:
+
+```sh
+bun run --cwd apps/data-pipeline run:baselayer
+bun run --cwd apps/data-pipeline run:climbing
+HIKR_SQLITE_PATH=/path/to/hikr.sqlite bun run --cwd apps/data-pipeline run:sqlite:baselayer
+HIKR_SQLITE_PATH=/path/to/hikr.sqlite bun run --cwd apps/data-pipeline run:sqlite:climbing
+```

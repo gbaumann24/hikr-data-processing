@@ -11,6 +11,7 @@ export { climbingSubActivityAgent } from './agents/climbing-subactivity-agent';
 export { baseLayerWorkflow } from './workflows/baselayer';
 export { climbingPipelineWorkflow } from './workflows/climbing';
 export { skiTouringPipelineWorkflow } from './workflows/ski-touring';
+export { runBaseLayerPipelineService } from './services/baselayer-pipeline-service';
 export { runClimbingPipelineService } from './services/climbing-pipeline-service';
 
 export { ACTIVITY } from '@hikr/shared';

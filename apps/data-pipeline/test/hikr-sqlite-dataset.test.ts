@@ -36,7 +36,7 @@ describe('hikr sqlite dataset', () => {
 
 			const result = await runClimbingDataPipeline({
 				database: {
-					findHikrOrgPostsForClimbingPreprocessing: () =>
+					findHikrOrgPostsForPreprocessing: () =>
 						rows.map(mapSqliteReportToBaseLayerInput),
 					upsertReportBase: (input) => { reportBaseWrites.push(input); },
 					upsertClimbingTourBase: () => {},

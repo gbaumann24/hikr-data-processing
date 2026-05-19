@@ -45,7 +45,7 @@ function parseSqliteDateOnly(value: string | null): Date | null {
 
 export function createSqliteDatabase(db: Database): ClimbingDataPipelineDatabase {
   return {
-    findHikrOrgPostsForClimbingPreprocessing() {
+    findHikrOrgPostsForPreprocessing() {
       const rows = db
         .query<HikrSqliteRow, []>('SELECT * FROM hikr_reports ORDER BY id')
         .all();

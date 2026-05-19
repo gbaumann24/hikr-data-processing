@@ -6,15 +6,23 @@ import type {
   ReportBaseSchemaWriteInput,
 } from './db';
 
-export type BaseDataPipelineDatabase<SourceRow, ReportBaseWriteInput> = {
-  findHikrOrgPostsForClimbingPreprocessing: () => MaybePromise<MaybeAsyncIterable<SourceRow>>;
+export type HikrOrgPostPreprocessingSource<SourceRow> = {
+  findHikrOrgPostsForPreprocessing: () => MaybePromise<MaybeAsyncIterable<SourceRow>>;
+};
+
+export type BaseLayerDataPipelineDatabase = HikrOrgPostPreprocessingSource<
+  HikrOrgPostBaseLayerInput
+> & {
+  upsertReportBase: (input: ReportBaseSchemaWriteInput) => MaybePromise<void>;
+};
+
+export type BaseDataPipelineDatabase<SourceRow, ReportBaseWriteInput> = HikrOrgPostPreprocessingSource<
+  SourceRow
+> & {
   upsertReportBase: (input: ReportBaseWriteInput) => MaybePromise<void>;
 };
 
-export type ClimbingDataPipelineDatabase = BaseDataPipelineDatabase<
-  HikrOrgPostBaseLayerInput,
-  ReportBaseSchemaWriteInput
-> & {
+export type ClimbingDataPipelineDatabase = BaseLayerDataPipelineDatabase & {
   upsertClimbingTourBase: (input: ClimbingTourBasePreprocessorOutput) => MaybePromise<void>;
   upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => MaybePromise<void>;
 };

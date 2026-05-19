@@ -10,7 +10,7 @@ import type {
 
 export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipelineDatabase {
   return {
-    async findHikrOrgPostsForClimbingPreprocessing(): Promise<HikrOrgPostBaseLayerInput[]> {
+    async findHikrOrgPostsForPreprocessing(): Promise<HikrOrgPostBaseLayerInput[]> {
       return prisma.hikrOrgPostSchema.findMany({
         select: HIKR_ORG_POST_BASE_LAYER_SELECT,
         orderBy: { id: 'asc' },

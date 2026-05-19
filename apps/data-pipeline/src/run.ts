@@ -1,16 +1,21 @@
 import { PrismaClient } from '@hikr/db';
-import { mastra, runClimbingPipelineService } from 'agent/mastra';
 import { createPostgresDatabase } from './database/postgres';
+import {
+  formatDataPipelineWorkflow,
+  getDataPipelineWorkflow,
+  runDataPipelineWorkflow,
+} from './utils/workflow-runner';
 
 const limit = process.env.LIMIT ? Number(process.env.LIMIT) : undefined;
+const workflow = getDataPipelineWorkflow();
 
-console.log(`Running climbing pipeline${limit ? ` — limit: ${limit}` : ''}`);
+console.log(`Running ${formatDataPipelineWorkflow(workflow)}${limit ? ` - limit: ${limit}` : ''}`);
 
 const prisma = new PrismaClient();
 
 try {
-  const result = await runClimbingPipelineService({
-    mastra,
+  const result = await runDataPipelineWorkflow({
+    workflow,
     database: createPostgresDatabase(prisma),
     limit,
   });
