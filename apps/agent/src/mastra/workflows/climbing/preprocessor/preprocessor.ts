@@ -132,7 +132,7 @@ export async function preprocessPreparedBaseLayerForClimbing(
   });
 }
 
-export function parseSubActivityClassification(
+function parseSubActivityClassification(
   classification: unknown,
 ): ClimbingSubActivityClassification | null {
   if (!classification || typeof classification !== 'object') {

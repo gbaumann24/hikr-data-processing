@@ -1,6 +1,5 @@
 import type {
   ClimbingGardenBasePreprocessorOutput,
-  ClimbingSubActivity,
   ClimbingTourBasePreprocessorOutput,
 } from '@hikr/shared';
 import {
@@ -15,7 +14,6 @@ import type {
 export { CLIMBING_PREPROCESSOR_SCHEMA_VERSION, CLIMBING_SUB_ACTIVITY };
 export type {
   ClimbingGardenBasePreprocessorOutput,
-  ClimbingSubActivity,
   ClimbingTourBasePreprocessorOutput,
 };
 

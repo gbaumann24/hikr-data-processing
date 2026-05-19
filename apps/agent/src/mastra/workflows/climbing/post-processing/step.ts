@@ -1,19 +1,13 @@
 import { createStep } from '@mastra/core/workflows';
-import {
-  climbingExtractionOutputSchema,
-  type ClimbingExtractionOutput,
-} from '../extraction';
+import { climbingExtractionOutputSchema } from '../extraction';
 
-export type ClimbingPostProcessingOutput = ClimbingExtractionOutput;
-
-export const climbingPostProcessingOutputSchema = climbingExtractionOutputSchema;
-export const climbingOutputSchema = climbingPostProcessingOutputSchema;
+export const climbingOutputSchema = climbingExtractionOutputSchema;
 
 export const climbingPostProcessingStep = createStep({
   id: 'climbing-post-processing',
   description: 'Apply final climbing output normalization before persistence',
   inputSchema: climbingExtractionOutputSchema,
-  outputSchema: climbingPostProcessingOutputSchema,
+  outputSchema: climbingOutputSchema,
   // Placeholder for final output shaping once extraction returns richer data.
   execute: async ({ inputData }) => inputData,
 });

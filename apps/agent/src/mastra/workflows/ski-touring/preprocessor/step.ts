@@ -1,10 +1,5 @@
 import { createStep } from '@mastra/core/workflows';
-import {
-  baseLayerOutputSchema,
-  type BaseLayerPreprocessorOutput,
-} from '../../baselayer';
-
-export type SkiTouringPreprocessorOutput = BaseLayerPreprocessorOutput;
+import { baseLayerOutputSchema } from '../../baselayer';
 
 export const skiTouringPreprocessorOutputSchema = baseLayerOutputSchema;
 

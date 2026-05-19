@@ -6,6 +6,7 @@
   "exports": {
     ".": "./index.ts",
     "./mastra": "./src/mastra/index.ts",
+    "./mastra/agents/climbing-extraction-agent": "./src/mastra/agents/climbing-extraction-agent.ts",
     "./mastra/agents/climbing-subactivity-agent": "./src/mastra/agents/climbing-subactivity-agent.ts"
   },
   "devDependencies": {
@@ -25,12 +26,6 @@
     "@hikr/shared": "workspace:*",
     "@hikr/utils": "workspace:*",
     "@mastra/core": "^1.35.0",
-    "@mastra/duckdb": "^1.3.2",
-    "@mastra/evals": "^1.2.2",
-    "@mastra/libsql": "^1.11.0",
-    "@mastra/loggers": "^1.1.1",
-    "@mastra/memory": "^1.18.2",
-    "@mastra/observability": "^1.12.0",
     "zod": "^4"
   }
 }

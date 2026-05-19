@@ -26,6 +26,3 @@ export const climbingPreprocessorStep = createStep({
     });
   },
 });
-
-// Temporary compatibility export for older climbing imports.
-export const climbingStep = climbingPreprocessorStep;

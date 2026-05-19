@@ -60,7 +60,7 @@ export function parseRegionPath(regionPathCsv: string | null | undefined): Regio
   return { tokens, canton, region };
 }
 
-export function parseCsvLine(value: string): string[] {
+function parseCsvLine(value: string): string[] {
   const fields: string[] = [];
   let current = '';
   let inQuotes = false;

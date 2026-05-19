@@ -18,6 +18,3 @@ export const baseLayerStep = createStep({
     return prepareBaseLayer(input);
   },
 });
-
-// Keep the old spelling available while imports move to baseLayerStep.
-export const baselayerStep = baseLayerStep;

@@ -20,8 +20,8 @@ export type {
   ReportBaseSchemaWriteInput,
 } from '@hikr/shared';
 
-export type HikrTourDate = Date | string | null;
-export type HikrReportIdInput = bigint | number | string;
+type HikrTourDate = Date | string | null;
+type HikrReportIdInput = bigint | number | string;
 
 export type HikrPreprocessorInput = {
   reportId: HikrReportIdInput;

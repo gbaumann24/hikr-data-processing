@@ -43,7 +43,7 @@ export function prepareBaseLayer(input: HikrPreprocessorInput): BaseLayerPreproc
   };
 }
 
-export function normalizeReportId(reportId: HikrPreprocessorInput['reportId']): bigint {
+function normalizeReportId(reportId: HikrPreprocessorInput['reportId']): bigint {
   if (typeof reportId === 'bigint') {
     return reportId;
   }

@@ -1,10 +1,8 @@
 import { createStep } from '@mastra/core/workflows';
-import {
-  climbingPreprocessorOutputSchema,
-  type ClimbingPreprocessorOutput,
-} from '../preprocessor';
-
-export type ClimbingExtractionOutput = ClimbingPreprocessorOutput;
+import { climbingPreprocessorOutputSchema } from '../preprocessor';
+import { PREPROCESSOR_STATUS, type HikrOrgPostBaseLayerInput } from '../../baselayer';
+import { createMastraClimbingExtractor } from './agent-caller';
+import { extractPreparedClimbingReport } from './extraction';
 
 export const climbingExtractionOutputSchema = climbingPreprocessorOutputSchema;
 
@@ -13,6 +11,18 @@ export const climbingExtractionStep = createStep({
   description: 'Extract climbing-specific schema data from preprocessed climbing reports',
   inputSchema: climbingPreprocessorOutputSchema,
   outputSchema: climbingExtractionOutputSchema,
-  // Placeholder until extraction is split out from preprocessing.
-  execute: async ({ inputData }) => inputData,
+  execute: async ({ inputData, getInitData, mastra }) => {
+    if (inputData.base.status !== PREPROCESSOR_STATUS.READY) {
+      return inputData;
+    }
+
+    const post = getInitData<HikrOrgPostBaseLayerInput>();
+    const agent = mastra.getAgent('climbing-extraction-agent');
+    const extractClimbing = createMastraClimbingExtractor(agent);
+
+    return extractPreparedClimbingReport(inputData, {
+      title: post.title,
+      extractClimbing,
+    });
+  },
 });
