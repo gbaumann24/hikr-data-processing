@@ -28,6 +28,7 @@
       "dependencies": {
         "@hikr/db": "workspace:*",
         "@hikr/shared": "workspace:*",
+        "@hikr/utils": "workspace:*",
         "agent": "workspace:*",
       },
     },

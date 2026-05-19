@@ -15,6 +15,7 @@ export { climbingPipelineWorkflow } from './workflows/climbing';
 export { skiTouringPipelineWorkflow } from './workflows/ski-touring';
 export { runBaseLayerPipelineService } from './services/baselayer-pipeline-service';
 export { runClimbingPipelineService } from './services/climbing-pipeline-service';
+export type { ClimbingPipelineProgressEvent } from './services/climbing-pipeline-service';
 
 export { ACTIVITY } from '@hikr/shared';
 export type { HikrOrgPostBaseLayerInput, ReportBaseSchemaWriteInput } from '@hikr/shared';

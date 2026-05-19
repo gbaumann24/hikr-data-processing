@@ -12,13 +12,13 @@ dev:
 
 # ── Pipeline ───────────────────────────────────────────────────────────────────
 
-# Run climbing pipeline against local SQLite export (no DB writes)
-run-sqlite limit="":
-    HIKR_SQLITE_PATH=hikr.sqlite {{ if limit != "" { "LIMIT=" + limit } else { "" } }} bun run apps/data-pipeline/src/run-sqlite.ts
-
 # Run climbing pipeline against Postgres (writes results to DB)
 run limit="":
     {{ if limit != "" { "LIMIT=" + limit } else { "" } }} bun run apps/data-pipeline/src/run.ts
+
+# Purge local Postgres, seed source posts from SQLite, then run climbing pipeline
+test-run-climbing limit="":
+    bun run apps/data-pipeline/src/run-climbing-test.ts {{ if limit != "" { "--limit " + limit } else { "" } }}
 
 # ── DB ────────────────────────────────────────────────────────────────────────
 

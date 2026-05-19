@@ -1,7 +1,7 @@
 import type { RequestContext } from '@mastra/core/request-context';
 import {
-  CLIMBING_SUB_ACTIVITY,
   climbingPreprocessorAgentOutputSchema,
+  parseClimbingPreprocessorAgentOutput,
   type ClimbingPreprocessorAgentOutput,
   type ClimbingPreprocessorAgentRunner,
 } from './types';
@@ -29,13 +29,7 @@ export function createMastraClimbingPreprocessorAgentRunner(
 ): ClimbingPreprocessorAgentRunner {
   return async ({ title, description, canton }) => {
     const response = await agent.generate(
-      [
-        `Canton: ${canton}`,
-        '',
-        `Title: ${title}`,
-        '',
-        `Description: ${description}`,
-      ].join('\n'),
+      [`Canton: ${canton}`, '', `Title: ${title}`, '', `Description: ${description}`].join('\n'),
       {
         requestContext: options.requestContext,
         maxSteps: 6,
@@ -62,55 +56,6 @@ export function createMastraClimbingPreprocessorAgentRunner(
       );
     }
 
-    return parseSubActivityClassification(response.object);
+    return parseClimbingPreprocessorAgentOutput(response.object);
   };
-}
-
-function parseSubActivityClassification(
-  classification: unknown,
-): ClimbingPreprocessorAgentOutput | null {
-  if (!classification || typeof classification !== 'object') {
-    return null;
-  }
-
-  const record = classification as Record<string, unknown>;
-
-  if (record.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR) {
-    const routeName = normalizeRequiredString(record.routeName);
-    const summit = normalizeRequiredString(record.summit);
-
-    return routeName && summit
-      ? {
-          subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
-          routeName,
-          summit,
-        }
-      : null;
-  }
-
-  if (record.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN) {
-    const name = normalizeRequiredString(record.name);
-
-    return name
-      ? {
-          subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
-          name,
-        }
-      : null;
-  }
-
-  if (record.subActivity === null) {
-    return { subActivity: null };
-  }
-
-  return null;
-}
-
-function normalizeRequiredString(value: unknown): string | null {
-  if (typeof value !== 'string') {
-    return null;
-  }
-
-  const normalized = value.replace(/\s+/g, ' ').trim();
-  return normalized === '' ? null : normalized;
 }

@@ -1,9 +1,5 @@
 import { createTool } from '@mastra/core/tools';
-import {
-  ACTIVITY,
-  CLIMBING_SUB_ACTIVITY,
-  type ClimbingDataPipelineDatabase,
-} from '@hikr/shared';
+import { ACTIVITY, CLIMBING_SUB_ACTIVITY, type ClimbingDataPipelineDatabase } from '@hikr/shared';
 import { z } from 'zod';
 
 export const CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY = 'climbingRouteLookup';
@@ -13,21 +9,21 @@ export type ClimbingRouteLookup = Pick<
   'findRouteSummitNames' | 'findRouteNames' | 'findRouteCragNames'
 >;
 
-const lookupInputSchema = z.discriminatedUnion('mode', [
-  z.object({
-    mode: z.literal('summitsByCanton'),
+const lookupInputSchema = z
+  .object({
+    mode: z.enum(['summitsByCanton', 'routesByCantonAndSummit', 'cragsByCanton']),
     canton: z.string().min(1),
-  }),
-  z.object({
-    mode: z.literal('routesByCantonAndSummit'),
-    canton: z.string().min(1),
-    summitName: z.string().min(1),
-  }),
-  z.object({
-    mode: z.literal('cragsByCanton'),
-    canton: z.string().min(1),
-  }),
-]);
+    summitName: z.string().min(1).optional(),
+  })
+  .superRefine((input, context) => {
+    if (input.mode === 'routesByCantonAndSummit' && !input.summitName) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'summitName is required when mode is routesByCantonAndSummit',
+        path: ['summitName'],
+      });
+    }
+  });
 
 const lookupOutputSchema = z.object({
   names: z.array(z.string()),
@@ -40,9 +36,9 @@ export const climbingRouteLookupTool = createTool({
   inputSchema: lookupInputSchema,
   outputSchema: lookupOutputSchema,
   execute: async (input, context) => {
-    const lookup = context?.requestContext?.get(
-      CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY,
-    ) as ClimbingRouteLookup | undefined;
+    const lookup = context?.requestContext?.get(CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY) as
+      | ClimbingRouteLookup
+      | undefined;
 
     if (!lookup) {
       throw new Error('Climbing route lookup is missing from Mastra request context');
@@ -66,6 +62,10 @@ export const climbingRouteLookupTool = createTool({
       });
 
       return { names: normalizeNames(names) };
+    }
+
+    if (!input.summitName) {
+      throw new Error('summitName is required when mode is routesByCantonAndSummit');
     }
 
     const names = await lookup.findRouteNames({

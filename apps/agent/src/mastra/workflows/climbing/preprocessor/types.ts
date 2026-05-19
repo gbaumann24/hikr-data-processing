@@ -2,20 +2,11 @@ import type {
   ClimbingGardenBasePreprocessorOutput,
   ClimbingTourBasePreprocessorOutput,
 } from '@hikr/shared';
-import {
-  CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
-  CLIMBING_SUB_ACTIVITY,
-} from '@hikr/shared';
-import type {
-  BaseLayerPreprocessorReason,
-  ReportBasePreprocessorOutput,
-} from '../../baselayer';
+import { CLIMBING_PREPROCESSOR_SCHEMA_VERSION, CLIMBING_SUB_ACTIVITY } from '@hikr/shared';
+import type { BaseLayerPreprocessorReason, ReportBasePreprocessorOutput } from '../../baselayer';
 
 export { CLIMBING_PREPROCESSOR_SCHEMA_VERSION, CLIMBING_SUB_ACTIVITY };
-export type {
-  ClimbingGardenBasePreprocessorOutput,
-  ClimbingTourBasePreprocessorOutput,
-};
+export type { ClimbingGardenBasePreprocessorOutput, ClimbingTourBasePreprocessorOutput };
 
 export type ClimbingPreprocessorAgentInput = {
   title: string;
@@ -25,36 +16,27 @@ export type ClimbingPreprocessorAgentInput = {
 
 export const climbingPreprocessorAgentOutputSchema = {
   type: 'object',
-  oneOf: [
-    {
-      type: 'object',
-      additionalProperties: false,
-      required: ['subActivity', 'routeName', 'summit'],
-      properties: {
-        subActivity: { enum: [CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR] },
-        routeName: { type: 'string', minLength: 1 },
-        summit: { type: 'string', minLength: 1 },
-      },
+  additionalProperties: false,
+  required: ['subActivity', 'routeName', 'summit', 'name'],
+  properties: {
+    subActivity: {
+      enum: [CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR, CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN, null],
     },
-    {
-      type: 'object',
-      additionalProperties: false,
-      required: ['subActivity', 'name'],
-      properties: {
-        subActivity: { enum: [CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN] },
-        name: { type: 'string', minLength: 1 },
-      },
-    },
-    {
-      type: 'object',
-      additionalProperties: false,
-      required: ['subActivity'],
-      properties: {
-        subActivity: { type: 'null' },
-      },
-    },
-  ],
+    routeName: { type: ['string', 'null'], minLength: 1 },
+    summit: { type: ['string', 'null'], minLength: 1 },
+    name: { type: ['string', 'null'], minLength: 1 },
+  },
 } as const;
+
+export type ClimbingPreprocessorAgentStructuredOutput = {
+  subActivity:
+    | typeof CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR
+    | typeof CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN
+    | null;
+  routeName: string | null;
+  summit: string | null;
+  name: string | null;
+};
 
 export type ClimbingPreprocessorAgentOutput =
   | {
@@ -70,9 +52,79 @@ export type ClimbingPreprocessorAgentOutput =
       subActivity: null;
     };
 
+export function parseClimbingPreprocessorAgentOutput(
+  output: unknown,
+): ClimbingPreprocessorAgentOutput {
+  if (!isClimbingPreprocessorAgentStructuredOutput(output)) {
+    return { subActivity: null };
+  }
+
+  if (output.subActivity === null) {
+    return { subActivity: null };
+  }
+
+  if (output.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN) {
+    const name = normalizeOptionalString(output.name);
+
+    if (!name) {
+      return { subActivity: null };
+    }
+
+    return {
+      subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
+      name,
+    };
+  }
+
+  const routeName = normalizeOptionalString(output.routeName);
+  const summit = normalizeOptionalString(output.summit);
+
+  if (!routeName || !summit) {
+    return { subActivity: null };
+  }
+
+  return {
+    subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+    routeName,
+    summit,
+  };
+}
+
+function isClimbingPreprocessorAgentStructuredOutput(
+  output: unknown,
+): output is ClimbingPreprocessorAgentStructuredOutput {
+  if (typeof output !== 'object' || output === null) {
+    return false;
+  }
+
+  const candidate = output as Partial<ClimbingPreprocessorAgentStructuredOutput>;
+
+  return (
+    (candidate.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR ||
+      candidate.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN ||
+      candidate.subActivity === null) &&
+    isNullableString(candidate.routeName) &&
+    isNullableString(candidate.summit) &&
+    isNullableString(candidate.name)
+  );
+}
+
+function isNullableString(value: unknown): value is string | null {
+  return typeof value === 'string' || value === null;
+}
+
+function normalizeOptionalString(value: string | null): string | null {
+  if (value === null) {
+    return null;
+  }
+
+  const normalized = value.replace(/\s+/g, ' ').trim();
+  return normalized === '' ? null : normalized;
+}
+
 export type ClimbingPreprocessorAgentRunner = (
   input: ClimbingPreprocessorAgentInput,
-) => Promise<ClimbingPreprocessorAgentOutput | null>;
+) => Promise<ClimbingPreprocessorAgentOutput>;
 
 export type ClimbingPreprocessorReason =
   | BaseLayerPreprocessorReason
@@ -80,7 +132,6 @@ export type ClimbingPreprocessorReason =
   | 'unsupported_activity_combination'
   | 'non_climbing_activity'
   | 'missing_climbing_preprocessor_agent'
-  | 'invalid_climbing_preprocessor_agent_output'
   | 'no_climbing_preprocessor_agent_match'
   | 'ready';
 

@@ -30,6 +30,15 @@ Run data-pipeline workflows separately:
 ```sh
 bun run --cwd apps/data-pipeline run:baselayer
 bun run --cwd apps/data-pipeline run:climbing
-HIKR_SQLITE_PATH=/path/to/hikr.sqlite bun run --cwd apps/data-pipeline run:sqlite:baselayer
-HIKR_SQLITE_PATH=/path/to/hikr.sqlite bun run --cwd apps/data-pipeline run:sqlite:climbing
+```
+
+Run an interactive climbing test against local Postgres. This purges the test DB,
+seeds the requested number of source posts from `hikr.sqlite`, then runs the
+climbing workflow:
+
+```sh
+bun run --cwd apps/data-pipeline test-run:climbing
+bun run --cwd apps/data-pipeline test-run:climbing -- --limit 25
+bun run --cwd apps/data-pipeline test-run:climbing -- --limit 25 --sqlite-path ../../hikr.sqlite
+just test-run-climbing 25
 ```

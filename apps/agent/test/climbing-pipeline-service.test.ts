@@ -20,7 +20,9 @@ const longDescription = 'Kletterbericht '.repeat(150);
 type ClimbingPipelineMastra = Parameters<typeof runClimbingPipelineService>[0]['mastra'];
 type WorkflowResult = { status: 'success'; result: ClimbingPreprocessorOutput };
 
-function hikrOrgPost(overrides: Partial<HikrOrgPostBaseLayerInput> = {}): HikrOrgPostBaseLayerInput {
+function hikrOrgPost(
+  overrides: Partial<HikrOrgPostBaseLayerInput> = {},
+): HikrOrgPostBaseLayerInput {
   return {
     id: 42n,
     title: 'Gross Turm - Südgrat',
@@ -66,7 +68,10 @@ function climbingOutput(
   };
 }
 
-function createMastraStub(results: WorkflowResult[], startArgs: unknown[] = []): ClimbingPipelineMastra {
+function createMastraStub(
+  results: WorkflowResult[],
+  startArgs: unknown[] = [],
+): ClimbingPipelineMastra {
   let index = 0;
 
   return {
@@ -93,27 +98,31 @@ describe('climbing pipeline service', () => {
     const workflowStartArgs: Array<{
       requestContext?: { get: (key: string) => unknown };
     }> = [];
+    const progressEvents: Array<{ type: string; [key: string]: unknown }> = [];
 
     const result = await runClimbingPipelineService({
-      mastra: createMastraStub([
-        { status: 'success', result: climbingOutput() },
-        {
-          status: 'success',
-          result: climbingOutput({
-            base: {
-              reportId: 43n,
-              status: PREPROCESSOR_STATUS.INSUFFICIENT,
-              activity: ACTIVITY.CLIMBING,
-              subActivity: null,
-              canton: 'Obwalden',
-              tourDate: new Date('2024-08-10T00:00:00.000Z'),
-              region: 'Melchtal',
-            },
-            climbingTourBase: null,
-            reasons: ['description_too_short'],
-          }),
-        },
-      ], workflowStartArgs),
+      mastra: createMastraStub(
+        [
+          { status: 'success', result: climbingOutput() },
+          {
+            status: 'success',
+            result: climbingOutput({
+              base: {
+                reportId: 43n,
+                status: PREPROCESSOR_STATUS.INSUFFICIENT,
+                activity: ACTIVITY.CLIMBING,
+                subActivity: null,
+                canton: 'Obwalden',
+                tourDate: new Date('2024-08-10T00:00:00.000Z'),
+                region: 'Melchtal',
+              },
+              climbingTourBase: null,
+              reasons: ['description_too_short'],
+            }),
+          },
+        ],
+        workflowStartArgs,
+      ),
       database: {
         findHikrOrgPostsForPreprocessing: () => [
           hikrOrgPost(),
@@ -131,6 +140,9 @@ describe('climbing pipeline service', () => {
         upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => {
           climbingGardenBaseWrites.push(input);
         },
+      },
+      onProgress: (event) => {
+        progressEvents.push(event);
       },
     });
 
@@ -175,6 +187,28 @@ describe('climbing pipeline service', () => {
       },
     ]);
     expect(climbingGardenBaseWrites).toEqual([]);
+    expect(progressEvents.map((event) => event.type)).toEqual([
+      'source-loaded',
+      'post-start',
+      'post-success',
+      'post-start',
+      'post-success',
+    ]);
+    expect(progressEvents[0]).toMatchObject({ total: 2 });
+    expect(progressEvents[2]).toMatchObject({
+      index: 1,
+      total: 2,
+      reportId: 42n,
+      status: PREPROCESSOR_STATUS.READY,
+      routeName: 'Südgrat',
+      summit: 'Gross Turm',
+    });
+    expect(progressEvents[4]).toMatchObject({
+      index: 2,
+      total: 2,
+      reportId: 43n,
+      status: PREPROCESSOR_STATUS.INSUFFICIENT,
+    });
   });
 
   test('supports async database cursors and limits processed rows', async () => {

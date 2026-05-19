@@ -90,14 +90,6 @@ export async function preprocessPreparedBaseLayerForClimbing(
   };
   const agentOutput = await options.runClimbingPreprocessorAgent(agentInput);
 
-  if (!agentOutput) {
-    return buildOutput({
-      base,
-      normalizedDescription: baseLayer.normalizedDescription,
-      reasons: ['invalid_climbing_preprocessor_agent_output'],
-    });
-  }
-
   if (agentOutput.subActivity === null) {
     return buildOutput({
       base,

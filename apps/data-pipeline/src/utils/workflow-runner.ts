@@ -3,9 +3,11 @@ import {
   mastra,
   runBaseLayerPipelineService,
   runClimbingPipelineService,
+  type ClimbingPipelineProgressEvent,
 } from 'agent/mastra';
 
 export type DataPipelineWorkflow = 'baselayer' | 'climbing';
+export type { ClimbingPipelineProgressEvent };
 
 const WORKFLOW_ALIASES: Record<string, DataPipelineWorkflow> = {
   baselayer: 'baselayer',
@@ -15,7 +17,9 @@ const WORKFLOW_ALIASES: Record<string, DataPipelineWorkflow> = {
   'climbing-pipeline': 'climbing',
 };
 
-export function getDataPipelineWorkflow(value = process.env.WORKFLOW ?? 'climbing'): DataPipelineWorkflow {
+export function getDataPipelineWorkflow(
+  value = process.env.WORKFLOW ?? 'climbing',
+): DataPipelineWorkflow {
   const workflow = WORKFLOW_ALIASES[value.trim().toLowerCase()];
 
   if (!workflow) {
@@ -29,16 +33,18 @@ export async function runDataPipelineWorkflow({
   workflow,
   database,
   limit,
+  onProgress,
 }: {
   workflow: DataPipelineWorkflow;
   database: ClimbingDataPipelineDatabase;
   limit?: number;
+  onProgress?: (event: ClimbingPipelineProgressEvent) => void;
 }) {
   if (workflow === 'baselayer') {
     return runBaseLayerPipelineService({ mastra, database, limit });
   }
 
-  return runClimbingPipelineService({ mastra, database, limit });
+  return runClimbingPipelineService({ mastra, database, limit, onProgress });
 }
 
 export function formatDataPipelineWorkflow(workflow: DataPipelineWorkflow): string {

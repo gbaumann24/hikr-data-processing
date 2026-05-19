@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./baselayer": "./src/baselayer/index.ts",
+    "./climbing": "./src/climbing/index.ts",
+    "./ski-touring": "./src/ski-touring/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

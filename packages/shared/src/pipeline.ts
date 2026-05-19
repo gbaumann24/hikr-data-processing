@@ -1,34 +1,3 @@
-import type { MaybePromise, MaybeAsyncIterable } from '@hikr/types';
-import type {
-  ClimbingGardenBasePreprocessorOutput,
-  ClimbingTourBasePreprocessorOutput,
-  HikrOrgPostBaseLayerInput,
-  ReportBaseSchemaWriteInput,
-  RouteCragNamesLookupInput,
-  RouteNamesLookupInput,
-  RouteSummitNamesLookupInput,
-} from './db';
-
-export type HikrOrgPostPreprocessingSource<SourceRow> = {
-  findHikrOrgPostsForPreprocessing: () => MaybePromise<MaybeAsyncIterable<SourceRow>>;
-};
-
-export type BaseLayerDataPipelineDatabase = HikrOrgPostPreprocessingSource<
-  HikrOrgPostBaseLayerInput
-> & {
-  upsertReportBase: (input: ReportBaseSchemaWriteInput) => MaybePromise<void>;
-};
-
-export type BaseDataPipelineDatabase<SourceRow, ReportBaseWriteInput> = HikrOrgPostPreprocessingSource<
-  SourceRow
-> & {
-  upsertReportBase: (input: ReportBaseWriteInput) => MaybePromise<void>;
-};
-
-export type ClimbingDataPipelineDatabase = BaseLayerDataPipelineDatabase & {
-  findRouteSummitNames: (input: RouteSummitNamesLookupInput) => MaybePromise<string[]>;
-  findRouteNames: (input: RouteNamesLookupInput) => MaybePromise<string[]>;
-  findRouteCragNames: (input: RouteCragNamesLookupInput) => MaybePromise<string[]>;
-  upsertClimbingTourBase: (input: ClimbingTourBasePreprocessorOutput) => MaybePromise<void>;
-  upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => MaybePromise<void>;
-};
+export * from './baselayer/pipeline';
+export * from './climbing/pipeline';
+export * from './ski-touring/pipeline';

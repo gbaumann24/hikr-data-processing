@@ -6,15 +6,14 @@
     "run": "bun src/run.ts",
     "run:baselayer": "WORKFLOW=baselayer bun src/run.ts",
     "run:climbing": "WORKFLOW=climbing bun src/run.ts",
-    "run:sqlite": "bun src/run-sqlite.ts",
-    "run:sqlite:baselayer": "WORKFLOW=baselayer bun src/run-sqlite.ts",
-    "run:sqlite:climbing": "WORKFLOW=climbing bun src/run-sqlite.ts",
+    "test-run:climbing": "bun src/run-climbing-test.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hikr/db": "workspace:*",
     "@hikr/shared": "workspace:*",
+    "@hikr/utils": "workspace:*",
     "agent": "workspace:*"
   }
 }
