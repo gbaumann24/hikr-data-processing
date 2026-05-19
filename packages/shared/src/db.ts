@@ -42,6 +42,13 @@ export type RouteSchemaWriteInput = Pick<
   'activity' | 'routeName' | 'startPoint' | 'summitName' | 'canton'
 >;
 
+export type RouteSummitNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'canton'>;
+
+export type RouteNamesLookupInput = Pick<
+  RouteSchemaWriteInput,
+  'activity' | 'canton' | 'summitName'
+>;
+
 export type ClimbingGardenBaseSchemaWriteInput = Pick<
   ClimbingGardenBaseSchema,
   'reportId' | 'name'

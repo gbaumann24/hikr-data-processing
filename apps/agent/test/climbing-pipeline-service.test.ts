@@ -13,6 +13,7 @@ import {
   type ClimbingPreprocessorOutput,
   type ClimbingTourBasePreprocessorOutput,
 } from '../src/mastra/workflows/climbing';
+import { CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY } from '../src/mastra/tools/climbing-route-lookup-tool';
 
 const longDescription = 'Kletterbericht '.repeat(150);
 
@@ -65,7 +66,7 @@ function climbingOutput(
   };
 }
 
-function createMastraStub(results: WorkflowResult[]): ClimbingPipelineMastra {
+function createMastraStub(results: WorkflowResult[], startArgs: unknown[] = []): ClimbingPipelineMastra {
   let index = 0;
 
   return {
@@ -74,7 +75,10 @@ function createMastraStub(results: WorkflowResult[]): ClimbingPipelineMastra {
 
       return {
         createRun: async () => ({
-          start: async () => results[index++],
+          start: async (args: unknown) => {
+            startArgs.push(args);
+            return results[index++];
+          },
         }),
       };
     },
@@ -86,6 +90,9 @@ describe('climbing pipeline service', () => {
     const reportBaseWrites: ReportBaseSchemaWriteInput[] = [];
     const climbingTourBaseWrites: ClimbingTourBasePreprocessorOutput[] = [];
     const climbingGardenBaseWrites: ClimbingGardenBasePreprocessorOutput[] = [];
+    const workflowStartArgs: Array<{
+      requestContext?: { get: (key: string) => unknown };
+    }> = [];
 
     const result = await runClimbingPipelineService({
       mastra: createMastraStub([
@@ -106,12 +113,14 @@ describe('climbing pipeline service', () => {
             reasons: ['description_too_short'],
           }),
         },
-      ]),
+      ], workflowStartArgs),
       database: {
         findHikrOrgPostsForPreprocessing: () => [
           hikrOrgPost(),
           hikrOrgPost({ id: 43n, description: 'zu kurz' }),
         ],
+        findRouteSummitNames: () => ['Gross Turm'],
+        findRouteNames: () => ['Südgrat'],
         upsertReportBase: (input: ReportBaseSchemaWriteInput) => {
           reportBaseWrites.push(input);
         },
@@ -129,6 +138,13 @@ describe('climbing pipeline service', () => {
       [PREPROCESSOR_STATUS.READY]: 1,
       [PREPROCESSOR_STATUS.SKIPPED]: 0,
       [PREPROCESSOR_STATUS.INSUFFICIENT]: 1,
+    });
+    expect(workflowStartArgs).toHaveLength(2);
+    expect(
+      workflowStartArgs[0].requestContext?.get(CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY),
+    ).toMatchObject({
+      findRouteSummitNames: expect.any(Function),
+      findRouteNames: expect.any(Function),
     });
     expect(reportBaseWrites).toMatchObject([
       {
@@ -188,6 +204,8 @@ describe('climbing pipeline service', () => {
       ]),
       database: {
         findHikrOrgPostsForPreprocessing,
+        findRouteSummitNames: () => [],
+        findRouteNames: () => [],
         upsertReportBase: (input: ReportBaseSchemaWriteInput) => {
           reportBaseWrites.push(input);
         },

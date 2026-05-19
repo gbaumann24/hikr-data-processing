@@ -7,7 +7,7 @@
     ".": "./index.ts",
     "./mastra": "./src/mastra/index.ts",
     "./mastra/agents/climbing-extraction-agent": "./src/mastra/agents/climbing-extraction-agent.ts",
-    "./mastra/agents/climbing-subactivity-agent": "./src/mastra/agents/climbing-subactivity-agent.ts"
+    "./mastra/agents/climbing-preprocessor-agent": "./src/mastra/agents/climbing-preprocessor-agent.ts"
   },
   "devDependencies": {
     "mastra": "^1.9.3"

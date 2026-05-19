@@ -53,6 +53,12 @@ export function createSqliteDatabase(db: Database): ClimbingDataPipelineDatabase
     },
 
     upsertReportBase(_input: ReportBaseSchemaWriteInput) {},
+    findRouteSummitNames() {
+      return [];
+    },
+    findRouteNames() {
+      return [];
+    },
     upsertClimbingTourBase() {},
     upsertClimbingGardenBase() {},
   };

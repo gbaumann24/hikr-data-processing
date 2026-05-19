@@ -1,35 +1,49 @@
+import type { RequestContext } from '@mastra/core/request-context';
 import {
-  climbingSubActivityClassificationSchema,
-  type ClimbingSubActivityClassifier,
+  climbingPreprocessorAgentOutputSchema,
+  type ClimbingPreprocessorAgentRunner,
 } from './types';
 
 type StructuredOutputAgent = {
 	generate: (
 		messages: string,
 		options: {
-			structuredOutput: { schema: typeof climbingSubActivityClassificationSchema };
+			requestContext?: RequestContext;
+			maxSteps?: number;
+			toolChoice?: 'auto' | 'none' | 'required';
+			structuredOutput: {
+				schema: typeof climbingPreprocessorAgentOutputSchema;
+				model?: string;
+			};
 			modelSettings?: { temperature?: number; maxOutputTokens?: number };
 			providerOptions?: { openai?: { reasoningEffort?: 'low' | 'medium' | 'high' } };
 		},
 	) => Promise<{ object?: unknown; finishReason?: string }>;
 };
 
-export function createMastraClimbingSubActivityClassifier(
+export function createMastraClimbingPreprocessorAgentRunner(
   agent: StructuredOutputAgent,
-): ClimbingSubActivityClassifier {
-  return async ({ title, description }) => {
+  options: { requestContext?: RequestContext } = {},
+): ClimbingPreprocessorAgentRunner {
+  return async ({ title, description, canton }) => {
     const response = await agent.generate(
       [
-        'Klassifiziere den HIKR-Kletterbericht.',
-        'Gib alle Schema-Felder zurück. Nutze null für Felder, die zur gewählten subActivity nicht gehören.',
+        'Extract the subActivity from the report.',
+        'Depening on the subActivity, extract the routeName and summit/objective name or the climbing garden/crag name.',
         '',
-        `Titel: ${title}`,
+        `Canton: ${canton}`,
         '',
-        `Beschreibung: ${description}`,
+        `Title: ${title}`,
+        '',
+        `Description: ${description}`,
       ].join('\n'),
       {
+        requestContext: options.requestContext,
+        maxSteps: 6,
+        toolChoice: 'auto',
         structuredOutput: {
-          schema: climbingSubActivityClassificationSchema,
+          schema: climbingPreprocessorAgentOutputSchema,
+          model: 'openai/gpt-5-mini',
         },
         modelSettings: {
           temperature: 0,
@@ -45,7 +59,7 @@ export function createMastraClimbingSubActivityClassifier(
 
     if (response.object === undefined) {
       throw new Error(
-        `Mastra climbing sub-activity classifier returned undefined object; finishReason=${response.finishReason ?? 'unknown'}`,
+        `Mastra climbing preprocessor agent returned undefined object; finishReason=${response.finishReason ?? 'unknown'}`,
       );
     }
 

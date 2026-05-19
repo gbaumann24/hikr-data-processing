@@ -1,4 +1,5 @@
 import type { Mastra } from '@mastra/core/mastra';
+import { RequestContext } from '@mastra/core/request-context';
 import { toAsyncIterable } from '@hikr/utils';
 import {
   mapReportBaseToSchemaWrite,
@@ -7,6 +8,10 @@ import {
 import type { ClimbingDataPipelineDatabase } from '@hikr/shared';
 import type { ClimbingPreprocessorOutput } from '../workflows/climbing';
 import { PREPROCESSOR_STATUS } from '../workflows/baselayer';
+import {
+  CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY,
+  type ClimbingRouteLookup,
+} from '../tools/climbing-route-lookup-tool';
 
 export type ClimbingPipelineServiceOptions = {
   mastra: Mastra;
@@ -40,7 +45,13 @@ export async function runClimbingPipelineService({
     }
 
     const run = await workflow.createRun();
-    const result = await run.start({ inputData: post });
+    const requestContext = new RequestContext();
+    requestContext.set(CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY, {
+      findRouteSummitNames: database.findRouteSummitNames,
+      findRouteNames: database.findRouteNames,
+    } satisfies ClimbingRouteLookup);
+
+    const result = await run.start({ inputData: post, requestContext });
 
     if (result.status === 'success') {
       const climbing = result.result as ClimbingPreprocessorOutput;

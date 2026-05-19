@@ -4,6 +4,8 @@ import type {
   ClimbingTourBasePreprocessorOutput,
   HikrOrgPostBaseLayerInput,
   ReportBaseSchemaWriteInput,
+  RouteNamesLookupInput,
+  RouteSummitNamesLookupInput,
 } from './db';
 
 export type HikrOrgPostPreprocessingSource<SourceRow> = {
@@ -23,6 +25,8 @@ export type BaseDataPipelineDatabase<SourceRow, ReportBaseWriteInput> = HikrOrgP
 };
 
 export type ClimbingDataPipelineDatabase = BaseLayerDataPipelineDatabase & {
+  findRouteSummitNames: (input: RouteSummitNamesLookupInput) => MaybePromise<string[]>;
+  findRouteNames: (input: RouteNamesLookupInput) => MaybePromise<string[]>;
   upsertClimbingTourBase: (input: ClimbingTourBasePreprocessorOutput) => MaybePromise<void>;
   upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => MaybePromise<void>;
 };

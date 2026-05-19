@@ -1,7 +1,7 @@
 import { loadRootEnv } from '../utils';
 import { Mastra } from '@mastra/core/mastra';
 import { climbingExtractionAgent } from './agents/climbing-extraction-agent';
-import { climbingSubActivityAgent } from './agents/climbing-subactivity-agent';
+import { climbingPreprocessorAgent } from './agents/climbing-preprocessor-agent';
 import { baseLayerWorkflow } from './workflows/baselayer';
 import { climbingPipelineWorkflow } from './workflows/climbing';
 import { skiTouringPipelineWorkflow } from './workflows/ski-touring';
@@ -9,7 +9,7 @@ import { skiTouringPipelineWorkflow } from './workflows/ski-touring';
 loadRootEnv();
 
 export { climbingExtractionAgent } from './agents/climbing-extraction-agent';
-export { climbingSubActivityAgent } from './agents/climbing-subactivity-agent';
+export { climbingPreprocessorAgent } from './agents/climbing-preprocessor-agent';
 export { baseLayerWorkflow } from './workflows/baselayer';
 export { climbingPipelineWorkflow } from './workflows/climbing';
 export { skiTouringPipelineWorkflow } from './workflows/ski-touring';
@@ -27,7 +27,7 @@ export type {
 export const mastra = new Mastra({
   agents: {
     'climbing-extraction-agent': climbingExtractionAgent,
-    'climbing-subactivity-agent': climbingSubActivityAgent,
+    'climbing-preprocessor-agent': climbingPreprocessorAgent,
   },
   workflows: {
     baselayer: baseLayerWorkflow,

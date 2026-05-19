@@ -17,31 +17,45 @@ export type {
   ClimbingTourBasePreprocessorOutput,
 };
 
-export type ClimbingSubActivityClassifierInput = {
+export type ClimbingPreprocessorAgentInput = {
   title: string;
   description: string;
+  canton: string;
 };
 
-export const climbingSubActivityClassificationSchema = {
-  type: 'object',
-  additionalProperties: false,
-  required: ['subActivity', 'routeName', 'summit', 'name', 'reason'],
-  properties: {
-    subActivity: {
-      enum: [
-        CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
-        CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
-        null,
-      ],
+export const climbingPreprocessorAgentOutputSchema = {
+  oneOf: [
+    {
+      type: 'object',
+      additionalProperties: false,
+      required: ['subActivity', 'routeName', 'summit'],
+      properties: {
+        subActivity: { enum: [CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR] },
+        routeName: { type: 'string' },
+        summit: { type: 'string' },
+      },
     },
-    routeName: { type: ['string', 'null'] },
-    summit: { type: ['string', 'null'] },
-    name: { type: ['string', 'null'] },
-    reason: { type: ['string', 'null'] },
-  },
+    {
+      type: 'object',
+      additionalProperties: false,
+      required: ['subActivity', 'name'],
+      properties: {
+        subActivity: { enum: [CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN] },
+        name: { type: 'string' },
+      },
+    },
+    {
+      type: 'object',
+      additionalProperties: false,
+      required: ['subActivity'],
+      properties: {
+        subActivity: { type: 'null' },
+      },
+    },
+  ],
 } as const;
 
-export type ClimbingSubActivityClassification =
+export type ClimbingPreprocessorAgentOutput =
   | {
       subActivity: typeof CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR;
       routeName: string;
@@ -53,11 +67,10 @@ export type ClimbingSubActivityClassification =
     }
   | {
       subActivity: null;
-      reason?: string;
     };
 
-export type ClimbingSubActivityClassifier = (
-  input: ClimbingSubActivityClassifierInput,
+export type ClimbingPreprocessorAgentRunner = (
+  input: ClimbingPreprocessorAgentInput,
 ) => Promise<unknown>;
 
 export type ClimbingPreprocessorReason =
@@ -65,9 +78,9 @@ export type ClimbingPreprocessorReason =
   | 'unsupported_activity_scales'
   | 'unsupported_activity_combination'
   | 'non_climbing_activity'
-  | 'missing_sub_activity_classifier'
-  | 'invalid_sub_activity_classification'
-  | 'no_climbing_sub_activity'
+  | 'missing_climbing_preprocessor_agent'
+  | 'invalid_climbing_preprocessor_agent_output'
+  | 'no_climbing_preprocessor_agent_match'
   | 'ready';
 
 export type ClimbingPreprocessorOutput = {

@@ -9,6 +9,7 @@ import {
 	CLIMBING_SUB_ACTIVITY,
 	classifyActivity,
 	preprocessHikrReportForClimbing,
+	type ClimbingPreprocessorAgentInput,
 } from '../src/mastra/workflows/climbing';
 
 const longDescription = 'Kletterbericht '.repeat(150);
@@ -85,7 +86,7 @@ describe('climbing preprocessor', () => {
 		const mountainBikeResult = await preprocessHikrReportForClimbing(
 			baseInput({ mountainBikeDifficulty: 'S2' }),
 			{
-				classifySubActivity: async () => ({
+				runClimbingPreprocessorAgent: async () => ({
 					subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
 					routeName: 'Südgrat',
 					summit: 'Gross Turm',
@@ -126,17 +127,22 @@ describe('climbing preprocessor', () => {
 		expect(result.reasons).toEqual(['non_climbing_activity']);
 	});
 
-	test('sets climbing tour output when classifier returns route and summit', async () => {
+	test('sets climbing tour output when preprocessor agent returns route and summit', async () => {
+		const agentInputs: ClimbingPreprocessorAgentInput[] = [];
 		const result = await preprocessHikrReportForClimbing(baseInput(), {
-			classifySubActivity: async () => ({
-				subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
-				routeName: 'Südgrat',
-				summit: 'Gross Turm',
-			}),
+			runClimbingPreprocessorAgent: async (input) => {
+				agentInputs.push(input);
+				return {
+					subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+					routeName: 'Südgrat',
+					summit: 'Gross Turm',
+				};
+			},
 		});
 
 		expect(result.base.status).toBe(PREPROCESSOR_STATUS.READY);
 		expect(result.base.subActivity).toBe(CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR);
+		expect(agentInputs).toMatchObject([{ canton: 'Obwalden' }]);
 		expect(result.climbingTourBase).toMatchObject({
 			routeName: 'Südgrat',
 			summit: 'Gross Turm',
@@ -144,9 +150,9 @@ describe('climbing preprocessor', () => {
 		expect(result.climbingGardenBase).toBeNull();
 	});
 
-	test('sets climbing garden output when classifier returns a name', async () => {
+	test('sets climbing garden output when preprocessor agent returns a climbing garden', async () => {
 		const result = await preprocessHikrReportForClimbing(baseInput(), {
-			classifySubActivity: async () => ({
+			runClimbingPreprocessorAgent: async () => ({
 				subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
 				name: 'Klettergarten Melchtal',
 			}),
@@ -154,31 +160,36 @@ describe('climbing preprocessor', () => {
 
 		expect(result.base.status).toBe(PREPROCESSOR_STATUS.READY);
 		expect(result.base.subActivity).toBe(CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN);
+		expect(result.climbingTourBase).toBeNull();
 		expect(result.climbingGardenBase).toEqual({
 			reportId: 42n,
 			name: 'Klettergarten Melchtal',
 		});
-		expect(result.climbingTourBase).toBeNull();
 	});
 
-	test('skips when classifier output misses required fields', async () => {
+	test('skips when preprocessor agent output misses required fields', async () => {
 		const result = await preprocessHikrReportForClimbing(baseInput(), {
-			classifySubActivity: async () => ({
+			runClimbingPreprocessorAgent: async () => ({
 				subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
 				routeName: 'Südgrat',
 			}),
 		});
 
 		expect(result.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
-		expect(result.reasons).toEqual(['invalid_sub_activity_classification']);
+		expect(result.reasons).toEqual(['invalid_climbing_preprocessor_agent_output']);
 	});
 
-	test('skips when classifier finds no climbing sub-activity', async () => {
+	test('skips when preprocessor agent finds no climbing sub-activity', async () => {
 		const result = await preprocessHikrReportForClimbing(baseInput(), {
-			classifySubActivity: async () => ({ subActivity: null, reason: 'ambiguous' }),
+			runClimbingPreprocessorAgent: async () => ({
+				subActivity: null,
+				routeName: null,
+				summit: null,
+				name: null,
+			}),
 		});
 
 		expect(result.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
-		expect(result.reasons).toEqual(['no_climbing_sub_activity']);
+		expect(result.reasons).toEqual(['no_climbing_preprocessor_agent_match']);
 	});
 });

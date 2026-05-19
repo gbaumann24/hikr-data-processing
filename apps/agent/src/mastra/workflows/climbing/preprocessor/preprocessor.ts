@@ -13,14 +13,14 @@ import {
   CLIMBING_SUB_ACTIVITY,
   type ClimbingPreprocessorOutput,
   type ClimbingPreprocessorReason,
-  type ClimbingSubActivityClassification,
-  type ClimbingSubActivityClassifier,
-  type ClimbingSubActivityClassifierInput,
+  type ClimbingPreprocessorAgentOutput,
+  type ClimbingPreprocessorAgentInput,
+  type ClimbingPreprocessorAgentRunner,
 } from './types';
 
 export async function preprocessHikrReportForClimbing(
   input: HikrPreprocessorInput,
-  options: { classifySubActivity?: ClimbingSubActivityClassifier } = {},
+  options: { runClimbingPreprocessorAgent?: ClimbingPreprocessorAgentRunner } = {},
 ): Promise<ClimbingPreprocessorOutput> {
   const baseLayer = prepareBaseLayer(input);
   return preprocessPreparedBaseLayerForClimbing(input, baseLayer, options);
@@ -29,7 +29,7 @@ export async function preprocessHikrReportForClimbing(
 export async function preprocessPreparedBaseLayerForClimbing(
   input: HikrPreprocessorInput,
   baseLayer: BaseLayerPreprocessorOutput,
-  options: { classifySubActivity?: ClimbingSubActivityClassifier } = {},
+  options: { runClimbingPreprocessorAgent?: ClimbingPreprocessorAgentRunner } = {},
 ): Promise<ClimbingPreprocessorOutput> {
   const activityClassification = classifyActivity(baseLayer.difficultyScales);
   const reasons: ClimbingPreprocessorReason[] = [...baseLayer.reasons];
@@ -68,51 +68,58 @@ export async function preprocessPreparedBaseLayerForClimbing(
     });
   }
 
-  if (!options.classifySubActivity) {
+  if (!base.canton) {
     return buildOutput({
-      base,
+      base: { ...base, status: PREPROCESSOR_STATUS.INSUFFICIENT },
       normalizedDescription: baseLayer.normalizedDescription,
-      reasons: ['missing_sub_activity_classifier'],
+      reasons: reasons.includes('missing_canton') ? reasons : [...reasons, 'missing_canton'],
     });
   }
 
-  const classificationInput: ClimbingSubActivityClassifierInput = {
+  if (!options.runClimbingPreprocessorAgent) {
+    return buildOutput({
+      base,
+      normalizedDescription: baseLayer.normalizedDescription,
+      reasons: ['missing_climbing_preprocessor_agent'],
+    });
+  }
+
+  const agentInput: ClimbingPreprocessorAgentInput = {
     title: normalizeDescription(input.title),
     description: baseLayer.normalizedDescription,
+    canton: base.canton,
   };
-  const classification = await options.classifySubActivity(classificationInput);
-  const parsedClassification = parseSubActivityClassification(classification);
+  const agentOutput = await options.runClimbingPreprocessorAgent(agentInput);
+  const parsedAgentOutput = parseClimbingPreprocessorAgentOutput(agentOutput);
 
-  if (!parsedClassification) {
+  if (!parsedAgentOutput) {
     return buildOutput({
       base,
       normalizedDescription: baseLayer.normalizedDescription,
-      reasons: ['invalid_sub_activity_classification'],
+      reasons: ['invalid_climbing_preprocessor_agent_output'],
     });
   }
 
-  if (parsedClassification.subActivity === null) {
+  if (parsedAgentOutput.subActivity === null) {
     return buildOutput({
       base,
       normalizedDescription: baseLayer.normalizedDescription,
-      reasons: ['no_climbing_sub_activity'],
+      reasons: ['no_climbing_preprocessor_agent_match'],
     });
   }
 
-  if (parsedClassification.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR) {
+  if (parsedAgentOutput.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN) {
     return buildOutput({
       base: {
         ...base,
         status: PREPROCESSOR_STATUS.READY,
-        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
       },
       normalizedDescription: baseLayer.normalizedDescription,
       reasons: ['ready'],
-      climbingTourBase: {
+      climbingGardenBase: {
         reportId: base.reportId,
-        schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
-        routeName: parsedClassification.routeName,
-        summit: parsedClassification.summit,
+        name: parsedAgentOutput.name,
       },
     });
   }
@@ -121,25 +128,27 @@ export async function preprocessPreparedBaseLayerForClimbing(
     base: {
       ...base,
       status: PREPROCESSOR_STATUS.READY,
-      subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
+      subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
     },
     normalizedDescription: baseLayer.normalizedDescription,
     reasons: ['ready'],
-    climbingGardenBase: {
+    climbingTourBase: {
       reportId: base.reportId,
-      name: parsedClassification.name,
+      schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
+      routeName: parsedAgentOutput.routeName,
+      summit: parsedAgentOutput.summit,
     },
   });
 }
 
-function parseSubActivityClassification(
-  classification: unknown,
-): ClimbingSubActivityClassification | null {
-  if (!classification || typeof classification !== 'object') {
+function parseClimbingPreprocessorAgentOutput(
+  agentOutput: unknown,
+): ClimbingPreprocessorAgentOutput | null {
+  if (!agentOutput || typeof agentOutput !== 'object') {
     return null;
   }
 
-  const record = classification as Record<string, unknown>;
+  const record = agentOutput as Record<string, unknown>;
 
   if (record.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR) {
     const routeName = normalizeRequiredString(record.routeName);
@@ -166,8 +175,7 @@ function parseSubActivityClassification(
   }
 
   if (record.subActivity === null) {
-    const reason = typeof record.reason === 'string' ? record.reason.trim() : undefined;
-    return reason ? { subActivity: null, reason } : { subActivity: null };
+    return { subActivity: null };
   }
 
   return null;

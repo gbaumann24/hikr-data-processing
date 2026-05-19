@@ -40,6 +40,33 @@ export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipeli
       });
     },
 
+    async findRouteSummitNames({ activity, canton }): Promise<string[]> {
+      const routes = await prisma.routeSchema.findMany({
+        where: { activity, canton },
+        distinct: ['summitName'],
+        select: { summitName: true },
+        orderBy: { summitName: 'asc' },
+      });
+
+      return routes.map((route) => route.summitName);
+    },
+
+    async findRouteNames({ activity, canton, summitName }): Promise<string[]> {
+      const routes = await prisma.routeSchema.findMany({
+        where: {
+          activity,
+          canton,
+          summitName,
+          routeName: { not: null },
+        },
+        distinct: ['routeName'],
+        select: { routeName: true },
+        orderBy: { routeName: 'asc' },
+      });
+
+      return routes.flatMap((route) => (route.routeName ? [route.routeName] : []));
+    },
+
     async upsertClimbingTourBase(input: ClimbingTourBasePreprocessorOutput): Promise<void> {
       await prisma.$transaction(async (tx) => {
         const reportBase = await tx.reportBaseSchema.findUnique({
