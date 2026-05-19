@@ -18,6 +18,13 @@ bun run test
 bun run build
 ```
 
+Format code before opening a PR:
+
+```sh
+bun run format
+bun run format:check
+```
+
 Run data-pipeline workflows separately:
 
 ```sh

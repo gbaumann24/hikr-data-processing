@@ -45,6 +45,14 @@ test:
     bun test --cwd apps/agent
     bun test --cwd apps/data-pipeline
 
+# Format all supported files with the shared Prettier config
+format:
+    bun run format
+
+# Check formatting without writing changes
+format-check:
+    bun run format:check
+
 # Typecheck all packages
 typecheck:
     for dir in packages/types packages/utils packages/db apps/agent apps/data-pipeline; do \
