@@ -39,15 +39,24 @@ export type ClimbingTourBaseSchemaWriteInput = Pick<
 
 export type RouteSchemaWriteInput = Pick<
   RouteSchema,
-  'activity' | 'routeName' | 'startPoint' | 'summitName' | 'canton'
+  'activity' | 'subActivity' | 'routeName' | 'startPoint' | 'summitName' | 'cragName' | 'canton'
 >;
 
-export type RouteSummitNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'canton'>;
+export type RouteSummitNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'canton'> & {
+  subActivity: string;
+};
 
 export type RouteNamesLookupInput = Pick<
   RouteSchemaWriteInput,
-  'activity' | 'canton' | 'summitName'
->;
+  'activity' | 'canton'
+> & {
+  subActivity: string;
+  summitName: string;
+};
+
+export type RouteCragNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'canton'> & {
+  subActivity: string;
+};
 
 export type ClimbingGardenBaseSchemaWriteInput = Pick<
   ClimbingGardenBaseSchema,

@@ -49,6 +49,7 @@ export async function runClimbingPipelineService({
     requestContext.set(CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY, {
       findRouteSummitNames: database.findRouteSummitNames,
       findRouteNames: database.findRouteNames,
+      findRouteCragNames: database.findRouteCragNames,
     } satisfies ClimbingRouteLookup);
 
     const result = await run.start({ inputData: post, requestContext });

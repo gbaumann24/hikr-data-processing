@@ -21060,9 +21060,11 @@ export namespace Prisma {
   export type RouteSchemaMinAggregateOutputType = {
     id: bigint | null
     activity: string | null
+    subActivity: string | null
     routeName: string | null
     startPoint: string | null
     summitName: string | null
+    cragName: string | null
     canton: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -21071,9 +21073,11 @@ export namespace Prisma {
   export type RouteSchemaMaxAggregateOutputType = {
     id: bigint | null
     activity: string | null
+    subActivity: string | null
     routeName: string | null
     startPoint: string | null
     summitName: string | null
+    cragName: string | null
     canton: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -21082,9 +21086,11 @@ export namespace Prisma {
   export type RouteSchemaCountAggregateOutputType = {
     id: number
     activity: number
+    subActivity: number
     routeName: number
     startPoint: number
     summitName: number
+    cragName: number
     canton: number
     createdAt: number
     updatedAt: number
@@ -21103,9 +21109,11 @@ export namespace Prisma {
   export type RouteSchemaMinAggregateInputType = {
     id?: true
     activity?: true
+    subActivity?: true
     routeName?: true
     startPoint?: true
     summitName?: true
+    cragName?: true
     canton?: true
     createdAt?: true
     updatedAt?: true
@@ -21114,9 +21122,11 @@ export namespace Prisma {
   export type RouteSchemaMaxAggregateInputType = {
     id?: true
     activity?: true
+    subActivity?: true
     routeName?: true
     startPoint?: true
     summitName?: true
+    cragName?: true
     canton?: true
     createdAt?: true
     updatedAt?: true
@@ -21125,9 +21135,11 @@ export namespace Prisma {
   export type RouteSchemaCountAggregateInputType = {
     id?: true
     activity?: true
+    subActivity?: true
     routeName?: true
     startPoint?: true
     summitName?: true
+    cragName?: true
     canton?: true
     createdAt?: true
     updatedAt?: true
@@ -21223,9 +21235,11 @@ export namespace Prisma {
   export type RouteSchemaGroupByOutputType = {
     id: bigint
     activity: string
+    subActivity: string | null
     routeName: string | null
     startPoint: string | null
-    summitName: string
+    summitName: string | null
+    cragName: string | null
     canton: string
     createdAt: Date
     updatedAt: Date
@@ -21253,9 +21267,11 @@ export namespace Prisma {
   export type RouteSchemaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     activity?: boolean
+    subActivity?: boolean
     routeName?: boolean
     startPoint?: boolean
     summitName?: boolean
+    cragName?: boolean
     canton?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -21266,9 +21282,11 @@ export namespace Prisma {
   export type RouteSchemaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     activity?: boolean
+    subActivity?: boolean
     routeName?: boolean
     startPoint?: boolean
     summitName?: boolean
+    cragName?: boolean
     canton?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -21277,9 +21295,11 @@ export namespace Prisma {
   export type RouteSchemaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     activity?: boolean
+    subActivity?: boolean
     routeName?: boolean
     startPoint?: boolean
     summitName?: boolean
+    cragName?: boolean
     canton?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -21288,15 +21308,17 @@ export namespace Prisma {
   export type RouteSchemaSelectScalar = {
     id?: boolean
     activity?: boolean
+    subActivity?: boolean
     routeName?: boolean
     startPoint?: boolean
     summitName?: boolean
+    cragName?: boolean
     canton?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type RouteSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "activity" | "routeName" | "startPoint" | "summitName" | "canton" | "createdAt" | "updatedAt", ExtArgs["result"]["routeSchema"]>
+  export type RouteSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "activity" | "subActivity" | "routeName" | "startPoint" | "summitName" | "cragName" | "canton" | "createdAt" | "updatedAt", ExtArgs["result"]["routeSchema"]>
   export type RouteSchemaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     climbingTourBaseSchemas?: boolean | RouteSchema$climbingTourBaseSchemasArgs<ExtArgs>
     _count?: boolean | RouteSchemaCountOutputTypeDefaultArgs<ExtArgs>
@@ -21312,9 +21334,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       activity: string
+      subActivity: string | null
       routeName: string | null
       startPoint: string | null
-      summitName: string
+      summitName: string | null
+      cragName: string | null
       canton: string
       createdAt: Date
       updatedAt: Date
@@ -21744,9 +21768,11 @@ export namespace Prisma {
   interface RouteSchemaFieldRefs {
     readonly id: FieldRef<"RouteSchema", 'BigInt'>
     readonly activity: FieldRef<"RouteSchema", 'String'>
+    readonly subActivity: FieldRef<"RouteSchema", 'String'>
     readonly routeName: FieldRef<"RouteSchema", 'String'>
     readonly startPoint: FieldRef<"RouteSchema", 'String'>
     readonly summitName: FieldRef<"RouteSchema", 'String'>
+    readonly cragName: FieldRef<"RouteSchema", 'String'>
     readonly canton: FieldRef<"RouteSchema", 'String'>
     readonly createdAt: FieldRef<"RouteSchema", 'DateTime'>
     readonly updatedAt: FieldRef<"RouteSchema", 'DateTime'>
@@ -22439,9 +22465,11 @@ export namespace Prisma {
   export const RouteSchemaScalarFieldEnum: {
     id: 'id',
     activity: 'activity',
+    subActivity: 'subActivity',
     routeName: 'routeName',
     startPoint: 'startPoint',
     summitName: 'summitName',
+    cragName: 'cragName',
     canton: 'canton',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -23886,9 +23914,11 @@ export namespace Prisma {
     NOT?: RouteSchemaWhereInput | RouteSchemaWhereInput[]
     id?: BigIntFilter<"RouteSchema"> | bigint | number
     activity?: StringFilter<"RouteSchema"> | string
+    subActivity?: StringNullableFilter<"RouteSchema"> | string | null
     routeName?: StringNullableFilter<"RouteSchema"> | string | null
     startPoint?: StringNullableFilter<"RouteSchema"> | string | null
-    summitName?: StringFilter<"RouteSchema"> | string
+    summitName?: StringNullableFilter<"RouteSchema"> | string | null
+    cragName?: StringNullableFilter<"RouteSchema"> | string | null
     canton?: StringFilter<"RouteSchema"> | string
     createdAt?: DateTimeFilter<"RouteSchema"> | Date | string
     updatedAt?: DateTimeFilter<"RouteSchema"> | Date | string
@@ -23898,9 +23928,11 @@ export namespace Prisma {
   export type RouteSchemaOrderByWithRelationInput = {
     id?: SortOrder
     activity?: SortOrder
+    subActivity?: SortOrderInput | SortOrder
     routeName?: SortOrderInput | SortOrder
     startPoint?: SortOrderInput | SortOrder
-    summitName?: SortOrder
+    summitName?: SortOrderInput | SortOrder
+    cragName?: SortOrderInput | SortOrder
     canton?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23911,25 +23943,30 @@ export namespace Prisma {
     id?: bigint | number
     activityRouteNameSummitCanton?: RouteSchemaActivityRouteNameSummitCantonCompoundUniqueInput
     activityStartPointSummitCanton?: RouteSchemaActivityStartPointSummitCantonCompoundUniqueInput
+    activitySubActivityCragNameCanton?: RouteSchemaActivitySubActivityCragNameCantonCompoundUniqueInput
     AND?: RouteSchemaWhereInput | RouteSchemaWhereInput[]
     OR?: RouteSchemaWhereInput[]
     NOT?: RouteSchemaWhereInput | RouteSchemaWhereInput[]
     activity?: StringFilter<"RouteSchema"> | string
+    subActivity?: StringNullableFilter<"RouteSchema"> | string | null
     routeName?: StringNullableFilter<"RouteSchema"> | string | null
     startPoint?: StringNullableFilter<"RouteSchema"> | string | null
-    summitName?: StringFilter<"RouteSchema"> | string
+    summitName?: StringNullableFilter<"RouteSchema"> | string | null
+    cragName?: StringNullableFilter<"RouteSchema"> | string | null
     canton?: StringFilter<"RouteSchema"> | string
     createdAt?: DateTimeFilter<"RouteSchema"> | Date | string
     updatedAt?: DateTimeFilter<"RouteSchema"> | Date | string
     climbingTourBaseSchemas?: ClimbingTourBaseSchemaListRelationFilter
-  }, "id" | "activityRouteNameSummitCanton" | "activityStartPointSummitCanton">
+  }, "id" | "activityRouteNameSummitCanton" | "activityStartPointSummitCanton" | "activitySubActivityCragNameCanton">
 
   export type RouteSchemaOrderByWithAggregationInput = {
     id?: SortOrder
     activity?: SortOrder
+    subActivity?: SortOrderInput | SortOrder
     routeName?: SortOrderInput | SortOrder
     startPoint?: SortOrderInput | SortOrder
-    summitName?: SortOrder
+    summitName?: SortOrderInput | SortOrder
+    cragName?: SortOrderInput | SortOrder
     canton?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23946,9 +23983,11 @@ export namespace Prisma {
     NOT?: RouteSchemaScalarWhereWithAggregatesInput | RouteSchemaScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"RouteSchema"> | bigint | number
     activity?: StringWithAggregatesFilter<"RouteSchema"> | string
+    subActivity?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
     routeName?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
     startPoint?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
-    summitName?: StringWithAggregatesFilter<"RouteSchema"> | string
+    summitName?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
+    cragName?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
     canton?: StringWithAggregatesFilter<"RouteSchema"> | string
     createdAt?: DateTimeWithAggregatesFilter<"RouteSchema"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"RouteSchema"> | Date | string
@@ -25353,9 +25392,11 @@ export namespace Prisma {
   export type RouteSchemaCreateInput = {
     id?: bigint | number
     activity: string
+    subActivity?: string | null
     routeName?: string | null
     startPoint?: string | null
-    summitName: string
+    summitName?: string | null
+    cragName?: string | null
     canton: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25365,9 +25406,11 @@ export namespace Prisma {
   export type RouteSchemaUncheckedCreateInput = {
     id?: bigint | number
     activity: string
+    subActivity?: string | null
     routeName?: string | null
     startPoint?: string | null
-    summitName: string
+    summitName?: string | null
+    cragName?: string | null
     canton: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25377,9 +25420,11 @@ export namespace Prisma {
   export type RouteSchemaUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     activity?: StringFieldUpdateOperationsInput | string
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    summitName?: StringFieldUpdateOperationsInput | string
+    summitName?: NullableStringFieldUpdateOperationsInput | string | null
+    cragName?: NullableStringFieldUpdateOperationsInput | string | null
     canton?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25389,9 +25434,11 @@ export namespace Prisma {
   export type RouteSchemaUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     activity?: StringFieldUpdateOperationsInput | string
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    summitName?: StringFieldUpdateOperationsInput | string
+    summitName?: NullableStringFieldUpdateOperationsInput | string | null
+    cragName?: NullableStringFieldUpdateOperationsInput | string | null
     canton?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25401,9 +25448,11 @@ export namespace Prisma {
   export type RouteSchemaCreateManyInput = {
     id?: bigint | number
     activity: string
+    subActivity?: string | null
     routeName?: string | null
     startPoint?: string | null
-    summitName: string
+    summitName?: string | null
+    cragName?: string | null
     canton: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25412,9 +25461,11 @@ export namespace Prisma {
   export type RouteSchemaUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     activity?: StringFieldUpdateOperationsInput | string
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    summitName?: StringFieldUpdateOperationsInput | string
+    summitName?: NullableStringFieldUpdateOperationsInput | string | null
+    cragName?: NullableStringFieldUpdateOperationsInput | string | null
     canton?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25423,9 +25474,11 @@ export namespace Prisma {
   export type RouteSchemaUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     activity?: StringFieldUpdateOperationsInput | string
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    summitName?: StringFieldUpdateOperationsInput | string
+    summitName?: NullableStringFieldUpdateOperationsInput | string | null
+    cragName?: NullableStringFieldUpdateOperationsInput | string | null
     canton?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26583,12 +26636,21 @@ export namespace Prisma {
     canton: string
   }
 
+  export type RouteSchemaActivitySubActivityCragNameCantonCompoundUniqueInput = {
+    activity: string
+    subActivity: string
+    cragName: string
+    canton: string
+  }
+
   export type RouteSchemaCountOrderByAggregateInput = {
     id?: SortOrder
     activity?: SortOrder
+    subActivity?: SortOrder
     routeName?: SortOrder
     startPoint?: SortOrder
     summitName?: SortOrder
+    cragName?: SortOrder
     canton?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26601,9 +26663,11 @@ export namespace Prisma {
   export type RouteSchemaMaxOrderByAggregateInput = {
     id?: SortOrder
     activity?: SortOrder
+    subActivity?: SortOrder
     routeName?: SortOrder
     startPoint?: SortOrder
     summitName?: SortOrder
+    cragName?: SortOrder
     canton?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26612,9 +26676,11 @@ export namespace Prisma {
   export type RouteSchemaMinOrderByAggregateInput = {
     id?: SortOrder
     activity?: SortOrder
+    subActivity?: SortOrder
     routeName?: SortOrder
     startPoint?: SortOrder
     summitName?: SortOrder
+    cragName?: SortOrder
     canton?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -27796,9 +27862,11 @@ export namespace Prisma {
   export type RouteSchemaCreateWithoutClimbingTourBaseSchemasInput = {
     id?: bigint | number
     activity: string
+    subActivity?: string | null
     routeName?: string | null
     startPoint?: string | null
-    summitName: string
+    summitName?: string | null
+    cragName?: string | null
     canton: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27807,9 +27875,11 @@ export namespace Prisma {
   export type RouteSchemaUncheckedCreateWithoutClimbingTourBaseSchemasInput = {
     id?: bigint | number
     activity: string
+    subActivity?: string | null
     routeName?: string | null
     startPoint?: string | null
-    summitName: string
+    summitName?: string | null
+    cragName?: string | null
     canton: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28096,9 +28166,11 @@ export namespace Prisma {
   export type RouteSchemaUpdateWithoutClimbingTourBaseSchemasInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     activity?: StringFieldUpdateOperationsInput | string
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    summitName?: StringFieldUpdateOperationsInput | string
+    summitName?: NullableStringFieldUpdateOperationsInput | string | null
+    cragName?: NullableStringFieldUpdateOperationsInput | string | null
     canton?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28107,9 +28179,11 @@ export namespace Prisma {
   export type RouteSchemaUncheckedUpdateWithoutClimbingTourBaseSchemasInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     activity?: StringFieldUpdateOperationsInput | string
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    summitName?: StringFieldUpdateOperationsInput | string
+    summitName?: NullableStringFieldUpdateOperationsInput | string | null
+    cragName?: NullableStringFieldUpdateOperationsInput | string | null
     canton?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

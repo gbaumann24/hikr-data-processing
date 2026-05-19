@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import { RequestContext } from '@mastra/core/request-context';
-import { ACTIVITY } from '@hikr/shared';
+import { ACTIVITY, CLIMBING_SUB_ACTIVITY } from '@hikr/shared';
 import {
   CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY,
   climbingRouteLookupTool,
@@ -16,6 +16,7 @@ describe('climbing route lookup tool', () => {
         return ['Gross Turm', 'Gross Turm', 'Chli Turm'];
       },
       findRouteNames: () => [],
+      findRouteCragNames: () => [],
     });
 
     const result = await climbingRouteLookupTool.execute!(
@@ -23,7 +24,13 @@ describe('climbing route lookup tool', () => {
       { requestContext },
     );
 
-    expect(summitInputs).toEqual([{ activity: ACTIVITY.CLIMBING, canton: 'Obwalden' }]);
+    expect(summitInputs).toEqual([
+      {
+        activity: ACTIVITY.CLIMBING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+        canton: 'Obwalden',
+      },
+    ]);
     expect(result).toEqual({ names: ['Chli Turm', 'Gross Turm'] });
   });
 
@@ -35,6 +42,7 @@ describe('climbing route lookup tool', () => {
         routeInputs.push(input);
         return ['Sudgrat', 'Sudgrat', 'Westwand'];
       },
+      findRouteCragNames: () => [],
     });
 
     const result = await climbingRouteLookupTool.execute!(
@@ -47,9 +55,40 @@ describe('climbing route lookup tool', () => {
     );
 
     expect(routeInputs).toEqual([
-      { activity: ACTIVITY.CLIMBING, canton: 'Obwalden', summitName: 'Gross Turm' },
+      {
+        activity: ACTIVITY.CLIMBING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+        canton: 'Obwalden',
+        summitName: 'Gross Turm',
+      },
     ]);
     expect(result).toEqual({ names: ['Sudgrat', 'Westwand'] });
+  });
+
+  test('lists all crag names for a canton', async () => {
+    const cragInputs: unknown[] = [];
+    const requestContext = createRequestContext({
+      findRouteSummitNames: () => [],
+      findRouteNames: () => [],
+      findRouteCragNames: (input) => {
+        cragInputs.push(input);
+        return ['Klettergarten Melchtal', 'Klettergarten Melchtal', 'Ofen'];
+      },
+    });
+
+    const result = await climbingRouteLookupTool.execute!(
+      { mode: 'cragsByCanton', canton: 'Obwalden' },
+      { requestContext },
+    );
+
+    expect(cragInputs).toEqual([
+      {
+        activity: ACTIVITY.CLIMBING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
+        canton: 'Obwalden',
+      },
+    ]);
+    expect(result).toEqual({ names: ['Klettergarten Melchtal', 'Ofen'] });
   });
 
   test('fails clearly when the route lookup dependency is missing', async () => {

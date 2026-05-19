@@ -5,20 +5,20 @@ import {
 } from './types';
 
 type StructuredOutputAgent = {
-	generate: (
-		messages: string,
-		options: {
-			requestContext?: RequestContext;
-			maxSteps?: number;
-			toolChoice?: 'auto' | 'none' | 'required';
-			structuredOutput: {
-				schema: typeof climbingPreprocessorAgentOutputSchema;
-				model?: string;
-			};
-			modelSettings?: { temperature?: number; maxOutputTokens?: number };
-			providerOptions?: { openai?: { reasoningEffort?: 'low' | 'medium' | 'high' } };
-		},
-	) => Promise<{ object?: unknown; finishReason?: string }>;
+  generate: (
+    messages: string,
+    options: {
+      requestContext?: RequestContext;
+      maxSteps?: number;
+      toolChoice?: 'auto' | 'none' | 'required';
+      structuredOutput: {
+        schema: typeof climbingPreprocessorAgentOutputSchema;
+        model?: string;
+      };
+      modelSettings?: { temperature?: number; maxOutputTokens?: number };
+      providerOptions?: { openai?: { reasoningEffort?: 'low' | 'medium' | 'high' } };
+    },
+  ) => Promise<{ object?: unknown; finishReason?: string }>;
 };
 
 export function createMastraClimbingPreprocessorAgentRunner(
@@ -28,9 +28,6 @@ export function createMastraClimbingPreprocessorAgentRunner(
   return async ({ title, description, canton }) => {
     const response = await agent.generate(
       [
-        'Extract the subActivity from the report.',
-        'Depening on the subActivity, extract the routeName and summit/objective name or the climbing garden/crag name.',
-        '',
         `Canton: ${canton}`,
         '',
         `Title: ${title}`,

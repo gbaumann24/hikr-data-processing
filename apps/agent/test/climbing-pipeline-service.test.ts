@@ -121,6 +121,7 @@ describe('climbing pipeline service', () => {
         ],
         findRouteSummitNames: () => ['Gross Turm'],
         findRouteNames: () => ['Südgrat'],
+        findRouteCragNames: () => ['Klettergarten Melchtal'],
         upsertReportBase: (input: ReportBaseSchemaWriteInput) => {
           reportBaseWrites.push(input);
         },
@@ -145,6 +146,7 @@ describe('climbing pipeline service', () => {
     ).toMatchObject({
       findRouteSummitNames: expect.any(Function),
       findRouteNames: expect.any(Function),
+      findRouteCragNames: expect.any(Function),
     });
     expect(reportBaseWrites).toMatchObject([
       {
@@ -206,6 +208,7 @@ describe('climbing pipeline service', () => {
         findHikrOrgPostsForPreprocessing,
         findRouteSummitNames: () => [],
         findRouteNames: () => [],
+        findRouteCragNames: () => [],
         upsertReportBase: (input: ReportBaseSchemaWriteInput) => {
           reportBaseWrites.push(input);
         },

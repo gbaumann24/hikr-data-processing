@@ -24,6 +24,7 @@ export type ClimbingPreprocessorAgentInput = {
 };
 
 export const climbingPreprocessorAgentOutputSchema = {
+  type: 'object',
   oneOf: [
     {
       type: 'object',
@@ -31,8 +32,8 @@ export const climbingPreprocessorAgentOutputSchema = {
       required: ['subActivity', 'routeName', 'summit'],
       properties: {
         subActivity: { enum: [CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR] },
-        routeName: { type: 'string' },
-        summit: { type: 'string' },
+        routeName: { type: 'string', minLength: 1 },
+        summit: { type: 'string', minLength: 1 },
       },
     },
     {
@@ -41,7 +42,7 @@ export const climbingPreprocessorAgentOutputSchema = {
       required: ['subActivity', 'name'],
       properties: {
         subActivity: { enum: [CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN] },
-        name: { type: 'string' },
+        name: { type: 'string', minLength: 1 },
       },
     },
     {

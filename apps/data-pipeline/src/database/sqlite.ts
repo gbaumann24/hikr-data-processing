@@ -59,6 +59,9 @@ export function createSqliteDatabase(db: Database): ClimbingDataPipelineDatabase
     findRouteNames() {
       return [];
     },
+    findRouteCragNames() {
+      return [];
+    },
     upsertClimbingTourBase() {},
     upsertClimbingGardenBase() {},
   };

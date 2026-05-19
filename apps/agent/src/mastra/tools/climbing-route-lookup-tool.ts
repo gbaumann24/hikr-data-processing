@@ -1,12 +1,16 @@
 import { createTool } from '@mastra/core/tools';
-import { ACTIVITY, type ClimbingDataPipelineDatabase } from '@hikr/shared';
+import {
+  ACTIVITY,
+  CLIMBING_SUB_ACTIVITY,
+  type ClimbingDataPipelineDatabase,
+} from '@hikr/shared';
 import { z } from 'zod';
 
 export const CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY = 'climbingRouteLookup';
 
 export type ClimbingRouteLookup = Pick<
   ClimbingDataPipelineDatabase,
-  'findRouteSummitNames' | 'findRouteNames'
+  'findRouteSummitNames' | 'findRouteNames' | 'findRouteCragNames'
 >;
 
 const lookupInputSchema = z.discriminatedUnion('mode', [
@@ -19,6 +23,10 @@ const lookupInputSchema = z.discriminatedUnion('mode', [
     canton: z.string().min(1),
     summitName: z.string().min(1),
   }),
+  z.object({
+    mode: z.literal('cragsByCanton'),
+    canton: z.string().min(1),
+  }),
 ]);
 
 const lookupOutputSchema = z.object({
@@ -28,7 +36,7 @@ const lookupOutputSchema = z.object({
 export const climbingRouteLookupTool = createTool({
   id: 'climbing-route-lookup-tool',
   description:
-    'Lists existing climbing summit names for a canton, or route names for a canton and summit.',
+    'Lists existing climbing summit names for a canton, route names for a canton and summit, or crag names for a canton.',
   inputSchema: lookupInputSchema,
   outputSchema: lookupOutputSchema,
   execute: async (input, context) => {
@@ -43,6 +51,17 @@ export const climbingRouteLookupTool = createTool({
     if (input.mode === 'summitsByCanton') {
       const names = await lookup.findRouteSummitNames({
         activity: ACTIVITY.CLIMBING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+        canton: input.canton,
+      });
+
+      return { names: normalizeNames(names) };
+    }
+
+    if (input.mode === 'cragsByCanton') {
+      const names = await lookup.findRouteCragNames({
+        activity: ACTIVITY.CLIMBING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
         canton: input.canton,
       });
 
@@ -51,6 +70,7 @@ export const climbingRouteLookupTool = createTool({
 
     const names = await lookup.findRouteNames({
       activity: ACTIVITY.CLIMBING,
+      subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
       canton: input.canton,
       summitName: input.summitName,
     });

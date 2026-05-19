@@ -309,12 +309,14 @@ model ReportBaseSchema {
 }
 
 model RouteSchema {
-  id         BigInt  @id @default(autoincrement())
-  activity   String
-  routeName  String? @map("route_name")
-  startPoint String? @map("start_point")
-  summitName String  @map("summit_name")
-  canton     String
+  id          BigInt  @id @default(autoincrement())
+  activity    String
+  subActivity String? @map("sub_activity")
+  routeName   String? @map("route_name")
+  startPoint  String? @map("start_point")
+  summitName  String? @map("summit_name")
+  cragName    String? @map("crag_name")
+  canton      String
 
   climbingTourBaseSchemas ClimbingTourBaseSchema[]
 
@@ -323,5 +325,6 @@ model RouteSchema {
 
   @@unique([activity, routeName, summitName, canton], name: "activityRouteNameSummitCanton", map: "routes_activity_route_name_summit_canton_key")
   @@unique([activity, startPoint, summitName, canton], name: "activityStartPointSummitCanton", map: "routes_activity_start_point_summit_canton_key")
+  @@unique([activity, subActivity, cragName, canton], name: "activitySubActivityCragNameCanton", map: "routes_activity_sub_activity_crag_name_canton_key")
   @@map("routes")
 }

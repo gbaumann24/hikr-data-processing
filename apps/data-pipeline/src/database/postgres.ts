@@ -40,21 +40,27 @@ export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipeli
       });
     },
 
-    async findRouteSummitNames({ activity, canton }): Promise<string[]> {
+    async findRouteSummitNames({ activity, subActivity, canton }): Promise<string[]> {
       const routes = await prisma.routeSchema.findMany({
-        where: { activity, canton },
+        where: {
+          activity,
+          subActivity,
+          canton,
+          summitName: { not: null },
+        },
         distinct: ['summitName'],
         select: { summitName: true },
         orderBy: { summitName: 'asc' },
       });
 
-      return routes.map((route) => route.summitName);
+      return routes.flatMap((route) => (route.summitName ? [route.summitName] : []));
     },
 
-    async findRouteNames({ activity, canton, summitName }): Promise<string[]> {
+    async findRouteNames({ activity, subActivity, canton, summitName }): Promise<string[]> {
       const routes = await prisma.routeSchema.findMany({
         where: {
           activity,
+          subActivity,
           canton,
           summitName,
           routeName: { not: null },
@@ -67,16 +73,32 @@ export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipeli
       return routes.flatMap((route) => (route.routeName ? [route.routeName] : []));
     },
 
+    async findRouteCragNames({ activity, subActivity, canton }): Promise<string[]> {
+      const routes = await prisma.routeSchema.findMany({
+        where: {
+          activity,
+          subActivity,
+          canton,
+          cragName: { not: null },
+        },
+        distinct: ['cragName'],
+        select: { cragName: true },
+        orderBy: { cragName: 'asc' },
+      });
+
+      return routes.flatMap((route) => (route.cragName ? [route.cragName] : []));
+    },
+
     async upsertClimbingTourBase(input: ClimbingTourBasePreprocessorOutput): Promise<void> {
       await prisma.$transaction(async (tx) => {
         const reportBase = await tx.reportBaseSchema.findUnique({
           where: { reportId: input.reportId },
-          select: { activity: true, canton: true },
+          select: { activity: true, subActivity: true, canton: true },
         });
 
-        if (!reportBase?.activity || !reportBase.canton) {
+        if (!reportBase?.activity || !reportBase.subActivity || !reportBase.canton) {
           throw new Error(
-            `Cannot persist climbing tour route for report ${input.reportId.toString()} without activity and canton`,
+            `Cannot persist climbing tour route for report ${input.reportId.toString()} without activity, subActivity, and canton`,
           );
         }
 
@@ -91,11 +113,14 @@ export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipeli
           },
           create: {
             activity: reportBase.activity,
+            subActivity: reportBase.subActivity,
             routeName: input.routeName,
             summitName: input.summit,
             canton: reportBase.canton,
           },
-          update: {},
+          update: {
+            subActivity: reportBase.subActivity,
+          },
         });
 
         await tx.climbingTourBaseSchema.upsert({
@@ -114,15 +139,46 @@ export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipeli
     },
 
     async upsertClimbingGardenBase(input: ClimbingGardenBasePreprocessorOutput): Promise<void> {
-      await prisma.climbingGardenBaseSchema.upsert({
-        where: { reportId: input.reportId },
-        create: {
-          reportId: input.reportId,
-          name: input.name,
-        },
-        update: {
-          name: input.name,
-        },
+      await prisma.$transaction(async (tx) => {
+        const reportBase = await tx.reportBaseSchema.findUnique({
+          where: { reportId: input.reportId },
+          select: { activity: true, subActivity: true, canton: true },
+        });
+
+        if (!reportBase?.activity || !reportBase.subActivity || !reportBase.canton) {
+          throw new Error(
+            `Cannot persist climbing garden route for report ${input.reportId.toString()} without activity, subActivity, and canton`,
+          );
+        }
+
+        await tx.routeSchema.upsert({
+          where: {
+            activitySubActivityCragNameCanton: {
+              activity: reportBase.activity,
+              subActivity: reportBase.subActivity,
+              cragName: input.name,
+              canton: reportBase.canton,
+            },
+          },
+          create: {
+            activity: reportBase.activity,
+            subActivity: reportBase.subActivity,
+            cragName: input.name,
+            canton: reportBase.canton,
+          },
+          update: {},
+        });
+
+        await tx.climbingGardenBaseSchema.upsert({
+          where: { reportId: input.reportId },
+          create: {
+            reportId: input.reportId,
+            name: input.name,
+          },
+          update: {
+            name: input.name,
+          },
+        });
       });
     },
   };
