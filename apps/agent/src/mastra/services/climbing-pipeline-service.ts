@@ -4,7 +4,8 @@ import {
   mapReportBaseToSchemaWrite,
   type PreprocessorStatus,
 } from '../workflows/baselayer';
-import type { ClimbingDataPipelineDatabase, ClimbingPreprocessorOutput } from '../workflows/climbing';
+import type { ClimbingDataPipelineDatabase } from '@hikr/shared';
+import type { ClimbingPreprocessorOutput } from '../workflows/climbing';
 import { PREPROCESSOR_STATUS } from '../workflows/baselayer';
 
 export type ClimbingPipelineServiceOptions = {

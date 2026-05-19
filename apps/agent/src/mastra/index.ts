@@ -16,7 +16,6 @@ export { runClimbingPipelineService } from './services/climbing-pipeline-service
 
 export { ACTIVITY } from '@hikr/shared';
 export type { HikrOrgPostBaseLayerInput, ReportBaseSchemaWriteInput } from '@hikr/shared';
-export { runClimbingDataPipeline } from './workflows/climbing';
 export type {
   ClimbingDataPipelineDatabase,
   ClimbingTourBasePreprocessorOutput,
