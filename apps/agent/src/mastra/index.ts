@@ -16,9 +16,9 @@ export type { ClimbingDataPipelineDatabase } from '../pipeline/climbing/pipeline
 
 export const mastra = new Mastra({
   agents: {
-    climbingSubActivityAgent,
+    'climbing-subactivity-agent': climbingSubActivityAgent,
   },
   workflows: {
-    climbingPipelineWorkflow,
+    'climbing-pipeline': climbingPipelineWorkflow,
   },
 });
