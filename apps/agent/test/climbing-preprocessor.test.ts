@@ -3,7 +3,7 @@ import {
 	PREPROCESSOR_STATUS,
 	normalizeDescription,
 	parseRegionPath,
-	type HikrPreprocessorInput,
+	type HikrOrgPostBaseLayerInput,
 } from '../src/mastra/workflows/baselayer';
 import {
 	CLIMBING_SUB_ACTIVITY,
@@ -14,15 +14,23 @@ import {
 
 const longDescription = 'Kletterbericht '.repeat(150);
 
-function baseInput(overrides: Partial<HikrPreprocessorInput> = {}): HikrPreprocessorInput {
+function baseInput(
+	overrides: Partial<HikrOrgPostBaseLayerInput> = {},
+): HikrOrgPostBaseLayerInput {
 	return {
-		reportId: 42,
+		id: 42n,
 		title: 'Gross Turm - Südgrat',
 		regionPathCsv: 'Welt, Schweiz, Obwalden, Melchtal',
 		description: longDescription,
-		tourDate: '2024-08-10',
+		tourDate: new Date('2024-08-10T00:00:00.000Z'),
 		hikingDifficulty: 'T4',
+		alpineTourDifficulty: null,
 		climbingDifficulty: '5a',
+		snowshoeTourDifficulty: null,
+		viaFerrataDifficulty: null,
+		skiDifficulty: null,
+		iceClimbingDifficulty: null,
+		mountainBikeDifficulty: null,
 		...overrides,
 	};
 }
@@ -167,12 +175,9 @@ describe('climbing preprocessor', () => {
 		});
 	});
 
-	test('skips when preprocessor agent output misses required fields', async () => {
+	test('skips when preprocessor agent cannot produce a valid output', async () => {
 		const result = await preprocessHikrReportForClimbing(baseInput(), {
-			runClimbingPreprocessorAgent: async () => ({
-				subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
-				routeName: 'Südgrat',
-			}),
+			runClimbingPreprocessorAgent: async () => null,
 		});
 
 		expect(result.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
@@ -183,9 +188,6 @@ describe('climbing preprocessor', () => {
 		const result = await preprocessHikrReportForClimbing(baseInput(), {
 			runClimbingPreprocessorAgent: async () => ({
 				subActivity: null,
-				routeName: null,
-				summit: null,
-				name: null,
 			}),
 		});
 

@@ -1,6 +1,5 @@
 import { createStep } from '@mastra/core/workflows';
 import { z } from 'zod';
-import { mapHikrOrgPostToPreprocessorInput } from '../utils';
 import type { BaseLayerPreprocessorOutput, HikrOrgPostBaseLayerInput } from '../types';
 import { prepareBaseLayer } from './preprocessor';
 
@@ -14,7 +13,6 @@ export const baseLayerStep = createStep({
   inputSchema: baseLayerInputSchema,
   outputSchema: baseLayerOutputSchema,
   execute: async ({ inputData }) => {
-    const input = mapHikrOrgPostToPreprocessorInput(inputData);
-    return prepareBaseLayer(input);
+    return prepareBaseLayer(inputData);
   },
 });

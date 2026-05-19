@@ -4,22 +4,21 @@ import {
   normalizeDescription,
   prepareBaseLayer,
   type BaseLayerPreprocessorOutput,
-  type HikrPreprocessorInput,
+  type HikrOrgPostBaseLayerInput,
   type ReportBasePreprocessorOutput,
 } from '../../baselayer';
 import { classifyActivity } from './activity';
 import {
   CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
   CLIMBING_SUB_ACTIVITY,
-  type ClimbingPreprocessorOutput,
-  type ClimbingPreprocessorReason,
-  type ClimbingPreprocessorAgentOutput,
   type ClimbingPreprocessorAgentInput,
   type ClimbingPreprocessorAgentRunner,
+  type ClimbingPreprocessorOutput,
+  type ClimbingPreprocessorReason,
 } from './types';
 
 export async function preprocessHikrReportForClimbing(
-  input: HikrPreprocessorInput,
+  input: HikrOrgPostBaseLayerInput,
   options: { runClimbingPreprocessorAgent?: ClimbingPreprocessorAgentRunner } = {},
 ): Promise<ClimbingPreprocessorOutput> {
   const baseLayer = prepareBaseLayer(input);
@@ -27,7 +26,7 @@ export async function preprocessHikrReportForClimbing(
 }
 
 export async function preprocessPreparedBaseLayerForClimbing(
-  input: HikrPreprocessorInput,
+  input: HikrOrgPostBaseLayerInput,
   baseLayer: BaseLayerPreprocessorOutput,
   options: { runClimbingPreprocessorAgent?: ClimbingPreprocessorAgentRunner } = {},
 ): Promise<ClimbingPreprocessorOutput> {
@@ -90,9 +89,8 @@ export async function preprocessPreparedBaseLayerForClimbing(
     canton: base.canton,
   };
   const agentOutput = await options.runClimbingPreprocessorAgent(agentInput);
-  const parsedAgentOutput = parseClimbingPreprocessorAgentOutput(agentOutput);
 
-  if (!parsedAgentOutput) {
+  if (!agentOutput) {
     return buildOutput({
       base,
       normalizedDescription: baseLayer.normalizedDescription,
@@ -100,7 +98,7 @@ export async function preprocessPreparedBaseLayerForClimbing(
     });
   }
 
-  if (parsedAgentOutput.subActivity === null) {
+  if (agentOutput.subActivity === null) {
     return buildOutput({
       base,
       normalizedDescription: baseLayer.normalizedDescription,
@@ -108,7 +106,7 @@ export async function preprocessPreparedBaseLayerForClimbing(
     });
   }
 
-  if (parsedAgentOutput.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN) {
+  if (agentOutput.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN) {
     return buildOutput({
       base: {
         ...base,
@@ -119,7 +117,7 @@ export async function preprocessPreparedBaseLayerForClimbing(
       reasons: ['ready'],
       climbingGardenBase: {
         reportId: base.reportId,
-        name: parsedAgentOutput.name,
+        name: agentOutput.name,
       },
     });
   }
@@ -135,50 +133,10 @@ export async function preprocessPreparedBaseLayerForClimbing(
     climbingTourBase: {
       reportId: base.reportId,
       schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
-      routeName: parsedAgentOutput.routeName,
-      summit: parsedAgentOutput.summit,
+      routeName: agentOutput.routeName,
+      summit: agentOutput.summit,
     },
   });
-}
-
-function parseClimbingPreprocessorAgentOutput(
-  agentOutput: unknown,
-): ClimbingPreprocessorAgentOutput | null {
-  if (!agentOutput || typeof agentOutput !== 'object') {
-    return null;
-  }
-
-  const record = agentOutput as Record<string, unknown>;
-
-  if (record.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR) {
-    const routeName = normalizeRequiredString(record.routeName);
-    const summit = normalizeRequiredString(record.summit);
-
-    return routeName && summit
-      ? {
-          subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
-          routeName,
-          summit,
-        }
-      : null;
-  }
-
-  if (record.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN) {
-    const name = normalizeRequiredString(record.name);
-
-    return name
-      ? {
-          subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
-          name,
-        }
-      : null;
-  }
-
-  if (record.subActivity === null) {
-    return { subActivity: null };
-  }
-
-  return null;
 }
 
 function buildOutput({
@@ -202,13 +160,4 @@ function buildOutput({
     normalizedDescriptionLength: normalizedDescription.length,
     reasons,
   };
-}
-
-function normalizeRequiredString(value: unknown): string | null {
-  if (typeof value !== 'string') {
-    return null;
-  }
-
-  const normalized = value.replace(/\s+/g, ' ').trim();
-  return normalized === '' ? null : normalized;
 }

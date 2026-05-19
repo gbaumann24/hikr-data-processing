@@ -1,7 +1,6 @@
 import { createStep } from '@mastra/core/workflows';
 import { z } from 'zod';
 import { baseLayerOutputSchema } from '../../baselayer/preprocessor';
-import { mapHikrOrgPostToPreprocessorInput } from '../../baselayer';
 import { createMastraClimbingPreprocessorAgentRunner } from './agent-caller';
 import { preprocessPreparedBaseLayerForClimbing } from './preprocessor';
 import type { HikrOrgPostBaseLayerInput } from '../../baselayer';
@@ -16,14 +15,13 @@ export const climbingPreprocessorStep = createStep({
   outputSchema: climbingPreprocessorOutputSchema,
   execute: async ({ inputData: baseLayer, getInitData, mastra, requestContext }) => {
     const post = getInitData<HikrOrgPostBaseLayerInput>();
-    const input = mapHikrOrgPostToPreprocessorInput(post);
 
     const agent = mastra.getAgent('climbing-preprocessor-agent');
     const runClimbingPreprocessorAgent = createMastraClimbingPreprocessorAgentRunner(agent, {
       requestContext,
     });
 
-    return preprocessPreparedBaseLayerForClimbing(input, baseLayer, {
+    return preprocessPreparedBaseLayerForClimbing(post, baseLayer, {
       runClimbingPreprocessorAgent,
     });
   },

@@ -3,12 +3,12 @@ import {
   HIKR_DIFFICULTY_SCALE,
   type DifficultyScaleExtraction,
   type HikrDifficultyScale,
-  type HikrPreprocessorInput,
+  type HikrOrgPostBaseLayerInput,
 } from '../types';
 
 const DIFFICULTY_FIELDS: Array<{
   scale: HikrDifficultyScale;
-  getValue: (input: HikrPreprocessorInput) => string | null | undefined;
+  getValue: (input: HikrOrgPostBaseLayerInput) => string | null | undefined;
   normalize?: (value: string | null | undefined) => string | null;
 }> = [
   { scale: HIKR_DIFFICULTY_SCALE.HIKING, getValue: (input) => input.hikingDifficulty },
@@ -25,7 +25,7 @@ const DIFFICULTY_FIELDS: Array<{
   { scale: HIKR_DIFFICULTY_SCALE.MOUNTAIN_BIKE, getValue: (input) => input.mountainBikeDifficulty },
 ];
 
-export function extractDifficultyScales(input: HikrPreprocessorInput): DifficultyScaleExtraction {
+export function extractDifficultyScales(input: HikrOrgPostBaseLayerInput): DifficultyScaleExtraction {
   const presentScales: HikrDifficultyScale[] = [];
   const valuesByScale: Partial<Record<HikrDifficultyScale, string>> = {};
 

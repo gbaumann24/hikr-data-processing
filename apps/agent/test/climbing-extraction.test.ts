@@ -18,7 +18,7 @@ function climbingOutput(
       activity: ACTIVITY.CLIMBING,
       subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
       canton: 'Obwalden',
-      tourDate: '2024-08-10',
+      tourDate: new Date('2024-08-10T00:00:00.000Z'),
       region: 'Melchtal',
     },
     climbingTourBase: {

@@ -20,25 +20,6 @@ export type {
   ReportBaseSchemaWriteInput,
 } from '@hikr/shared';
 
-type HikrTourDate = Date | string | null;
-type HikrReportIdInput = bigint | number | string;
-
-export type HikrPreprocessorInput = {
-  reportId: HikrReportIdInput;
-  title?: string | null;
-  regionPathCsv?: string | null;
-  description?: string | null;
-  tourDate?: HikrTourDate;
-  hikingDifficulty?: string | null;
-  alpineTourDifficulty?: string | null;
-  climbingDifficulty?: string | null;
-  snowshoeTourDifficulty?: string | null;
-  viaFerrataDifficulty?: string | null;
-  skiDifficulty?: string | null;
-  iceClimbingDifficulty?: string | null;
-  mountainBikeDifficulty?: string | null;
-};
-
 export type DifficultyScaleExtraction = {
   presentScales: HikrDifficultyScale[];
   valuesByScale: Partial<Record<HikrDifficultyScale, string>>;
@@ -50,7 +31,7 @@ export type ReportBasePreprocessorOutput = {
   activity: Activity | null;
   subActivity: string | null;
   canton: string | null;
-  tourDate: HikrTourDate;
+  tourDate: HikrOrgPostBaseLayerInput['tourDate'];
   region: string | null;
 };
 

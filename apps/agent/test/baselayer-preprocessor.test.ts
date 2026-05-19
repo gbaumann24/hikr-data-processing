@@ -2,16 +2,28 @@ import { describe, expect, test } from 'bun:test';
 import {
   HIKR_DIFFICULTY_SCALE,
   prepareBaseLayer,
-  type HikrPreprocessorInput,
+  type HikrOrgPostBaseLayerInput,
 } from '../src/mastra/workflows/baselayer';
 
 const longDescription = 'Baselayer Bericht '.repeat(150);
 
-function baseInput(overrides: Partial<HikrPreprocessorInput> = {}): HikrPreprocessorInput {
+function baseInput(
+  overrides: Partial<HikrOrgPostBaseLayerInput> = {},
+): HikrOrgPostBaseLayerInput {
   return {
-    reportId: 42,
+    id: 42n,
+    title: null,
     regionPathCsv: 'Welt, Schweiz, Obwalden, Melchtal',
+    tourDate: null,
     description: longDescription,
+    hikingDifficulty: null,
+    alpineTourDifficulty: null,
+    climbingDifficulty: null,
+    snowshoeTourDifficulty: null,
+    viaFerrataDifficulty: null,
+    skiDifficulty: null,
+    iceClimbingDifficulty: null,
+    mountainBikeDifficulty: null,
     ...overrides,
   };
 }

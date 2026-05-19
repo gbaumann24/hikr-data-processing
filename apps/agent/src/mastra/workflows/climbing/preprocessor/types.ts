@@ -72,7 +72,7 @@ export type ClimbingPreprocessorAgentOutput =
 
 export type ClimbingPreprocessorAgentRunner = (
   input: ClimbingPreprocessorAgentInput,
-) => Promise<unknown>;
+) => Promise<ClimbingPreprocessorAgentOutput | null>;
 
 export type ClimbingPreprocessorReason =
   | BaseLayerPreprocessorReason

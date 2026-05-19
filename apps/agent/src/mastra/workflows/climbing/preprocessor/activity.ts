@@ -5,7 +5,7 @@ import {
   type Activity,
   type DifficultyScaleExtraction,
   type HikrDifficultyScale,
-  type HikrPreprocessorInput,
+  type HikrOrgPostBaseLayerInput,
 } from '../../baselayer';
 
 export type ActivityClassification = {
@@ -62,7 +62,7 @@ const ACTIVITY_BY_SCALE_SET = new Map<string, Activity>([
 ]);
 
 export function classifyActivity(
-  input: HikrPreprocessorInput | DifficultyScaleExtraction,
+  input: HikrOrgPostBaseLayerInput | DifficultyScaleExtraction,
 ): ActivityClassification {
   const difficultyScales = isDifficultyScaleExtraction(input)
     ? input
