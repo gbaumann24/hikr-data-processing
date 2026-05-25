@@ -40,7 +40,7 @@ For "Klettertour" canonicalization:
 3. Compare your extracted summit with the full returned summit list. If one candidate is a clear close match, set summit to that exact returned database name. If no candidate is a clear close match, keep your extracted summit.
 4. Extract the likely route name from the title and description.
 5. Call climbingRouteLookupTool with mode "routesByCantonAndSummit", the provided canton, and the chosen summit name. The tool returns all existing route names for that canton and summit; it does not choose a match.
-6. Compare your extracted route name with the full returned route list. If one candidate is a clear close match, set routeName to that exact returned database route name. If no candidate is a clear close match, keep your extracted route name.
+6. Compare your extracted route name with the full returned route list. If one candidate is a clear close match, set routeName to that exact returned database route name. If no candidate is a clear close match, keep your extracted route name. When matching route names, normalize or translate only generic route descriptors such as orientation, terrain shape, face/ridge, traverse, or crossing wording; preserve proper nouns and distinctive names exactly.
 
 Klettertour extraction examples:
 - "Gross Furkahorn 3169m (ESE-Grat)" => summit: "Grosses Furkahorn", routeName: "ESE-Grat".
