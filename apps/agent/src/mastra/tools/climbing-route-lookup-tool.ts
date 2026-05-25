@@ -27,12 +27,20 @@ const lookupInputSchema = z
 
 const lookupOutputSchema = z.object({
   names: z.array(z.string()),
+  routes: z
+    .array(
+      z.object({
+        routeName: z.string(),
+        routeNames: z.array(z.string()),
+      }),
+    )
+    .optional(),
 });
 
 export const climbingRouteLookupTool = createTool({
   id: 'climbing-route-lookup-tool',
   description:
-    'Lists existing climbing summit names for a canton, canonical route names for a canton and summit, or crag names for a canton.',
+    'Lists existing climbing summit names for a canton, canonical route names and stored route aliases for a canton and summit, or crag names for a canton.',
   inputSchema: lookupInputSchema,
   outputSchema: lookupOutputSchema,
   execute: async (input, context) => {
@@ -68,19 +76,59 @@ export const climbingRouteLookupTool = createTool({
       throw new Error('summitName is required when mode is routesByCantonAndSummit');
     }
 
-    const names = await lookup.findRouteNames({
-      activity: ACTIVITY.CLIMBING,
-      subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
-      canton: input.canton,
-      summitName: input.summitName,
-    });
+    const routes = normalizeRouteLookupRoutes(
+      await lookup.findRouteNames({
+        activity: ACTIVITY.CLIMBING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+        canton: input.canton,
+        summitName: input.summitName,
+      }),
+    );
 
-    return { names: normalizeNames(names) };
+    return {
+      names: routes.map((route) => route.routeName),
+      routes,
+    };
   },
 });
+
+function normalizeRouteLookupRoutes(
+  routes: Array<{ routeName: string; routeNames: string[] }>,
+): Array<{ routeName: string; routeNames: string[] }> {
+  const routesByCanonicalName = new Map<string, string[]>();
+
+  for (const route of routes) {
+    const routeName = route.routeName.trim();
+
+    if (!routeName) {
+      continue;
+    }
+
+    routesByCanonicalName.set(
+      routeName,
+      normalizeRouteNames(routeName, [
+        ...(routesByCanonicalName.get(routeName) ?? []),
+        ...route.routeNames,
+      ]),
+    );
+  }
+
+  return [...routesByCanonicalName.entries()]
+    .map(([routeName, routeNames]) => ({ routeName, routeNames }))
+    .sort((left, right) => left.routeName.localeCompare(right.routeName));
+}
 
 function normalizeNames(names: string[]): string[] {
   return [...new Set(names.map((name) => name.trim()).filter(Boolean))].sort((a, b) =>
     a.localeCompare(b),
   );
+}
+
+function normalizeRouteNames(routeName: string, routeNames: string[]): string[] {
+  return [
+    routeName,
+    ...new Set(
+      routeNames.map((name) => name.trim()).filter((name) => name !== '' && name !== routeName),
+    ),
+  ];
 }

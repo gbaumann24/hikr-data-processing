@@ -27,6 +27,11 @@ export type RouteNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'ca
   summitName: string;
 };
 
+export type RouteNamesLookupOutput = {
+  routeName: string;
+  routeNames: string[];
+};
+
 export type RouteCragNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'canton'> & {
   subActivity: string;
 };

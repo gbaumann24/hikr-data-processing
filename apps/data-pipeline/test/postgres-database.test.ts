@@ -60,8 +60,8 @@ describe('postgres database adapter', () => {
         }) => {
           const lookupKey = distinct?.[0] ?? Object.keys(select).join('+');
           calls.push(`routeSchema.findMany.${lookupKey}`);
-          return lookupKey === 'routeName'
-            ? [{ routeName: 'Südgrat' }]
+          return lookupKey === 'routeName+routeNames'
+            ? [{ routeName: 'Südgrat', routeNames: ['Südgrat', 'S-Grat'] }]
             : lookupKey === 'cragName'
               ? [{ cragName: 'Melchtal' }]
               : [{ summitName: 'Gross Turm' }];
@@ -99,7 +99,7 @@ describe('postgres database adapter', () => {
         canton: 'Obwalden',
         summitName: 'Gross Turm',
       }),
-    ).resolves.toEqual(['Südgrat']);
+    ).resolves.toEqual([{ routeName: 'Südgrat', routeNames: ['Südgrat', 'S-Grat'] }]);
     await expect(
       database.findRouteCragNames({
         activity: ACTIVITY.CLIMBING,
@@ -122,7 +122,7 @@ describe('postgres database adapter', () => {
     expect(calls).toEqual([
       'reportBaseSchema.upsert',
       'routeSchema.findMany.summitName',
-      'routeSchema.findMany.routeName',
+      'routeSchema.findMany.routeName+routeNames',
       'routeSchema.findMany.cragName',
       '$transaction',
       'tx.routeSchema.upsert',

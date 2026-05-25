@@ -40,7 +40,11 @@ describe('climbing route lookup tool', () => {
       findRouteSummitNames: () => [],
       findRouteNames: (input) => {
         routeInputs.push(input);
-        return ['Sudgrat', 'Sudgrat', 'Westwand'];
+        return [
+          { routeName: 'Sudgrat', routeNames: ['Sudgrat', 'S-Grat'] },
+          { routeName: 'Sudgrat', routeNames: ['Sudgrat'] },
+          { routeName: 'Westwand', routeNames: ['Westwand'] },
+        ];
       },
       findRouteCragNames: () => [],
     });
@@ -62,7 +66,13 @@ describe('climbing route lookup tool', () => {
         summitName: 'Gross Turm',
       },
     ]);
-    expect(result).toEqual({ names: ['Sudgrat', 'Westwand'] });
+    expect(result).toEqual({
+      names: ['Sudgrat', 'Westwand'],
+      routes: [
+        { routeName: 'Sudgrat', routeNames: ['Sudgrat', 'S-Grat'] },
+        { routeName: 'Westwand', routeNames: ['Westwand'] },
+      ],
+    });
   });
 
   test('lists all crag names for a canton', async () => {
@@ -93,10 +103,7 @@ describe('climbing route lookup tool', () => {
 
   test('fails clearly when the route lookup dependency is missing', async () => {
     await expect(
-      climbingRouteLookupTool.execute!(
-        { mode: 'summitsByCanton', canton: 'Obwalden' },
-        {},
-      ),
+      climbingRouteLookupTool.execute!({ mode: 'summitsByCanton', canton: 'Obwalden' }, {}),
     ).rejects.toThrow('Climbing route lookup is missing from Mastra request context');
   });
 });

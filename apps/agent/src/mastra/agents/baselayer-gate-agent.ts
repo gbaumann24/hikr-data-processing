@@ -21,5 +21,5 @@ When decision is "ready":
 - Set reason to null.
 
 Do not skip merely because the report mentions approach and descent, route variants, waypoints, pitches, rope lengths, cruxes, or alternative names for the same route. If the evidence is ambiguous, return "ready".`,
-  model: 'openai/gpt-5-mini',
+  model: 'openai/gpt-5.4-mini',
 });

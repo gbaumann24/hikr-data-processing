@@ -131,7 +131,7 @@ describe('climbing pipeline service', () => {
           hikrOrgPost({ id: 43n, description: 'zu kurz' }),
         ],
         findRouteSummitNames: () => ['Gross Turm'],
-        findRouteNames: () => ['Südgrat'],
+        findRouteNames: () => [{ routeName: 'Südgrat', routeNames: ['Südgrat'] }],
         findRouteCragNames: () => ['Klettergarten Melchtal'],
         upsertReportBase: (input: ReportBaseSchemaWriteInput) => {
           reportBaseWrites.push(input);

@@ -5,12 +5,13 @@ import type {
   ClimbingTourBasePreprocessorOutput,
   RouteCragNamesLookupInput,
   RouteNamesLookupInput,
+  RouteNamesLookupOutput,
   RouteSummitNamesLookupInput,
 } from './db';
 
 export type ClimbingDataPipelineDatabase = BaseLayerDataPipelineDatabase & {
   findRouteSummitNames: (input: RouteSummitNamesLookupInput) => MaybePromise<string[]>;
-  findRouteNames: (input: RouteNamesLookupInput) => MaybePromise<string[]>;
+  findRouteNames: (input: RouteNamesLookupInput) => MaybePromise<RouteNamesLookupOutput[]>;
   findRouteCragNames: (input: RouteCragNamesLookupInput) => MaybePromise<string[]>;
   upsertClimbingTourBase: (input: ClimbingTourBasePreprocessorOutput) => MaybePromise<void>;
   upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => MaybePromise<void>;
