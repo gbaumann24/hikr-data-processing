@@ -1,13 +1,13 @@
 import { loadRootEnv } from '../utils';
 import { Mastra } from '@mastra/core/mastra';
 import { MastraCompositeStore } from '@mastra/core/storage';
-import { DuckDBStore } from '@mastra/duckdb';
 import { LibSQLStore } from '@mastra/libsql';
 import {
   MastraStorageExporter,
   Observability,
   SamplingStrategyType,
 } from '@mastra/observability';
+import { PostgresStore } from '@mastra/pg';
 import { climbingExtractionAgent } from './agents/climbing-extraction-agent';
 import { climbingPreprocessorAgent } from './agents/climbing-preprocessor-agent';
 import { baseLayerWorkflow } from './workflows/baselayer';
@@ -33,13 +33,20 @@ export type {
   ClimbingGardenBasePreprocessorOutput,
 } from '@hikr/shared';
 
-const observabilityStorage = new DuckDBStore({
-  id: 'hikr-observability',
-  path: './mastra-observability.duckdb',
-});
-const observabilityStore = observabilityStorage.observability;
+const defaultMastraTracesDatabaseUrl =
+  'postgresql://mastra:mastra@127.0.0.1:5436/hikr_data_processing_mastra_traces';
 
-// DuckDB's facade currently omits this method, while Studio calls it for trace lists.
+const observabilityStorage = new PostgresStore({
+  id: 'hikr-observability',
+  connectionString: process.env.MASTRA_TRACES_DATABASE_URL ?? defaultMastraTracesDatabaseUrl,
+});
+const observabilityStore = observabilityStorage.stores.observability;
+
+if (!observabilityStore) {
+  throw new Error('Postgres observability storage is not available');
+}
+
+// The Studio route calls this lightweight method directly.
 observabilityStore.listTracesLight = async (args) => {
   const { spans, pagination } = await observabilityStore.listTraces(args);
 

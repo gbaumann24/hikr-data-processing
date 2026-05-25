@@ -7,10 +7,16 @@ Welcome to your new [Mastra](https://mastra.ai/) project! We're excited to see w
 Start the development server:
 
 ```shell
-bun run dev
+# from the repository root
+docker compose up -d mastra-traces-db
+bun run --cwd apps/agent dev
 ```
 
 Open [http://localhost:4111](http://localhost:4111) in your browser to access [Mastra Studio](https://mastra.ai/docs/studio/overview). It provides an interactive UI for building and testing your agents, along with a REST API that exposes your Mastra application as a local service. This lets you start building without worrying about integration right away.
+
+Observability traces are stored in the local Postgres service from the root
+`compose.yaml`. Override `MASTRA_TRACES_DATABASE_URL` if you want to point
+Mastra at a different traces database.
 
 You can start editing files inside the `src/mastra` directory. The development server will automatically reload whenever you make changes.
 

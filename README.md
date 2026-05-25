@@ -32,6 +32,17 @@ bun run --cwd apps/data-pipeline run:baselayer
 bun run --cwd apps/data-pipeline run:climbing
 ```
 
+Start the local Mastra traces database before using Mastra Studio observability:
+
+```sh
+docker compose up -d mastra-traces-db
+bun run --cwd apps/agent dev
+```
+
+Mastra stores traces in `MASTRA_TRACES_DATABASE_URL`, which defaults to the
+compose database at
+`postgresql://mastra:mastra@127.0.0.1:5436/hikr_data_processing_mastra_traces`.
+
 Run an interactive climbing test against local Postgres. This purges the test DB,
 seeds the requested number of source posts from `hikr.sqlite`, then runs the
 climbing workflow:

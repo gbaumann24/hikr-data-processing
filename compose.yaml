@@ -1,0 +1,20 @@
+services:
+  mastra-traces-db:
+    image: postgres:17-alpine
+    container_name: hikr-mastra-traces-db
+    environment:
+      POSTGRES_DB: hikr_data_processing_mastra_traces
+      POSTGRES_USER: mastra
+      POSTGRES_PASSWORD: mastra
+    ports:
+      - "5436:5432"
+    volumes:
+      - mastra-traces-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mastra -d hikr_data_processing_mastra_traces"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mastra-traces-postgres-data:
