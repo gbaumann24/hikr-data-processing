@@ -31,6 +31,7 @@ function climbingOutput(
     normalizedDescription: 'Kletterbericht '.repeat(150),
     normalizedDescriptionLength: 'Kletterbericht '.repeat(150).length,
     reasons: ['ready'],
+    skipReason: null,
     ...overrides,
   };
 }

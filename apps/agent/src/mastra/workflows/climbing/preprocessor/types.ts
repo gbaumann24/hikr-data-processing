@@ -1,8 +1,13 @@
 import type {
   ClimbingGardenBasePreprocessorOutput,
   ClimbingTourBasePreprocessorOutput,
+  HikrDifficultyScale,
 } from '@hikr/shared';
-import { CLIMBING_PREPROCESSOR_SCHEMA_VERSION, CLIMBING_SUB_ACTIVITY } from '@hikr/shared';
+import {
+  ACTIVITY,
+  CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
+  CLIMBING_SUB_ACTIVITY,
+} from '@hikr/shared';
 import type { BaseLayerPreprocessorReason, ReportBasePreprocessorOutput } from '../../baselayer';
 
 export { CLIMBING_PREPROCESSOR_SCHEMA_VERSION, CLIMBING_SUB_ACTIVITY };
@@ -12,13 +17,17 @@ export type ClimbingPreprocessorAgentInput = {
   title: string;
   description: string;
   canton: string;
+  difficultyScales: Array<{ scale: HikrDifficultyScale; value: string }>;
 };
 
 export const climbingPreprocessorAgentOutputSchema = {
   type: 'object',
   additionalProperties: false,
-  required: ['subActivity', 'routeName', 'summit', 'name'],
+  required: ['activity', 'subActivity', 'routeName', 'summit', 'name'],
   properties: {
+    activity: {
+      enum: [ACTIVITY.CLIMBING, ACTIVITY.HIKING],
+    },
     subActivity: {
       enum: [CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR, CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN, null],
     },
@@ -28,7 +37,10 @@ export const climbingPreprocessorAgentOutputSchema = {
   },
 } as const;
 
+export type ClimbingPreprocessorAgentActivity = typeof ACTIVITY.CLIMBING | typeof ACTIVITY.HIKING;
+
 export type ClimbingPreprocessorAgentStructuredOutput = {
+  activity: ClimbingPreprocessorAgentActivity;
   subActivity:
     | typeof CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR
     | typeof CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN
@@ -40,15 +52,18 @@ export type ClimbingPreprocessorAgentStructuredOutput = {
 
 export type ClimbingPreprocessorAgentOutput =
   | {
+      activity: typeof ACTIVITY.CLIMBING;
       subActivity: typeof CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR;
       routeName: string;
       summit: string;
     }
   | {
+      activity: typeof ACTIVITY.CLIMBING;
       subActivity: typeof CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN;
       name: string;
     }
   | {
+      activity: ClimbingPreprocessorAgentActivity;
       subActivity: null;
     };
 
@@ -56,21 +71,26 @@ export function parseClimbingPreprocessorAgentOutput(
   output: unknown,
 ): ClimbingPreprocessorAgentOutput {
   if (!isClimbingPreprocessorAgentStructuredOutput(output)) {
-    return { subActivity: null };
+    return { activity: ACTIVITY.CLIMBING, subActivity: null };
+  }
+
+  if (output.activity === ACTIVITY.HIKING) {
+    return { activity: ACTIVITY.HIKING, subActivity: null };
   }
 
   if (output.subActivity === null) {
-    return { subActivity: null };
+    return { activity: ACTIVITY.CLIMBING, subActivity: null };
   }
 
   if (output.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN) {
     const name = normalizeOptionalString(output.name);
 
     if (!name) {
-      return { subActivity: null };
+      return { activity: ACTIVITY.CLIMBING, subActivity: null };
     }
 
     return {
+      activity: ACTIVITY.CLIMBING,
       subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
       name,
     };
@@ -80,10 +100,11 @@ export function parseClimbingPreprocessorAgentOutput(
   const summit = normalizeOptionalString(output.summit);
 
   if (!routeName || !summit) {
-    return { subActivity: null };
+    return { activity: ACTIVITY.CLIMBING, subActivity: null };
   }
 
   return {
+    activity: ACTIVITY.CLIMBING,
     subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
     routeName,
     summit,
@@ -100,6 +121,7 @@ function isClimbingPreprocessorAgentStructuredOutput(
   const candidate = output as Partial<ClimbingPreprocessorAgentStructuredOutput>;
 
   return (
+    (candidate.activity === ACTIVITY.CLIMBING || candidate.activity === ACTIVITY.HIKING) &&
     (candidate.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR ||
       candidate.subActivity === CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN ||
       candidate.subActivity === null) &&
@@ -142,4 +164,5 @@ export type ClimbingPreprocessorOutput = {
   normalizedDescription: string;
   normalizedDescriptionLength: number;
   reasons: ClimbingPreprocessorReason[];
+  skipReason: string | null;
 };

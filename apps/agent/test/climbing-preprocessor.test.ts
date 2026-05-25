@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import {
+  ACTIVITY,
   PREPROCESSOR_STATUS,
   normalizeDescription,
   parseRegionPath,
@@ -98,6 +99,7 @@ describe('climbing preprocessor', () => {
       baseInput({ mountainBikeDifficulty: 'S2' }),
       {
         runClimbingPreprocessorAgent: async () => ({
+          activity: ACTIVITY.CLIMBING,
           subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
           routeName: 'Südgrat',
           summit: 'Gross Turm',
@@ -108,6 +110,9 @@ describe('climbing preprocessor', () => {
     expect(mountainBikeResult.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
     expect(mountainBikeResult.base.activity).toBeNull();
     expect(mountainBikeResult.reasons).toEqual(['unsupported_activity_scales']);
+    expect(mountainBikeResult.skipReason).toBe(
+      'Report uses unsupported activity difficulty scales.',
+    );
   });
 
   test('returns insufficient when description is too short', async () => {
@@ -115,6 +120,7 @@ describe('climbing preprocessor', () => {
 
     expect(result.base.status).toBe(PREPROCESSOR_STATUS.INSUFFICIENT);
     expect(result.reasons).toContain('description_too_short');
+    expect(result.skipReason).toBeNull();
   });
 
   test('returns insufficient when canton is missing', async () => {
@@ -138,6 +144,7 @@ describe('climbing preprocessor', () => {
     expect(result.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
     expect(result.base.activity).toBe('Skitour');
     expect(result.reasons).toEqual(['non_climbing_activity']);
+    expect(result.skipReason).toBe('Report activity is Skitour, not Klettern.');
   });
 
   test('sets climbing tour output when preprocessor agent returns route and summit', async () => {
@@ -146,6 +153,7 @@ describe('climbing preprocessor', () => {
       runClimbingPreprocessorAgent: async (input) => {
         agentInputs.push(input);
         return {
+          activity: ACTIVITY.CLIMBING,
           subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
           routeName: 'Südgrat',
           summit: 'Gross Turm',
@@ -155,17 +163,27 @@ describe('climbing preprocessor', () => {
 
     expect(result.base.status).toBe(PREPROCESSOR_STATUS.READY);
     expect(result.base.subActivity).toBe(CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR);
-    expect(agentInputs).toMatchObject([{ canton: 'Obwalden' }]);
+    expect(agentInputs).toMatchObject([
+      {
+        canton: 'Obwalden',
+        difficultyScales: [
+          { scale: 'wandern', value: 'T4' },
+          { scale: 'klettern', value: '5a' },
+        ],
+      },
+    ]);
     expect(result.climbingTourBase).toMatchObject({
       routeName: 'Südgrat',
       summit: 'Gross Turm',
     });
     expect(result.climbingGardenBase).toBeNull();
+    expect(result.skipReason).toBeNull();
   });
 
   test('sets climbing garden output when preprocessor agent returns a climbing garden', async () => {
     const result = await preprocessHikrReportForClimbing(baseInput(), {
       runClimbingPreprocessorAgent: async () => ({
+        activity: ACTIVITY.CLIMBING,
         subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
         name: 'Klettergarten Melchtal',
       }),
@@ -183,31 +201,72 @@ describe('climbing preprocessor', () => {
   test('skips when preprocessor agent finds no climbing sub-activity', async () => {
     const result = await preprocessHikrReportForClimbing(baseInput(), {
       runClimbingPreprocessorAgent: async () => ({
+        activity: ACTIVITY.CLIMBING,
         subActivity: null,
       }),
     });
 
     expect(result.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
     expect(result.reasons).toEqual(['no_climbing_preprocessor_agent_match']);
+    expect(result.skipReason).toBe(
+      'Climbing preprocessor agent did not identify a Klettertour or Klettergarten.',
+    );
+  });
+
+  test('changes activity to hiking when the agent says hiking outweighs climbing', async () => {
+    const result = await preprocessHikrReportForClimbing(
+      baseInput({
+        description: `${'Wanderbericht auf markiertem Weg mit langer Zustiegspassage. '.repeat(35)}Kurze leichte Kletterstelle im I. Grad, danach weiter als Wanderung zum Gipfel.`,
+        climbingDifficulty: 'I',
+      }),
+      {
+        runClimbingPreprocessorAgent: async () => ({
+          activity: ACTIVITY.HIKING,
+          subActivity: null,
+        }),
+      },
+    );
+
+    expect(result.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
+    expect(result.base.activity).toBe(ACTIVITY.HIKING);
+    expect(result.base.subActivity).toBeNull();
+    expect(result.climbingTourBase).toBeNull();
+    expect(result.climbingGardenBase).toBeNull();
+    expect(result.reasons).toEqual(['non_climbing_activity']);
+    expect(result.skipReason).toBe('Report activity is Wanderung, not Klettern.');
   });
 
   test('treats incomplete structured agent output as no match', async () => {
     expect(
       parseClimbingPreprocessorAgentOutput({
+        activity: ACTIVITY.CLIMBING,
         subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
         routeName: 'Südgrat',
         summit: null,
         name: null,
       }),
-    ).toEqual({ subActivity: null });
+    ).toEqual({ activity: ACTIVITY.CLIMBING, subActivity: null });
 
     expect(
       parseClimbingPreprocessorAgentOutput({
+        activity: ACTIVITY.CLIMBING,
         subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
         routeName: null,
         summit: null,
         name: '',
       }),
-    ).toEqual({ subActivity: null });
+    ).toEqual({ activity: ACTIVITY.CLIMBING, subActivity: null });
+  });
+
+  test('parses hiking activity without extracting climbing names', () => {
+    expect(
+      parseClimbingPreprocessorAgentOutput({
+        activity: ACTIVITY.HIKING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+        routeName: 'Südgrat',
+        summit: 'Gross Turm',
+        name: null,
+      }),
+    ).toEqual({ activity: ACTIVITY.HIKING, subActivity: null });
   });
 });

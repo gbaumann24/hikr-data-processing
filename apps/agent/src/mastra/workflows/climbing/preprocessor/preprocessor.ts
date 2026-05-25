@@ -87,8 +87,25 @@ export async function preprocessPreparedBaseLayerForClimbing(
     title: normalizeDescription(input.title),
     description: baseLayer.normalizedDescription,
     canton: base.canton,
+    difficultyScales: activityClassification.supportedScales.map((scale) => ({
+      scale,
+      value: baseLayer.difficultyScales.valuesByScale[scale] ?? '',
+    })),
   };
   const agentOutput = await options.runClimbingPreprocessorAgent(agentInput);
+
+  if (agentOutput.activity === ACTIVITY.HIKING) {
+    return buildOutput({
+      base: {
+        ...base,
+        activity: ACTIVITY.HIKING,
+        status: PREPROCESSOR_STATUS.SKIPPED,
+        subActivity: null,
+      },
+      normalizedDescription: baseLayer.normalizedDescription,
+      reasons: ['non_climbing_activity'],
+    });
+  }
 
   if (agentOutput.subActivity === null) {
     return buildOutput({
@@ -151,5 +168,39 @@ function buildOutput({
     normalizedDescription,
     normalizedDescriptionLength: normalizedDescription.length,
     reasons,
+    skipReason: buildSkipReason(base, reasons),
   };
+}
+
+function buildSkipReason(
+  base: ReportBasePreprocessorOutput,
+  reasons: ClimbingPreprocessorReason[],
+): string | null {
+  if (base.status !== PREPROCESSOR_STATUS.SKIPPED) {
+    return null;
+  }
+
+  if (reasons.includes('unsupported_activity_scales')) {
+    return 'Report uses unsupported activity difficulty scales.';
+  }
+
+  if (reasons.includes('unsupported_activity_combination')) {
+    return 'Report difficulty scales do not map to a supported activity.';
+  }
+
+  if (reasons.includes('non_climbing_activity')) {
+    return base.activity
+      ? `Report activity is ${base.activity}, not ${ACTIVITY.CLIMBING}.`
+      : `Report activity is not ${ACTIVITY.CLIMBING}.`;
+  }
+
+  if (reasons.includes('missing_climbing_preprocessor_agent')) {
+    return 'Climbing preprocessor agent is not configured.';
+  }
+
+  if (reasons.includes('no_climbing_preprocessor_agent_match')) {
+    return 'Climbing preprocessor agent did not identify a Klettertour or Klettergarten.';
+  }
+
+  return 'Report was skipped by the climbing preprocessor.';
 }

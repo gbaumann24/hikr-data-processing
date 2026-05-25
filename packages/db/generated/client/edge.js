@@ -365,7 +365,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/gillesbaumann/githome/hikr-data-processing/packages/db/generated/client",
+      "value": "/Users/root/hikr-data-processing/packages/db/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -382,7 +382,7 @@ const config = {
       "postgresqlExtensions",
       "prismaSchemaFolder"
     ],
-    "sourceFilePath": "/Users/gillesbaumann/githome/hikr-data-processing/packages/db/prisma/report.base.schema.prisma",
+    "sourceFilePath": "/Users/root/hikr-data-processing/packages/db/prisma/report.base.schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

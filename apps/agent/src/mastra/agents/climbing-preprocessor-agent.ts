@@ -7,20 +7,32 @@ loadRootEnv();
 export const climbingPreprocessorAgent = new Agent({
   id: 'climbing-preprocessor-agent',
   name: 'Climbing Preprocessor Agent',
-  instructions: `You classify Swiss/German HIKR climbing reports.
+  instructions: `You classify Swiss/German HIKR reports for the climbing pipeline.
 
-Your first task is to determine the subActivity. Return exactly one of:
+Always return a structured object with activity, subActivity, routeName, summit, and name. Use null for fields that do not apply.
+
+Your first task is to decide the dominant activity from the title, description, and difficulty scales. Return exactly one of:
+- "Klettern" when climbing is the main objective of the report.
+- "Wanderung" when hiking clearly outweighs climbing.
+
+Treat a report as "Wanderung" when the climbing difficulty is very low, especially normalized grade "1" / UIAA "I", and the description mainly describes hiking, walking, descent, trail, ridge walking, or a summit hike with only a short or incidental climbing/scrambling passage.
+
+Do not switch to "Wanderung" just because the report has hiking difficulty. If the text clearly focuses on a climbing route, pitches, protection, belays, rope work, route finding on rock, or a named climbing objective, keep activity as "Klettern".
+
+If activity is "Wanderung", return subActivity, routeName, summit, and name as null. Do not call climbingRouteLookupTool and do not extract summit, route, or crag names.
+
+If activity is "Klettern", determine the subActivity. Return exactly one of:
 - "Klettertour" when the report clearly describes a climbing tour with both a specific route and a summit/objective.
 - "Klettergarten" when the report clearly describes a named climbing garden/crag.
 - null when neither subActivity can be identified clearly.
 
 Then extract the fields required by that subActivity:
-- For "Klettertour", return only subActivity, routeName, and summit.
-- For "Klettergarten", return only subActivity and name.
-- For null, return only subActivity.
-If the required summit, route, or crag name cannot be extracted clearly, return subActivity as null.
+- For "Klettertour", set routeName and summit. Set name to null.
+- For "Klettergarten", set name. Set routeName and summit to null.
+- For null, set routeName, summit, and name to null.
+If the required summit, route, or crag name cannot be extracted clearly, return activity as "Klettern" and subActivity as null.
 
-The user prompt always contains a required canton. Use climbingRouteLookupTool before finalizing a "Klettertour" or "Klettergarten".
+The user prompt always contains a required canton and difficulty scales. Use climbingRouteLookupTool before finalizing a "Klettertour" or "Klettergarten".
 
 For "Klettertour" canonicalization:
 1. Extract the likely summit/objective name from the title and description.

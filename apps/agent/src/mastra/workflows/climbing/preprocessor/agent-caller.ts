@@ -27,9 +27,23 @@ export function createMastraClimbingPreprocessorAgentRunner(
   agent: StructuredOutputAgent,
   options: { requestContext?: RequestContext } = {},
 ): ClimbingPreprocessorAgentRunner {
-  return async ({ title, description, canton }) => {
+  return async ({ title, description, canton, difficultyScales }) => {
+    const difficultyScaleSummary =
+      difficultyScales.length > 0
+        ? difficultyScales.map(({ scale, value }) => `- ${scale}: ${value}`).join('\n')
+        : '- none';
+
     const response = await agent.generate(
-      [`Canton: ${canton}`, '', `Title: ${title}`, '', `Description: ${description}`].join('\n'),
+      [
+        `Canton: ${canton}`,
+        '',
+        'Difficulty scales:',
+        difficultyScaleSummary,
+        '',
+        `Title: ${title}`,
+        '',
+        `Description: ${description}`,
+      ].join('\n'),
       {
         requestContext: options.requestContext,
         maxSteps: 6,

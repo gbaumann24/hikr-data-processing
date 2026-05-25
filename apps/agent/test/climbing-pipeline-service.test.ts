@@ -64,6 +64,7 @@ function climbingOutput(
     normalizedDescription: longDescription,
     normalizedDescriptionLength: longDescription.length,
     reasons: ['ready'],
+    skipReason: null,
     ...overrides,
   };
 }
