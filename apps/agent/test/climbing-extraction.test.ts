@@ -25,6 +25,7 @@ function climbingOutput(
       reportId: 42n,
       schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
       routeName: 'Sudgrat',
+      routeNames: ['Sudgrat'],
       summit: 'Gross Turm',
     },
     climbingGardenBase: null,

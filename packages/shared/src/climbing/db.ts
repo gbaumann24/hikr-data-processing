@@ -1,8 +1,4 @@
-import type {
-  ClimbingGardenBaseSchema,
-  ClimbingTourBaseSchema,
-  RouteSchema,
-} from '@hikr/db';
+import type { ClimbingGardenBaseSchema, ClimbingTourBaseSchema, RouteSchema } from '@hikr/db';
 import type { CLIMBING_PREPROCESSOR_SCHEMA_VERSION } from './domain';
 
 export type ClimbingTourBaseSchemaWriteInput = Pick<
@@ -12,17 +8,21 @@ export type ClimbingTourBaseSchemaWriteInput = Pick<
 
 export type RouteSchemaWriteInput = Pick<
   RouteSchema,
-  'activity' | 'subActivity' | 'routeName' | 'startPoint' | 'summitName' | 'cragName' | 'canton'
+  | 'activity'
+  | 'subActivity'
+  | 'routeName'
+  | 'routeNames'
+  | 'startPoint'
+  | 'summitName'
+  | 'cragName'
+  | 'canton'
 >;
 
 export type RouteSummitNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'canton'> & {
   subActivity: string;
 };
 
-export type RouteNamesLookupInput = Pick<
-  RouteSchemaWriteInput,
-  'activity' | 'canton'
-> & {
+export type RouteNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'canton'> & {
   subActivity: string;
   summitName: string;
 };
@@ -36,12 +36,10 @@ export type ClimbingGardenBaseSchemaWriteInput = Pick<
   'reportId' | 'name'
 >;
 
-export type ClimbingTourBasePreprocessorOutput = Pick<
-  ClimbingTourBaseSchema,
-  'reportId'
-> & {
+export type ClimbingTourBasePreprocessorOutput = Pick<ClimbingTourBaseSchema, 'reportId'> & {
   schemaVersion: typeof CLIMBING_PREPROCESSOR_SCHEMA_VERSION;
   routeName: string;
+  routeNames: string[];
   summit: string;
 };
 

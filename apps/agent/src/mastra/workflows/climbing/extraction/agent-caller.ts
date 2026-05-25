@@ -27,6 +27,7 @@ export function createMastraClimbingExtractor(agent: StructuredOutputAgent): Cli
         '',
         `Sub-activity: ${preprocessed.base.subActivity ?? ''}`,
         `Route name: ${preprocessed.climbingTourBase?.routeName ?? ''}`,
+        `Route names: ${(preprocessed.climbingTourBase?.routeNames ?? []).join(', ')}`,
         `Summit: ${preprocessed.climbingTourBase?.summit ?? ''}`,
         `Climbing garden: ${preprocessed.climbingGardenBase?.name ?? ''}`,
         '',

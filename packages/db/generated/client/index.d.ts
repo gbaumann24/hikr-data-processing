@@ -21075,6 +21075,7 @@ export namespace Prisma {
     activity: number
     subActivity: number
     routeName: number
+    routeNames: number
     startPoint: number
     summitName: number
     cragName: number
@@ -21124,6 +21125,7 @@ export namespace Prisma {
     activity?: true
     subActivity?: true
     routeName?: true
+    routeNames?: true
     startPoint?: true
     summitName?: true
     cragName?: true
@@ -21224,6 +21226,7 @@ export namespace Prisma {
     activity: string
     subActivity: string | null
     routeName: string | null
+    routeNames: string[]
     startPoint: string | null
     summitName: string | null
     cragName: string | null
@@ -21256,6 +21259,7 @@ export namespace Prisma {
     activity?: boolean
     subActivity?: boolean
     routeName?: boolean
+    routeNames?: boolean
     startPoint?: boolean
     summitName?: boolean
     cragName?: boolean
@@ -21271,6 +21275,7 @@ export namespace Prisma {
     activity?: boolean
     subActivity?: boolean
     routeName?: boolean
+    routeNames?: boolean
     startPoint?: boolean
     summitName?: boolean
     cragName?: boolean
@@ -21284,6 +21289,7 @@ export namespace Prisma {
     activity?: boolean
     subActivity?: boolean
     routeName?: boolean
+    routeNames?: boolean
     startPoint?: boolean
     summitName?: boolean
     cragName?: boolean
@@ -21297,6 +21303,7 @@ export namespace Prisma {
     activity?: boolean
     subActivity?: boolean
     routeName?: boolean
+    routeNames?: boolean
     startPoint?: boolean
     summitName?: boolean
     cragName?: boolean
@@ -21305,7 +21312,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type RouteSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "activity" | "subActivity" | "routeName" | "startPoint" | "summitName" | "cragName" | "canton" | "createdAt" | "updatedAt", ExtArgs["result"]["routeSchema"]>
+  export type RouteSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "activity" | "subActivity" | "routeName" | "routeNames" | "startPoint" | "summitName" | "cragName" | "canton" | "createdAt" | "updatedAt", ExtArgs["result"]["routeSchema"]>
   export type RouteSchemaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     climbingTourBaseSchemas?: boolean | RouteSchema$climbingTourBaseSchemasArgs<ExtArgs>
     _count?: boolean | RouteSchemaCountOutputTypeDefaultArgs<ExtArgs>
@@ -21323,6 +21330,7 @@ export namespace Prisma {
       activity: string
       subActivity: string | null
       routeName: string | null
+      routeNames: string[]
       startPoint: string | null
       summitName: string | null
       cragName: string | null
@@ -21757,6 +21765,7 @@ export namespace Prisma {
     readonly activity: FieldRef<"RouteSchema", 'String'>
     readonly subActivity: FieldRef<"RouteSchema", 'String'>
     readonly routeName: FieldRef<"RouteSchema", 'String'>
+    readonly routeNames: FieldRef<"RouteSchema", 'String[]'>
     readonly startPoint: FieldRef<"RouteSchema", 'String'>
     readonly summitName: FieldRef<"RouteSchema", 'String'>
     readonly cragName: FieldRef<"RouteSchema", 'String'>
@@ -22453,6 +22462,7 @@ export namespace Prisma {
     activity: 'activity',
     subActivity: 'subActivity',
     routeName: 'routeName',
+    routeNames: 'routeNames',
     startPoint: 'startPoint',
     summitName: 'summitName',
     cragName: 'cragName',
@@ -23911,6 +23921,7 @@ export namespace Prisma {
     activity?: StringFilter<"RouteSchema"> | string
     subActivity?: StringNullableFilter<"RouteSchema"> | string | null
     routeName?: StringNullableFilter<"RouteSchema"> | string | null
+    routeNames?: StringNullableListFilter<"RouteSchema">
     startPoint?: StringNullableFilter<"RouteSchema"> | string | null
     summitName?: StringNullableFilter<"RouteSchema"> | string | null
     cragName?: StringNullableFilter<"RouteSchema"> | string | null
@@ -23925,6 +23936,7 @@ export namespace Prisma {
     activity?: SortOrder
     subActivity?: SortOrderInput | SortOrder
     routeName?: SortOrderInput | SortOrder
+    routeNames?: SortOrder
     startPoint?: SortOrderInput | SortOrder
     summitName?: SortOrderInput | SortOrder
     cragName?: SortOrderInput | SortOrder
@@ -23945,6 +23957,7 @@ export namespace Prisma {
     activity?: StringFilter<"RouteSchema"> | string
     subActivity?: StringNullableFilter<"RouteSchema"> | string | null
     routeName?: StringNullableFilter<"RouteSchema"> | string | null
+    routeNames?: StringNullableListFilter<"RouteSchema">
     startPoint?: StringNullableFilter<"RouteSchema"> | string | null
     summitName?: StringNullableFilter<"RouteSchema"> | string | null
     cragName?: StringNullableFilter<"RouteSchema"> | string | null
@@ -23959,6 +23972,7 @@ export namespace Prisma {
     activity?: SortOrder
     subActivity?: SortOrderInput | SortOrder
     routeName?: SortOrderInput | SortOrder
+    routeNames?: SortOrder
     startPoint?: SortOrderInput | SortOrder
     summitName?: SortOrderInput | SortOrder
     cragName?: SortOrderInput | SortOrder
@@ -23980,6 +23994,7 @@ export namespace Prisma {
     activity?: StringWithAggregatesFilter<"RouteSchema"> | string
     subActivity?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
     routeName?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
+    routeNames?: StringNullableListFilter<"RouteSchema">
     startPoint?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
     summitName?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
     cragName?: StringNullableWithAggregatesFilter<"RouteSchema"> | string | null
@@ -25382,6 +25397,7 @@ export namespace Prisma {
     activity: string
     subActivity?: string | null
     routeName?: string | null
+    routeNames?: RouteSchemaCreaterouteNamesInput | string[]
     startPoint?: string | null
     summitName?: string | null
     cragName?: string | null
@@ -25396,6 +25412,7 @@ export namespace Prisma {
     activity: string
     subActivity?: string | null
     routeName?: string | null
+    routeNames?: RouteSchemaCreaterouteNamesInput | string[]
     startPoint?: string | null
     summitName?: string | null
     cragName?: string | null
@@ -25410,6 +25427,7 @@ export namespace Prisma {
     activity?: StringFieldUpdateOperationsInput | string
     subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
+    routeNames?: RouteSchemaUpdaterouteNamesInput | string[]
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
     summitName?: NullableStringFieldUpdateOperationsInput | string | null
     cragName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25424,6 +25442,7 @@ export namespace Prisma {
     activity?: StringFieldUpdateOperationsInput | string
     subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
+    routeNames?: RouteSchemaUpdaterouteNamesInput | string[]
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
     summitName?: NullableStringFieldUpdateOperationsInput | string | null
     cragName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25438,6 +25457,7 @@ export namespace Prisma {
     activity: string
     subActivity?: string | null
     routeName?: string | null
+    routeNames?: RouteSchemaCreaterouteNamesInput | string[]
     startPoint?: string | null
     summitName?: string | null
     cragName?: string | null
@@ -25451,6 +25471,7 @@ export namespace Prisma {
     activity?: StringFieldUpdateOperationsInput | string
     subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
+    routeNames?: RouteSchemaUpdaterouteNamesInput | string[]
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
     summitName?: NullableStringFieldUpdateOperationsInput | string | null
     cragName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25464,6 +25485,7 @@ export namespace Prisma {
     activity?: StringFieldUpdateOperationsInput | string
     subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
+    routeNames?: RouteSchemaUpdaterouteNamesInput | string[]
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
     summitName?: NullableStringFieldUpdateOperationsInput | string | null
     cragName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26695,6 +26717,7 @@ export namespace Prisma {
     activity?: SortOrder
     subActivity?: SortOrder
     routeName?: SortOrder
+    routeNames?: SortOrder
     startPoint?: SortOrder
     summitName?: SortOrder
     cragName?: SortOrder
@@ -27507,6 +27530,10 @@ export namespace Prisma {
     update?: XOR<XOR<ClimbingGardenBaseSchemaUpdateToOneWithWhereWithoutBaseInput, ClimbingGardenBaseSchemaUpdateWithoutBaseInput>, ClimbingGardenBaseSchemaUncheckedUpdateWithoutBaseInput>
   }
 
+  export type RouteSchemaCreaterouteNamesInput = {
+    set: string[]
+  }
+
   export type ClimbingTourBaseSchemaCreateNestedManyWithoutRouteInput = {
     create?: XOR<ClimbingTourBaseSchemaCreateWithoutRouteInput, ClimbingTourBaseSchemaUncheckedCreateWithoutRouteInput> | ClimbingTourBaseSchemaCreateWithoutRouteInput[] | ClimbingTourBaseSchemaUncheckedCreateWithoutRouteInput[]
     connectOrCreate?: ClimbingTourBaseSchemaCreateOrConnectWithoutRouteInput | ClimbingTourBaseSchemaCreateOrConnectWithoutRouteInput[]
@@ -27519,6 +27546,11 @@ export namespace Prisma {
     connectOrCreate?: ClimbingTourBaseSchemaCreateOrConnectWithoutRouteInput | ClimbingTourBaseSchemaCreateOrConnectWithoutRouteInput[]
     createMany?: ClimbingTourBaseSchemaCreateManyRouteInputEnvelope
     connect?: ClimbingTourBaseSchemaWhereUniqueInput | ClimbingTourBaseSchemaWhereUniqueInput[]
+  }
+
+  export type RouteSchemaUpdaterouteNamesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type ClimbingTourBaseSchemaUpdateManyWithoutRouteNestedInput = {
@@ -27966,6 +27998,7 @@ export namespace Prisma {
     activity: string
     subActivity?: string | null
     routeName?: string | null
+    routeNames?: RouteSchemaCreaterouteNamesInput | string[]
     startPoint?: string | null
     summitName?: string | null
     cragName?: string | null
@@ -27979,6 +28012,7 @@ export namespace Prisma {
     activity: string
     subActivity?: string | null
     routeName?: string | null
+    routeNames?: RouteSchemaCreaterouteNamesInput | string[]
     startPoint?: string | null
     summitName?: string | null
     cragName?: string | null
@@ -28268,6 +28302,7 @@ export namespace Prisma {
     activity?: StringFieldUpdateOperationsInput | string
     subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
+    routeNames?: RouteSchemaUpdaterouteNamesInput | string[]
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
     summitName?: NullableStringFieldUpdateOperationsInput | string | null
     cragName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28281,6 +28316,7 @@ export namespace Prisma {
     activity?: StringFieldUpdateOperationsInput | string
     subActivity?: NullableStringFieldUpdateOperationsInput | string | null
     routeName?: NullableStringFieldUpdateOperationsInput | string | null
+    routeNames?: RouteSchemaUpdaterouteNamesInput | string[]
     startPoint?: NullableStringFieldUpdateOperationsInput | string | null
     summitName?: NullableStringFieldUpdateOperationsInput | string | null
     cragName?: NullableStringFieldUpdateOperationsInput | string | null

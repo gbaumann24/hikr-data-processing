@@ -45,3 +45,28 @@ export type BaseLayerPreprocessorOutput = {
   reasons: BaseLayerPreprocessorReason[];
   isInsufficient: boolean;
 };
+
+export const BASELAYER_GATE_DECISION = {
+  READY: 'ready',
+  SKIP: 'skip',
+} as const;
+
+export const BASELAYER_GATE_REASON = {
+  MULTIPLE_ROUTES_IN_REPORT: 'multiple_routes_in_report',
+} as const;
+
+export type BaseLayerGateDecision =
+  (typeof BASELAYER_GATE_DECISION)[keyof typeof BASELAYER_GATE_DECISION];
+
+export type BaseLayerGateAgentReason =
+  (typeof BASELAYER_GATE_REASON)[keyof typeof BASELAYER_GATE_REASON];
+
+export type BaseLayerGateReason =
+  | BaseLayerPreprocessorReason
+  | BaseLayerGateAgentReason
+  | 'missing_baselayer_gate_agent'
+  | 'invalid_baselayer_gate_agent_output';
+
+export type BaseLayerGateOutput = Omit<BaseLayerPreprocessorOutput, 'reasons'> & {
+  reasons: BaseLayerGateReason[];
+};

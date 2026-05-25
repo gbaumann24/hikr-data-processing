@@ -11,6 +11,7 @@ import { createPostgresDatabase } from '../src/database/postgres';
 describe('postgres database adapter', () => {
   test('wires climbing persistence through operation modules', async () => {
     const calls: string[] = [];
+    const routeUpdates: unknown[] = [];
     const reportBase = {
       activity: ACTIVITY.CLIMBING,
       subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
@@ -24,7 +25,11 @@ describe('postgres database adapter', () => {
       routeSchema: {
         upsert: async () => {
           calls.push('tx.routeSchema.upsert');
-          return { id: 7n };
+          return { id: 7n, routeNames: ['Südgrat'] };
+        },
+        update: async (input: unknown) => {
+          calls.push('tx.routeSchema.update');
+          routeUpdates.push(input);
         },
       },
       climbingTourBaseSchema: {
@@ -46,11 +51,18 @@ describe('postgres database adapter', () => {
         },
       },
       routeSchema: {
-        findMany: async ({ distinct }: { distinct: string[] }) => {
-          calls.push(`routeSchema.findMany.${distinct[0]}`);
-          return distinct[0] === 'routeName'
+        findMany: async ({
+          distinct,
+          select,
+        }: {
+          distinct?: string[];
+          select: Record<string, true>;
+        }) => {
+          const lookupKey = distinct?.[0] ?? Object.keys(select).join('+');
+          calls.push(`routeSchema.findMany.${lookupKey}`);
+          return lookupKey === 'routeName'
             ? [{ routeName: 'Südgrat' }]
-            : distinct[0] === 'cragName'
+            : lookupKey === 'cragName'
               ? [{ cragName: 'Melchtal' }]
               : [{ summitName: 'Gross Turm' }];
         },
@@ -99,6 +111,7 @@ describe('postgres database adapter', () => {
       reportId: 42n,
       schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
       routeName: 'Südgrat',
+      routeNames: ['Südgrat', 'S-Grat'],
       summit: 'Gross Turm',
     });
     await database.upsertClimbingGardenBase({
@@ -113,10 +126,17 @@ describe('postgres database adapter', () => {
       'routeSchema.findMany.cragName',
       '$transaction',
       'tx.routeSchema.upsert',
+      'tx.routeSchema.update',
       'tx.climbingTourBaseSchema.upsert',
       '$transaction',
       'tx.routeSchema.upsert',
       'tx.climbingGardenBaseSchema.upsert',
+    ]);
+    expect(routeUpdates).toEqual([
+      {
+        where: { id: 7n },
+        data: { routeNames: ['Südgrat', 'S-Grat'] },
+      },
     ]);
   });
 });

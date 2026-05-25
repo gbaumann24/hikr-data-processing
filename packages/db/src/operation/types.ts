@@ -12,7 +12,14 @@ export type ReportBaseSchemaWriteInput = Pick<
 
 export type RouteSchemaWriteInput = Pick<
   RouteSchema,
-  'activity' | 'subActivity' | 'routeName' | 'startPoint' | 'summitName' | 'cragName' | 'canton'
+  | 'activity'
+  | 'subActivity'
+  | 'routeName'
+  | 'routeNames'
+  | 'startPoint'
+  | 'summitName'
+  | 'cragName'
+  | 'canton'
 >;
 
 export type RouteSummitNamesLookupInput = Pick<RouteSchemaWriteInput, 'activity' | 'canton'> & {
@@ -33,6 +40,7 @@ export type ClimbingTourBasePreprocessorOutput = Pick<
   'reportId' | 'schemaVersion'
 > & {
   routeName: string;
+  routeNames: string[];
   summit: string;
 };
 

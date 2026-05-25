@@ -3,6 +3,7 @@ model RouteSchema {
   activity    String
   subActivity String? @map("sub_activity")
   routeName   String? @map("route_name")
+  routeNames  String[] @default([]) @map("route_names")
   startPoint  String? @map("start_point")
   summitName  String? @map("summit_name")
   cragName    String? @map("crag_name")

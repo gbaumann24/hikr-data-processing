@@ -17,6 +17,7 @@ export async function upsertClimbingTourBase(
       );
     }
 
+    const inputRouteNames = normalizeRouteNames(input.routeNames, input.routeName);
     const route = await tx.routeSchema.upsert({
       where: {
         activityRouteNameSummitCanton: {
@@ -30,6 +31,7 @@ export async function upsertClimbingTourBase(
         activity: reportBase.activity,
         subActivity: reportBase.subActivity,
         routeName: input.routeName,
+        routeNames: inputRouteNames,
         summitName: input.summit,
         canton: reportBase.canton,
       },
@@ -37,6 +39,18 @@ export async function upsertClimbingTourBase(
         subActivity: reportBase.subActivity,
       },
     });
+
+    const routeNames = normalizeRouteNames(
+      [...route.routeNames, ...inputRouteNames],
+      input.routeName,
+    );
+
+    if (!areEqualStringArrays(route.routeNames, routeNames)) {
+      await tx.routeSchema.update({
+        where: { id: route.id },
+        data: { routeNames },
+      });
+    }
 
     await tx.climbingTourBaseSchema.upsert({
       where: { reportId: input.reportId },
@@ -51,4 +65,18 @@ export async function upsertClimbingTourBase(
       },
     });
   });
+}
+
+function normalizeRouteNames(routeNames: string[], routeName: string): string[] {
+  return [
+    ...new Set(
+      [routeName, ...routeNames]
+        .map((name) => name.replace(/\s+/g, ' ').trim())
+        .filter((name) => name !== ''),
+    ),
+  ];
+}
+
+function areEqualStringArrays(left: string[], right: string[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
 }

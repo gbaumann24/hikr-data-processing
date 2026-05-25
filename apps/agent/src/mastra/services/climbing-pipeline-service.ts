@@ -44,6 +44,7 @@ export type ClimbingPipelineProgressEvent =
       subActivity: string | null;
       reasons: string[];
       routeName?: string;
+      routeNames?: string[];
       summit?: string;
       gardenName?: string;
       elapsedMs: number;
@@ -138,6 +139,7 @@ export async function runClimbingPipelineService({
           subActivity: climbing.base.subActivity,
           reasons: climbing.reasons,
           routeName: climbing.climbingTourBase?.routeName,
+          routeNames: climbing.climbingTourBase?.routeNames,
           summit: climbing.climbingTourBase?.summit,
           gardenName: climbing.climbingGardenBase?.name,
           elapsedMs: Date.now() - startedAt,

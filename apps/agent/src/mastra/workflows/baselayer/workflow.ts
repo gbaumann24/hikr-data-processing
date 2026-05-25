@@ -1,11 +1,13 @@
 import { createWorkflow } from '@mastra/core/workflows';
-import { baseLayerInputSchema, baseLayerOutputSchema, baseLayerStep } from './preprocessor';
+import { baseLayerGateOutputSchema, baseLayerGateStep } from './gate';
+import { baseLayerInputSchema, baseLayerStep } from './preprocessor';
 
 export const baseLayerWorkflow = createWorkflow({
   id: 'baselayer',
-  description: 'Processes a single HIKR post through baselayer normalisation',
+  description: 'Processes a single HIKR post through baselayer normalisation and gating',
   inputSchema: baseLayerInputSchema,
-  outputSchema: baseLayerOutputSchema,
+  outputSchema: baseLayerGateOutputSchema,
 })
   .then(baseLayerStep)
+  .then(baseLayerGateStep)
   .commit();

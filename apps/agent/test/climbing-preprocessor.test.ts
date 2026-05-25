@@ -102,6 +102,7 @@ describe('climbing preprocessor', () => {
           activity: ACTIVITY.CLIMBING,
           subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
           routeName: 'Südgrat',
+          routeNames: ['Südgrat'],
           summit: 'Gross Turm',
         }),
       },
@@ -156,6 +157,7 @@ describe('climbing preprocessor', () => {
           activity: ACTIVITY.CLIMBING,
           subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
           routeName: 'Südgrat',
+          routeNames: ['Südgrat', 'S-Grat'],
           summit: 'Gross Turm',
         };
       },
@@ -174,6 +176,7 @@ describe('climbing preprocessor', () => {
     ]);
     expect(result.climbingTourBase).toMatchObject({
       routeName: 'Südgrat',
+      routeNames: ['Südgrat', 'S-Grat'],
       summit: 'Gross Turm',
     });
     expect(result.climbingGardenBase).toBeNull();
@@ -242,6 +245,7 @@ describe('climbing preprocessor', () => {
         activity: ACTIVITY.CLIMBING,
         subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
         routeName: 'Südgrat',
+        routeNames: ['Südgrat'],
         summit: null,
         name: null,
       }),
@@ -252,6 +256,7 @@ describe('climbing preprocessor', () => {
         activity: ACTIVITY.CLIMBING,
         subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_GARDEN,
         routeName: null,
+        routeNames: null,
         summit: null,
         name: '',
       }),
@@ -264,9 +269,29 @@ describe('climbing preprocessor', () => {
         activity: ACTIVITY.HIKING,
         subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
         routeName: 'Südgrat',
+        routeNames: ['Südgrat'],
         summit: 'Gross Turm',
         name: null,
       }),
     ).toEqual({ activity: ACTIVITY.HIKING, subActivity: null });
+  });
+
+  test('parses multiple route names for the same climbing tour', () => {
+    expect(
+      parseClimbingPreprocessorAgentOutput({
+        activity: ACTIVITY.CLIMBING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+        routeName: 'Südgrat',
+        routeNames: ['Südgrat', 'S-Grat', 'Südgrat'],
+        summit: 'Gross Turm',
+        name: null,
+      }),
+    ).toEqual({
+      activity: ACTIVITY.CLIMBING,
+      subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+      routeName: 'Südgrat',
+      routeNames: ['Südgrat', 'S-Grat'],
+      summit: 'Gross Turm',
+    });
   });
 });

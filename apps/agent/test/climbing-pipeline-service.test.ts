@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { runClimbingPipelineService } from '../src/mastra';
+import { runClimbingPipelineService } from '../src/mastra/services/climbing-pipeline-service';
 import {
   ACTIVITY,
   PREPROCESSOR_STATUS,
@@ -58,6 +58,7 @@ function climbingOutput(
       reportId: 42n,
       schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
       routeName: 'Südgrat',
+      routeNames: ['Südgrat'],
       summit: 'Gross Turm',
     },
     climbingGardenBase: null,
@@ -186,6 +187,7 @@ describe('climbing pipeline service', () => {
         reportId: 42n,
         schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
         routeName: 'Südgrat',
+        routeNames: ['Südgrat'],
         summit: 'Gross Turm',
       },
     ]);
@@ -204,6 +206,7 @@ describe('climbing pipeline service', () => {
       reportId: 42n,
       status: PREPROCESSOR_STATUS.READY,
       routeName: 'Südgrat',
+      routeNames: ['Südgrat'],
       summit: 'Gross Turm',
     });
     expect(progressEvents[4]).toMatchObject({

@@ -319,6 +319,7 @@ exports.Prisma.RouteSchemaScalarFieldEnum = {
   activity: 'activity',
   subActivity: 'subActivity',
   routeName: 'routeName',
+  routeNames: 'routeNames',
   startPoint: 'startPoint',
   summitName: 'summitName',
   cragName: 'cragName',

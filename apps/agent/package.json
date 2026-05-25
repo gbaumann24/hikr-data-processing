@@ -6,6 +6,7 @@
   "exports": {
     ".": "./index.ts",
     "./mastra": "./src/mastra/index.ts",
+    "./mastra/agents/baselayer-gate-agent": "./src/mastra/agents/baselayer-gate-agent.ts",
     "./mastra/agents/climbing-extraction-agent": "./src/mastra/agents/climbing-extraction-agent.ts",
     "./mastra/agents/climbing-preprocessor-agent": "./src/mastra/agents/climbing-preprocessor-agent.ts"
   },

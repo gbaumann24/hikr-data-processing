@@ -2,12 +2,9 @@ import { loadRootEnv } from '../utils';
 import { Mastra } from '@mastra/core/mastra';
 import { MastraCompositeStore } from '@mastra/core/storage';
 import { LibSQLStore } from '@mastra/libsql';
-import {
-  MastraStorageExporter,
-  Observability,
-  SamplingStrategyType,
-} from '@mastra/observability';
+import { MastraStorageExporter, Observability, SamplingStrategyType } from '@mastra/observability';
 import { PostgresStore } from '@mastra/pg';
+import { baseLayerGateAgent } from './agents/baselayer-gate-agent';
 import { climbingExtractionAgent } from './agents/climbing-extraction-agent';
 import { climbingPreprocessorAgent } from './agents/climbing-preprocessor-agent';
 import { baseLayerWorkflow } from './workflows/baselayer';
@@ -16,6 +13,7 @@ import { skiTouringPipelineWorkflow } from './workflows/ski-touring';
 
 loadRootEnv();
 
+export { baseLayerGateAgent } from './agents/baselayer-gate-agent';
 export { climbingExtractionAgent } from './agents/climbing-extraction-agent';
 export { climbingPreprocessorAgent } from './agents/climbing-preprocessor-agent';
 export { baseLayerWorkflow } from './workflows/baselayer';
@@ -109,6 +107,7 @@ export const mastra = new Mastra({
     },
   }),
   agents: {
+    'baselayer-gate-agent': baseLayerGateAgent,
     'climbing-extraction-agent': climbingExtractionAgent,
     'climbing-preprocessor-agent': climbingPreprocessorAgent,
   },

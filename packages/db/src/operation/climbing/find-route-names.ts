@@ -13,10 +13,12 @@ export async function findRouteNames(
       summitName,
       routeName: { not: null },
     },
-    distinct: ['routeName'],
     select: { routeName: true },
+    distinct: ['routeName'],
     orderBy: { routeName: 'asc' },
   });
 
-  return routes.flatMap((route) => (route.routeName ? [route.routeName] : []));
+  return routes
+    .map((route) => route.routeName)
+    .filter((name): name is string => typeof name === 'string' && name.trim() !== '');
 }

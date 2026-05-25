@@ -143,6 +143,7 @@ export async function preprocessPreparedBaseLayerForClimbing(
       reportId: base.reportId,
       schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
       routeName: agentOutput.routeName,
+      routeNames: agentOutput.routeNames,
       summit: agentOutput.summit,
     },
   });

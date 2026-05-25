@@ -32,7 +32,7 @@ const lookupOutputSchema = z.object({
 export const climbingRouteLookupTool = createTool({
   id: 'climbing-route-lookup-tool',
   description:
-    'Lists existing climbing summit names for a canton, route names for a canton and summit, or crag names for a canton.',
+    'Lists existing climbing summit names for a canton, canonical route names for a canton and summit, or crag names for a canton.',
   inputSchema: lookupInputSchema,
   outputSchema: lookupOutputSchema,
   execute: async (input, context) => {

@@ -3,7 +3,7 @@ import { toAsyncIterable } from '@hikr/utils';
 import type { BaseLayerDataPipelineDatabase } from '@hikr/shared';
 import {
   mapReportBaseToSchemaWrite,
-  type BaseLayerPreprocessorOutput,
+  type BaseLayerGateOutput,
   type PreprocessorStatus,
 } from '../workflows/baselayer';
 
@@ -42,7 +42,7 @@ export async function runBaseLayerPipelineService({
     const result = await run.start({ inputData: post });
 
     if (result.status === 'success') {
-      const baseLayer = result.result as BaseLayerPreprocessorOutput;
+      const baseLayer = result.result as BaseLayerGateOutput;
       await database.upsertReportBase(
         mapReportBaseToSchemaWrite(baseLayer.base, baseLayer.reasons),
       );
