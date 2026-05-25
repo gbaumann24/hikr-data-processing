@@ -141,8 +141,10 @@ function logProgress(event: ClimbingPipelineProgressEvent): void {
   }
 
   if (event.type === 'post-failure') {
+    const error = event.error ? `: ${formatError(event.error)}` : '';
+
     console.log(
-      `${formatProgress(event.index, event.total)} workflow returned ${event.workflowStatus} for report ${event.reportId.toString()} after ${formatDuration(event.elapsedMs)}`,
+      `${formatProgress(event.index, event.total)} workflow returned ${event.workflowStatus} for report ${event.reportId.toString()} after ${formatDuration(event.elapsedMs)}${error}`,
     );
     return;
   }

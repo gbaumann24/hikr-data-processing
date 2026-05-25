@@ -11,7 +11,6 @@ type StructuredOutputAgent = {
     options: {
       structuredOutput: { schema: typeof climbingExtractionAgentResultSchema };
       modelSettings?: { temperature?: number; maxOutputTokens?: number };
-      providerOptions?: { openai?: { reasoningEffort?: 'low' | 'medium' | 'high' } };
     },
   ) => Promise<{ object?: unknown; finishReason?: string }>;
 };
@@ -39,11 +38,6 @@ export function createMastraClimbingExtractor(agent: StructuredOutputAgent): Cli
         modelSettings: {
           temperature: 0,
           maxOutputTokens: 1000,
-        },
-        providerOptions: {
-          openai: {
-            reasoningEffort: 'low',
-          },
         },
       },
     );

@@ -4,6 +4,12 @@ Welcome to your new [Mastra](https://mastra.ai/) project! We're excited to see w
 
 ## Getting Started
 
+Copy `apps/agent/.env.example` to the workspace root `.env` file and set the DeepSeek API key:
+
+```shell
+DEEPSEEK_API_KEY=your-deepseek-api-key
+```
+
 Start the development server:
 
 ```shell

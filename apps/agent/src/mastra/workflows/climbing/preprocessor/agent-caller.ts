@@ -1,4 +1,5 @@
 import type { RequestContext } from '@mastra/core/request-context';
+import { CLIMBING_AGENT_MODEL } from '../../../agents/models';
 import {
   climbingPreprocessorAgentOutputSchema,
   parseClimbingPreprocessorAgentOutput,
@@ -18,7 +19,6 @@ type StructuredOutputAgent = {
         model?: string;
       };
       modelSettings?: { temperature?: number; maxOutputTokens?: number };
-      providerOptions?: { openai?: { reasoningEffort?: 'low' | 'medium' | 'high' } };
     },
   ) => Promise<{ object?: unknown; finishReason?: string }>;
 };
@@ -36,16 +36,11 @@ export function createMastraClimbingPreprocessorAgentRunner(
         toolChoice: 'auto',
         structuredOutput: {
           schema: climbingPreprocessorAgentOutputSchema,
-          model: 'openai/gpt-5-mini',
+          model: CLIMBING_AGENT_MODEL,
         },
         modelSettings: {
           temperature: 0,
           maxOutputTokens: 8000,
-        },
-        providerOptions: {
-          openai: {
-            reasoningEffort: 'low',
-          },
         },
       },
     );

@@ -18,7 +18,9 @@ import { CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY } from '../src/mastra/tools/climbing-
 const longDescription = 'Kletterbericht '.repeat(150);
 
 type ClimbingPipelineMastra = Parameters<typeof runClimbingPipelineService>[0]['mastra'];
-type WorkflowResult = { status: 'success'; result: ClimbingPreprocessorOutput };
+type WorkflowResult =
+  | { status: 'success'; result: ClimbingPreprocessorOutput }
+  | { status: 'failed'; error: unknown };
 
 function hikrOrgPost(
   overrides: Partial<HikrOrgPostBaseLayerInput> = {},
@@ -259,5 +261,46 @@ describe('climbing pipeline service', () => {
       [PREPROCESSOR_STATUS.INSUFFICIENT]: 0,
     });
     expect(reportBaseWrites.map((write) => write.reportId)).toEqual([1n]);
+  });
+
+  test('aborts on fatal upstream LLM provider failures', async () => {
+    const providerError = Object.assign(new Error('Insufficient Balance'), {
+      statusCode: 402,
+      url: 'https://api.deepseek.com/chat/completions',
+      responseBody:
+        '{"error":{"message":"Insufficient Balance","type":"unknown_error","param":null,"code":"invalid_request_error"}}',
+      'vercel.ai.error': true,
+    });
+    const progressEvents: Array<{ type: string; [key: string]: unknown }> = [];
+
+    await expect(
+      runClimbingPipelineService({
+        mastra: createMastraStub([{ status: 'failed', error: providerError }]),
+        database: {
+          findHikrOrgPostsForPreprocessing: () => [hikrOrgPost()],
+          findRouteSummitNames: () => [],
+          findRouteNames: () => [],
+          findRouteCragNames: () => [],
+          upsertReportBase: () => {},
+          upsertClimbingTourBase: () => {},
+          upsertClimbingGardenBase: () => {},
+        },
+        onProgress: (event) => {
+          progressEvents.push(event);
+        },
+      }),
+    ).rejects.toThrow(
+      'Upstream LLM provider rejected the request with HTTP 402: Insufficient Balance.',
+    );
+
+    expect(progressEvents.map((event) => event.type)).toEqual([
+      'source-loaded',
+      'post-start',
+      'post-failure',
+    ]);
+    expect(progressEvents[2]).toMatchObject({
+      workflowStatus: 'failed',
+      error: providerError,
+    });
   });
 });

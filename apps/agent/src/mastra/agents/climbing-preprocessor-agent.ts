@@ -1,6 +1,7 @@
 import { loadRootEnv } from '../../utils';
 import { Agent } from '@mastra/core/agent';
 import { climbingRouteLookupTool } from '../tools/climbing-route-lookup-tool';
+import { CLIMBING_AGENT_MODEL } from './models';
 
 loadRootEnv();
 
@@ -36,6 +37,6 @@ For "Klettergarten" canonicalization:
 3. Compare your extracted crag name with the full returned crag list. If one candidate is a clear close match, set name to that exact returned database crag name. If no candidate is a clear close match, keep your extracted crag name exactly as it appears in the report when possible.
 
 Do not infer names from geography alone. Do not create database rows; new summit/route/crag names should only be returned in the structured classification.`,
-  model: 'openai/gpt-5-mini',
+  model: CLIMBING_AGENT_MODEL,
   tools: { climbingRouteLookupTool },
 });

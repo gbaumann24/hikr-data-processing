@@ -54,6 +54,7 @@ export type ClimbingPipelineProgressEvent =
       total?: number;
       reportId: bigint;
       workflowStatus: string;
+      error?: unknown;
       elapsedMs: number;
     }
   | {
@@ -103,6 +104,7 @@ export async function runClimbingPipelineService({
 
     const run = await workflow.createRun();
     const requestContext = new RequestContext();
+    let fatalWorkflowError: Error | undefined;
     requestContext.set(CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY, {
       findRouteSummitNames: database.findRouteSummitNames,
       findRouteNames: database.findRouteNames,
@@ -141,14 +143,22 @@ export async function runClimbingPipelineService({
           elapsedMs: Date.now() - startedAt,
         });
       } else {
+        const workflowError = 'error' in result ? result.error : undefined;
         onProgress?.({
           type: 'post-failure',
           index,
           total: plannedTotal,
           reportId: post.id,
           workflowStatus: String(result.status),
+          error: workflowError,
           elapsedMs: Date.now() - startedAt,
         });
+
+        if (isFatalUpstreamLlmError(workflowError)) {
+          fatalWorkflowError = new Error(formatFatalUpstreamLlmError(workflowError), {
+            cause: workflowError,
+          });
+        }
       }
     } catch (error) {
       onProgress?.({
@@ -162,8 +172,105 @@ export async function runClimbingPipelineService({
       throw error;
     }
 
+    if (fatalWorkflowError) {
+      throw fatalWorkflowError;
+    }
+
     total += 1;
   }
 
   return { total, statusCounts };
+}
+
+const FATAL_UPSTREAM_LLM_STATUS_CODES = new Set([401, 402, 403]);
+
+function isFatalUpstreamLlmError(error: unknown): boolean {
+  const statusCode = getErrorNumber(error, 'statusCode');
+
+  if (!statusCode || !FATAL_UPSTREAM_LLM_STATUS_CODES.has(statusCode)) {
+    return false;
+  }
+
+  return Boolean(getErrorBoolean(error, 'vercel.ai.error') || getErrorString(error, 'url'));
+}
+
+function formatFatalUpstreamLlmError(error: unknown): string {
+  const statusCode = getErrorNumber(error, 'statusCode');
+  const message = getProviderErrorMessage(error);
+  const httpStatus = statusCode ? ` with HTTP ${statusCode}` : '';
+  const providerMessage = message ? `: ${message}` : '';
+
+  return `Upstream LLM provider rejected the request${httpStatus}${providerMessage}. Check the provider API key or billing before rerunning.`;
+}
+
+function getProviderErrorMessage(error: unknown): string | undefined {
+  const dataMessage = getNestedErrorMessage(getErrorObject(error, 'data'));
+
+  if (dataMessage) {
+    return dataMessage;
+  }
+
+  const responseBody = getErrorString(error, 'responseBody');
+
+  if (!responseBody) {
+    return error instanceof Error ? error.message : undefined;
+  }
+
+  try {
+    return getNestedErrorMessage(JSON.parse(responseBody)) ?? responseBody;
+  } catch {
+    return responseBody;
+  }
+}
+
+function getNestedErrorMessage(value: unknown): string | undefined {
+  if (!value || typeof value !== 'object') {
+    return undefined;
+  }
+
+  const error = 'error' in value ? value.error : undefined;
+
+  if (!error || typeof error !== 'object') {
+    return undefined;
+  }
+
+  const message = 'message' in error ? error.message : undefined;
+
+  return typeof message === 'string' ? message : undefined;
+}
+
+function getErrorObject(error: unknown, key: string): object | undefined {
+  if (!error || typeof error !== 'object' || !(key in error)) {
+    return undefined;
+  }
+
+  const value = error[key as keyof typeof error];
+  return value && typeof value === 'object' ? value : undefined;
+}
+
+function getErrorString(error: unknown, key: string): string | undefined {
+  if (!error || typeof error !== 'object' || !(key in error)) {
+    return undefined;
+  }
+
+  const value = error[key as keyof typeof error];
+  return typeof value === 'string' ? value : undefined;
+}
+
+function getErrorNumber(error: unknown, key: string): number | undefined {
+  if (!error || typeof error !== 'object' || !(key in error)) {
+    return undefined;
+  }
+
+  const value = error[key as keyof typeof error];
+  return typeof value === 'number' ? value : undefined;
+}
+
+function getErrorBoolean(error: unknown, key: string): boolean | undefined {
+  if (!error || typeof error !== 'object' || !(key in error)) {
+    return undefined;
+  }
+
+  const value = error[key as keyof typeof error];
+  return typeof value === 'boolean' ? value : undefined;
 }
