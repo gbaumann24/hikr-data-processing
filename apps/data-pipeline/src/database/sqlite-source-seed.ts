@@ -137,7 +137,19 @@ function parseSqliteDateTime(value: string | null): Date | undefined {
     return undefined;
   }
 
-  return new Date(`${value.replace(' ', 'T')}Z`);
+  const hasTimezone = /(?:Z|[+-]\d{2}:?\d{2})$/i.test(value);
+  const normalizedValue = value.includes('T')
+    ? hasTimezone
+      ? value
+      : `${value}Z`
+    : `${value.replace(' ', 'T')}Z`;
+  const date = new Date(normalizedValue);
+
+  if (Number.isNaN(date.getTime())) {
+    throw new Error(`Invalid SQLite datetime value: ${value}`);
+  }
+
+  return date;
 }
 
 function parseJson(value: string | null): Prisma.InputJsonValue | undefined {

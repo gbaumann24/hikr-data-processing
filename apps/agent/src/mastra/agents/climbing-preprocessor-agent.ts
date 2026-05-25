@@ -69,6 +69,6 @@ Klettergarten example names:
 Gastlosen, Bärglischwand, Gemschifluh, Lehn, Gimmelwald, Elsigen, Dossen Zermatt, Panoramix, Rawyl, Salvan – Van d’en Haut.
 
 Do not infer names from geography alone. Do not create database rows; new summit/route/crag names should only be returned in the structured classification.`,
-  model: 'openai/gpt-5-mini',
+  model: 'openai/gpt-5.4-mini',
   tools: { climbingRouteLookupTool },
 });

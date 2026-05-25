@@ -8,13 +8,13 @@ import { seedHikrReportsFromSqlite } from './database/sqlite-source-seed';
 import type { ClimbingPipelineProgressEvent } from './utils/workflow-runner';
 
 const DEFAULT_LIMIT = 10;
-const FURKAHORN_FIXTURE_SQLITE_PATH = 'apps/data-pipeline/fixtures/furkahorn.sqlite';
+const SPECIAL_CASE_FIXTURE_SQLITE_PATH = 'apps/data-pipeline/fixtures/special-case.sqlite';
 
 type ParsedArgs = {
   help: boolean;
   limit?: number;
   sqlitePath?: string;
-  useFurkahornFixture: boolean;
+  useSpecialCaseFixture: boolean;
 };
 
 function parsePositiveInteger(value: string, label: string): number {
@@ -30,7 +30,7 @@ function parsePositiveInteger(value: string, label: string): number {
 function parseArgs(args: string[]): ParsedArgs {
   let limit: number | undefined;
   let sqlitePath: string | undefined;
-  let useFurkahornFixture = false;
+  let useSpecialCaseFixture = false;
 
   const setLimit = (value: string): void => {
     if (limit !== undefined) {
@@ -52,11 +52,11 @@ function parseArgs(args: string[]): ParsedArgs {
     const arg = args[index];
 
     if (arg === '--help' || arg === '-h') {
-      return { help: true, useFurkahornFixture: false };
+      return { help: true, useSpecialCaseFixture: false };
     }
 
-    if (arg === '--furkahorn' || arg === '--furka') {
-      useFurkahornFixture = true;
+    if (arg === '--special-case') {
+      useSpecialCaseFixture = true;
       continue;
     }
 
@@ -101,11 +101,11 @@ function parseArgs(args: string[]): ParsedArgs {
     setLimit(arg);
   }
 
-  if (useFurkahornFixture && sqlitePath !== undefined) {
-    throw new Error('Use either --furkahorn or --sqlite-path, not both');
+  if (useSpecialCaseFixture && sqlitePath !== undefined) {
+    throw new Error('Use either --special-case or --sqlite-path, not both');
   }
 
-  return { help: false, limit, sqlitePath, useFurkahornFixture };
+  return { help: false, limit, sqlitePath, useSpecialCaseFixture };
 }
 
 function printUsage(): void {
@@ -114,7 +114,7 @@ function printUsage(): void {
   bun src/run-climbing-test.ts --limit 25
   bun src/run-climbing-test.ts 25
   bun src/run-climbing-test.ts --limit 25 --sqlite-path ../../hikr.sqlite
-  bun src/run-climbing-test.ts --furkahorn
+  bun src/run-climbing-test.ts --special-case
 
 Always purges the local Postgres test DB, seeds source posts from SQLite,
 then runs the climbing workflow against the seeded rows.`);
@@ -211,6 +211,11 @@ type TestDatabasePurgeResult = {
   scraperProgressRows: number;
 };
 
+type TestDatabaseCounts = TestDatabasePurgeResult & {
+  climbingGardenRows: number;
+  climbingTourRows: number;
+};
+
 async function purgeTestDatabase(prisma: PrismaClient): Promise<TestDatabasePurgeResult> {
   const pipelineOutput = await purgePipelineOutput(prisma);
 
@@ -231,6 +236,67 @@ async function purgeTestDatabase(prisma: PrismaClient): Promise<TestDatabasePurg
     ...pipelineOutput,
     ...source,
   };
+}
+
+async function countTestDatabaseRows(prisma: PrismaClient): Promise<TestDatabaseCounts> {
+  const [
+    sourcePostRows,
+    reportBaseRows,
+    routeRows,
+    sourceWaypointRows,
+    scraperProgressRows,
+    climbingTourRows,
+    climbingGardenRows,
+  ] = await prisma.$transaction([
+    prisma.hikrOrgPostSchema.count(),
+    prisma.reportBaseSchema.count(),
+    prisma.routeSchema.count(),
+    prisma.hikrWaypointSchema.count(),
+    prisma.hikrScraperProgressSchema.count(),
+    prisma.climbingTourBaseSchema.count(),
+    prisma.climbingGardenBaseSchema.count(),
+  ]);
+
+  return {
+    sourcePostRows,
+    reportBaseRows,
+    routeRows,
+    sourceWaypointRows,
+    scraperProgressRows,
+    climbingTourRows,
+    climbingGardenRows,
+  };
+}
+
+function assertRunPersistedExpectedRows({
+  counts,
+  processedRows,
+  seededRows,
+}: {
+  counts: TestDatabaseCounts;
+  processedRows: number;
+  seededRows: number;
+}): void {
+  const mismatches: string[] = [];
+
+  if (counts.sourcePostRows !== seededRows) {
+    mismatches.push(`source posts ${counts.sourcePostRows} != seeded ${seededRows}`);
+  }
+
+  if (counts.reportBaseRows !== processedRows) {
+    mismatches.push(
+      `report_base_schema rows ${counts.reportBaseRows} != processed ${processedRows}`,
+    );
+  }
+
+  if (mismatches.length === 0) {
+    return;
+  }
+
+  throw new Error(
+    `Post-run database state mismatch: ${mismatches.join('; ')}. ` +
+      'The test runner expects source and report-base rows to remain until the next purge.',
+  );
 }
 
 async function promptForLimit(): Promise<number> {
@@ -271,9 +337,9 @@ async function main(): Promise<void> {
     return;
   }
 
-  const limit = args.limit ?? (args.useFurkahornFixture ? undefined : await promptForLimit());
-  const sqlitePath = args.useFurkahornFixture
-    ? join(rootEnv.rootDir, FURKAHORN_FIXTURE_SQLITE_PATH)
+  const limit = args.limit ?? (args.useSpecialCaseFixture ? undefined : await promptForLimit());
+  const sqlitePath = args.useSpecialCaseFixture
+    ? join(rootEnv.rootDir, SPECIAL_CASE_FIXTURE_SQLITE_PATH)
     : (args.sqlitePath ?? process.env.HIKR_SQLITE_PATH ?? join(rootEnv.rootDir, 'hikr.sqlite'));
 
   console.log(`Using Postgres ${formatDatabaseUrl(process.env.DATABASE_URL)}`);
@@ -307,6 +373,15 @@ async function main(): Promise<void> {
 
     console.log(`\nDone. Processed ${result.total} posts`);
     console.log('Status counts:', result.statusCounts);
+    const counts = await countTestDatabaseRows(prisma);
+    console.log(
+      `Persisted rows: ${counts.sourcePostRows} source posts, ${counts.reportBaseRows} report_base_schema rows, ${counts.routeRows} routes, ${counts.climbingTourRows} climbing tours, ${counts.climbingGardenRows} climbing gardens.`,
+    );
+    assertRunPersistedExpectedRows({
+      counts,
+      processedRows: result.total,
+      seededRows: seed.insertedRows,
+    });
   } finally {
     await prisma.$disconnect();
   }

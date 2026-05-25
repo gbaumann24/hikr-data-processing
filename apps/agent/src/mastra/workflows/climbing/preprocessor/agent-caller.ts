@@ -50,7 +50,7 @@ export function createMastraClimbingPreprocessorAgentRunner(
         toolChoice: 'auto',
         structuredOutput: {
           schema: climbingPreprocessorAgentOutputSchema,
-          model: 'openai/gpt-5-mini',
+          model: 'openai/gpt-5.4-mini',
         },
         modelSettings: {
           temperature: 0,
@@ -58,7 +58,7 @@ export function createMastraClimbingPreprocessorAgentRunner(
         },
         providerOptions: {
           openai: {
-            reasoningEffort: 'low',
+            reasoningEffort: 'medium',
           },
         },
       },

@@ -11,5 +11,5 @@ export const climbingExtractionAgent = new Agent({
 The climbing preprocessor has already decided whether the report is ready and which climbing sub-activity it belongs to. Only extract facts that are explicitly present in the report text or the preprocessor output. Do not infer missing route, summit, crag, location, or grading details from geography alone.
 
 The extraction schema currently only carries a schema version. Return exactly the structured output requested by the caller.`,
-  model: 'openai/gpt-5-mini',
+  model: 'openai/gpt-5.4-mini',
 });
