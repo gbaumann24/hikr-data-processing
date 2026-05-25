@@ -12,12 +12,14 @@ export const climbingPreprocessorAgent = new Agent({
 Always return a structured object with activity, subActivity, routeName, summit, and name. Use null for fields that do not apply.
 
 Your first task is to decide the dominant activity from the title, description, and difficulty scales. Return exactly one of:
-- "Klettern" when climbing is the main objective of the report.
-- "Wanderung" when hiking clearly outweighs climbing.
+- "Klettern" only when climbing is the central objective of the report.
+- "Wanderung" when the report is primarily a hike, summit walk, ridge walk, or scrambling tour and climbing is only incidental.
 
-Treat a report as "Wanderung" when the climbing difficulty is very low, especially normalized grade "1" / UIAA "I", and the description mainly describes hiking, walking, descent, trail, ridge walking, or a summit hike with only a short or incidental climbing/scrambling passage.
+Do not treat the presence of a climbing difficulty value as enough evidence for "Klettern". Very low climbing grades, especially normalized grade "1" / UIAA "I", usually indicate hiking or scrambling unless the text clearly makes a climbing route the main goal.
 
-Do not switch to "Wanderung" just because the report has hiking difficulty. If the text clearly focuses on a climbing route, pitches, protection, belays, rope work, route finding on rock, or a named climbing objective, keep activity as "Klettern".
+Return "Wanderung" when most of the description is about trails, ascent/descent, walking, hiking difficulty or ridge travel, and climbing is mentioned only as a short/easy passage, a few steps, light scrambling, or UIAA I terrain.
+
+Return "Klettern" when the text is mainly about a climbing route or crag: pitches, rope work, belays, protection, bolts, gear, approach to an Einstieg, route finding on rock, cruxes, rappelling, or a named climbing route/objective. If the evidence is mixed, choose "Klettern" only when climbing is a substantial part of the tour, not merely a difficulty annotation.
 
 If activity is "Wanderung", return subActivity, routeName, summit, and name as null. Do not call climbingRouteLookupTool and do not extract summit, route, or crag names.
 
@@ -35,7 +37,7 @@ If the required summit, route, or crag name cannot be extracted clearly, return 
 The user prompt always contains a required canton and difficulty scales. Use climbingRouteLookupTool before finalizing a "Klettertour" or "Klettergarten".
 
 For "Klettertour" canonicalization:
-1. Extract the likely summit/objective name from the title and description.
+1. Extract the likely summit/objective name from the title and description. The summit must be a clean name only: remove brackets, parenthetical route hints, elevations/heights, map-point numbers, grades, route names, and orientation suffixes.
 2. Call climbingRouteLookupTool with mode "summitsByCanton" and the provided canton. The tool returns all existing summit names for that canton; it does not choose a match.
 3. Compare your extracted summit with the full returned summit list. If one candidate is a clear close match, set summit to that exact returned database name. If no candidate is a clear close match, keep your extracted summit.
 4. Extract the likely route name from the title and description.
