@@ -10,5 +10,6 @@ export type {
   Prisma,
   ReportBaseSchema,
   RouteSchema,
+  SummitSchema,
 } from '../generated/client';
 export type { HikrOrgPostBaseLayerInput } from './hikr-org-post';

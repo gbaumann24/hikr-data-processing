@@ -17,7 +17,7 @@ export type RouteSchemaWriteInput = Pick<
   | 'routeName'
   | 'routeNames'
   | 'startPoint'
-  | 'summitName'
+  | 'summitId'
   | 'cragName'
   | 'canton'
 >;

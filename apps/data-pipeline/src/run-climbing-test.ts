@@ -206,6 +206,7 @@ function truncate(value: string, maxLength: number): string {
 type TestDatabasePurgeResult = {
   reportBaseRows: number;
   routeRows: number;
+  summitRows: number;
   sourcePostRows: number;
   sourceWaypointRows: number;
   scraperProgressRows: number;
@@ -351,7 +352,7 @@ async function main(): Promise<void> {
     console.log('Purging local Postgres test DB...');
     const purge = await purgeTestDatabase(prisma);
     console.log(
-      `Purged ${purge.sourcePostRows} source posts, ${purge.reportBaseRows} report_base_schema rows, ${purge.routeRows} routes, ${purge.sourceWaypointRows} waypoints, and ${purge.scraperProgressRows} scraper progress rows.`,
+      `Purged ${purge.sourcePostRows} source posts, ${purge.reportBaseRows} report_base_schema rows, ${purge.routeRows} routes, ${purge.summitRows} summits, ${purge.sourceWaypointRows} waypoints, and ${purge.scraperProgressRows} scraper progress rows.`,
     );
 
     console.log(`Seeding ${limit ?? 'all'} source DB entries from ${sqlitePath}...`);

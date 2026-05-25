@@ -17,22 +17,46 @@ export async function upsertClimbingTourBase(
       );
     }
 
-    const inputRouteNames = normalizeRouteNames(input.routeNames, input.routeName);
+    const routeName = normalizeName(input.routeName);
+    const summitName = normalizeName(input.summit);
+
+    if (!routeName || !summitName) {
+      throw new Error(
+        `Cannot persist climbing tour route for report ${input.reportId.toString()} without route name and summit`,
+      );
+    }
+
+    const summit = await tx.summitSchema.upsert({
+      where: {
+        summitNameCanton: {
+          summitName,
+          canton: reportBase.canton,
+        },
+      },
+      create: {
+        summitName,
+        summitNames: [summitName],
+        canton: reportBase.canton,
+      },
+      update: {},
+    });
+
+    const inputRouteNames = normalizeRouteNames(input.routeNames, routeName);
     const route = await tx.routeSchema.upsert({
       where: {
         activityRouteNameSummitCanton: {
           activity: reportBase.activity,
-          routeName: input.routeName,
-          summitName: input.summit,
+          routeName,
+          summitId: summit.id,
           canton: reportBase.canton,
         },
       },
       create: {
         activity: reportBase.activity,
         subActivity: reportBase.subActivity,
-        routeName: input.routeName,
+        routeName,
         routeNames: inputRouteNames,
-        summitName: input.summit,
+        summitId: summit.id,
         canton: reportBase.canton,
       },
       update: {
@@ -40,10 +64,7 @@ export async function upsertClimbingTourBase(
       },
     });
 
-    const routeNames = normalizeRouteNames(
-      [...route.routeNames, ...inputRouteNames],
-      input.routeName,
-    );
+    const routeNames = normalizeRouteNames([...route.routeNames, ...inputRouteNames], routeName);
 
     if (!areEqualStringArrays(route.routeNames, routeNames)) {
       await tx.routeSchema.update({
@@ -75,6 +96,10 @@ function normalizeRouteNames(routeNames: string[], routeName: string): string[] 
         .filter((name) => name !== ''),
     ),
   ];
+}
+
+function normalizeName(name: string): string {
+  return name.replace(/\s+/g, ' ').trim();
 }
 
 function areEqualStringArrays(left: string[], right: string[]): boolean {

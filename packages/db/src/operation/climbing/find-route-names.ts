@@ -5,12 +5,18 @@ export async function findRouteNames(
   prisma: PrismaClient,
   { activity, subActivity, canton, summitName }: RouteNamesLookupInput,
 ): Promise<RouteNamesLookupOutput[]> {
+  const normalizedSummitName = normalizeName(summitName);
   const routes = await prisma.routeSchema.findMany({
     where: {
       activity,
       subActivity,
       canton,
-      summitName,
+      summit: {
+        is: {
+          summitName: normalizedSummitName,
+          canton,
+        },
+      },
       routeName: { not: null },
     },
     select: { routeName: true, routeNames: true },

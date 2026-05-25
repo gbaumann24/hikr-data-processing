@@ -44,6 +44,12 @@ describe('postgres database adapter', () => {
       reportBaseSchema: {
         findUnique: async () => reportBase,
       },
+      summitSchema: {
+        upsert: async () => {
+          calls.push('tx.summitSchema.upsert');
+          return { id: 5n };
+        },
+      },
       routeSchema: {
         upsert: async () => {
           calls.push('tx.routeSchema.upsert');
@@ -84,9 +90,14 @@ describe('postgres database adapter', () => {
           calls.push(`routeSchema.findMany.${lookupKey}`);
           return lookupKey === 'routeName+routeNames'
             ? [{ routeName: 'Südgrat', routeNames: ['Südgrat', 'S-Grat'] }]
-            : lookupKey === 'cragName'
-              ? [{ cragName: 'Melchtal' }]
-              : [{ summitName: 'Gross Turm' }];
+            : [{ cragName: 'Melchtal' }];
+        },
+      },
+      summitSchema: {
+        findMany: async ({ select }: { select: Record<string, true> }) => {
+          const lookupKey = Object.keys(select).join('+');
+          calls.push(`summitSchema.findMany.${lookupKey}`);
+          return [{ summitName: 'Gross Turm' }];
         },
       },
       $transaction: async (callback: (transaction: typeof tx) => Promise<void>) => {
@@ -143,10 +154,11 @@ describe('postgres database adapter', () => {
 
     expect(calls).toEqual([
       'reportBaseSchema.upsert',
-      'routeSchema.findMany.summitName',
+      'summitSchema.findMany.summitName',
       'routeSchema.findMany.routeName+routeNames',
       'routeSchema.findMany.cragName',
       '$transaction',
+      'tx.summitSchema.upsert',
       'tx.routeSchema.upsert',
       'tx.routeSchema.update',
       'tx.climbingTourBaseSchema.upsert',

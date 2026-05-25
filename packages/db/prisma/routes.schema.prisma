@@ -1,21 +1,23 @@
 model RouteSchema {
-  id          BigInt  @id @default(autoincrement())
+  id          BigInt   @id @default(autoincrement())
   activity    String
-  subActivity String? @map("sub_activity")
-  routeName   String? @map("route_name")
+  subActivity String?  @map("sub_activity")
+  routeName   String?  @map("route_name")
   routeNames  String[] @default([]) @map("route_names")
-  startPoint  String? @map("start_point")
-  summitName  String? @map("summit_name")
-  cragName    String? @map("crag_name")
+  startPoint  String?  @map("start_point")
+  summitId    BigInt?  @map("summit_id")
+  cragName    String?  @map("crag_name")
   canton      String
 
+  summit                  SummitSchema?            @relation(fields: [summitId], references: [id], onDelete: Restrict)
   climbingTourBaseSchemas ClimbingTourBaseSchema[]
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  @@unique([activity, routeName, summitName, canton], name: "activityRouteNameSummitCanton", map: "routes_activity_route_name_summit_canton_key")
-  @@unique([activity, startPoint, summitName, canton], name: "activityStartPointSummitCanton", map: "routes_activity_start_point_summit_canton_key")
+  @@unique([activity, routeName, summitId, canton], name: "activityRouteNameSummitCanton", map: "routes_activity_route_name_summit_canton_key")
+  @@unique([activity, startPoint, summitId, canton], name: "activityStartPointSummitCanton", map: "routes_activity_start_point_summit_canton_key")
   @@unique([activity, subActivity, cragName, canton], name: "activitySubActivityCragNameCanton", map: "routes_activity_sub_activity_crag_name_canton_key")
+  @@index([summitId], map: "routes_summit_id_idx")
   @@map("routes")
 }

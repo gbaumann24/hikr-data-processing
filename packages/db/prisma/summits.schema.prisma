@@ -1,0 +1,14 @@
+model SummitSchema {
+  id          BigInt   @id @default(autoincrement())
+  summitName  String   @map("summit_name")
+  summitNames String[] @default([]) @map("summit_names")
+  canton      String
+
+  routes RouteSchema[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([summitName, canton], name: "summitNameCanton", map: "summits_summit_name_canton_key")
+  @@map("summits")
+}

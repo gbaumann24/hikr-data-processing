@@ -5,17 +5,20 @@ export async function findRouteSummitNames(
   prisma: PrismaClient,
   { activity, subActivity, canton }: RouteSummitNamesLookupInput,
 ): Promise<string[]> {
-  const routes = await prisma.routeSchema.findMany({
+  const summits = await prisma.summitSchema.findMany({
     where: {
-      activity,
-      subActivity,
       canton,
-      summitName: { not: null },
+      routes: {
+        some: {
+          activity,
+          subActivity,
+          canton,
+        },
+      },
     },
-    distinct: ['summitName'],
     select: { summitName: true },
     orderBy: { summitName: 'asc' },
   });
 
-  return routes.flatMap((route) => (route.summitName ? [route.summitName] : []));
+  return summits.map((summit) => summit.summitName);
 }

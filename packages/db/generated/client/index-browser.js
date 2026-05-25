@@ -321,8 +321,17 @@ exports.Prisma.RouteSchemaScalarFieldEnum = {
   routeName: 'routeName',
   routeNames: 'routeNames',
   startPoint: 'startPoint',
-  summitName: 'summitName',
+  summitId: 'summitId',
   cragName: 'cragName',
+  canton: 'canton',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SummitSchemaScalarFieldEnum = {
+  id: 'id',
+  summitName: 'summitName',
+  summitNames: 'summitNames',
   canton: 'canton',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -384,7 +393,8 @@ exports.Prisma.ModelName = {
   HikrReportWaypointSchema: 'HikrReportWaypointSchema',
   HikrScraperProgressSchema: 'HikrScraperProgressSchema',
   ReportBaseSchema: 'ReportBaseSchema',
-  RouteSchema: 'RouteSchema'
+  RouteSchema: 'RouteSchema',
+  SummitSchema: 'SummitSchema'
 };
 
 /**
