@@ -51,5 +51,7 @@ climbing workflow:
 bun run --cwd apps/data-pipeline test-run:climbing
 bun run --cwd apps/data-pipeline test-run:climbing -- --limit 25
 bun run --cwd apps/data-pipeline test-run:climbing -- --limit 25 --sqlite-path ../../hikr.sqlite
+bun run --cwd apps/data-pipeline test-run:climbing -- --furkahorn
 just test-run-climbing 25
+just test-run-climbing-furkahorn
 ```

@@ -9,6 +9,6 @@ export async function findHikrOrgPostsForPreprocessing(
 ): Promise<HikrOrgPostBaseLayerInput[]> {
   return prisma.hikrOrgPostSchema.findMany({
     select: HIKR_ORG_POST_BASE_LAYER_SELECT,
-    orderBy: { id: 'asc' },
+    orderBy: [{ id: 'asc' }, { hikrPostId: 'asc' }],
   });
 }

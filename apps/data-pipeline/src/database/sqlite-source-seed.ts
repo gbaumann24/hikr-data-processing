@@ -62,14 +62,16 @@ export async function seedHikrReportsFromSqlite({
 }: {
   prisma: PrismaClient;
   sqlitePath: string;
-  limit: number;
+  limit?: number;
 }): Promise<HikrPostSeedResult> {
   const sqlite = new Database(sqlitePath, { readonly: true });
 
   try {
-    const rows = sqlite
-      .query<HikrSqliteRow, [number]>('SELECT * FROM hikr_reports ORDER BY id LIMIT ?')
-      .all(limit);
+    const baseQuery = 'SELECT * FROM hikr_reports ORDER BY id ASC, hikr_post_id ASC';
+    const rows =
+      limit === undefined
+        ? sqlite.query<HikrSqliteRow, []>(baseQuery).all()
+        : sqlite.query<HikrSqliteRow, [number]>(`${baseQuery} LIMIT ?`).all(limit);
 
     if (rows.length === 0) {
       return { selectedRows: 0, insertedRows: 0 };

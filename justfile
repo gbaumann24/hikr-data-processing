@@ -1,8 +1,12 @@
 set dotenv-load := true
 
-# List all recipes
-default:
+# Show available recipes
+help:
     @just --list
+
+# Show available recipes
+default:
+    @just help
 
 # ── Dev ────────────────────────────────────────────────────────────────────────
 
@@ -19,6 +23,10 @@ run limit="":
 # Purge local Postgres, seed source posts from SQLite, then run climbing pipeline
 test-run-climbing limit="":
     bun run apps/data-pipeline/src/run-climbing-test.ts {{ if limit != "" { "--limit " + limit } else { "" } }}
+
+# Purge local Postgres, seed the Furkahorn fixture, then run climbing pipeline
+test-run-climbing-furkahorn limit="":
+    bun run apps/data-pipeline/src/run-climbing-test.ts --furkahorn {{ if limit != "" { "--limit " + limit } else { "" } }}
 
 # ── DB ────────────────────────────────────────────────────────────────────────
 

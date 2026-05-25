@@ -5,17 +5,16 @@ import { PrismaClient, purgePipelineOutput } from '@hikr/db';
 import { loadRootEnv } from '@hikr/utils';
 import { createPostgresDatabase } from './database/postgres';
 import { seedHikrReportsFromSqlite } from './database/sqlite-source-seed';
-import {
-  runDataPipelineWorkflow,
-  type ClimbingPipelineProgressEvent,
-} from './utils/workflow-runner';
+import type { ClimbingPipelineProgressEvent } from './utils/workflow-runner';
 
 const DEFAULT_LIMIT = 10;
+const FURKAHORN_FIXTURE_SQLITE_PATH = 'apps/data-pipeline/fixtures/furkahorn.sqlite';
 
 type ParsedArgs = {
   help: boolean;
   limit?: number;
   sqlitePath?: string;
+  useFurkahornFixture: boolean;
 };
 
 function parsePositiveInteger(value: string, label: string): number {
@@ -31,6 +30,7 @@ function parsePositiveInteger(value: string, label: string): number {
 function parseArgs(args: string[]): ParsedArgs {
   let limit: number | undefined;
   let sqlitePath: string | undefined;
+  let useFurkahornFixture = false;
 
   const setLimit = (value: string): void => {
     if (limit !== undefined) {
@@ -52,7 +52,12 @@ function parseArgs(args: string[]): ParsedArgs {
     const arg = args[index];
 
     if (arg === '--help' || arg === '-h') {
-      return { help: true };
+      return { help: true, useFurkahornFixture: false };
+    }
+
+    if (arg === '--furkahorn' || arg === '--furka') {
+      useFurkahornFixture = true;
+      continue;
     }
 
     if (arg === '--limit' || arg === '-l') {
@@ -96,7 +101,11 @@ function parseArgs(args: string[]): ParsedArgs {
     setLimit(arg);
   }
 
-  return { help: false, limit, sqlitePath };
+  if (useFurkahornFixture && sqlitePath !== undefined) {
+    throw new Error('Use either --furkahorn or --sqlite-path, not both');
+  }
+
+  return { help: false, limit, sqlitePath, useFurkahornFixture };
 }
 
 function printUsage(): void {
@@ -105,6 +114,7 @@ function printUsage(): void {
   bun src/run-climbing-test.ts --limit 25
   bun src/run-climbing-test.ts 25
   bun src/run-climbing-test.ts --limit 25 --sqlite-path ../../hikr.sqlite
+  bun src/run-climbing-test.ts --furkahorn
 
 Always purges the local Postgres test DB, seeds source posts from SQLite,
 then runs the climbing workflow against the seeded rows.`);
@@ -261,9 +271,10 @@ async function main(): Promise<void> {
     return;
   }
 
-  const limit = args.limit ?? (await promptForLimit());
-  const sqlitePath =
-    args.sqlitePath ?? process.env.HIKR_SQLITE_PATH ?? join(rootEnv.rootDir, 'hikr.sqlite');
+  const limit = args.limit ?? (args.useFurkahornFixture ? undefined : await promptForLimit());
+  const sqlitePath = args.useFurkahornFixture
+    ? join(rootEnv.rootDir, FURKAHORN_FIXTURE_SQLITE_PATH)
+    : (args.sqlitePath ?? process.env.HIKR_SQLITE_PATH ?? join(rootEnv.rootDir, 'hikr.sqlite'));
 
   console.log(`Using Postgres ${formatDatabaseUrl(process.env.DATABASE_URL)}`);
   console.log(`Using SQLite source ${sqlitePath}`);
@@ -277,7 +288,7 @@ async function main(): Promise<void> {
       `Purged ${purge.sourcePostRows} source posts, ${purge.reportBaseRows} report_base_schema rows, ${purge.routeRows} routes, ${purge.sourceWaypointRows} waypoints, and ${purge.scraperProgressRows} scraper progress rows.`,
     );
 
-    console.log(`Seeding ${limit} source DB entries from ${sqlitePath}...`);
+    console.log(`Seeding ${limit ?? 'all'} source DB entries from ${sqlitePath}...`);
     const seed = await seedHikrReportsFromSqlite({ prisma, sqlitePath, limit });
 
     if (seed.insertedRows === 0) {
@@ -286,6 +297,7 @@ async function main(): Promise<void> {
 
     console.log(`Seeded ${seed.insertedRows} source posts.`);
     console.log(`Running climbing workflow for ${seed.insertedRows} DB entries...`);
+    const { runDataPipelineWorkflow } = await import('./utils/workflow-runner');
     const result = await runDataPipelineWorkflow({
       workflow: 'climbing',
       database: createPostgresDatabase(prisma),

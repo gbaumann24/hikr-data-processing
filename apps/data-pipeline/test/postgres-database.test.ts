@@ -9,6 +9,28 @@ import {
 import { createPostgresDatabase } from '../src/database/postgres';
 
 describe('postgres database adapter', () => {
+  test('reads source posts in deterministic report order', async () => {
+    const calls: unknown[] = [];
+    const prisma = {
+      hikrOrgPostSchema: {
+        findMany: async (options: unknown) => {
+          calls.push(options);
+          return [];
+        },
+      },
+    } as unknown as PrismaClient;
+
+    const database = createPostgresDatabase(prisma);
+
+    await database.findHikrOrgPostsForPreprocessing();
+
+    expect(calls).toMatchObject([
+      {
+        orderBy: [{ id: 'asc' }, { hikrPostId: 'asc' }],
+      },
+    ]);
+  });
+
   test('wires climbing persistence through operation modules', async () => {
     const calls: string[] = [];
     const routeUpdates: unknown[] = [];
