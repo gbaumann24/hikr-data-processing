@@ -7,7 +7,7 @@ import type {
 
 export type ReportBaseSchemaWriteInput = Pick<
   ReportBaseSchema,
-  'reportId' | 'status' | 'activity' | 'subActivity' | 'canton' | 'tourDate' | 'region'
+  'reportId' | 'status' | 'activity' | 'subActivity' | 'canton' | 'tourDate' | 'region' | 'reasons'
 >;
 
 export type RouteSchemaWriteInput = Pick<

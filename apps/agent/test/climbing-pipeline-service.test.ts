@@ -169,6 +169,7 @@ describe('climbing pipeline service', () => {
         subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
         canton: 'Obwalden',
         region: 'Melchtal',
+        reasons: ['ready'],
       },
       {
         reportId: 43n,
@@ -176,6 +177,7 @@ describe('climbing pipeline service', () => {
         activity: ACTIVITY.CLIMBING,
         canton: 'Obwalden',
         region: 'Melchtal',
+        reasons: ['description_too_short'],
       },
     ]);
     expect(reportBaseWrites[0].tourDate?.toISOString()).toBe('2024-08-10T00:00:00.000Z');
@@ -260,5 +262,6 @@ describe('climbing pipeline service', () => {
       [PREPROCESSOR_STATUS.INSUFFICIENT]: 0,
     });
     expect(reportBaseWrites.map((write) => write.reportId)).toEqual([1n]);
+    expect(reportBaseWrites[0].reasons).toEqual(['non_climbing_activity']);
   });
 });

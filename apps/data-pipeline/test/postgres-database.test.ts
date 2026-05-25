@@ -71,6 +71,7 @@ describe('postgres database adapter', () => {
       canton: 'Obwalden',
       tourDate: null,
       region: null,
+      reasons: ['ready'],
     });
     await expect(
       database.findRouteSummitNames({

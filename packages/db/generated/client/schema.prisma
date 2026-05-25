@@ -12,17 +12,17 @@ model ClimbingTourBaseSchema {
   schemaVersion String @map("schema_version")
   routeId       BigInt @map("route_id")
 
-  base            ReportBaseSchema                   @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
-  route           RouteSchema                        @relation(fields: [routeId], references: [id], onDelete: Restrict)
-  equipment       ClimbingTourEquipmentSchema?
-  timeRequirement ClimbingTourTimeRequirementSchema?
-  protection      ClimbingTourProtectionSchema?
-  footwear        ClimbingTourFootwearSchema?
-  terrain         ClimbingTourTerrainSchema?
-  climbing        ClimbingTourClimbingSchema?
-  access          ClimbingTourAccessSchema?
-  approachDescent ClimbingTourApproachDescentSchema?
-  specialNotes    ClimbingTourSpecialNotesSchema?
+  base                ReportBaseSchema                       @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
+  route               RouteSchema                            @relation(fields: [routeId], references: [id], onDelete: Restrict)
+  ausruestung         ClimbingTourAusruestungSchema?
+  zeitbedarf          ClimbingTourZeitbedarfSchema?
+  absicherung         ClimbingTourAbsicherungSchema?
+  schuhwerk           ClimbingTourSchuhwerkSchema?
+  gelaendeUndGefahren ClimbingTourGelaendeUndGefahrenSchema?
+  klettern            ClimbingTourKletternSchema?
+  anreise             ClimbingTourAnreiseSchema?
+  zustiegUndAbstieg   ClimbingTourZustiegUndAbstiegSchema?
+  besonderes          ClimbingTourBesonderesSchema?
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
@@ -31,139 +31,137 @@ model ClimbingTourBaseSchema {
   @@map("climbing_tour_base_schema")
 }
 
-model ClimbingTourEquipmentSchema {
+model ClimbingTourAusruestungSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  ropeTypeValue                   String? @map("rope_type_value")
-  ropeLengthMetersValue           Int?    @map("rope_length_meters_value")
-  mobileProtectionRequiredValue   String? @map("mobile_protection_required_value")
-  mobileFriendsCountPerSizeValue  Json?   @map("mobile_friends_count_per_size_value")
-  mobileFriendsSizesValue         Json?   @map("mobile_friends_sizes_value")
-  mobileNutsCountPerSizeValue     Json?   @map("mobile_nuts_count_per_size_value")
-  mobileNutsSizesValue            Json?   @map("mobile_nuts_sizes_value")
-  mobileSlingsLengthsValue        Json?   @map("mobile_slings_lengths_value")
-  mobileSlingsCountPerLengthValue Json?   @map("mobile_slings_count_per_length_value")
-  mobileQuickdrawsCountValue      Int?    @map("mobile_quickdraws_count_value")
-  mobileProtectionOptionsValue    String? @map("mobile_protection_options_value")
-  additionalEquipmentValue        Json?   @map("additional_equipment_value")
+  seilArt                         String?  @map("seil_art")
+  seilLaengeM                     Int?     @map("seil_laenge_m")
+  mobileAbsicherungErforderlich   Boolean? @map("mobile_absicherung_erforderlich")
+  mobileAbsicherungEmpfohlen      Boolean? @map("mobile_absicherung_empfohlen")
+  mobileAbsicherungVerwendet      Boolean? @map("mobile_absicherung_verwendet")
+  mobileAbsicherungMoeglichkeiten String?  @map("mobile_absicherung_moeglichkeiten")
+  mobileAbsicherungFriends        Json     @default("[]") @map("mobile_absicherung_friends")
+  mobileAbsicherungKeile          Json     @default("[]") @map("mobile_absicherung_keile")
+  schlingen                       Json     @default("[]")
+  expresskarabinerAnzahl          Int?     @map("expresskarabiner_anzahl")
+  zusaetzlich                     Json     @default("[]")
 
-  @@map("climbing_tour_equipment_schema")
+  @@map("climbing_tour_ausruestung_schema")
 }
 
-model ClimbingTourTimeRequirementSchema {
+model ClimbingTourZeitbedarfSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  pureClimbingTimeMinutesValue String? @map("pure_climbing_time_minutes_value")
-  descentMinutesValue          String? @map("descent_minutes_value")
-  approachMinutesValue         String? @map("approach_minutes_value")
+  zustiegMin          Int? @map("zustieg_min")
+  reineKletterzeitMin Int? @map("reine_kletterzeit_min")
+  abstiegMin          Int? @map("abstieg_min")
 
-  @@map("climbing_tour_time_requirement_schema")
+  @@map("climbing_tour_zeitbedarf_schema")
 }
 
-model ClimbingTourProtectionSchema {
+model ClimbingTourAbsicherungSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  boltSpacingTypeValue          String? @map("bolt_spacing_type_value")
-  belayStationsValue            String? @map("belay_stations_value")
-  boltConditionTypeValue        String? @map("bolt_condition_type_value")
-  boltConditionDescriptionValue String? @map("bolt_condition_description_value")
+  hakenabstaendeBewertung    String?  @map("hakenabstaende_bewertung")
+  hakenabstaendeBeschreibung String?  @map("hakenabstaende_beschreibung")
+  staendeGebohrt             Boolean? @map("staende_gebohrt")
+  staendeBeschreibung        String?  @map("staende_beschreibung")
+  hakenzustandBewertung      String?  @map("hakenzustand_bewertung")
+  hakenzustandBeschreibung   String?  @map("hakenzustand_beschreibung")
 
-  @@map("climbing_tour_protection_schema")
+  @@map("climbing_tour_absicherung_schema")
 }
 
-model ClimbingTourFootwearSchema {
+model ClimbingTourSchuhwerkSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  approachFootwearTypeValue String? @map("approach_footwear_type_value")
-  climbingFootwearTypeValue String? @map("climbing_footwear_type_value")
-  descentFootwearTypeValue  String? @map("descent_footwear_type_value")
+  zustiegTyp  String? @map("zustieg_typ")
+  kletternTyp String? @map("klettern_typ")
+  abstiegTyp  String? @map("abstieg_typ")
 
-  @@map("climbing_tour_footwear_schema")
+  @@map("climbing_tour_schuhwerk_schema")
 }
 
-model ClimbingTourTerrainSchema {
+model ClimbingTourGelaendeUndGefahrenSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  routeTypeValue    Json?   @map("route_type_value")
-  exposureValue     String? @map("exposure_value")
-  sunValue          String? @map("sun_value")
-  driesQuicklyValue String? @map("dries_quickly_value")
-  rockTypeValue     String? @map("rock_type_value")
-  hazards           Json?
+  charakterExposition       String?  @map("charakter_exposition")
+  charakterSonnig           Boolean? @map("charakter_sonnig")
+  charakterSchnellTrocknend Boolean? @map("charakter_schnell_trocknend")
+  charakterFelsart          String?  @map("charakter_felsart")
+  gefahren                  Json     @default("[]")
 
-  @@map("climbing_tour_terrain_schema")
+  @@map("climbing_tour_gelaende_und_gefahren_schema")
 }
 
-model ClimbingTourClimbingSchema {
+model ClimbingTourKletternSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  cruxPresentValue                String? @map("crux_present_value")
-  cruxLocationValue               String? @map("crux_location_value")
-  cruxDifficultyValue             String? @map("crux_difficulty_value")
-  climbingDifficultyRelationValue String? @map("climbing_difficulty_relation_value")
-  climbingDifficultyReasonValue   String? @map("climbing_difficulty_reason_value")
-  rappellingPossibleValue         String? @map("rappelling_possible_value")
-  rappelCountValue                Int?    @map("rappel_count_value")
-  rappelLengthsValue              String? @map("rappel_lengths_value")
-  rappelToStartValue              String? @map("rappel_to_start_value")
-  rappelRouteValue                String? @map("rappel_route_value")
-  climbingStyleValue              Json?   @map("climbing_style_value")
-  routeFindingValue               String? @map("route_finding_value")
-  routeFindingDescriptionValue    String? @map("route_finding_description_value")
-  exitOptionsValue                String? @map("exit_options_value")
-  exitDescriptionValue            String? @map("exit_description_value")
-  pitchLinkingPossibleValue       String? @map("pitch_linking_possible_value")
-  pitchLinkingDescriptionValue    String? @map("pitch_linking_description_value")
-  pitchDescription                Json?   @map("pitch_description")
+  schluesselstellenVorhanden        Boolean? @map("schluesselstellen_vorhanden")
+  schluesselstellenStellen          Json     @default("[]") @map("schluesselstellen_stellen")
+  schwierigkeitVerhaeltnis          String?  @map("schwierigkeit_verhaeltnis")
+  schwierigkeitBeschreibung         String?  @map("schwierigkeit_beschreibung")
+  abseilenMoeglich                  Boolean? @map("abseilen_moeglich")
+  abseilenAnzahl                    Int?     @map("abseilen_anzahl")
+  abseilenLaengenM                  Json     @default("[]") @map("abseilen_laengen_m")
+  abseilenZumEinstieg               Boolean? @map("abseilen_zum_einstieg")
+  abseilenAbseilpiste               Boolean? @map("abseilen_abseilpiste")
+  charakterKletterstil              Json     @default("[]") @map("charakter_kletterstil")
+  routenverlaufRoutenfindung        String?  @map("routenverlauf_routenfindung")
+  routenverlaufBeschreibung         String?  @map("routenverlauf_beschreibung")
+  routenverlaufRueckzugMoeglich     Boolean? @map("routenverlauf_rueckzug_moeglich")
+  routenverlaufRueckzugBeschreibung String?  @map("routenverlauf_rueckzug_beschreibung")
+  seillaengenVerbindenMoeglich      Boolean? @map("seillaengen_verbinden_moeglich")
+  seillaengenVerbindenBeschreibung  String?  @map("seillaengen_verbinden_beschreibung")
+  seillaengen                       Json     @default("[]")
 
-  @@map("climbing_tour_climbing_schema")
+  @@map("climbing_tour_klettern_schema")
 }
 
-model ClimbingTourAccessSchema {
+model ClimbingTourAnreiseSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  parkingLocationValue             String? @map("parking_location_value")
-  parkingCostsValue                String? @map("parking_costs_value")
-  parkingSpecialFeaturesValue      String? @map("parking_special_features_value")
-  publicTransportTypeValue         String? @map("public_transport_type_value")
-  publicTransportStationValue      String? @map("public_transport_station_value")
-  publicTransportCableCarValue     String? @map("public_transport_cable_car_value")
-  publicTransportRegistrationValue String? @map("public_transport_registration_value")
+  parkplatzOrt            String?  @map("parkplatz_ort")
+  parkplatzKosten         String?  @map("parkplatz_kosten")
+  parkplatzBesonderheiten String?  @map("parkplatz_besonderheiten")
+  oevVerkehrsmittel       Json     @default("[]") @map("oev_verkehrsmittel")
+  oevEndstation           String?  @map("oev_endstation")
+  oevLuftseilbahnMoeglich Boolean? @map("oev_luftseilbahn_moeglich")
+  oevAnmeldungNoetig      Boolean? @map("oev_anmeldung_noetig")
 
-  @@map("climbing_tour_access_schema")
+  @@map("climbing_tour_anreise_schema")
 }
 
-model ClimbingTourApproachDescentSchema {
+model ClimbingTourZustiegUndAbstiegSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  descentSummitElevationMetersValue  Int?    @map("descent_summit_elevation_meters_value")
-  descentSameAsApproachValue         String? @map("descent_same_as_approach_value")
-  descentRefreshmentValue            String? @map("descent_refreshment_value")
-  descentRefreshmentDescriptionValue String? @map("descent_refreshment_description_value")
-  descentDifficultyValue             String? @map("descent_difficulty_value")
-  approachStartElevationMetersValue  Int?    @map("approach_start_elevation_meters_value")
-  approachRouteFindingValue          String? @map("approach_route_finding_value")
-  approachDescriptionValue           String? @map("approach_description_value")
-  approachDifficultyValue            String? @map("approach_difficulty_value")
+  zustiegEinstiegsfindung        String?  @map("zustieg_einstiegsfindung")
+  zustiegBeschreibung            String?  @map("zustieg_beschreibung")
+  zustiegSchwierigkeit           String?  @map("zustieg_schwierigkeit")
+  abstiegFuehrtZumEinstieg       Boolean? @map("abstieg_fuehrt_zum_einstieg")
+  abstiegVerpflegungMoeglich     Boolean? @map("abstieg_verpflegung_moeglich")
+  abstiegVerpflegungBeschreibung String?  @map("abstieg_verpflegung_beschreibung")
+  abstiegSchwierigkeit           String?  @map("abstieg_schwierigkeit")
 
-  @@map("climbing_tour_approach_descent_schema")
+  @@map("climbing_tour_zustieg_und_abstieg_schema")
 }
 
-model ClimbingTourSpecialNotesSchema {
+model ClimbingTourBesonderesSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  seasonalityValue String? @map("seasonality_value")
+  saisonalitaet String? @map("saisonalitaet")
+  hinweise      Json    @default("[]")
 
-  @@map("climbing_tour_special_notes_schema")
+  @@map("climbing_tour_besonderes_schema")
 }
 
 enum HikrCategory {
@@ -297,6 +295,7 @@ model ReportBaseSchema {
   canton      String?   @map("kanton")
   tourDate    DateTime? @map("tour_date") @db.Date
   region      String?
+  reasons     String[]  @default([])
 
   hikrOrgPostSchema      HikrOrgPostSchema         @relation(fields: [reportId], references: [id], onDelete: Cascade)
   climbingTourBaseSchema ClimbingTourBaseSchema?

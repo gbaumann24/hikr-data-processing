@@ -19,6 +19,7 @@ model ReportBaseSchema {
   canton      String?  @map("kanton")
   tourDate    DateTime? @map("tour_date") @db.Date
   region      String?
+  reasons     String[] @default([])
 
   hikrOrgPostSchema      HikrOrgPostSchema         @relation(fields: [reportId], references: [id], onDelete: Cascade)
   climbingTourBaseSchema ClimbingTourBaseSchema?

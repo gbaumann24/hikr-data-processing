@@ -15,6 +15,7 @@ export async function upsertReportBase(
       canton: input.canton,
       tourDate: input.tourDate,
       region: input.region,
+      reasons: input.reasons,
     },
     update: {
       status: input.status,
@@ -23,6 +24,7 @@ export async function upsertReportBase(
       canton: input.canton,
       tourDate: input.tourDate,
       region: input.region,
+      reasons: input.reasons,
     },
   });
 }

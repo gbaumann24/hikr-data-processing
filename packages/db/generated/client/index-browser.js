@@ -134,103 +134,101 @@ exports.Prisma.ClimbingTourBaseSchemaScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ClimbingTourEquipmentSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourAusruestungSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  ropeTypeValue: 'ropeTypeValue',
-  ropeLengthMetersValue: 'ropeLengthMetersValue',
-  mobileProtectionRequiredValue: 'mobileProtectionRequiredValue',
-  mobileFriendsCountPerSizeValue: 'mobileFriendsCountPerSizeValue',
-  mobileFriendsSizesValue: 'mobileFriendsSizesValue',
-  mobileNutsCountPerSizeValue: 'mobileNutsCountPerSizeValue',
-  mobileNutsSizesValue: 'mobileNutsSizesValue',
-  mobileSlingsLengthsValue: 'mobileSlingsLengthsValue',
-  mobileSlingsCountPerLengthValue: 'mobileSlingsCountPerLengthValue',
-  mobileQuickdrawsCountValue: 'mobileQuickdrawsCountValue',
-  mobileProtectionOptionsValue: 'mobileProtectionOptionsValue',
-  additionalEquipmentValue: 'additionalEquipmentValue'
+  seilArt: 'seilArt',
+  seilLaengeM: 'seilLaengeM',
+  mobileAbsicherungErforderlich: 'mobileAbsicherungErforderlich',
+  mobileAbsicherungEmpfohlen: 'mobileAbsicherungEmpfohlen',
+  mobileAbsicherungVerwendet: 'mobileAbsicherungVerwendet',
+  mobileAbsicherungMoeglichkeiten: 'mobileAbsicherungMoeglichkeiten',
+  mobileAbsicherungFriends: 'mobileAbsicherungFriends',
+  mobileAbsicherungKeile: 'mobileAbsicherungKeile',
+  schlingen: 'schlingen',
+  expresskarabinerAnzahl: 'expresskarabinerAnzahl',
+  zusaetzlich: 'zusaetzlich'
 };
 
-exports.Prisma.ClimbingTourTimeRequirementSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourZeitbedarfSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  pureClimbingTimeMinutesValue: 'pureClimbingTimeMinutesValue',
-  descentMinutesValue: 'descentMinutesValue',
-  approachMinutesValue: 'approachMinutesValue'
+  zustiegMin: 'zustiegMin',
+  reineKletterzeitMin: 'reineKletterzeitMin',
+  abstiegMin: 'abstiegMin'
 };
 
-exports.Prisma.ClimbingTourProtectionSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourAbsicherungSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  boltSpacingTypeValue: 'boltSpacingTypeValue',
-  belayStationsValue: 'belayStationsValue',
-  boltConditionTypeValue: 'boltConditionTypeValue',
-  boltConditionDescriptionValue: 'boltConditionDescriptionValue'
+  hakenabstaendeBewertung: 'hakenabstaendeBewertung',
+  hakenabstaendeBeschreibung: 'hakenabstaendeBeschreibung',
+  staendeGebohrt: 'staendeGebohrt',
+  staendeBeschreibung: 'staendeBeschreibung',
+  hakenzustandBewertung: 'hakenzustandBewertung',
+  hakenzustandBeschreibung: 'hakenzustandBeschreibung'
 };
 
-exports.Prisma.ClimbingTourFootwearSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourSchuhwerkSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  approachFootwearTypeValue: 'approachFootwearTypeValue',
-  climbingFootwearTypeValue: 'climbingFootwearTypeValue',
-  descentFootwearTypeValue: 'descentFootwearTypeValue'
+  zustiegTyp: 'zustiegTyp',
+  kletternTyp: 'kletternTyp',
+  abstiegTyp: 'abstiegTyp'
 };
 
-exports.Prisma.ClimbingTourTerrainSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  routeTypeValue: 'routeTypeValue',
-  exposureValue: 'exposureValue',
-  sunValue: 'sunValue',
-  driesQuicklyValue: 'driesQuicklyValue',
-  rockTypeValue: 'rockTypeValue',
-  hazards: 'hazards'
+  charakterExposition: 'charakterExposition',
+  charakterSonnig: 'charakterSonnig',
+  charakterSchnellTrocknend: 'charakterSchnellTrocknend',
+  charakterFelsart: 'charakterFelsart',
+  gefahren: 'gefahren'
 };
 
-exports.Prisma.ClimbingTourClimbingSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourKletternSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  cruxPresentValue: 'cruxPresentValue',
-  cruxLocationValue: 'cruxLocationValue',
-  cruxDifficultyValue: 'cruxDifficultyValue',
-  climbingDifficultyRelationValue: 'climbingDifficultyRelationValue',
-  climbingDifficultyReasonValue: 'climbingDifficultyReasonValue',
-  rappellingPossibleValue: 'rappellingPossibleValue',
-  rappelCountValue: 'rappelCountValue',
-  rappelLengthsValue: 'rappelLengthsValue',
-  rappelToStartValue: 'rappelToStartValue',
-  rappelRouteValue: 'rappelRouteValue',
-  climbingStyleValue: 'climbingStyleValue',
-  routeFindingValue: 'routeFindingValue',
-  routeFindingDescriptionValue: 'routeFindingDescriptionValue',
-  exitOptionsValue: 'exitOptionsValue',
-  exitDescriptionValue: 'exitDescriptionValue',
-  pitchLinkingPossibleValue: 'pitchLinkingPossibleValue',
-  pitchLinkingDescriptionValue: 'pitchLinkingDescriptionValue',
-  pitchDescription: 'pitchDescription'
+  schluesselstellenVorhanden: 'schluesselstellenVorhanden',
+  schluesselstellenStellen: 'schluesselstellenStellen',
+  schwierigkeitVerhaeltnis: 'schwierigkeitVerhaeltnis',
+  schwierigkeitBeschreibung: 'schwierigkeitBeschreibung',
+  abseilenMoeglich: 'abseilenMoeglich',
+  abseilenAnzahl: 'abseilenAnzahl',
+  abseilenLaengenM: 'abseilenLaengenM',
+  abseilenZumEinstieg: 'abseilenZumEinstieg',
+  abseilenAbseilpiste: 'abseilenAbseilpiste',
+  charakterKletterstil: 'charakterKletterstil',
+  routenverlaufRoutenfindung: 'routenverlaufRoutenfindung',
+  routenverlaufBeschreibung: 'routenverlaufBeschreibung',
+  routenverlaufRueckzugMoeglich: 'routenverlaufRueckzugMoeglich',
+  routenverlaufRueckzugBeschreibung: 'routenverlaufRueckzugBeschreibung',
+  seillaengenVerbindenMoeglich: 'seillaengenVerbindenMoeglich',
+  seillaengenVerbindenBeschreibung: 'seillaengenVerbindenBeschreibung',
+  seillaengen: 'seillaengen'
 };
 
-exports.Prisma.ClimbingTourAccessSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourAnreiseSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  parkingLocationValue: 'parkingLocationValue',
-  parkingCostsValue: 'parkingCostsValue',
-  parkingSpecialFeaturesValue: 'parkingSpecialFeaturesValue',
-  publicTransportTypeValue: 'publicTransportTypeValue',
-  publicTransportStationValue: 'publicTransportStationValue',
-  publicTransportCableCarValue: 'publicTransportCableCarValue',
-  publicTransportRegistrationValue: 'publicTransportRegistrationValue'
+  parkplatzOrt: 'parkplatzOrt',
+  parkplatzKosten: 'parkplatzKosten',
+  parkplatzBesonderheiten: 'parkplatzBesonderheiten',
+  oevVerkehrsmittel: 'oevVerkehrsmittel',
+  oevEndstation: 'oevEndstation',
+  oevLuftseilbahnMoeglich: 'oevLuftseilbahnMoeglich',
+  oevAnmeldungNoetig: 'oevAnmeldungNoetig'
 };
 
-exports.Prisma.ClimbingTourApproachDescentSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourZustiegUndAbstiegSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  descentSummitElevationMetersValue: 'descentSummitElevationMetersValue',
-  descentSameAsApproachValue: 'descentSameAsApproachValue',
-  descentRefreshmentValue: 'descentRefreshmentValue',
-  descentRefreshmentDescriptionValue: 'descentRefreshmentDescriptionValue',
-  descentDifficultyValue: 'descentDifficultyValue',
-  approachStartElevationMetersValue: 'approachStartElevationMetersValue',
-  approachRouteFindingValue: 'approachRouteFindingValue',
-  approachDescriptionValue: 'approachDescriptionValue',
-  approachDifficultyValue: 'approachDifficultyValue'
+  zustiegEinstiegsfindung: 'zustiegEinstiegsfindung',
+  zustiegBeschreibung: 'zustiegBeschreibung',
+  zustiegSchwierigkeit: 'zustiegSchwierigkeit',
+  abstiegFuehrtZumEinstieg: 'abstiegFuehrtZumEinstieg',
+  abstiegVerpflegungMoeglich: 'abstiegVerpflegungMoeglich',
+  abstiegVerpflegungBeschreibung: 'abstiegVerpflegungBeschreibung',
+  abstiegSchwierigkeit: 'abstiegSchwierigkeit'
 };
 
-exports.Prisma.ClimbingTourSpecialNotesSchemaScalarFieldEnum = {
+exports.Prisma.ClimbingTourBesonderesSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  seasonalityValue: 'seasonalityValue'
+  saisonalitaet: 'saisonalitaet',
+  hinweise: 'hinweise'
 };
 
 exports.Prisma.HikrOrgPostSchemaScalarFieldEnum = {
@@ -311,6 +309,7 @@ exports.Prisma.ReportBaseSchemaScalarFieldEnum = {
   canton: 'canton',
   tourDate: 'tourDate',
   region: 'region',
+  reasons: 'reasons',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -331,6 +330,10 @@ exports.Prisma.RouteSchemaScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.NullableJsonNullValueInput = {
@@ -366,15 +369,15 @@ exports.HikrCategory = exports.$Enums.HikrCategory = {
 exports.Prisma.ModelName = {
   ClimbingGardenBaseSchema: 'ClimbingGardenBaseSchema',
   ClimbingTourBaseSchema: 'ClimbingTourBaseSchema',
-  ClimbingTourEquipmentSchema: 'ClimbingTourEquipmentSchema',
-  ClimbingTourTimeRequirementSchema: 'ClimbingTourTimeRequirementSchema',
-  ClimbingTourProtectionSchema: 'ClimbingTourProtectionSchema',
-  ClimbingTourFootwearSchema: 'ClimbingTourFootwearSchema',
-  ClimbingTourTerrainSchema: 'ClimbingTourTerrainSchema',
-  ClimbingTourClimbingSchema: 'ClimbingTourClimbingSchema',
-  ClimbingTourAccessSchema: 'ClimbingTourAccessSchema',
-  ClimbingTourApproachDescentSchema: 'ClimbingTourApproachDescentSchema',
-  ClimbingTourSpecialNotesSchema: 'ClimbingTourSpecialNotesSchema',
+  ClimbingTourAusruestungSchema: 'ClimbingTourAusruestungSchema',
+  ClimbingTourZeitbedarfSchema: 'ClimbingTourZeitbedarfSchema',
+  ClimbingTourAbsicherungSchema: 'ClimbingTourAbsicherungSchema',
+  ClimbingTourSchuhwerkSchema: 'ClimbingTourSchuhwerkSchema',
+  ClimbingTourGelaendeUndGefahrenSchema: 'ClimbingTourGelaendeUndGefahrenSchema',
+  ClimbingTourKletternSchema: 'ClimbingTourKletternSchema',
+  ClimbingTourAnreiseSchema: 'ClimbingTourAnreiseSchema',
+  ClimbingTourZustiegUndAbstiegSchema: 'ClimbingTourZustiegUndAbstiegSchema',
+  ClimbingTourBesonderesSchema: 'ClimbingTourBesonderesSchema',
   HikrOrgPostSchema: 'HikrOrgPostSchema',
   HikrWaypointSchema: 'HikrWaypointSchema',
   HikrReportWaypointSchema: 'HikrReportWaypointSchema',

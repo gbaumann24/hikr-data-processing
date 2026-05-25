@@ -43,7 +43,9 @@ export async function runBaseLayerPipelineService({
 
     if (result.status === 'success') {
       const baseLayer = result.result as BaseLayerPreprocessorOutput;
-      await database.upsertReportBase(mapReportBaseToSchemaWrite(baseLayer.base));
+      await database.upsertReportBase(
+        mapReportBaseToSchemaWrite(baseLayer.base, baseLayer.reasons),
+      );
       statusCounts[baseLayer.base.status] += 1;
     }
 

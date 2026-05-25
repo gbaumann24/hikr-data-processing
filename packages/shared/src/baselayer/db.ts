@@ -5,5 +5,5 @@ export type { HikrOrgPostBaseLayerInput } from '@hikr/db';
 
 export type ReportBaseSchemaWriteInput = Pick<
   ReportBaseSchema,
-  'reportId' | 'status' | 'activity' | 'subActivity' | 'canton' | 'tourDate' | 'region'
+  'reportId' | 'status' | 'activity' | 'subActivity' | 'canton' | 'tourDate' | 'region' | 'reasons'
 >;

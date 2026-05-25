@@ -8,7 +8,9 @@ import {
 
 const longDescription = 'Baselayer Bericht '.repeat(150);
 
-function hikrOrgPost(overrides: Partial<HikrOrgPostBaseLayerInput> = {}): HikrOrgPostBaseLayerInput {
+function hikrOrgPost(
+  overrides: Partial<HikrOrgPostBaseLayerInput> = {},
+): HikrOrgPostBaseLayerInput {
   return {
     id: 42n,
     title: 'Gross Turm',
@@ -57,10 +59,12 @@ describe('baselayer pipeline service', () => {
         activity: null,
         canton: 'Obwalden',
         region: 'Melchtal',
+        reasons: [],
       },
       {
         reportId: 43n,
         status: PREPROCESSOR_STATUS.INSUFFICIENT,
+        reasons: ['description_too_short'],
       },
     ]);
   });

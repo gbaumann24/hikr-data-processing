@@ -1,11 +1,9 @@
-import type {
-  ReportBasePreprocessorOutput,
-  ReportBaseSchemaWriteInput,
-} from '../types';
+import type { ReportBasePreprocessorOutput, ReportBaseSchemaWriteInput } from '../types';
 import { normalizeDateOnly } from './date';
 
 export function mapReportBaseToSchemaWrite(
   base: ReportBasePreprocessorOutput,
+  reasons: string[] = [],
 ): ReportBaseSchemaWriteInput {
   return {
     reportId: base.reportId,
@@ -15,5 +13,6 @@ export function mapReportBaseToSchemaWrite(
     canton: base.canton,
     tourDate: normalizeDateOnly(base.tourDate),
     region: base.region,
+    reasons,
   };
 }

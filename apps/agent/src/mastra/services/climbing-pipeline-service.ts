@@ -114,7 +114,9 @@ export async function runClimbingPipelineService({
 
       if (result.status === 'success') {
         const climbing = result.result as ClimbingPreprocessorOutput;
-        await database.upsertReportBase(mapReportBaseToSchemaWrite(climbing.base));
+        await database.upsertReportBase(
+          mapReportBaseToSchemaWrite(climbing.base, climbing.reasons),
+        );
 
         if (climbing.base.status === PREPROCESSOR_STATUS.READY) {
           if (climbing.climbingTourBase) {

@@ -96,6 +96,7 @@ The persisted `report_base_schema` row becomes:
 status: 'skipped'
 activity: 'Wanderung'
 subActivity: null
+reasons: ['non_climbing_activity']
 ```
 
 Because `status !== ready`, the service does not write `climbing_tour_base_schema` or `climbing_garden_base_schema`.
