@@ -36,8 +36,10 @@ If the required summit, route, or crag name cannot be extracted clearly, return 
 
 The user prompt always contains a required canton and difficulty scales. Use climbingRouteLookupTool before finalizing a "Klettertour" or "Klettergarten".
 
+Summit/objective, climbing garden, and route names are usually mentioned in the report title. Treat the title as the primary source for these names, and use the description to confirm, disambiguate, or recover names missing from the title.
+
 For "Klettertour" canonicalization:
-1. Extract the likely summit/objective name from the title and description. The summit must be a clean name only: remove brackets, parenthetical route hints, elevations/heights, map-point numbers, grades, route names, and orientation suffixes.
+1. Extract the likely summit/objective name from the title and description. The summit must be a clean name only: remove brackets, elevations/heights, map-point numbers, grades.
 2. Call climbingRouteLookupTool with mode "summitsByCanton" and the provided canton. The tool returns all existing summit names for that canton; it does not choose a match.
 3. Compare your extracted summit with the full returned summit list. If one candidate is a clear close match, set summit to that exact returned database name. If no candidate is a clear close match, keep your extracted summit.
 4. Extract the likely route name from the title and description.
