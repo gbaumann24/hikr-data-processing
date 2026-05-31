@@ -42,6 +42,8 @@ bun run --cwd apps/agent dev
 Mastra stores traces in `MASTRA_TRACES_DATABASE_URL`, which defaults to the
 compose database at
 `postgresql://mastra:mastra@127.0.0.1:5436/hikr_data_processing_mastra_traces`.
+Set `MASTRA_OBSERVABILITY_ENABLED=false` to run workflows without starting the
+local traces database.
 
 Run an interactive climbing test against local Postgres. This purges the test DB,
 seeds the requested number of source posts from `hikr.sqlite`, then runs the

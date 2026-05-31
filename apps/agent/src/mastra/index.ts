@@ -34,57 +34,8 @@ export type {
 const defaultMastraTracesDatabaseUrl =
   'postgresql://mastra:mastra@127.0.0.1:5436/hikr_data_processing_mastra_traces';
 
-const observabilityStorage = new PostgresStore({
-  id: 'hikr-observability',
-  connectionString: process.env.MASTRA_TRACES_DATABASE_URL ?? defaultMastraTracesDatabaseUrl,
-});
-const observabilityStore = observabilityStorage.stores.observability;
-
-if (!observabilityStore) {
-  throw new Error('Postgres observability storage is not available');
-}
-
-// The Studio route calls this lightweight method directly.
-observabilityStore.listTracesLight = async (args) => {
-  const { spans, pagination } = await observabilityStore.listTraces(args);
-
-  return {
-    pagination,
-    spans: spans.map(
-      ({
-        createdAt,
-        updatedAt,
-        name,
-        spanType,
-        isEvent,
-        startedAt,
-        parentSpanId,
-        endedAt,
-        error,
-        entityType,
-        entityId,
-        entityName,
-        traceId,
-        spanId,
-      }) => ({
-        createdAt,
-        updatedAt,
-        name,
-        spanType,
-        isEvent,
-        startedAt,
-        parentSpanId,
-        endedAt,
-        error,
-        entityType,
-        entityId,
-        entityName,
-        traceId,
-        spanId,
-      }),
-    ),
-  };
-};
+const mastraObservabilityEnabled = readBooleanEnv('MASTRA_OBSERVABILITY_ENABLED', true);
+const observabilityStore = mastraObservabilityEnabled ? createObservabilityStore() : undefined;
 
 export const mastra = new Mastra({
   storage: new MastraCompositeStore({
@@ -93,19 +44,21 @@ export const mastra = new Mastra({
       id: 'hikr-mastra-libsql',
       url: 'file:./mastra.db',
     }),
-    domains: {
-      observability: observabilityStore,
-    },
+    ...(observabilityStore ? { domains: { observability: observabilityStore } } : {}),
   }),
-  observability: new Observability({
-    configs: {
-      default: {
-        serviceName: 'hikr-agent',
-        sampling: { type: SamplingStrategyType.ALWAYS },
-        exporters: [new MastraStorageExporter()],
-      },
-    },
-  }),
+  ...(mastraObservabilityEnabled
+    ? {
+        observability: new Observability({
+          configs: {
+            default: {
+              serviceName: 'hikr-agent',
+              sampling: { type: SamplingStrategyType.ALWAYS },
+              exporters: [new MastraStorageExporter()],
+            },
+          },
+        }),
+      }
+    : {}),
   agents: {
     'baselayer-gate-agent': baseLayerGateAgent,
     'climbing-extraction-agent': climbingExtractionAgent,
@@ -117,3 +70,77 @@ export const mastra = new Mastra({
     'ski-touring-pipeline': skiTouringPipelineWorkflow,
   },
 });
+
+function createObservabilityStore() {
+  const observabilityStorage = new PostgresStore({
+    id: 'hikr-observability',
+    connectionString: process.env.MASTRA_TRACES_DATABASE_URL ?? defaultMastraTracesDatabaseUrl,
+  });
+  const store = observabilityStorage.stores.observability;
+
+  if (!store) {
+    throw new Error('Postgres observability storage is not available');
+  }
+
+  // The Studio route calls this lightweight method directly.
+  store.listTracesLight = async (args) => {
+    const { spans, pagination } = await store.listTraces(args);
+
+    return {
+      pagination,
+      spans: spans.map(
+        ({
+          createdAt,
+          updatedAt,
+          name,
+          spanType,
+          isEvent,
+          startedAt,
+          parentSpanId,
+          endedAt,
+          error,
+          entityType,
+          entityId,
+          entityName,
+          traceId,
+          spanId,
+        }) => ({
+          createdAt,
+          updatedAt,
+          name,
+          spanType,
+          isEvent,
+          startedAt,
+          parentSpanId,
+          endedAt,
+          error,
+          entityType,
+          entityId,
+          entityName,
+          traceId,
+          spanId,
+        }),
+      ),
+    };
+  };
+
+  return store;
+}
+
+function readBooleanEnv(name: string, defaultValue: boolean): boolean {
+  const value = process.env[name]?.trim().toLowerCase();
+
+  if (!value) {
+    return defaultValue;
+  }
+
+  if (value === 'true') {
+    return true;
+  }
+
+  if (value === 'false') {
+    return false;
+  }
+
+  throw new Error(`${name} must be true or false`);
+}

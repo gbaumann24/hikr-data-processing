@@ -16,7 +16,9 @@ Open [http://localhost:4111](http://localhost:4111) in your browser to access [M
 
 Observability traces are stored in the local Postgres service from the root
 `compose.yaml`. Override `MASTRA_TRACES_DATABASE_URL` if you want to point
-Mastra at a different traces database.
+Mastra at a different traces database. Set `MASTRA_OBSERVABILITY_ENABLED=false`
+to disable Mastra observability for local workflow runs that do not need Studio
+traces.
 
 You can start editing files inside the `src/mastra` directory. The development server will automatically reload whenever you make changes.
 
