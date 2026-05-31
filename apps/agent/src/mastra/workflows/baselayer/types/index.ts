@@ -53,6 +53,7 @@ export const BASELAYER_GATE_DECISION = {
 
 export const BASELAYER_GATE_REASON = {
   MULTIPLE_ROUTES_IN_REPORT: 'multiple_routes_in_report',
+  NON_MOUNTAIN_ACTIVITY: 'non_mountain_activity',
 } as const;
 
 export type BaseLayerGateDecision =

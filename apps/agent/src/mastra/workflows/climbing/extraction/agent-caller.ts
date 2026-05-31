@@ -21,7 +21,9 @@ export function createMastraClimbingExtractor(agent: StructuredOutputAgent): Cli
     const response = await agent.generate(
       [
         'Extract structured climbing data from the preprocessed HIKR report.',
-        'The current extraction schema is a scaffold. Return the requested schema version exactly.',
+        'Return the schema version and only the extraction fields that are explicitly supported by the report.',
+        'Omit categories and fields with no evidence instead of filling an empty object.',
+        'Do not guess. Only apply obvious normalizations such as converting hours to minutes or removing units from numeric values.',
         '',
         `Title: ${title ?? ''}`,
         '',
@@ -39,7 +41,7 @@ export function createMastraClimbingExtractor(agent: StructuredOutputAgent): Cli
         },
         modelSettings: {
           temperature: 0,
-          maxOutputTokens: 1000,
+          maxOutputTokens: 6000,
         },
         providerOptions: {
           openai: {
@@ -56,7 +58,7 @@ export function createMastraClimbingExtractor(agent: StructuredOutputAgent): Cli
     }
 
     if (!isClimbingExtractionAgentResult(response.object)) {
-      throw new Error('Mastra climbing extraction agent returned invalid scaffold output');
+      throw new Error('Mastra climbing extraction agent returned invalid structured output');
     }
 
     return response.object;
@@ -64,8 +66,9 @@ export function createMastraClimbingExtractor(agent: StructuredOutputAgent): Cli
 }
 
 function isClimbingExtractionAgentResult(value: unknown): value is ClimbingExtractionAgentResult {
-  return (
-    Boolean(value && typeof value === 'object') &&
-    (value as { schemaVersion?: unknown }).schemaVersion === CLIMBING_EXTRACTION_SCHEMA_VERSION
-  );
+  return isObjectRecord(value) && value.schemaVersion === CLIMBING_EXTRACTION_SCHEMA_VERSION;
+}
+
+function isObjectRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

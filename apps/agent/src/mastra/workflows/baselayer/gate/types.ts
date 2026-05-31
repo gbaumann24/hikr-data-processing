@@ -27,7 +27,11 @@ export const baseLayerGateAgentOutputSchema = {
       enum: [BASELAYER_GATE_DECISION.READY, BASELAYER_GATE_DECISION.SKIP],
     },
     reason: {
-      enum: [BASELAYER_GATE_REASON.MULTIPLE_ROUTES_IN_REPORT, null],
+      enum: [
+        BASELAYER_GATE_REASON.MULTIPLE_ROUTES_IN_REPORT,
+        BASELAYER_GATE_REASON.NON_MOUNTAIN_ACTIVITY,
+        null,
+      ],
     },
   },
 } as const;
@@ -62,7 +66,7 @@ export function parseBaseLayerGateAgentOutput(output: unknown): BaseLayerGateAge
     return { decision: BASELAYER_GATE_DECISION.READY };
   }
 
-  if (output.reason !== BASELAYER_GATE_REASON.MULTIPLE_ROUTES_IN_REPORT) {
+  if (!isBaseLayerGateAgentReason(output.reason)) {
     return {
       decision: BASELAYER_GATE_DECISION.SKIP,
       reason: 'invalid_baselayer_gate_agent_output',
@@ -71,7 +75,7 @@ export function parseBaseLayerGateAgentOutput(output: unknown): BaseLayerGateAge
 
   return {
     decision: BASELAYER_GATE_DECISION.SKIP,
-    reason: BASELAYER_GATE_REASON.MULTIPLE_ROUTES_IN_REPORT,
+    reason: output.reason,
   };
 }
 
@@ -87,8 +91,14 @@ function isBaseLayerGateAgentStructuredOutput(
   return (
     (candidate.decision === BASELAYER_GATE_DECISION.READY ||
       candidate.decision === BASELAYER_GATE_DECISION.SKIP) &&
-    (candidate.reason === BASELAYER_GATE_REASON.MULTIPLE_ROUTES_IN_REPORT ||
-      candidate.reason === null)
+    (isBaseLayerGateAgentReason(candidate.reason) || candidate.reason === null)
+  );
+}
+
+function isBaseLayerGateAgentReason(reason: unknown): reason is BaseLayerGateAgentReason {
+  return (
+    reason === BASELAYER_GATE_REASON.MULTIPLE_ROUTES_IN_REPORT ||
+    reason === BASELAYER_GATE_REASON.NON_MOUNTAIN_ACTIVITY
   );
 }
 

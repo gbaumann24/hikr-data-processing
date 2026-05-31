@@ -72,6 +72,24 @@ describe('baselayer gate', () => {
     expect(result.reasons).toEqual([BASELAYER_GATE_REASON.MULTIPLE_ROUTES_IN_REPORT]);
   });
 
+  test('skips reports that are not about a mountain activity', async () => {
+    const input = baseInput({
+      title: 'Spaziergang durch das Dorf',
+      description: `${longDescription} Gemütlicher Spaziergang durch das Dorfzentrum mit Kaffeehalt.`,
+      climbingDifficulty: null,
+    });
+
+    const result = await gatePreparedBaseLayer(input, prepareBaseLayer(input), {
+      runBaseLayerGateAgent: async () => ({
+        decision: BASELAYER_GATE_DECISION.SKIP,
+        reason: BASELAYER_GATE_REASON.NON_MOUNTAIN_ACTIVITY,
+      }),
+    });
+
+    expect(result.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
+    expect(result.reasons).toEqual([BASELAYER_GATE_REASON.NON_MOUNTAIN_ACTIVITY]);
+  });
+
   test('does not call the gate agent for insufficient reports', async () => {
     const input = baseInput({ description: 'zu kurz' });
     let called = false;
