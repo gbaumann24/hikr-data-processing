@@ -333,6 +333,7 @@ exports.Prisma.SummitSchemaScalarFieldEnum = {
   summitName: 'summitName',
   summitNames: 'summitNames',
   canton: 'canton',
+  duplicationRisk: 'duplicationRisk',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

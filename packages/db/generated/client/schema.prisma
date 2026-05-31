@@ -332,10 +332,11 @@ model RouteSchema {
 }
 
 model SummitSchema {
-  id          BigInt   @id @default(autoincrement())
-  summitName  String   @map("summit_name")
-  summitNames String[] @default([]) @map("summit_names")
-  canton      String
+  id              BigInt   @id @default(autoincrement())
+  summitName      String   @map("summit_name")
+  summitNames     String[] @default([]) @map("summit_names")
+  canton          String
+  duplicationRisk Boolean  @default(false) @map("duplication_risk")
 
   routes RouteSchema[]
 

@@ -15,92 +15,92 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 /**
  * Model ClimbingGardenBaseSchema
- *
+ * 
  */
 export type ClimbingGardenBaseSchema = $Result.DefaultSelection<Prisma.$ClimbingGardenBaseSchemaPayload>
 /**
  * Model ClimbingTourBaseSchema
- *
+ * 
  */
 export type ClimbingTourBaseSchema = $Result.DefaultSelection<Prisma.$ClimbingTourBaseSchemaPayload>
 /**
  * Model ClimbingTourAusruestungSchema
- *
+ * 
  */
 export type ClimbingTourAusruestungSchema = $Result.DefaultSelection<Prisma.$ClimbingTourAusruestungSchemaPayload>
 /**
  * Model ClimbingTourZeitbedarfSchema
- *
+ * 
  */
 export type ClimbingTourZeitbedarfSchema = $Result.DefaultSelection<Prisma.$ClimbingTourZeitbedarfSchemaPayload>
 /**
  * Model ClimbingTourAbsicherungSchema
- *
+ * 
  */
 export type ClimbingTourAbsicherungSchema = $Result.DefaultSelection<Prisma.$ClimbingTourAbsicherungSchemaPayload>
 /**
  * Model ClimbingTourSchuhwerkSchema
- *
+ * 
  */
 export type ClimbingTourSchuhwerkSchema = $Result.DefaultSelection<Prisma.$ClimbingTourSchuhwerkSchemaPayload>
 /**
  * Model ClimbingTourGelaendeUndGefahrenSchema
- *
+ * 
  */
 export type ClimbingTourGelaendeUndGefahrenSchema = $Result.DefaultSelection<Prisma.$ClimbingTourGelaendeUndGefahrenSchemaPayload>
 /**
  * Model ClimbingTourKletternSchema
- *
+ * 
  */
 export type ClimbingTourKletternSchema = $Result.DefaultSelection<Prisma.$ClimbingTourKletternSchemaPayload>
 /**
  * Model ClimbingTourAnreiseSchema
- *
+ * 
  */
 export type ClimbingTourAnreiseSchema = $Result.DefaultSelection<Prisma.$ClimbingTourAnreiseSchemaPayload>
 /**
  * Model ClimbingTourZustiegUndAbstiegSchema
- *
+ * 
  */
 export type ClimbingTourZustiegUndAbstiegSchema = $Result.DefaultSelection<Prisma.$ClimbingTourZustiegUndAbstiegSchemaPayload>
 /**
  * Model ClimbingTourBesonderesSchema
- *
+ * 
  */
 export type ClimbingTourBesonderesSchema = $Result.DefaultSelection<Prisma.$ClimbingTourBesonderesSchemaPayload>
 /**
  * Model HikrOrgPostSchema
- *
+ * 
  */
 export type HikrOrgPostSchema = $Result.DefaultSelection<Prisma.$HikrOrgPostSchemaPayload>
 /**
  * Model HikrWaypointSchema
- *
+ * 
  */
 export type HikrWaypointSchema = $Result.DefaultSelection<Prisma.$HikrWaypointSchemaPayload>
 /**
  * Model HikrReportWaypointSchema
- *
+ * 
  */
 export type HikrReportWaypointSchema = $Result.DefaultSelection<Prisma.$HikrReportWaypointSchemaPayload>
 /**
  * Model HikrScraperProgressSchema
- *
+ * 
  */
 export type HikrScraperProgressSchema = $Result.DefaultSelection<Prisma.$HikrScraperProgressSchemaPayload>
 /**
  * Model ReportBaseSchema
- *
+ * 
  */
 export type ReportBaseSchema = $Result.DefaultSelection<Prisma.$ReportBaseSchemaPayload>
 /**
  * Model RouteSchema
- *
+ * 
  */
 export type RouteSchema = $Result.DefaultSelection<Prisma.$RouteSchemaPayload>
 /**
  * Model SummitSchema
- *
+ * 
  */
 export type SummitSchema = $Result.DefaultSelection<Prisma.$SummitSchemaPayload>
 
@@ -232,7 +232,7 @@ export class PrismaClient<
    *   prisma.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
-   *
+   * 
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
@@ -2281,7 +2281,7 @@ export namespace Prisma {
      * ```
      * // Shorthand for `emit: 'stdout'`
      * log: ['query', 'info', 'warn', 'error']
-     *
+     * 
      * // Emit as events only
      * log: [
      *   { emit: 'event', level: 'query' },
@@ -2289,14 +2289,14 @@ export namespace Prisma {
      *   { emit: 'event', level: 'warn' }
      *   { emit: 'event', level: 'error' }
      * ]
-     *
+     * 
      * / Emit as events and log to stdout
      * og: [
      *  { emit: 'stdout', level: 'query' },
      *  { emit: 'stdout', level: 'info' },
      *  { emit: 'stdout', level: 'warn' }
      *  { emit: 'stdout', level: 'error' }
-     *
+     * 
      * ```
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
@@ -2317,7 +2317,7 @@ export namespace Prisma {
     adapter?: runtime.SqlDriverAdapterFactory | null
     /**
      * Global configuration for omitting model fields by default.
-     *
+     * 
      * @example
      * ```
      * const prisma = new PrismaClient({
@@ -2621,55 +2621,55 @@ export namespace Prisma {
     where?: ClimbingGardenBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingGardenBaseSchemas to fetch.
      */
     orderBy?: ClimbingGardenBaseSchemaOrderByWithRelationInput | ClimbingGardenBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingGardenBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingGardenBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingGardenBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingGardenBaseSchemas
     **/
     _count?: true | ClimbingGardenBaseSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingGardenBaseSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingGardenBaseSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingGardenBaseSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingGardenBaseSchemaMaxAggregateInputType
@@ -2845,13 +2845,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingGardenBaseSchemas
      * const climbingGardenBaseSchemas = await prisma.climbingGardenBaseSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingGardenBaseSchemas
      * const climbingGardenBaseSchemas = await prisma.climbingGardenBaseSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `reportId`
      * const climbingGardenBaseSchemaWithReportIdOnly = await prisma.climbingGardenBaseSchema.findMany({ select: { reportId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingGardenBaseSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingGardenBaseSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingGardenBaseSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -2865,7 +2865,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingGardenBaseSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingGardenBaseSchemaCreateArgs>(args: SelectSubset<T, ClimbingGardenBaseSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingGardenBaseSchemaClient<$Result.GetResult<Prisma.$ClimbingGardenBaseSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -2879,7 +2879,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingGardenBaseSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingGardenBaseSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2893,7 +2893,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingGardenBaseSchemas and only return the `reportId`
      * const climbingGardenBaseSchemaWithReportIdOnly = await prisma.climbingGardenBaseSchema.createManyAndReturn({
      *   select: { reportId: true },
@@ -2903,7 +2903,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingGardenBaseSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingGardenBaseSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingGardenBaseSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -2917,7 +2917,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingGardenBaseSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingGardenBaseSchemaDeleteArgs>(args: SelectSubset<T, ClimbingGardenBaseSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingGardenBaseSchemaClient<$Result.GetResult<Prisma.$ClimbingGardenBaseSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -2934,7 +2934,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingGardenBaseSchemaUpdateArgs>(args: SelectSubset<T, ClimbingGardenBaseSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingGardenBaseSchemaClient<$Result.GetResult<Prisma.$ClimbingGardenBaseSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -2948,7 +2948,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingGardenBaseSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingGardenBaseSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2967,7 +2967,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingGardenBaseSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingGardenBaseSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2984,7 +2984,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingGardenBaseSchemas and only return the `reportId`
      * const climbingGardenBaseSchemaWithReportIdOnly = await prisma.climbingGardenBaseSchema.updateManyAndReturn({
      *   select: { reportId: true },
@@ -2997,7 +2997,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingGardenBaseSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingGardenBaseSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingGardenBaseSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -3086,7 +3086,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingGardenBaseSchemaGroupByArgs,
@@ -3193,7 +3193,7 @@ export namespace Prisma {
     readonly reportId: FieldRef<"ClimbingGardenBaseSchema", 'BigInt'>
     readonly name: FieldRef<"ClimbingGardenBaseSchema", 'String'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -3262,31 +3262,31 @@ export namespace Prisma {
     where?: ClimbingGardenBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingGardenBaseSchemas to fetch.
      */
     orderBy?: ClimbingGardenBaseSchemaOrderByWithRelationInput | ClimbingGardenBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingGardenBaseSchemas.
      */
     cursor?: ClimbingGardenBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingGardenBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingGardenBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingGardenBaseSchemas.
      */
     distinct?: ClimbingGardenBaseSchemaScalarFieldEnum | ClimbingGardenBaseSchemaScalarFieldEnum[]
@@ -3314,31 +3314,31 @@ export namespace Prisma {
     where?: ClimbingGardenBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingGardenBaseSchemas to fetch.
      */
     orderBy?: ClimbingGardenBaseSchemaOrderByWithRelationInput | ClimbingGardenBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingGardenBaseSchemas.
      */
     cursor?: ClimbingGardenBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingGardenBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingGardenBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingGardenBaseSchemas.
      */
     distinct?: ClimbingGardenBaseSchemaScalarFieldEnum | ClimbingGardenBaseSchemaScalarFieldEnum[]
@@ -3366,25 +3366,25 @@ export namespace Prisma {
     where?: ClimbingGardenBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingGardenBaseSchemas to fetch.
      */
     orderBy?: ClimbingGardenBaseSchemaOrderByWithRelationInput | ClimbingGardenBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingGardenBaseSchemas.
      */
     cursor?: ClimbingGardenBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingGardenBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingGardenBaseSchemas.
      */
     skip?: number
@@ -3696,55 +3696,55 @@ export namespace Prisma {
     where?: ClimbingTourBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourBaseSchemas to fetch.
      */
     orderBy?: ClimbingTourBaseSchemaOrderByWithRelationInput | ClimbingTourBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourBaseSchemas
     **/
     _count?: true | ClimbingTourBaseSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourBaseSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourBaseSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourBaseSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourBaseSchemaMaxAggregateInputType
@@ -3972,13 +3972,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourBaseSchemas
      * const climbingTourBaseSchemas = await prisma.climbingTourBaseSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourBaseSchemas
      * const climbingTourBaseSchemas = await prisma.climbingTourBaseSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `reportId`
      * const climbingTourBaseSchemaWithReportIdOnly = await prisma.climbingTourBaseSchema.findMany({ select: { reportId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourBaseSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourBaseSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourBaseSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -3992,7 +3992,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourBaseSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourBaseSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourBaseSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourBaseSchemaClient<$Result.GetResult<Prisma.$ClimbingTourBaseSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -4006,7 +4006,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourBaseSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourBaseSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -4020,7 +4020,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourBaseSchemas and only return the `reportId`
      * const climbingTourBaseSchemaWithReportIdOnly = await prisma.climbingTourBaseSchema.createManyAndReturn({
      *   select: { reportId: true },
@@ -4030,7 +4030,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourBaseSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourBaseSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourBaseSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -4044,7 +4044,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourBaseSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourBaseSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourBaseSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourBaseSchemaClient<$Result.GetResult<Prisma.$ClimbingTourBaseSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -4061,7 +4061,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourBaseSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourBaseSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourBaseSchemaClient<$Result.GetResult<Prisma.$ClimbingTourBaseSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -4075,7 +4075,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourBaseSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourBaseSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -4094,7 +4094,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourBaseSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourBaseSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -4111,7 +4111,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourBaseSchemas and only return the `reportId`
      * const climbingTourBaseSchemaWithReportIdOnly = await prisma.climbingTourBaseSchema.updateManyAndReturn({
      *   select: { reportId: true },
@@ -4124,7 +4124,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourBaseSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourBaseSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourBaseSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -4213,7 +4213,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourBaseSchemaGroupByArgs,
@@ -4333,7 +4333,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"ClimbingTourBaseSchema", 'DateTime'>
     readonly updatedAt: FieldRef<"ClimbingTourBaseSchema", 'DateTime'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -4402,31 +4402,31 @@ export namespace Prisma {
     where?: ClimbingTourBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourBaseSchemas to fetch.
      */
     orderBy?: ClimbingTourBaseSchemaOrderByWithRelationInput | ClimbingTourBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourBaseSchemas.
      */
     cursor?: ClimbingTourBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourBaseSchemas.
      */
     distinct?: ClimbingTourBaseSchemaScalarFieldEnum | ClimbingTourBaseSchemaScalarFieldEnum[]
@@ -4454,31 +4454,31 @@ export namespace Prisma {
     where?: ClimbingTourBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourBaseSchemas to fetch.
      */
     orderBy?: ClimbingTourBaseSchemaOrderByWithRelationInput | ClimbingTourBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourBaseSchemas.
      */
     cursor?: ClimbingTourBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourBaseSchemas.
      */
     distinct?: ClimbingTourBaseSchemaScalarFieldEnum | ClimbingTourBaseSchemaScalarFieldEnum[]
@@ -4506,25 +4506,25 @@ export namespace Prisma {
     where?: ClimbingTourBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourBaseSchemas to fetch.
      */
     orderBy?: ClimbingTourBaseSchemaOrderByWithRelationInput | ClimbingTourBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourBaseSchemas.
      */
     cursor?: ClimbingTourBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourBaseSchemas.
      */
     skip?: number
@@ -5037,55 +5037,55 @@ export namespace Prisma {
     where?: ClimbingTourAusruestungSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAusruestungSchemas to fetch.
      */
     orderBy?: ClimbingTourAusruestungSchemaOrderByWithRelationInput | ClimbingTourAusruestungSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourAusruestungSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAusruestungSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAusruestungSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourAusruestungSchemas
     **/
     _count?: true | ClimbingTourAusruestungSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourAusruestungSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourAusruestungSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourAusruestungSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourAusruestungSchemaMaxAggregateInputType
@@ -5321,13 +5321,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourAusruestungSchemas
      * const climbingTourAusruestungSchemas = await prisma.climbingTourAusruestungSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourAusruestungSchemas
      * const climbingTourAusruestungSchemas = await prisma.climbingTourAusruestungSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourAusruestungSchemaWithBaseIdOnly = await prisma.climbingTourAusruestungSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourAusruestungSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourAusruestungSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAusruestungSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -5341,7 +5341,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourAusruestungSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourAusruestungSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourAusruestungSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourAusruestungSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAusruestungSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -5355,7 +5355,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourAusruestungSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourAusruestungSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -5369,7 +5369,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourAusruestungSchemas and only return the `baseId`
      * const climbingTourAusruestungSchemaWithBaseIdOnly = await prisma.climbingTourAusruestungSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -5379,7 +5379,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourAusruestungSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourAusruestungSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAusruestungSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -5393,7 +5393,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourAusruestungSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourAusruestungSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourAusruestungSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourAusruestungSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAusruestungSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -5410,7 +5410,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourAusruestungSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourAusruestungSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourAusruestungSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAusruestungSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -5424,7 +5424,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourAusruestungSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourAusruestungSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -5443,7 +5443,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourAusruestungSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourAusruestungSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -5460,7 +5460,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourAusruestungSchemas and only return the `baseId`
      * const climbingTourAusruestungSchemaWithBaseIdOnly = await prisma.climbingTourAusruestungSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -5473,7 +5473,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourAusruestungSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourAusruestungSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAusruestungSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -5562,7 +5562,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourAusruestungSchemaGroupByArgs,
@@ -5679,7 +5679,7 @@ export namespace Prisma {
     readonly expresskarabinerAnzahl: FieldRef<"ClimbingTourAusruestungSchema", 'Int'>
     readonly zusaetzlich: FieldRef<"ClimbingTourAusruestungSchema", 'Json'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -5748,31 +5748,31 @@ export namespace Prisma {
     where?: ClimbingTourAusruestungSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAusruestungSchemas to fetch.
      */
     orderBy?: ClimbingTourAusruestungSchemaOrderByWithRelationInput | ClimbingTourAusruestungSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourAusruestungSchemas.
      */
     cursor?: ClimbingTourAusruestungSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAusruestungSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAusruestungSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourAusruestungSchemas.
      */
     distinct?: ClimbingTourAusruestungSchemaScalarFieldEnum | ClimbingTourAusruestungSchemaScalarFieldEnum[]
@@ -5800,31 +5800,31 @@ export namespace Prisma {
     where?: ClimbingTourAusruestungSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAusruestungSchemas to fetch.
      */
     orderBy?: ClimbingTourAusruestungSchemaOrderByWithRelationInput | ClimbingTourAusruestungSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourAusruestungSchemas.
      */
     cursor?: ClimbingTourAusruestungSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAusruestungSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAusruestungSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourAusruestungSchemas.
      */
     distinct?: ClimbingTourAusruestungSchemaScalarFieldEnum | ClimbingTourAusruestungSchemaScalarFieldEnum[]
@@ -5852,25 +5852,25 @@ export namespace Prisma {
     where?: ClimbingTourAusruestungSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAusruestungSchemas to fetch.
      */
     orderBy?: ClimbingTourAusruestungSchemaOrderByWithRelationInput | ClimbingTourAusruestungSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourAusruestungSchemas.
      */
     cursor?: ClimbingTourAusruestungSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAusruestungSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAusruestungSchemas.
      */
     skip?: number
@@ -6184,55 +6184,55 @@ export namespace Prisma {
     where?: ClimbingTourZeitbedarfSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourZeitbedarfSchemas to fetch.
      */
     orderBy?: ClimbingTourZeitbedarfSchemaOrderByWithRelationInput | ClimbingTourZeitbedarfSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourZeitbedarfSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourZeitbedarfSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourZeitbedarfSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourZeitbedarfSchemas
     **/
     _count?: true | ClimbingTourZeitbedarfSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourZeitbedarfSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourZeitbedarfSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourZeitbedarfSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourZeitbedarfSchemaMaxAggregateInputType
@@ -6420,13 +6420,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourZeitbedarfSchemas
      * const climbingTourZeitbedarfSchemas = await prisma.climbingTourZeitbedarfSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourZeitbedarfSchemas
      * const climbingTourZeitbedarfSchemas = await prisma.climbingTourZeitbedarfSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourZeitbedarfSchemaWithBaseIdOnly = await prisma.climbingTourZeitbedarfSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourZeitbedarfSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourZeitbedarfSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourZeitbedarfSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -6440,7 +6440,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourZeitbedarfSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourZeitbedarfSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourZeitbedarfSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourZeitbedarfSchemaClient<$Result.GetResult<Prisma.$ClimbingTourZeitbedarfSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -6454,7 +6454,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourZeitbedarfSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourZeitbedarfSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -6468,7 +6468,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourZeitbedarfSchemas and only return the `baseId`
      * const climbingTourZeitbedarfSchemaWithBaseIdOnly = await prisma.climbingTourZeitbedarfSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -6478,7 +6478,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourZeitbedarfSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourZeitbedarfSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourZeitbedarfSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -6492,7 +6492,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourZeitbedarfSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourZeitbedarfSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourZeitbedarfSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourZeitbedarfSchemaClient<$Result.GetResult<Prisma.$ClimbingTourZeitbedarfSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -6509,7 +6509,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourZeitbedarfSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourZeitbedarfSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourZeitbedarfSchemaClient<$Result.GetResult<Prisma.$ClimbingTourZeitbedarfSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -6523,7 +6523,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourZeitbedarfSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourZeitbedarfSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -6542,7 +6542,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourZeitbedarfSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourZeitbedarfSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -6559,7 +6559,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourZeitbedarfSchemas and only return the `baseId`
      * const climbingTourZeitbedarfSchemaWithBaseIdOnly = await prisma.climbingTourZeitbedarfSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -6572,7 +6572,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourZeitbedarfSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourZeitbedarfSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourZeitbedarfSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -6661,7 +6661,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourZeitbedarfSchemaGroupByArgs,
@@ -6770,7 +6770,7 @@ export namespace Prisma {
     readonly reineKletterzeitMin: FieldRef<"ClimbingTourZeitbedarfSchema", 'Int'>
     readonly abstiegMin: FieldRef<"ClimbingTourZeitbedarfSchema", 'Int'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -6839,31 +6839,31 @@ export namespace Prisma {
     where?: ClimbingTourZeitbedarfSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourZeitbedarfSchemas to fetch.
      */
     orderBy?: ClimbingTourZeitbedarfSchemaOrderByWithRelationInput | ClimbingTourZeitbedarfSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourZeitbedarfSchemas.
      */
     cursor?: ClimbingTourZeitbedarfSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourZeitbedarfSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourZeitbedarfSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourZeitbedarfSchemas.
      */
     distinct?: ClimbingTourZeitbedarfSchemaScalarFieldEnum | ClimbingTourZeitbedarfSchemaScalarFieldEnum[]
@@ -6891,31 +6891,31 @@ export namespace Prisma {
     where?: ClimbingTourZeitbedarfSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourZeitbedarfSchemas to fetch.
      */
     orderBy?: ClimbingTourZeitbedarfSchemaOrderByWithRelationInput | ClimbingTourZeitbedarfSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourZeitbedarfSchemas.
      */
     cursor?: ClimbingTourZeitbedarfSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourZeitbedarfSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourZeitbedarfSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourZeitbedarfSchemas.
      */
     distinct?: ClimbingTourZeitbedarfSchemaScalarFieldEnum | ClimbingTourZeitbedarfSchemaScalarFieldEnum[]
@@ -6943,25 +6943,25 @@ export namespace Prisma {
     where?: ClimbingTourZeitbedarfSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourZeitbedarfSchemas to fetch.
      */
     orderBy?: ClimbingTourZeitbedarfSchemaOrderByWithRelationInput | ClimbingTourZeitbedarfSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourZeitbedarfSchemas.
      */
     cursor?: ClimbingTourZeitbedarfSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourZeitbedarfSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourZeitbedarfSchemas.
      */
     skip?: number
@@ -7281,55 +7281,55 @@ export namespace Prisma {
     where?: ClimbingTourAbsicherungSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAbsicherungSchemas to fetch.
      */
     orderBy?: ClimbingTourAbsicherungSchemaOrderByWithRelationInput | ClimbingTourAbsicherungSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourAbsicherungSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAbsicherungSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAbsicherungSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourAbsicherungSchemas
     **/
     _count?: true | ClimbingTourAbsicherungSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourAbsicherungSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourAbsicherungSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourAbsicherungSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourAbsicherungSchemaMaxAggregateInputType
@@ -7535,13 +7535,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourAbsicherungSchemas
      * const climbingTourAbsicherungSchemas = await prisma.climbingTourAbsicherungSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourAbsicherungSchemas
      * const climbingTourAbsicherungSchemas = await prisma.climbingTourAbsicherungSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourAbsicherungSchemaWithBaseIdOnly = await prisma.climbingTourAbsicherungSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourAbsicherungSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourAbsicherungSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAbsicherungSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -7555,7 +7555,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourAbsicherungSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourAbsicherungSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourAbsicherungSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourAbsicherungSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAbsicherungSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -7569,7 +7569,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourAbsicherungSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourAbsicherungSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -7583,7 +7583,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourAbsicherungSchemas and only return the `baseId`
      * const climbingTourAbsicherungSchemaWithBaseIdOnly = await prisma.climbingTourAbsicherungSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -7593,7 +7593,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourAbsicherungSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourAbsicherungSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAbsicherungSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -7607,7 +7607,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourAbsicherungSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourAbsicherungSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourAbsicherungSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourAbsicherungSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAbsicherungSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -7624,7 +7624,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourAbsicherungSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourAbsicherungSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourAbsicherungSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAbsicherungSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -7638,7 +7638,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourAbsicherungSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourAbsicherungSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -7657,7 +7657,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourAbsicherungSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourAbsicherungSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -7674,7 +7674,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourAbsicherungSchemas and only return the `baseId`
      * const climbingTourAbsicherungSchemaWithBaseIdOnly = await prisma.climbingTourAbsicherungSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -7687,7 +7687,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourAbsicherungSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourAbsicherungSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAbsicherungSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -7776,7 +7776,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourAbsicherungSchemaGroupByArgs,
@@ -7888,7 +7888,7 @@ export namespace Prisma {
     readonly hakenzustandBewertung: FieldRef<"ClimbingTourAbsicherungSchema", 'String'>
     readonly hakenzustandBeschreibung: FieldRef<"ClimbingTourAbsicherungSchema", 'String'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -7957,31 +7957,31 @@ export namespace Prisma {
     where?: ClimbingTourAbsicherungSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAbsicherungSchemas to fetch.
      */
     orderBy?: ClimbingTourAbsicherungSchemaOrderByWithRelationInput | ClimbingTourAbsicherungSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourAbsicherungSchemas.
      */
     cursor?: ClimbingTourAbsicherungSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAbsicherungSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAbsicherungSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourAbsicherungSchemas.
      */
     distinct?: ClimbingTourAbsicherungSchemaScalarFieldEnum | ClimbingTourAbsicherungSchemaScalarFieldEnum[]
@@ -8009,31 +8009,31 @@ export namespace Prisma {
     where?: ClimbingTourAbsicherungSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAbsicherungSchemas to fetch.
      */
     orderBy?: ClimbingTourAbsicherungSchemaOrderByWithRelationInput | ClimbingTourAbsicherungSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourAbsicherungSchemas.
      */
     cursor?: ClimbingTourAbsicherungSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAbsicherungSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAbsicherungSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourAbsicherungSchemas.
      */
     distinct?: ClimbingTourAbsicherungSchemaScalarFieldEnum | ClimbingTourAbsicherungSchemaScalarFieldEnum[]
@@ -8061,25 +8061,25 @@ export namespace Prisma {
     where?: ClimbingTourAbsicherungSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAbsicherungSchemas to fetch.
      */
     orderBy?: ClimbingTourAbsicherungSchemaOrderByWithRelationInput | ClimbingTourAbsicherungSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourAbsicherungSchemas.
      */
     cursor?: ClimbingTourAbsicherungSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAbsicherungSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAbsicherungSchemas.
      */
     skip?: number
@@ -8381,55 +8381,55 @@ export namespace Prisma {
     where?: ClimbingTourSchuhwerkSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourSchuhwerkSchemas to fetch.
      */
     orderBy?: ClimbingTourSchuhwerkSchemaOrderByWithRelationInput | ClimbingTourSchuhwerkSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourSchuhwerkSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourSchuhwerkSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourSchuhwerkSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourSchuhwerkSchemas
     **/
     _count?: true | ClimbingTourSchuhwerkSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourSchuhwerkSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourSchuhwerkSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourSchuhwerkSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourSchuhwerkSchemaMaxAggregateInputType
@@ -8617,13 +8617,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourSchuhwerkSchemas
      * const climbingTourSchuhwerkSchemas = await prisma.climbingTourSchuhwerkSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourSchuhwerkSchemas
      * const climbingTourSchuhwerkSchemas = await prisma.climbingTourSchuhwerkSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourSchuhwerkSchemaWithBaseIdOnly = await prisma.climbingTourSchuhwerkSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourSchuhwerkSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourSchuhwerkSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourSchuhwerkSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -8637,7 +8637,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourSchuhwerkSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourSchuhwerkSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourSchuhwerkSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourSchuhwerkSchemaClient<$Result.GetResult<Prisma.$ClimbingTourSchuhwerkSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -8651,7 +8651,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourSchuhwerkSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourSchuhwerkSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -8665,7 +8665,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourSchuhwerkSchemas and only return the `baseId`
      * const climbingTourSchuhwerkSchemaWithBaseIdOnly = await prisma.climbingTourSchuhwerkSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -8675,7 +8675,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourSchuhwerkSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourSchuhwerkSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourSchuhwerkSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -8689,7 +8689,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourSchuhwerkSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourSchuhwerkSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourSchuhwerkSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourSchuhwerkSchemaClient<$Result.GetResult<Prisma.$ClimbingTourSchuhwerkSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -8706,7 +8706,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourSchuhwerkSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourSchuhwerkSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourSchuhwerkSchemaClient<$Result.GetResult<Prisma.$ClimbingTourSchuhwerkSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -8720,7 +8720,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourSchuhwerkSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourSchuhwerkSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -8739,7 +8739,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourSchuhwerkSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourSchuhwerkSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -8756,7 +8756,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourSchuhwerkSchemas and only return the `baseId`
      * const climbingTourSchuhwerkSchemaWithBaseIdOnly = await prisma.climbingTourSchuhwerkSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -8769,7 +8769,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourSchuhwerkSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourSchuhwerkSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourSchuhwerkSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -8858,7 +8858,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourSchuhwerkSchemaGroupByArgs,
@@ -8967,7 +8967,7 @@ export namespace Prisma {
     readonly kletternTyp: FieldRef<"ClimbingTourSchuhwerkSchema", 'String'>
     readonly abstiegTyp: FieldRef<"ClimbingTourSchuhwerkSchema", 'String'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -9036,31 +9036,31 @@ export namespace Prisma {
     where?: ClimbingTourSchuhwerkSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourSchuhwerkSchemas to fetch.
      */
     orderBy?: ClimbingTourSchuhwerkSchemaOrderByWithRelationInput | ClimbingTourSchuhwerkSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourSchuhwerkSchemas.
      */
     cursor?: ClimbingTourSchuhwerkSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourSchuhwerkSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourSchuhwerkSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourSchuhwerkSchemas.
      */
     distinct?: ClimbingTourSchuhwerkSchemaScalarFieldEnum | ClimbingTourSchuhwerkSchemaScalarFieldEnum[]
@@ -9088,31 +9088,31 @@ export namespace Prisma {
     where?: ClimbingTourSchuhwerkSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourSchuhwerkSchemas to fetch.
      */
     orderBy?: ClimbingTourSchuhwerkSchemaOrderByWithRelationInput | ClimbingTourSchuhwerkSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourSchuhwerkSchemas.
      */
     cursor?: ClimbingTourSchuhwerkSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourSchuhwerkSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourSchuhwerkSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourSchuhwerkSchemas.
      */
     distinct?: ClimbingTourSchuhwerkSchemaScalarFieldEnum | ClimbingTourSchuhwerkSchemaScalarFieldEnum[]
@@ -9140,25 +9140,25 @@ export namespace Prisma {
     where?: ClimbingTourSchuhwerkSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourSchuhwerkSchemas to fetch.
      */
     orderBy?: ClimbingTourSchuhwerkSchemaOrderByWithRelationInput | ClimbingTourSchuhwerkSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourSchuhwerkSchemas.
      */
     cursor?: ClimbingTourSchuhwerkSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourSchuhwerkSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourSchuhwerkSchemas.
      */
     skip?: number
@@ -9468,55 +9468,55 @@ export namespace Prisma {
     where?: ClimbingTourGelaendeUndGefahrenSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourGelaendeUndGefahrenSchemas to fetch.
      */
     orderBy?: ClimbingTourGelaendeUndGefahrenSchemaOrderByWithRelationInput | ClimbingTourGelaendeUndGefahrenSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourGelaendeUndGefahrenSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourGelaendeUndGefahrenSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourGelaendeUndGefahrenSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourGelaendeUndGefahrenSchemas
     **/
     _count?: true | ClimbingTourGelaendeUndGefahrenSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourGelaendeUndGefahrenSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourGelaendeUndGefahrenSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourGelaendeUndGefahrenSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourGelaendeUndGefahrenSchemaMaxAggregateInputType
@@ -9716,13 +9716,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourGelaendeUndGefahrenSchemas
      * const climbingTourGelaendeUndGefahrenSchemas = await prisma.climbingTourGelaendeUndGefahrenSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourGelaendeUndGefahrenSchemas
      * const climbingTourGelaendeUndGefahrenSchemas = await prisma.climbingTourGelaendeUndGefahrenSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourGelaendeUndGefahrenSchemaWithBaseIdOnly = await prisma.climbingTourGelaendeUndGefahrenSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourGelaendeUndGefahrenSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourGelaendeUndGefahrenSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -9736,7 +9736,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourGelaendeUndGefahrenSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourGelaendeUndGefahrenSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourGelaendeUndGefahrenSchemaClient<$Result.GetResult<Prisma.$ClimbingTourGelaendeUndGefahrenSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -9750,7 +9750,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourGelaendeUndGefahrenSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -9764,7 +9764,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourGelaendeUndGefahrenSchemas and only return the `baseId`
      * const climbingTourGelaendeUndGefahrenSchemaWithBaseIdOnly = await prisma.climbingTourGelaendeUndGefahrenSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -9774,7 +9774,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourGelaendeUndGefahrenSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourGelaendeUndGefahrenSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -9788,7 +9788,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourGelaendeUndGefahrenSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourGelaendeUndGefahrenSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourGelaendeUndGefahrenSchemaClient<$Result.GetResult<Prisma.$ClimbingTourGelaendeUndGefahrenSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -9805,7 +9805,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourGelaendeUndGefahrenSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourGelaendeUndGefahrenSchemaClient<$Result.GetResult<Prisma.$ClimbingTourGelaendeUndGefahrenSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -9819,7 +9819,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourGelaendeUndGefahrenSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -9838,7 +9838,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourGelaendeUndGefahrenSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -9855,7 +9855,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourGelaendeUndGefahrenSchemas and only return the `baseId`
      * const climbingTourGelaendeUndGefahrenSchemaWithBaseIdOnly = await prisma.climbingTourGelaendeUndGefahrenSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -9868,7 +9868,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourGelaendeUndGefahrenSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourGelaendeUndGefahrenSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourGelaendeUndGefahrenSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -9957,7 +9957,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourGelaendeUndGefahrenSchemaGroupByArgs,
@@ -10068,7 +10068,7 @@ export namespace Prisma {
     readonly charakterFelsart: FieldRef<"ClimbingTourGelaendeUndGefahrenSchema", 'String'>
     readonly gefahren: FieldRef<"ClimbingTourGelaendeUndGefahrenSchema", 'Json'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -10137,31 +10137,31 @@ export namespace Prisma {
     where?: ClimbingTourGelaendeUndGefahrenSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourGelaendeUndGefahrenSchemas to fetch.
      */
     orderBy?: ClimbingTourGelaendeUndGefahrenSchemaOrderByWithRelationInput | ClimbingTourGelaendeUndGefahrenSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourGelaendeUndGefahrenSchemas.
      */
     cursor?: ClimbingTourGelaendeUndGefahrenSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourGelaendeUndGefahrenSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourGelaendeUndGefahrenSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourGelaendeUndGefahrenSchemas.
      */
     distinct?: ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum | ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum[]
@@ -10189,31 +10189,31 @@ export namespace Prisma {
     where?: ClimbingTourGelaendeUndGefahrenSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourGelaendeUndGefahrenSchemas to fetch.
      */
     orderBy?: ClimbingTourGelaendeUndGefahrenSchemaOrderByWithRelationInput | ClimbingTourGelaendeUndGefahrenSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourGelaendeUndGefahrenSchemas.
      */
     cursor?: ClimbingTourGelaendeUndGefahrenSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourGelaendeUndGefahrenSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourGelaendeUndGefahrenSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourGelaendeUndGefahrenSchemas.
      */
     distinct?: ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum | ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum[]
@@ -10241,25 +10241,25 @@ export namespace Prisma {
     where?: ClimbingTourGelaendeUndGefahrenSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourGelaendeUndGefahrenSchemas to fetch.
      */
     orderBy?: ClimbingTourGelaendeUndGefahrenSchemaOrderByWithRelationInput | ClimbingTourGelaendeUndGefahrenSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourGelaendeUndGefahrenSchemas.
      */
     cursor?: ClimbingTourGelaendeUndGefahrenSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourGelaendeUndGefahrenSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourGelaendeUndGefahrenSchemas.
      */
     skip?: number
@@ -10633,55 +10633,55 @@ export namespace Prisma {
     where?: ClimbingTourKletternSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourKletternSchemas to fetch.
      */
     orderBy?: ClimbingTourKletternSchemaOrderByWithRelationInput | ClimbingTourKletternSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourKletternSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourKletternSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourKletternSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourKletternSchemas
     **/
     _count?: true | ClimbingTourKletternSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourKletternSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourKletternSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourKletternSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourKletternSchemaMaxAggregateInputType
@@ -10953,13 +10953,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourKletternSchemas
      * const climbingTourKletternSchemas = await prisma.climbingTourKletternSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourKletternSchemas
      * const climbingTourKletternSchemas = await prisma.climbingTourKletternSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourKletternSchemaWithBaseIdOnly = await prisma.climbingTourKletternSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourKletternSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourKletternSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourKletternSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -10973,7 +10973,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourKletternSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourKletternSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourKletternSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourKletternSchemaClient<$Result.GetResult<Prisma.$ClimbingTourKletternSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -10987,7 +10987,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourKletternSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourKletternSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -11001,7 +11001,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourKletternSchemas and only return the `baseId`
      * const climbingTourKletternSchemaWithBaseIdOnly = await prisma.climbingTourKletternSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -11011,7 +11011,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourKletternSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourKletternSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourKletternSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -11025,7 +11025,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourKletternSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourKletternSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourKletternSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourKletternSchemaClient<$Result.GetResult<Prisma.$ClimbingTourKletternSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -11042,7 +11042,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourKletternSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourKletternSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourKletternSchemaClient<$Result.GetResult<Prisma.$ClimbingTourKletternSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -11056,7 +11056,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourKletternSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourKletternSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -11075,7 +11075,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourKletternSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourKletternSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -11092,7 +11092,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourKletternSchemas and only return the `baseId`
      * const climbingTourKletternSchemaWithBaseIdOnly = await prisma.climbingTourKletternSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -11105,7 +11105,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourKletternSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourKletternSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourKletternSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -11194,7 +11194,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourKletternSchemaGroupByArgs,
@@ -11317,7 +11317,7 @@ export namespace Prisma {
     readonly seillaengenVerbindenBeschreibung: FieldRef<"ClimbingTourKletternSchema", 'String'>
     readonly seillaengen: FieldRef<"ClimbingTourKletternSchema", 'Json'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -11386,31 +11386,31 @@ export namespace Prisma {
     where?: ClimbingTourKletternSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourKletternSchemas to fetch.
      */
     orderBy?: ClimbingTourKletternSchemaOrderByWithRelationInput | ClimbingTourKletternSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourKletternSchemas.
      */
     cursor?: ClimbingTourKletternSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourKletternSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourKletternSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourKletternSchemas.
      */
     distinct?: ClimbingTourKletternSchemaScalarFieldEnum | ClimbingTourKletternSchemaScalarFieldEnum[]
@@ -11438,31 +11438,31 @@ export namespace Prisma {
     where?: ClimbingTourKletternSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourKletternSchemas to fetch.
      */
     orderBy?: ClimbingTourKletternSchemaOrderByWithRelationInput | ClimbingTourKletternSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourKletternSchemas.
      */
     cursor?: ClimbingTourKletternSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourKletternSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourKletternSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourKletternSchemas.
      */
     distinct?: ClimbingTourKletternSchemaScalarFieldEnum | ClimbingTourKletternSchemaScalarFieldEnum[]
@@ -11490,25 +11490,25 @@ export namespace Prisma {
     where?: ClimbingTourKletternSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourKletternSchemas to fetch.
      */
     orderBy?: ClimbingTourKletternSchemaOrderByWithRelationInput | ClimbingTourKletternSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourKletternSchemas.
      */
     cursor?: ClimbingTourKletternSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourKletternSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourKletternSchemas.
      */
     skip?: number
@@ -11830,55 +11830,55 @@ export namespace Prisma {
     where?: ClimbingTourAnreiseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAnreiseSchemas to fetch.
      */
     orderBy?: ClimbingTourAnreiseSchemaOrderByWithRelationInput | ClimbingTourAnreiseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourAnreiseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAnreiseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAnreiseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourAnreiseSchemas
     **/
     _count?: true | ClimbingTourAnreiseSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourAnreiseSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourAnreiseSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourAnreiseSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourAnreiseSchemaMaxAggregateInputType
@@ -12090,13 +12090,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourAnreiseSchemas
      * const climbingTourAnreiseSchemas = await prisma.climbingTourAnreiseSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourAnreiseSchemas
      * const climbingTourAnreiseSchemas = await prisma.climbingTourAnreiseSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourAnreiseSchemaWithBaseIdOnly = await prisma.climbingTourAnreiseSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourAnreiseSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourAnreiseSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAnreiseSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -12110,7 +12110,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourAnreiseSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourAnreiseSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourAnreiseSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourAnreiseSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAnreiseSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -12124,7 +12124,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourAnreiseSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourAnreiseSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -12138,7 +12138,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourAnreiseSchemas and only return the `baseId`
      * const climbingTourAnreiseSchemaWithBaseIdOnly = await prisma.climbingTourAnreiseSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -12148,7 +12148,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourAnreiseSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourAnreiseSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAnreiseSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -12162,7 +12162,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourAnreiseSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourAnreiseSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourAnreiseSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourAnreiseSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAnreiseSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -12179,7 +12179,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourAnreiseSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourAnreiseSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourAnreiseSchemaClient<$Result.GetResult<Prisma.$ClimbingTourAnreiseSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -12193,7 +12193,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourAnreiseSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourAnreiseSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -12212,7 +12212,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourAnreiseSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourAnreiseSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -12229,7 +12229,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourAnreiseSchemas and only return the `baseId`
      * const climbingTourAnreiseSchemaWithBaseIdOnly = await prisma.climbingTourAnreiseSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -12242,7 +12242,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourAnreiseSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourAnreiseSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourAnreiseSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -12331,7 +12331,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourAnreiseSchemaGroupByArgs,
@@ -12444,7 +12444,7 @@ export namespace Prisma {
     readonly oevLuftseilbahnMoeglich: FieldRef<"ClimbingTourAnreiseSchema", 'Boolean'>
     readonly oevAnmeldungNoetig: FieldRef<"ClimbingTourAnreiseSchema", 'Boolean'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -12513,31 +12513,31 @@ export namespace Prisma {
     where?: ClimbingTourAnreiseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAnreiseSchemas to fetch.
      */
     orderBy?: ClimbingTourAnreiseSchemaOrderByWithRelationInput | ClimbingTourAnreiseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourAnreiseSchemas.
      */
     cursor?: ClimbingTourAnreiseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAnreiseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAnreiseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourAnreiseSchemas.
      */
     distinct?: ClimbingTourAnreiseSchemaScalarFieldEnum | ClimbingTourAnreiseSchemaScalarFieldEnum[]
@@ -12565,31 +12565,31 @@ export namespace Prisma {
     where?: ClimbingTourAnreiseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAnreiseSchemas to fetch.
      */
     orderBy?: ClimbingTourAnreiseSchemaOrderByWithRelationInput | ClimbingTourAnreiseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourAnreiseSchemas.
      */
     cursor?: ClimbingTourAnreiseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAnreiseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAnreiseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourAnreiseSchemas.
      */
     distinct?: ClimbingTourAnreiseSchemaScalarFieldEnum | ClimbingTourAnreiseSchemaScalarFieldEnum[]
@@ -12617,25 +12617,25 @@ export namespace Prisma {
     where?: ClimbingTourAnreiseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourAnreiseSchemas to fetch.
      */
     orderBy?: ClimbingTourAnreiseSchemaOrderByWithRelationInput | ClimbingTourAnreiseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourAnreiseSchemas.
      */
     cursor?: ClimbingTourAnreiseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourAnreiseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourAnreiseSchemas.
      */
     skip?: number
@@ -12961,55 +12961,55 @@ export namespace Prisma {
     where?: ClimbingTourZustiegUndAbstiegSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourZustiegUndAbstiegSchemas to fetch.
      */
     orderBy?: ClimbingTourZustiegUndAbstiegSchemaOrderByWithRelationInput | ClimbingTourZustiegUndAbstiegSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourZustiegUndAbstiegSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourZustiegUndAbstiegSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourZustiegUndAbstiegSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourZustiegUndAbstiegSchemas
     **/
     _count?: true | ClimbingTourZustiegUndAbstiegSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourZustiegUndAbstiegSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourZustiegUndAbstiegSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourZustiegUndAbstiegSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourZustiegUndAbstiegSchemaMaxAggregateInputType
@@ -13221,13 +13221,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourZustiegUndAbstiegSchemas
      * const climbingTourZustiegUndAbstiegSchemas = await prisma.climbingTourZustiegUndAbstiegSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourZustiegUndAbstiegSchemas
      * const climbingTourZustiegUndAbstiegSchemas = await prisma.climbingTourZustiegUndAbstiegSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourZustiegUndAbstiegSchemaWithBaseIdOnly = await prisma.climbingTourZustiegUndAbstiegSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourZustiegUndAbstiegSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourZustiegUndAbstiegSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -13241,7 +13241,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourZustiegUndAbstiegSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourZustiegUndAbstiegSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourZustiegUndAbstiegSchemaClient<$Result.GetResult<Prisma.$ClimbingTourZustiegUndAbstiegSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -13255,7 +13255,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourZustiegUndAbstiegSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -13269,7 +13269,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourZustiegUndAbstiegSchemas and only return the `baseId`
      * const climbingTourZustiegUndAbstiegSchemaWithBaseIdOnly = await prisma.climbingTourZustiegUndAbstiegSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -13279,7 +13279,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourZustiegUndAbstiegSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourZustiegUndAbstiegSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -13293,7 +13293,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourZustiegUndAbstiegSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourZustiegUndAbstiegSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourZustiegUndAbstiegSchemaClient<$Result.GetResult<Prisma.$ClimbingTourZustiegUndAbstiegSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -13310,7 +13310,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourZustiegUndAbstiegSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourZustiegUndAbstiegSchemaClient<$Result.GetResult<Prisma.$ClimbingTourZustiegUndAbstiegSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -13324,7 +13324,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourZustiegUndAbstiegSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -13343,7 +13343,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourZustiegUndAbstiegSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -13360,7 +13360,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourZustiegUndAbstiegSchemas and only return the `baseId`
      * const climbingTourZustiegUndAbstiegSchemaWithBaseIdOnly = await prisma.climbingTourZustiegUndAbstiegSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -13373,7 +13373,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourZustiegUndAbstiegSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourZustiegUndAbstiegSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourZustiegUndAbstiegSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -13462,7 +13462,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourZustiegUndAbstiegSchemaGroupByArgs,
@@ -13575,7 +13575,7 @@ export namespace Prisma {
     readonly abstiegVerpflegungBeschreibung: FieldRef<"ClimbingTourZustiegUndAbstiegSchema", 'String'>
     readonly abstiegSchwierigkeit: FieldRef<"ClimbingTourZustiegUndAbstiegSchema", 'String'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -13644,31 +13644,31 @@ export namespace Prisma {
     where?: ClimbingTourZustiegUndAbstiegSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourZustiegUndAbstiegSchemas to fetch.
      */
     orderBy?: ClimbingTourZustiegUndAbstiegSchemaOrderByWithRelationInput | ClimbingTourZustiegUndAbstiegSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourZustiegUndAbstiegSchemas.
      */
     cursor?: ClimbingTourZustiegUndAbstiegSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourZustiegUndAbstiegSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourZustiegUndAbstiegSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourZustiegUndAbstiegSchemas.
      */
     distinct?: ClimbingTourZustiegUndAbstiegSchemaScalarFieldEnum | ClimbingTourZustiegUndAbstiegSchemaScalarFieldEnum[]
@@ -13696,31 +13696,31 @@ export namespace Prisma {
     where?: ClimbingTourZustiegUndAbstiegSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourZustiegUndAbstiegSchemas to fetch.
      */
     orderBy?: ClimbingTourZustiegUndAbstiegSchemaOrderByWithRelationInput | ClimbingTourZustiegUndAbstiegSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourZustiegUndAbstiegSchemas.
      */
     cursor?: ClimbingTourZustiegUndAbstiegSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourZustiegUndAbstiegSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourZustiegUndAbstiegSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourZustiegUndAbstiegSchemas.
      */
     distinct?: ClimbingTourZustiegUndAbstiegSchemaScalarFieldEnum | ClimbingTourZustiegUndAbstiegSchemaScalarFieldEnum[]
@@ -13748,25 +13748,25 @@ export namespace Prisma {
     where?: ClimbingTourZustiegUndAbstiegSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourZustiegUndAbstiegSchemas to fetch.
      */
     orderBy?: ClimbingTourZustiegUndAbstiegSchemaOrderByWithRelationInput | ClimbingTourZustiegUndAbstiegSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourZustiegUndAbstiegSchemas.
      */
     cursor?: ClimbingTourZustiegUndAbstiegSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourZustiegUndAbstiegSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourZustiegUndAbstiegSchemas.
      */
     skip?: number
@@ -14058,55 +14058,55 @@ export namespace Prisma {
     where?: ClimbingTourBesonderesSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourBesonderesSchemas to fetch.
      */
     orderBy?: ClimbingTourBesonderesSchemaOrderByWithRelationInput | ClimbingTourBesonderesSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ClimbingTourBesonderesSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourBesonderesSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourBesonderesSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ClimbingTourBesonderesSchemas
     **/
     _count?: true | ClimbingTourBesonderesSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ClimbingTourBesonderesSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ClimbingTourBesonderesSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClimbingTourBesonderesSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ClimbingTourBesonderesSchemaMaxAggregateInputType
@@ -14288,13 +14288,13 @@ export namespace Prisma {
      * @example
      * // Get all ClimbingTourBesonderesSchemas
      * const climbingTourBesonderesSchemas = await prisma.climbingTourBesonderesSchema.findMany()
-     *
+     * 
      * // Get first 10 ClimbingTourBesonderesSchemas
      * const climbingTourBesonderesSchemas = await prisma.climbingTourBesonderesSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `baseId`
      * const climbingTourBesonderesSchemaWithBaseIdOnly = await prisma.climbingTourBesonderesSchema.findMany({ select: { baseId: true } })
-     *
+     * 
      */
     findMany<T extends ClimbingTourBesonderesSchemaFindManyArgs>(args?: SelectSubset<T, ClimbingTourBesonderesSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourBesonderesSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -14308,7 +14308,7 @@ export namespace Prisma {
      *     // ... data to create a ClimbingTourBesonderesSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ClimbingTourBesonderesSchemaCreateArgs>(args: SelectSubset<T, ClimbingTourBesonderesSchemaCreateArgs<ExtArgs>>): Prisma__ClimbingTourBesonderesSchemaClient<$Result.GetResult<Prisma.$ClimbingTourBesonderesSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -14322,7 +14322,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ClimbingTourBesonderesSchemaCreateManyArgs>(args?: SelectSubset<T, ClimbingTourBesonderesSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -14336,7 +14336,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ClimbingTourBesonderesSchemas and only return the `baseId`
      * const climbingTourBesonderesSchemaWithBaseIdOnly = await prisma.climbingTourBesonderesSchema.createManyAndReturn({
      *   select: { baseId: true },
@@ -14346,7 +14346,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ClimbingTourBesonderesSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ClimbingTourBesonderesSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourBesonderesSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -14360,7 +14360,7 @@ export namespace Prisma {
      *     // ... filter to delete one ClimbingTourBesonderesSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ClimbingTourBesonderesSchemaDeleteArgs>(args: SelectSubset<T, ClimbingTourBesonderesSchemaDeleteArgs<ExtArgs>>): Prisma__ClimbingTourBesonderesSchemaClient<$Result.GetResult<Prisma.$ClimbingTourBesonderesSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -14377,7 +14377,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ClimbingTourBesonderesSchemaUpdateArgs>(args: SelectSubset<T, ClimbingTourBesonderesSchemaUpdateArgs<ExtArgs>>): Prisma__ClimbingTourBesonderesSchemaClient<$Result.GetResult<Prisma.$ClimbingTourBesonderesSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -14391,7 +14391,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ClimbingTourBesonderesSchemaDeleteManyArgs>(args?: SelectSubset<T, ClimbingTourBesonderesSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -14410,7 +14410,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ClimbingTourBesonderesSchemaUpdateManyArgs>(args: SelectSubset<T, ClimbingTourBesonderesSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -14427,7 +14427,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ClimbingTourBesonderesSchemas and only return the `baseId`
      * const climbingTourBesonderesSchemaWithBaseIdOnly = await prisma.climbingTourBesonderesSchema.updateManyAndReturn({
      *   select: { baseId: true },
@@ -14440,7 +14440,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ClimbingTourBesonderesSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ClimbingTourBesonderesSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClimbingTourBesonderesSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -14529,7 +14529,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ClimbingTourBesonderesSchemaGroupByArgs,
@@ -14637,7 +14637,7 @@ export namespace Prisma {
     readonly saisonalitaet: FieldRef<"ClimbingTourBesonderesSchema", 'String'>
     readonly hinweise: FieldRef<"ClimbingTourBesonderesSchema", 'Json'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -14706,31 +14706,31 @@ export namespace Prisma {
     where?: ClimbingTourBesonderesSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourBesonderesSchemas to fetch.
      */
     orderBy?: ClimbingTourBesonderesSchemaOrderByWithRelationInput | ClimbingTourBesonderesSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourBesonderesSchemas.
      */
     cursor?: ClimbingTourBesonderesSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourBesonderesSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourBesonderesSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourBesonderesSchemas.
      */
     distinct?: ClimbingTourBesonderesSchemaScalarFieldEnum | ClimbingTourBesonderesSchemaScalarFieldEnum[]
@@ -14758,31 +14758,31 @@ export namespace Prisma {
     where?: ClimbingTourBesonderesSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourBesonderesSchemas to fetch.
      */
     orderBy?: ClimbingTourBesonderesSchemaOrderByWithRelationInput | ClimbingTourBesonderesSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ClimbingTourBesonderesSchemas.
      */
     cursor?: ClimbingTourBesonderesSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourBesonderesSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourBesonderesSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ClimbingTourBesonderesSchemas.
      */
     distinct?: ClimbingTourBesonderesSchemaScalarFieldEnum | ClimbingTourBesonderesSchemaScalarFieldEnum[]
@@ -14810,25 +14810,25 @@ export namespace Prisma {
     where?: ClimbingTourBesonderesSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ClimbingTourBesonderesSchemas to fetch.
      */
     orderBy?: ClimbingTourBesonderesSchemaOrderByWithRelationInput | ClimbingTourBesonderesSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ClimbingTourBesonderesSchemas.
      */
     cursor?: ClimbingTourBesonderesSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ClimbingTourBesonderesSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ClimbingTourBesonderesSchemas.
      */
     skip?: number
@@ -15292,55 +15292,55 @@ export namespace Prisma {
     where?: HikrOrgPostSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrOrgPostSchemas to fetch.
      */
     orderBy?: HikrOrgPostSchemaOrderByWithRelationInput | HikrOrgPostSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: HikrOrgPostSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrOrgPostSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrOrgPostSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned HikrOrgPostSchemas
     **/
     _count?: true | HikrOrgPostSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: HikrOrgPostSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: HikrOrgPostSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: HikrOrgPostSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: HikrOrgPostSchemaMaxAggregateInputType
@@ -15689,13 +15689,13 @@ export namespace Prisma {
      * @example
      * // Get all HikrOrgPostSchemas
      * const hikrOrgPostSchemas = await prisma.hikrOrgPostSchema.findMany()
-     *
+     * 
      * // Get first 10 HikrOrgPostSchemas
      * const hikrOrgPostSchemas = await prisma.hikrOrgPostSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const hikrOrgPostSchemaWithIdOnly = await prisma.hikrOrgPostSchema.findMany({ select: { id: true } })
-     *
+     * 
      */
     findMany<T extends HikrOrgPostSchemaFindManyArgs>(args?: SelectSubset<T, HikrOrgPostSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrOrgPostSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -15709,7 +15709,7 @@ export namespace Prisma {
      *     // ... data to create a HikrOrgPostSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends HikrOrgPostSchemaCreateArgs>(args: SelectSubset<T, HikrOrgPostSchemaCreateArgs<ExtArgs>>): Prisma__HikrOrgPostSchemaClient<$Result.GetResult<Prisma.$HikrOrgPostSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -15723,7 +15723,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends HikrOrgPostSchemaCreateManyArgs>(args?: SelectSubset<T, HikrOrgPostSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -15737,7 +15737,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many HikrOrgPostSchemas and only return the `id`
      * const hikrOrgPostSchemaWithIdOnly = await prisma.hikrOrgPostSchema.createManyAndReturn({
      *   select: { id: true },
@@ -15747,7 +15747,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends HikrOrgPostSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, HikrOrgPostSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrOrgPostSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -15761,7 +15761,7 @@ export namespace Prisma {
      *     // ... filter to delete one HikrOrgPostSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends HikrOrgPostSchemaDeleteArgs>(args: SelectSubset<T, HikrOrgPostSchemaDeleteArgs<ExtArgs>>): Prisma__HikrOrgPostSchemaClient<$Result.GetResult<Prisma.$HikrOrgPostSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -15778,7 +15778,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends HikrOrgPostSchemaUpdateArgs>(args: SelectSubset<T, HikrOrgPostSchemaUpdateArgs<ExtArgs>>): Prisma__HikrOrgPostSchemaClient<$Result.GetResult<Prisma.$HikrOrgPostSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -15792,7 +15792,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends HikrOrgPostSchemaDeleteManyArgs>(args?: SelectSubset<T, HikrOrgPostSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -15811,7 +15811,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends HikrOrgPostSchemaUpdateManyArgs>(args: SelectSubset<T, HikrOrgPostSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -15828,7 +15828,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more HikrOrgPostSchemas and only return the `id`
      * const hikrOrgPostSchemaWithIdOnly = await prisma.hikrOrgPostSchema.updateManyAndReturn({
      *   select: { id: true },
@@ -15841,7 +15841,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends HikrOrgPostSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, HikrOrgPostSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrOrgPostSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -15930,7 +15930,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends HikrOrgPostSchemaGroupByArgs,
@@ -16067,7 +16067,7 @@ export namespace Prisma {
     readonly scrapedAt: FieldRef<"HikrOrgPostSchema", 'DateTime'>
     readonly updatedAt: FieldRef<"HikrOrgPostSchema", 'DateTime'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -16136,31 +16136,31 @@ export namespace Prisma {
     where?: HikrOrgPostSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrOrgPostSchemas to fetch.
      */
     orderBy?: HikrOrgPostSchemaOrderByWithRelationInput | HikrOrgPostSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for HikrOrgPostSchemas.
      */
     cursor?: HikrOrgPostSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrOrgPostSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrOrgPostSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of HikrOrgPostSchemas.
      */
     distinct?: HikrOrgPostSchemaScalarFieldEnum | HikrOrgPostSchemaScalarFieldEnum[]
@@ -16188,31 +16188,31 @@ export namespace Prisma {
     where?: HikrOrgPostSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrOrgPostSchemas to fetch.
      */
     orderBy?: HikrOrgPostSchemaOrderByWithRelationInput | HikrOrgPostSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for HikrOrgPostSchemas.
      */
     cursor?: HikrOrgPostSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrOrgPostSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrOrgPostSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of HikrOrgPostSchemas.
      */
     distinct?: HikrOrgPostSchemaScalarFieldEnum | HikrOrgPostSchemaScalarFieldEnum[]
@@ -16240,25 +16240,25 @@ export namespace Prisma {
     where?: HikrOrgPostSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrOrgPostSchemas to fetch.
      */
     orderBy?: HikrOrgPostSchemaOrderByWithRelationInput | HikrOrgPostSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing HikrOrgPostSchemas.
      */
     cursor?: HikrOrgPostSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrOrgPostSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrOrgPostSchemas.
      */
     skip?: number
@@ -16665,55 +16665,55 @@ export namespace Prisma {
     where?: HikrWaypointSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrWaypointSchemas to fetch.
      */
     orderBy?: HikrWaypointSchemaOrderByWithRelationInput | HikrWaypointSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: HikrWaypointSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrWaypointSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrWaypointSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned HikrWaypointSchemas
     **/
     _count?: true | HikrWaypointSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: HikrWaypointSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: HikrWaypointSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: HikrWaypointSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: HikrWaypointSchemaMaxAggregateInputType
@@ -16951,13 +16951,13 @@ export namespace Prisma {
      * @example
      * // Get all HikrWaypointSchemas
      * const hikrWaypointSchemas = await prisma.hikrWaypointSchema.findMany()
-     *
+     * 
      * // Get first 10 HikrWaypointSchemas
      * const hikrWaypointSchemas = await prisma.hikrWaypointSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const hikrWaypointSchemaWithIdOnly = await prisma.hikrWaypointSchema.findMany({ select: { id: true } })
-     *
+     * 
      */
     findMany<T extends HikrWaypointSchemaFindManyArgs>(args?: SelectSubset<T, HikrWaypointSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrWaypointSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -16971,7 +16971,7 @@ export namespace Prisma {
      *     // ... data to create a HikrWaypointSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends HikrWaypointSchemaCreateArgs>(args: SelectSubset<T, HikrWaypointSchemaCreateArgs<ExtArgs>>): Prisma__HikrWaypointSchemaClient<$Result.GetResult<Prisma.$HikrWaypointSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -16985,7 +16985,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends HikrWaypointSchemaCreateManyArgs>(args?: SelectSubset<T, HikrWaypointSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -16999,7 +16999,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many HikrWaypointSchemas and only return the `id`
      * const hikrWaypointSchemaWithIdOnly = await prisma.hikrWaypointSchema.createManyAndReturn({
      *   select: { id: true },
@@ -17009,7 +17009,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends HikrWaypointSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, HikrWaypointSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrWaypointSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -17023,7 +17023,7 @@ export namespace Prisma {
      *     // ... filter to delete one HikrWaypointSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends HikrWaypointSchemaDeleteArgs>(args: SelectSubset<T, HikrWaypointSchemaDeleteArgs<ExtArgs>>): Prisma__HikrWaypointSchemaClient<$Result.GetResult<Prisma.$HikrWaypointSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -17040,7 +17040,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends HikrWaypointSchemaUpdateArgs>(args: SelectSubset<T, HikrWaypointSchemaUpdateArgs<ExtArgs>>): Prisma__HikrWaypointSchemaClient<$Result.GetResult<Prisma.$HikrWaypointSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -17054,7 +17054,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends HikrWaypointSchemaDeleteManyArgs>(args?: SelectSubset<T, HikrWaypointSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -17073,7 +17073,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends HikrWaypointSchemaUpdateManyArgs>(args: SelectSubset<T, HikrWaypointSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -17090,7 +17090,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more HikrWaypointSchemas and only return the `id`
      * const hikrWaypointSchemaWithIdOnly = await prisma.hikrWaypointSchema.updateManyAndReturn({
      *   select: { id: true },
@@ -17103,7 +17103,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends HikrWaypointSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, HikrWaypointSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrWaypointSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -17192,7 +17192,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends HikrWaypointSchemaGroupByArgs,
@@ -17310,7 +17310,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"HikrWaypointSchema", 'DateTime'>
     readonly updatedAt: FieldRef<"HikrWaypointSchema", 'DateTime'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -17379,31 +17379,31 @@ export namespace Prisma {
     where?: HikrWaypointSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrWaypointSchemas to fetch.
      */
     orderBy?: HikrWaypointSchemaOrderByWithRelationInput | HikrWaypointSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for HikrWaypointSchemas.
      */
     cursor?: HikrWaypointSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrWaypointSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrWaypointSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of HikrWaypointSchemas.
      */
     distinct?: HikrWaypointSchemaScalarFieldEnum | HikrWaypointSchemaScalarFieldEnum[]
@@ -17431,31 +17431,31 @@ export namespace Prisma {
     where?: HikrWaypointSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrWaypointSchemas to fetch.
      */
     orderBy?: HikrWaypointSchemaOrderByWithRelationInput | HikrWaypointSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for HikrWaypointSchemas.
      */
     cursor?: HikrWaypointSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrWaypointSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrWaypointSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of HikrWaypointSchemas.
      */
     distinct?: HikrWaypointSchemaScalarFieldEnum | HikrWaypointSchemaScalarFieldEnum[]
@@ -17483,25 +17483,25 @@ export namespace Prisma {
     where?: HikrWaypointSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrWaypointSchemas to fetch.
      */
     orderBy?: HikrWaypointSchemaOrderByWithRelationInput | HikrWaypointSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing HikrWaypointSchemas.
      */
     cursor?: HikrWaypointSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrWaypointSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrWaypointSchemas.
      */
     skip?: number
@@ -17817,55 +17817,55 @@ export namespace Prisma {
     where?: HikrReportWaypointSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrReportWaypointSchemas to fetch.
      */
     orderBy?: HikrReportWaypointSchemaOrderByWithRelationInput | HikrReportWaypointSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: HikrReportWaypointSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrReportWaypointSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrReportWaypointSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned HikrReportWaypointSchemas
     **/
     _count?: true | HikrReportWaypointSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: HikrReportWaypointSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: HikrReportWaypointSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: HikrReportWaypointSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: HikrReportWaypointSchemaMaxAggregateInputType
@@ -18054,13 +18054,13 @@ export namespace Prisma {
      * @example
      * // Get all HikrReportWaypointSchemas
      * const hikrReportWaypointSchemas = await prisma.hikrReportWaypointSchema.findMany()
-     *
+     * 
      * // Get first 10 HikrReportWaypointSchemas
      * const hikrReportWaypointSchemas = await prisma.hikrReportWaypointSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `reportId`
      * const hikrReportWaypointSchemaWithReportIdOnly = await prisma.hikrReportWaypointSchema.findMany({ select: { reportId: true } })
-     *
+     * 
      */
     findMany<T extends HikrReportWaypointSchemaFindManyArgs>(args?: SelectSubset<T, HikrReportWaypointSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrReportWaypointSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -18074,7 +18074,7 @@ export namespace Prisma {
      *     // ... data to create a HikrReportWaypointSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends HikrReportWaypointSchemaCreateArgs>(args: SelectSubset<T, HikrReportWaypointSchemaCreateArgs<ExtArgs>>): Prisma__HikrReportWaypointSchemaClient<$Result.GetResult<Prisma.$HikrReportWaypointSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -18088,7 +18088,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends HikrReportWaypointSchemaCreateManyArgs>(args?: SelectSubset<T, HikrReportWaypointSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -18102,7 +18102,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many HikrReportWaypointSchemas and only return the `reportId`
      * const hikrReportWaypointSchemaWithReportIdOnly = await prisma.hikrReportWaypointSchema.createManyAndReturn({
      *   select: { reportId: true },
@@ -18112,7 +18112,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends HikrReportWaypointSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, HikrReportWaypointSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrReportWaypointSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -18126,7 +18126,7 @@ export namespace Prisma {
      *     // ... filter to delete one HikrReportWaypointSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends HikrReportWaypointSchemaDeleteArgs>(args: SelectSubset<T, HikrReportWaypointSchemaDeleteArgs<ExtArgs>>): Prisma__HikrReportWaypointSchemaClient<$Result.GetResult<Prisma.$HikrReportWaypointSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -18143,7 +18143,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends HikrReportWaypointSchemaUpdateArgs>(args: SelectSubset<T, HikrReportWaypointSchemaUpdateArgs<ExtArgs>>): Prisma__HikrReportWaypointSchemaClient<$Result.GetResult<Prisma.$HikrReportWaypointSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -18157,7 +18157,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends HikrReportWaypointSchemaDeleteManyArgs>(args?: SelectSubset<T, HikrReportWaypointSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -18176,7 +18176,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends HikrReportWaypointSchemaUpdateManyArgs>(args: SelectSubset<T, HikrReportWaypointSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -18193,7 +18193,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more HikrReportWaypointSchemas and only return the `reportId`
      * const hikrReportWaypointSchemaWithReportIdOnly = await prisma.hikrReportWaypointSchema.updateManyAndReturn({
      *   select: { reportId: true },
@@ -18206,7 +18206,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends HikrReportWaypointSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, HikrReportWaypointSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrReportWaypointSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -18295,7 +18295,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends HikrReportWaypointSchemaGroupByArgs,
@@ -18404,7 +18404,7 @@ export namespace Prisma {
     readonly waypointId: FieldRef<"HikrReportWaypointSchema", 'String'>
     readonly position: FieldRef<"HikrReportWaypointSchema", 'Int'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -18473,31 +18473,31 @@ export namespace Prisma {
     where?: HikrReportWaypointSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrReportWaypointSchemas to fetch.
      */
     orderBy?: HikrReportWaypointSchemaOrderByWithRelationInput | HikrReportWaypointSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for HikrReportWaypointSchemas.
      */
     cursor?: HikrReportWaypointSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrReportWaypointSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrReportWaypointSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of HikrReportWaypointSchemas.
      */
     distinct?: HikrReportWaypointSchemaScalarFieldEnum | HikrReportWaypointSchemaScalarFieldEnum[]
@@ -18525,31 +18525,31 @@ export namespace Prisma {
     where?: HikrReportWaypointSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrReportWaypointSchemas to fetch.
      */
     orderBy?: HikrReportWaypointSchemaOrderByWithRelationInput | HikrReportWaypointSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for HikrReportWaypointSchemas.
      */
     cursor?: HikrReportWaypointSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrReportWaypointSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrReportWaypointSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of HikrReportWaypointSchemas.
      */
     distinct?: HikrReportWaypointSchemaScalarFieldEnum | HikrReportWaypointSchemaScalarFieldEnum[]
@@ -18577,25 +18577,25 @@ export namespace Prisma {
     where?: HikrReportWaypointSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrReportWaypointSchemas to fetch.
      */
     orderBy?: HikrReportWaypointSchemaOrderByWithRelationInput | HikrReportWaypointSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing HikrReportWaypointSchemas.
      */
     cursor?: HikrReportWaypointSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrReportWaypointSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrReportWaypointSchemas.
      */
     skip?: number
@@ -18959,55 +18959,55 @@ export namespace Prisma {
     where?: HikrScraperProgressSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrScraperProgressSchemas to fetch.
      */
     orderBy?: HikrScraperProgressSchemaOrderByWithRelationInput | HikrScraperProgressSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: HikrScraperProgressSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrScraperProgressSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrScraperProgressSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned HikrScraperProgressSchemas
     **/
     _count?: true | HikrScraperProgressSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: HikrScraperProgressSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: HikrScraperProgressSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: HikrScraperProgressSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: HikrScraperProgressSchemaMaxAggregateInputType
@@ -19223,13 +19223,13 @@ export namespace Prisma {
      * @example
      * // Get all HikrScraperProgressSchemas
      * const hikrScraperProgressSchemas = await prisma.hikrScraperProgressSchema.findMany()
-     *
+     * 
      * // Get first 10 HikrScraperProgressSchemas
      * const hikrScraperProgressSchemas = await prisma.hikrScraperProgressSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const hikrScraperProgressSchemaWithIdOnly = await prisma.hikrScraperProgressSchema.findMany({ select: { id: true } })
-     *
+     * 
      */
     findMany<T extends HikrScraperProgressSchemaFindManyArgs>(args?: SelectSubset<T, HikrScraperProgressSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrScraperProgressSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -19243,7 +19243,7 @@ export namespace Prisma {
      *     // ... data to create a HikrScraperProgressSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends HikrScraperProgressSchemaCreateArgs>(args: SelectSubset<T, HikrScraperProgressSchemaCreateArgs<ExtArgs>>): Prisma__HikrScraperProgressSchemaClient<$Result.GetResult<Prisma.$HikrScraperProgressSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -19257,7 +19257,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends HikrScraperProgressSchemaCreateManyArgs>(args?: SelectSubset<T, HikrScraperProgressSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -19271,7 +19271,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many HikrScraperProgressSchemas and only return the `id`
      * const hikrScraperProgressSchemaWithIdOnly = await prisma.hikrScraperProgressSchema.createManyAndReturn({
      *   select: { id: true },
@@ -19281,7 +19281,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends HikrScraperProgressSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, HikrScraperProgressSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrScraperProgressSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -19295,7 +19295,7 @@ export namespace Prisma {
      *     // ... filter to delete one HikrScraperProgressSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends HikrScraperProgressSchemaDeleteArgs>(args: SelectSubset<T, HikrScraperProgressSchemaDeleteArgs<ExtArgs>>): Prisma__HikrScraperProgressSchemaClient<$Result.GetResult<Prisma.$HikrScraperProgressSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -19312,7 +19312,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends HikrScraperProgressSchemaUpdateArgs>(args: SelectSubset<T, HikrScraperProgressSchemaUpdateArgs<ExtArgs>>): Prisma__HikrScraperProgressSchemaClient<$Result.GetResult<Prisma.$HikrScraperProgressSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -19326,7 +19326,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends HikrScraperProgressSchemaDeleteManyArgs>(args?: SelectSubset<T, HikrScraperProgressSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -19345,7 +19345,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends HikrScraperProgressSchemaUpdateManyArgs>(args: SelectSubset<T, HikrScraperProgressSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -19362,7 +19362,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more HikrScraperProgressSchemas and only return the `id`
      * const hikrScraperProgressSchemaWithIdOnly = await prisma.hikrScraperProgressSchema.updateManyAndReturn({
      *   select: { id: true },
@@ -19375,7 +19375,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends HikrScraperProgressSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, HikrScraperProgressSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HikrScraperProgressSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -19464,7 +19464,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends HikrScraperProgressSchemaGroupByArgs,
@@ -19579,7 +19579,7 @@ export namespace Prisma {
     readonly startedAt: FieldRef<"HikrScraperProgressSchema", 'DateTime'>
     readonly updatedAt: FieldRef<"HikrScraperProgressSchema", 'DateTime'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -19636,31 +19636,31 @@ export namespace Prisma {
     where?: HikrScraperProgressSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrScraperProgressSchemas to fetch.
      */
     orderBy?: HikrScraperProgressSchemaOrderByWithRelationInput | HikrScraperProgressSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for HikrScraperProgressSchemas.
      */
     cursor?: HikrScraperProgressSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrScraperProgressSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrScraperProgressSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of HikrScraperProgressSchemas.
      */
     distinct?: HikrScraperProgressSchemaScalarFieldEnum | HikrScraperProgressSchemaScalarFieldEnum[]
@@ -19684,31 +19684,31 @@ export namespace Prisma {
     where?: HikrScraperProgressSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrScraperProgressSchemas to fetch.
      */
     orderBy?: HikrScraperProgressSchemaOrderByWithRelationInput | HikrScraperProgressSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for HikrScraperProgressSchemas.
      */
     cursor?: HikrScraperProgressSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrScraperProgressSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrScraperProgressSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of HikrScraperProgressSchemas.
      */
     distinct?: HikrScraperProgressSchemaScalarFieldEnum | HikrScraperProgressSchemaScalarFieldEnum[]
@@ -19732,25 +19732,25 @@ export namespace Prisma {
     where?: HikrScraperProgressSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of HikrScraperProgressSchemas to fetch.
      */
     orderBy?: HikrScraperProgressSchemaOrderByWithRelationInput | HikrScraperProgressSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing HikrScraperProgressSchemas.
      */
     cursor?: HikrScraperProgressSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` HikrScraperProgressSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` HikrScraperProgressSchemas.
      */
     skip?: number
@@ -20056,55 +20056,55 @@ export namespace Prisma {
     where?: ReportBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ReportBaseSchemas to fetch.
      */
     orderBy?: ReportBaseSchemaOrderByWithRelationInput | ReportBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ReportBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ReportBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ReportBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ReportBaseSchemas
     **/
     _count?: true | ReportBaseSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: ReportBaseSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: ReportBaseSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ReportBaseSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: ReportBaseSchemaMaxAggregateInputType
@@ -20337,13 +20337,13 @@ export namespace Prisma {
      * @example
      * // Get all ReportBaseSchemas
      * const reportBaseSchemas = await prisma.reportBaseSchema.findMany()
-     *
+     * 
      * // Get first 10 ReportBaseSchemas
      * const reportBaseSchemas = await prisma.reportBaseSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `reportId`
      * const reportBaseSchemaWithReportIdOnly = await prisma.reportBaseSchema.findMany({ select: { reportId: true } })
-     *
+     * 
      */
     findMany<T extends ReportBaseSchemaFindManyArgs>(args?: SelectSubset<T, ReportBaseSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportBaseSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -20357,7 +20357,7 @@ export namespace Prisma {
      *     // ... data to create a ReportBaseSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends ReportBaseSchemaCreateArgs>(args: SelectSubset<T, ReportBaseSchemaCreateArgs<ExtArgs>>): Prisma__ReportBaseSchemaClient<$Result.GetResult<Prisma.$ReportBaseSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -20371,7 +20371,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends ReportBaseSchemaCreateManyArgs>(args?: SelectSubset<T, ReportBaseSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -20385,7 +20385,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many ReportBaseSchemas and only return the `reportId`
      * const reportBaseSchemaWithReportIdOnly = await prisma.reportBaseSchema.createManyAndReturn({
      *   select: { reportId: true },
@@ -20395,7 +20395,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends ReportBaseSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ReportBaseSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportBaseSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -20409,7 +20409,7 @@ export namespace Prisma {
      *     // ... filter to delete one ReportBaseSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends ReportBaseSchemaDeleteArgs>(args: SelectSubset<T, ReportBaseSchemaDeleteArgs<ExtArgs>>): Prisma__ReportBaseSchemaClient<$Result.GetResult<Prisma.$ReportBaseSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -20426,7 +20426,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends ReportBaseSchemaUpdateArgs>(args: SelectSubset<T, ReportBaseSchemaUpdateArgs<ExtArgs>>): Prisma__ReportBaseSchemaClient<$Result.GetResult<Prisma.$ReportBaseSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -20440,7 +20440,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends ReportBaseSchemaDeleteManyArgs>(args?: SelectSubset<T, ReportBaseSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -20459,7 +20459,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends ReportBaseSchemaUpdateManyArgs>(args: SelectSubset<T, ReportBaseSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -20476,7 +20476,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more ReportBaseSchemas and only return the `reportId`
      * const reportBaseSchemaWithReportIdOnly = await prisma.reportBaseSchema.updateManyAndReturn({
      *   select: { reportId: true },
@@ -20489,7 +20489,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends ReportBaseSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ReportBaseSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportBaseSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -20578,7 +20578,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends ReportBaseSchemaGroupByArgs,
@@ -20695,7 +20695,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"ReportBaseSchema", 'DateTime'>
     readonly updatedAt: FieldRef<"ReportBaseSchema", 'DateTime'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -20764,31 +20764,31 @@ export namespace Prisma {
     where?: ReportBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ReportBaseSchemas to fetch.
      */
     orderBy?: ReportBaseSchemaOrderByWithRelationInput | ReportBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ReportBaseSchemas.
      */
     cursor?: ReportBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ReportBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ReportBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ReportBaseSchemas.
      */
     distinct?: ReportBaseSchemaScalarFieldEnum | ReportBaseSchemaScalarFieldEnum[]
@@ -20816,31 +20816,31 @@ export namespace Prisma {
     where?: ReportBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ReportBaseSchemas to fetch.
      */
     orderBy?: ReportBaseSchemaOrderByWithRelationInput | ReportBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ReportBaseSchemas.
      */
     cursor?: ReportBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ReportBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ReportBaseSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ReportBaseSchemas.
      */
     distinct?: ReportBaseSchemaScalarFieldEnum | ReportBaseSchemaScalarFieldEnum[]
@@ -20868,25 +20868,25 @@ export namespace Prisma {
     where?: ReportBaseSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ReportBaseSchemas to fetch.
      */
     orderBy?: ReportBaseSchemaOrderByWithRelationInput | ReportBaseSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ReportBaseSchemas.
      */
     cursor?: ReportBaseSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ReportBaseSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ReportBaseSchemas.
      */
     skip?: number
@@ -21268,55 +21268,55 @@ export namespace Prisma {
     where?: RouteSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of RouteSchemas to fetch.
      */
     orderBy?: RouteSchemaOrderByWithRelationInput | RouteSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: RouteSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` RouteSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` RouteSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned RouteSchemas
     **/
     _count?: true | RouteSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: RouteSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: RouteSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: RouteSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: RouteSchemaMaxAggregateInputType
@@ -21551,13 +21551,13 @@ export namespace Prisma {
      * @example
      * // Get all RouteSchemas
      * const routeSchemas = await prisma.routeSchema.findMany()
-     *
+     * 
      * // Get first 10 RouteSchemas
      * const routeSchemas = await prisma.routeSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const routeSchemaWithIdOnly = await prisma.routeSchema.findMany({ select: { id: true } })
-     *
+     * 
      */
     findMany<T extends RouteSchemaFindManyArgs>(args?: SelectSubset<T, RouteSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RouteSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -21571,7 +21571,7 @@ export namespace Prisma {
      *     // ... data to create a RouteSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends RouteSchemaCreateArgs>(args: SelectSubset<T, RouteSchemaCreateArgs<ExtArgs>>): Prisma__RouteSchemaClient<$Result.GetResult<Prisma.$RouteSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -21585,7 +21585,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends RouteSchemaCreateManyArgs>(args?: SelectSubset<T, RouteSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -21599,7 +21599,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many RouteSchemas and only return the `id`
      * const routeSchemaWithIdOnly = await prisma.routeSchema.createManyAndReturn({
      *   select: { id: true },
@@ -21609,7 +21609,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends RouteSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, RouteSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RouteSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -21623,7 +21623,7 @@ export namespace Prisma {
      *     // ... filter to delete one RouteSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends RouteSchemaDeleteArgs>(args: SelectSubset<T, RouteSchemaDeleteArgs<ExtArgs>>): Prisma__RouteSchemaClient<$Result.GetResult<Prisma.$RouteSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -21640,7 +21640,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends RouteSchemaUpdateArgs>(args: SelectSubset<T, RouteSchemaUpdateArgs<ExtArgs>>): Prisma__RouteSchemaClient<$Result.GetResult<Prisma.$RouteSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -21654,7 +21654,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends RouteSchemaDeleteManyArgs>(args?: SelectSubset<T, RouteSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -21673,7 +21673,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends RouteSchemaUpdateManyArgs>(args: SelectSubset<T, RouteSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -21690,7 +21690,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more RouteSchemas and only return the `id`
      * const routeSchemaWithIdOnly = await prisma.routeSchema.updateManyAndReturn({
      *   select: { id: true },
@@ -21703,7 +21703,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends RouteSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, RouteSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RouteSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -21792,7 +21792,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends RouteSchemaGroupByArgs,
@@ -21909,7 +21909,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"RouteSchema", 'DateTime'>
     readonly updatedAt: FieldRef<"RouteSchema", 'DateTime'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -21978,31 +21978,31 @@ export namespace Prisma {
     where?: RouteSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of RouteSchemas to fetch.
      */
     orderBy?: RouteSchemaOrderByWithRelationInput | RouteSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for RouteSchemas.
      */
     cursor?: RouteSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` RouteSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` RouteSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of RouteSchemas.
      */
     distinct?: RouteSchemaScalarFieldEnum | RouteSchemaScalarFieldEnum[]
@@ -22030,31 +22030,31 @@ export namespace Prisma {
     where?: RouteSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of RouteSchemas to fetch.
      */
     orderBy?: RouteSchemaOrderByWithRelationInput | RouteSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for RouteSchemas.
      */
     cursor?: RouteSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` RouteSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` RouteSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of RouteSchemas.
      */
     distinct?: RouteSchemaScalarFieldEnum | RouteSchemaScalarFieldEnum[]
@@ -22082,25 +22082,25 @@ export namespace Prisma {
     where?: RouteSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of RouteSchemas to fetch.
      */
     orderBy?: RouteSchemaOrderByWithRelationInput | RouteSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing RouteSchemas.
      */
     cursor?: RouteSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` RouteSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` RouteSchemas.
      */
     skip?: number
@@ -22389,6 +22389,7 @@ export namespace Prisma {
     id: bigint | null
     summitName: string | null
     canton: string | null
+    duplicationRisk: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -22397,6 +22398,7 @@ export namespace Prisma {
     id: bigint | null
     summitName: string | null
     canton: string | null
+    duplicationRisk: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -22406,6 +22408,7 @@ export namespace Prisma {
     summitName: number
     summitNames: number
     canton: number
+    duplicationRisk: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -22424,6 +22427,7 @@ export namespace Prisma {
     id?: true
     summitName?: true
     canton?: true
+    duplicationRisk?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -22432,6 +22436,7 @@ export namespace Prisma {
     id?: true
     summitName?: true
     canton?: true
+    duplicationRisk?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -22441,6 +22446,7 @@ export namespace Prisma {
     summitName?: true
     summitNames?: true
     canton?: true
+    duplicationRisk?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -22453,55 +22459,55 @@ export namespace Prisma {
     where?: SummitSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of SummitSchemas to fetch.
      */
     orderBy?: SummitSchemaOrderByWithRelationInput | SummitSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: SummitSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` SummitSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` SummitSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned SummitSchemas
     **/
     _count?: true | SummitSchemaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
     **/
     _avg?: SummitSchemaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
     **/
     _sum?: SummitSchemaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: SummitSchemaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
     **/
     _max?: SummitSchemaMaxAggregateInputType
@@ -22537,6 +22543,7 @@ export namespace Prisma {
     summitName: string
     summitNames: string[]
     canton: string
+    duplicationRisk: boolean
     createdAt: Date
     updatedAt: Date
     _count: SummitSchemaCountAggregateOutputType | null
@@ -22565,6 +22572,7 @@ export namespace Prisma {
     summitName?: boolean
     summitNames?: boolean
     canton?: boolean
+    duplicationRisk?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     routes?: boolean | SummitSchema$routesArgs<ExtArgs>
@@ -22576,6 +22584,7 @@ export namespace Prisma {
     summitName?: boolean
     summitNames?: boolean
     canton?: boolean
+    duplicationRisk?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["summitSchema"]>
@@ -22585,6 +22594,7 @@ export namespace Prisma {
     summitName?: boolean
     summitNames?: boolean
     canton?: boolean
+    duplicationRisk?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["summitSchema"]>
@@ -22594,11 +22604,12 @@ export namespace Prisma {
     summitName?: boolean
     summitNames?: boolean
     canton?: boolean
+    duplicationRisk?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SummitSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "summitName" | "summitNames" | "canton" | "createdAt" | "updatedAt", ExtArgs["result"]["summitSchema"]>
+  export type SummitSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "summitName" | "summitNames" | "canton" | "duplicationRisk" | "createdAt" | "updatedAt", ExtArgs["result"]["summitSchema"]>
   export type SummitSchemaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     routes?: boolean | SummitSchema$routesArgs<ExtArgs>
     _count?: boolean | SummitSchemaCountOutputTypeDefaultArgs<ExtArgs>
@@ -22616,6 +22627,7 @@ export namespace Prisma {
       summitName: string
       summitNames: string[]
       canton: string
+      duplicationRisk: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["summitSchema"]>
@@ -22697,13 +22709,13 @@ export namespace Prisma {
      * @example
      * // Get all SummitSchemas
      * const summitSchemas = await prisma.summitSchema.findMany()
-     *
+     * 
      * // Get first 10 SummitSchemas
      * const summitSchemas = await prisma.summitSchema.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const summitSchemaWithIdOnly = await prisma.summitSchema.findMany({ select: { id: true } })
-     *
+     * 
      */
     findMany<T extends SummitSchemaFindManyArgs>(args?: SelectSubset<T, SummitSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SummitSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -22717,7 +22729,7 @@ export namespace Prisma {
      *     // ... data to create a SummitSchema
      *   }
      * })
-     *
+     * 
      */
     create<T extends SummitSchemaCreateArgs>(args: SelectSubset<T, SummitSchemaCreateArgs<ExtArgs>>): Prisma__SummitSchemaClient<$Result.GetResult<Prisma.$SummitSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -22731,7 +22743,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
     createMany<T extends SummitSchemaCreateManyArgs>(args?: SelectSubset<T, SummitSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -22745,7 +22757,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Create many SummitSchemas and only return the `id`
      * const summitSchemaWithIdOnly = await prisma.summitSchema.createManyAndReturn({
      *   select: { id: true },
@@ -22755,7 +22767,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     createManyAndReturn<T extends SummitSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, SummitSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SummitSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -22769,7 +22781,7 @@ export namespace Prisma {
      *     // ... filter to delete one SummitSchema
      *   }
      * })
-     *
+     * 
      */
     delete<T extends SummitSchemaDeleteArgs>(args: SelectSubset<T, SummitSchemaDeleteArgs<ExtArgs>>): Prisma__SummitSchemaClient<$Result.GetResult<Prisma.$SummitSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -22786,7 +22798,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     update<T extends SummitSchemaUpdateArgs>(args: SelectSubset<T, SummitSchemaUpdateArgs<ExtArgs>>): Prisma__SummitSchemaClient<$Result.GetResult<Prisma.$SummitSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -22800,7 +22812,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
     deleteMany<T extends SummitSchemaDeleteManyArgs>(args?: SelectSubset<T, SummitSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -22819,7 +22831,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
     updateMany<T extends SummitSchemaUpdateManyArgs>(args: SelectSubset<T, SummitSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -22836,7 +22848,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     * 
      * // Update zero or more SummitSchemas and only return the `id`
      * const summitSchemaWithIdOnly = await prisma.summitSchema.updateManyAndReturn({
      *   select: { id: true },
@@ -22849,7 +22861,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     *
+     * 
      */
     updateManyAndReturn<T extends SummitSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, SummitSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SummitSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -22938,7 +22950,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
+     * 
     **/
     groupBy<
       T extends SummitSchemaGroupByArgs,
@@ -23046,10 +23058,11 @@ export namespace Prisma {
     readonly summitName: FieldRef<"SummitSchema", 'String'>
     readonly summitNames: FieldRef<"SummitSchema", 'String[]'>
     readonly canton: FieldRef<"SummitSchema", 'String'>
+    readonly duplicationRisk: FieldRef<"SummitSchema", 'Boolean'>
     readonly createdAt: FieldRef<"SummitSchema", 'DateTime'>
     readonly updatedAt: FieldRef<"SummitSchema", 'DateTime'>
   }
-
+    
 
   // Custom InputTypes
   /**
@@ -23118,31 +23131,31 @@ export namespace Prisma {
     where?: SummitSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of SummitSchemas to fetch.
      */
     orderBy?: SummitSchemaOrderByWithRelationInput | SummitSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for SummitSchemas.
      */
     cursor?: SummitSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` SummitSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` SummitSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of SummitSchemas.
      */
     distinct?: SummitSchemaScalarFieldEnum | SummitSchemaScalarFieldEnum[]
@@ -23170,31 +23183,31 @@ export namespace Prisma {
     where?: SummitSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of SummitSchemas to fetch.
      */
     orderBy?: SummitSchemaOrderByWithRelationInput | SummitSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for SummitSchemas.
      */
     cursor?: SummitSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` SummitSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` SummitSchemas.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of SummitSchemas.
      */
     distinct?: SummitSchemaScalarFieldEnum | SummitSchemaScalarFieldEnum[]
@@ -23222,25 +23235,25 @@ export namespace Prisma {
     where?: SummitSchemaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of SummitSchemas to fetch.
      */
     orderBy?: SummitSchemaOrderByWithRelationInput | SummitSchemaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing SummitSchemas.
      */
     cursor?: SummitSchemaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` SummitSchemas from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` SummitSchemas.
      */
     skip?: number
@@ -23755,6 +23768,7 @@ export namespace Prisma {
     summitName: 'summitName',
     summitNames: 'summitNames',
     canton: 'canton',
+    duplicationRisk: 'duplicationRisk',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -23819,105 +23833,105 @@ export namespace Prisma {
    * Reference to a field of type 'BigInt'
    */
   export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
-
+    
 
 
   /**
    * Reference to a field of type 'BigInt[]'
    */
   export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
-
+    
 
 
   /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-
+    
 
 
   /**
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-
+    
 
 
   /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-
+    
 
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-
+    
 
 
   /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-
+    
 
 
   /**
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-
+    
 
 
   /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-
+    
 
 
   /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-
+    
 
 
   /**
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-
+    
 
 
   /**
    * Reference to a field of type 'HikrCategory'
    */
   export type EnumHikrCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HikrCategory'>
-
+    
 
 
   /**
    * Reference to a field of type 'HikrCategory[]'
    */
   export type ListEnumHikrCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HikrCategory[]'>
-
+    
 
 
   /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-
+    
 
 
   /**
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-
+    
   /**
    * Deep Input Types
    */
@@ -25302,6 +25316,7 @@ export namespace Prisma {
     summitName?: StringFilter<"SummitSchema"> | string
     summitNames?: StringNullableListFilter<"SummitSchema">
     canton?: StringFilter<"SummitSchema"> | string
+    duplicationRisk?: BoolFilter<"SummitSchema"> | boolean
     createdAt?: DateTimeFilter<"SummitSchema"> | Date | string
     updatedAt?: DateTimeFilter<"SummitSchema"> | Date | string
     routes?: RouteSchemaListRelationFilter
@@ -25312,6 +25327,7 @@ export namespace Prisma {
     summitName?: SortOrder
     summitNames?: SortOrder
     canton?: SortOrder
+    duplicationRisk?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     routes?: RouteSchemaOrderByRelationAggregateInput
@@ -25326,6 +25342,7 @@ export namespace Prisma {
     summitName?: StringFilter<"SummitSchema"> | string
     summitNames?: StringNullableListFilter<"SummitSchema">
     canton?: StringFilter<"SummitSchema"> | string
+    duplicationRisk?: BoolFilter<"SummitSchema"> | boolean
     createdAt?: DateTimeFilter<"SummitSchema"> | Date | string
     updatedAt?: DateTimeFilter<"SummitSchema"> | Date | string
     routes?: RouteSchemaListRelationFilter
@@ -25336,6 +25353,7 @@ export namespace Prisma {
     summitName?: SortOrder
     summitNames?: SortOrder
     canton?: SortOrder
+    duplicationRisk?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SummitSchemaCountOrderByAggregateInput
@@ -25353,6 +25371,7 @@ export namespace Prisma {
     summitName?: StringWithAggregatesFilter<"SummitSchema"> | string
     summitNames?: StringNullableListFilter<"SummitSchema">
     canton?: StringWithAggregatesFilter<"SummitSchema"> | string
+    duplicationRisk?: BoolWithAggregatesFilter<"SummitSchema"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SummitSchema"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SummitSchema"> | Date | string
   }
@@ -26852,6 +26871,7 @@ export namespace Prisma {
     summitName: string
     summitNames?: SummitSchemaCreatesummitNamesInput | string[]
     canton: string
+    duplicationRisk?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     routes?: RouteSchemaCreateNestedManyWithoutSummitInput
@@ -26862,6 +26882,7 @@ export namespace Prisma {
     summitName: string
     summitNames?: SummitSchemaCreatesummitNamesInput | string[]
     canton: string
+    duplicationRisk?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     routes?: RouteSchemaUncheckedCreateNestedManyWithoutSummitInput
@@ -26872,6 +26893,7 @@ export namespace Prisma {
     summitName?: StringFieldUpdateOperationsInput | string
     summitNames?: SummitSchemaUpdatesummitNamesInput | string[]
     canton?: StringFieldUpdateOperationsInput | string
+    duplicationRisk?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     routes?: RouteSchemaUpdateManyWithoutSummitNestedInput
@@ -26882,6 +26904,7 @@ export namespace Prisma {
     summitName?: StringFieldUpdateOperationsInput | string
     summitNames?: SummitSchemaUpdatesummitNamesInput | string[]
     canton?: StringFieldUpdateOperationsInput | string
+    duplicationRisk?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     routes?: RouteSchemaUncheckedUpdateManyWithoutSummitNestedInput
@@ -26892,6 +26915,7 @@ export namespace Prisma {
     summitName: string
     summitNames?: SummitSchemaCreatesummitNamesInput | string[]
     canton: string
+    duplicationRisk?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26901,6 +26925,7 @@ export namespace Prisma {
     summitName?: StringFieldUpdateOperationsInput | string
     summitNames?: SummitSchemaUpdatesummitNamesInput | string[]
     canton?: StringFieldUpdateOperationsInput | string
+    duplicationRisk?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26910,6 +26935,7 @@ export namespace Prisma {
     summitName?: StringFieldUpdateOperationsInput | string
     summitNames?: SummitSchemaUpdatesummitNamesInput | string[]
     canton?: StringFieldUpdateOperationsInput | string
+    duplicationRisk?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28214,6 +28240,11 @@ export namespace Prisma {
     _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type RouteSchemaListRelationFilter = {
     every?: RouteSchemaWhereInput
     some?: RouteSchemaWhereInput
@@ -28234,6 +28265,7 @@ export namespace Prisma {
     summitName?: SortOrder
     summitNames?: SortOrder
     canton?: SortOrder
+    duplicationRisk?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -28246,6 +28278,7 @@ export namespace Prisma {
     id?: SortOrder
     summitName?: SortOrder
     canton?: SortOrder
+    duplicationRisk?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -28254,12 +28287,21 @@ export namespace Prisma {
     id?: SortOrder
     summitName?: SortOrder
     canton?: SortOrder
+    duplicationRisk?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SummitSchemaSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ReportBaseSchemaCreateNestedOneWithoutClimbingGardenSchemaInput = {
@@ -29130,6 +29172,10 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type RouteSchemaUpdateManyWithoutSummitNestedInput = {
     create?: XOR<RouteSchemaCreateWithoutSummitInput, RouteSchemaUncheckedCreateWithoutSummitInput> | RouteSchemaCreateWithoutSummitInput[] | RouteSchemaUncheckedCreateWithoutSummitInput[]
     connectOrCreate?: RouteSchemaCreateOrConnectWithoutSummitInput | RouteSchemaCreateOrConnectWithoutSummitInput[]
@@ -29490,6 +29536,19 @@ export namespace Prisma {
     _sum?: NestedBigIntNullableFilter<$PrismaModel>
     _min?: NestedBigIntNullableFilter<$PrismaModel>
     _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ReportBaseSchemaCreateWithoutClimbingGardenSchemaInput = {
@@ -31586,6 +31645,7 @@ export namespace Prisma {
     summitName: string
     summitNames?: SummitSchemaCreatesummitNamesInput | string[]
     canton: string
+    duplicationRisk?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31595,6 +31655,7 @@ export namespace Prisma {
     summitName: string
     summitNames?: SummitSchemaCreatesummitNamesInput | string[]
     canton: string
+    duplicationRisk?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31662,6 +31723,7 @@ export namespace Prisma {
     summitName?: StringFieldUpdateOperationsInput | string
     summitNames?: SummitSchemaUpdatesummitNamesInput | string[]
     canton?: StringFieldUpdateOperationsInput | string
+    duplicationRisk?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31671,6 +31733,7 @@ export namespace Prisma {
     summitName?: StringFieldUpdateOperationsInput | string
     summitNames?: SummitSchemaUpdatesummitNamesInput | string[]
     canton?: StringFieldUpdateOperationsInput | string
+    duplicationRisk?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

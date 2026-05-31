@@ -34,6 +34,7 @@ describe('postgres database adapter', () => {
   test('wires climbing persistence through operation modules', async () => {
     const calls: string[] = [];
     const routeUpdates: unknown[] = [];
+    const summitUpserts: unknown[] = [];
     const reportBase = {
       activity: ACTIVITY.CLIMBING,
       subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
@@ -45,8 +46,13 @@ describe('postgres database adapter', () => {
         findUnique: async () => reportBase,
       },
       summitSchema: {
-        upsert: async () => {
+        findFirst: async () => {
+          calls.push('tx.summitSchema.findFirst');
+          return null;
+        },
+        upsert: async (input: unknown) => {
           calls.push('tx.summitSchema.upsert');
+          summitUpserts.push(input);
           return { id: 5n };
         },
       },
@@ -158,6 +164,7 @@ describe('postgres database adapter', () => {
       'routeSchema.findMany.routeName+routeNames',
       'routeSchema.findMany.cragName',
       '$transaction',
+      'tx.summitSchema.findFirst',
       'tx.summitSchema.upsert',
       'tx.routeSchema.upsert',
       'tx.routeSchema.update',
@@ -170,6 +177,102 @@ describe('postgres database adapter', () => {
       {
         where: { id: 7n },
         data: { routeNames: ['Südgrat', 'S-Grat'] },
+      },
+    ]);
+    expect(summitUpserts).toEqual([
+      {
+        where: {
+          summitNameCanton: {
+            summitName: 'Gross Turm',
+            canton: 'Obwalden',
+          },
+        },
+        create: {
+          summitName: 'Gross Turm',
+          summitNames: ['Gross Turm'],
+          canton: 'Obwalden',
+          duplicationRisk: false,
+        },
+        update: {
+          duplicationRisk: false,
+        },
+      },
+    ]);
+  });
+
+  test('marks summit duplication risk when the same summit exists in an adjacent canton', async () => {
+    const summitFindFirstInputs: unknown[] = [];
+    const summitUpserts: unknown[] = [];
+    const reportBase = {
+      activity: ACTIVITY.CLIMBING,
+      subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+      canton: 'Solothurn',
+    };
+
+    const tx = {
+      reportBaseSchema: {
+        findUnique: async () => reportBase,
+      },
+      summitSchema: {
+        findFirst: async (input: unknown) => {
+          summitFindFirstInputs.push(input);
+          return { id: 9n };
+        },
+        upsert: async (input: unknown) => {
+          summitUpserts.push(input);
+          return { id: 5n };
+        },
+      },
+      routeSchema: {
+        upsert: async () => ({ id: 7n, routeNames: ['Eulengrat'] }),
+      },
+      climbingTourBaseSchema: {
+        upsert: async () => {},
+      },
+    };
+
+    const prisma = {
+      $transaction: async (callback: (transaction: typeof tx) => Promise<void>) => {
+        await callback(tx);
+      },
+    } as unknown as PrismaClient;
+
+    const database = createPostgresDatabase(prisma);
+
+    await database.upsertClimbingTourBase({
+      reportId: 42n,
+      schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
+      routeName: 'Eulengrat',
+      routeNames: ['Eulengrat'],
+      summit: 'Eulengrat',
+    });
+
+    expect(summitFindFirstInputs).toEqual([
+      {
+        where: {
+          canton: { in: ['Aargau', 'Basel Land', 'Bern', 'Jura'] },
+          OR: [{ summitName: 'Eulengrat' }, { summitNames: { has: 'Eulengrat' } }],
+        },
+        select: { id: true },
+      },
+    ]);
+    expect(summitUpserts).toEqual([
+      {
+        where: {
+          summitNameCanton: {
+            summitName: 'Eulengrat',
+            canton: 'Solothurn',
+          },
+        },
+        create: {
+          summitName: 'Eulengrat',
+          summitNames: ['Eulengrat'],
+          canton: 'Solothurn',
+          duplicationRisk: true,
+        },
+        update: {
+          duplicationRisk: true,
+        },
       },
     ]);
   });
