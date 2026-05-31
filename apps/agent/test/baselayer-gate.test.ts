@@ -18,6 +18,7 @@ function baseInput(overrides: Partial<HikrOrgPostBaseLayerInput> = {}): HikrOrgP
     regionPathCsv: 'Welt, Schweiz, Obwalden, Melchtal',
     tourDate: new Date('2024-08-10T00:00:00.000Z'),
     description: longDescription,
+    reportWaypoints: [],
     hikingDifficulty: null,
     alpineTourDifficulty: null,
     climbingDifficulty: '5a',

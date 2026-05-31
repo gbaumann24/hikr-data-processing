@@ -9,6 +9,7 @@ import {
 import {
   CLIMBING_SUB_ACTIVITY,
   classifyActivity,
+  createMastraClimbingPreprocessorAgentRunner,
   parseClimbingPreprocessorAgentOutput,
   preprocessHikrReportForClimbing,
   type ClimbingPreprocessorAgentInput,
@@ -22,6 +23,7 @@ function baseInput(overrides: Partial<HikrOrgPostBaseLayerInput> = {}): HikrOrgP
     title: 'Gross Turm - Südgrat',
     regionPathCsv: 'Welt, Schweiz, Obwalden, Melchtal',
     description: longDescription,
+    reportWaypoints: [],
     tourDate: new Date('2024-08-10T00:00:00.000Z'),
     hikingDifficulty: 'T4',
     alpineTourDifficulty: null,
@@ -150,18 +152,28 @@ describe('climbing preprocessor', () => {
 
   test('sets climbing tour output when preprocessor agent returns route and summit', async () => {
     const agentInputs: ClimbingPreprocessorAgentInput[] = [];
-    const result = await preprocessHikrReportForClimbing(baseInput(), {
-      runClimbingPreprocessorAgent: async (input) => {
-        agentInputs.push(input);
-        return {
-          activity: ACTIVITY.CLIMBING,
-          subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
-          routeName: 'Südgrat',
-          routeNames: ['Südgrat', 'S-Grat'],
-          summit: 'Gross Turm',
-        };
+    const result = await preprocessHikrReportForClimbing(
+      baseInput({
+        reportWaypoints: [
+          { position: 2, waypoint: { name: 'Gross Turm' } },
+          { position: 1, waypoint: { name: 'Ausgangspunkt Melchtal' } },
+          { position: 3, waypoint: { name: 'Gross Turm' } },
+          { position: 4, waypoint: { name: '  ' } },
+        ],
+      }),
+      {
+        runClimbingPreprocessorAgent: async (input) => {
+          agentInputs.push(input);
+          return {
+            activity: ACTIVITY.CLIMBING,
+            subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+            routeName: 'Südgrat',
+            routeNames: ['Südgrat', 'S-Grat'],
+            summit: 'Gross Turm',
+          };
+        },
       },
-    });
+    );
 
     expect(result.base.status).toBe(PREPROCESSOR_STATUS.READY);
     expect(result.base.subActivity).toBe(CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR);
@@ -172,6 +184,7 @@ describe('climbing preprocessor', () => {
           { scale: 'wandern', value: 'T4' },
           { scale: 'klettern', value: '5a' },
         ],
+        hikrWaypointNames: ['Ausgangspunkt Melchtal', 'Gross Turm'],
       },
     ]);
     expect(result.climbingTourBase).toMatchObject({
@@ -237,6 +250,35 @@ describe('climbing preprocessor', () => {
     expect(result.climbingGardenBase).toBeNull();
     expect(result.reasons).toEqual(['non_climbing_activity']);
     expect(result.skipReason).toBe('Report activity is Wanderung, not Klettern.');
+  });
+
+  test('passes HIKR waypoint names to the Mastra agent context', async () => {
+    const messages: string[] = [];
+    const runner = createMastraClimbingPreprocessorAgentRunner({
+      generate: async (message: string) => {
+        messages.push(message);
+        return {
+          object: {
+            activity: ACTIVITY.HIKING,
+            subActivity: null,
+            routeName: null,
+            routeNames: null,
+            summit: null,
+            name: null,
+          },
+        };
+      },
+    });
+
+    await runner({
+      title: 'Gross Turm - Südgrat',
+      description: longDescription,
+      canton: 'Obwalden',
+      difficultyScales: [],
+      hikrWaypointNames: ['Ausgangspunkt Melchtal', 'Gross Turm'],
+    });
+
+    expect(messages[0]).toContain('HIKR waypoints:\n- Ausgangspunkt Melchtal\n- Gross Turm');
   });
 
   test('treats incomplete structured agent output as no match', async () => {

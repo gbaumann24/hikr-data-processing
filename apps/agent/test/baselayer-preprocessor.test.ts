@@ -16,6 +16,7 @@ function baseInput(
     regionPathCsv: 'Welt, Schweiz, Obwalden, Melchtal',
     tourDate: null,
     description: longDescription,
+    reportWaypoints: [],
     hikingDifficulty: null,
     alpineTourDifficulty: null,
     climbingDifficulty: null,

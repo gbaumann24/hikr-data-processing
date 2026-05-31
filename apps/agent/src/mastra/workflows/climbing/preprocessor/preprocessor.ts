@@ -91,6 +91,7 @@ export async function preprocessPreparedBaseLayerForClimbing(
       scale,
       value: baseLayer.difficultyScales.valuesByScale[scale] ?? '',
     })),
+    hikrWaypointNames: extractHikrWaypointNames(input),
   };
   const agentOutput = await options.runClimbingPreprocessorAgent(agentInput);
 
@@ -147,6 +148,15 @@ export async function preprocessPreparedBaseLayerForClimbing(
       summit: agentOutput.summit,
     },
   });
+}
+
+function extractHikrWaypointNames(input: HikrOrgPostBaseLayerInput): string[] {
+  const waypointNames = [...input.reportWaypoints]
+    .sort((left, right) => left.position - right.position)
+    .map(({ waypoint }) => normalizeDescription(waypoint.name))
+    .filter(Boolean);
+
+  return [...new Set(waypointNames)];
 }
 
 function buildOutput({

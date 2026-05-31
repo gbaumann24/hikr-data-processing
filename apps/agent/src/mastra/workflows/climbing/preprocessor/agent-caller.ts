@@ -27,10 +27,14 @@ export function createMastraClimbingPreprocessorAgentRunner(
   agent: StructuredOutputAgent,
   options: { requestContext?: RequestContext } = {},
 ): ClimbingPreprocessorAgentRunner {
-  return async ({ title, description, canton, difficultyScales }) => {
+  return async ({ title, description, canton, difficultyScales, hikrWaypointNames }) => {
     const difficultyScaleSummary =
       difficultyScales.length > 0
         ? difficultyScales.map(({ scale, value }) => `- ${scale}: ${value}`).join('\n')
+        : '- none';
+    const hikrWaypointSummary =
+      hikrWaypointNames.length > 0
+        ? hikrWaypointNames.map((waypointName) => `- ${waypointName}`).join('\n')
         : '- none';
 
     const response = await agent.generate(
@@ -39,6 +43,9 @@ export function createMastraClimbingPreprocessorAgentRunner(
         '',
         'Difficulty scales:',
         difficultyScaleSummary,
+        '',
+        'HIKR waypoints:',
+        hikrWaypointSummary,
         '',
         `Title: ${title}`,
         '',

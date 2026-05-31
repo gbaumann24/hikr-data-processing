@@ -18,6 +18,7 @@ export type ClimbingPreprocessorAgentInput = {
   description: string;
   canton: string;
   difficultyScales: Array<{ scale: HikrDifficultyScale; value: string }>;
+  hikrWaypointNames: string[];
 };
 
 export const climbingPreprocessorAgentOutputSchema = {

@@ -14,6 +14,17 @@ export const HIKR_ORG_POST_BASE_LAYER_SELECT = {
   iceClimbingDifficulty: true,
   mountainBikeDifficulty: true,
   description: true,
+  reportWaypoints: {
+    orderBy: { position: 'asc' },
+    select: {
+      position: true,
+      waypoint: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  },
 } satisfies Prisma.HikrOrgPostSchemaSelect;
 
 export type HikrOrgPostBaseLayerInput = Prisma.HikrOrgPostSchemaGetPayload<{

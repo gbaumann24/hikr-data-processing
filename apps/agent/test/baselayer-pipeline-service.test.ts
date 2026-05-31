@@ -20,6 +20,7 @@ function hikrOrgPost(
     title: 'Gross Turm',
     regionPathCsv: 'Welt, Schweiz, Obwalden, Melchtal',
     description: longDescription,
+    reportWaypoints: [],
     tourDate: new Date('2024-08-10T00:00:00.000Z'),
     hikingDifficulty: null,
     alpineTourDifficulty: null,
