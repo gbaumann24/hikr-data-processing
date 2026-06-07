@@ -1,12 +1,10 @@
 import { loadRootEnv } from '../utils';
 import { Mastra } from '@mastra/core/mastra';
-import { MastraCompositeStore } from '@mastra/core/storage';
-import { LibSQLStore } from '@mastra/libsql';
-import { MastraStorageExporter, Observability, SamplingStrategyType } from '@mastra/observability';
-import { PostgresStore } from '@mastra/pg';
 import { baseLayerGateAgent } from './agents/baselayer-gate-agent';
 import { climbingExtractionAgent } from './agents/climbing-extraction-agent';
 import { climbingPreprocessorAgent } from './agents/climbing-preprocessor-agent';
+import { createObservabilityConfig, isMastraObservabilityEnabled } from './runtime/observability';
+import { createMastraStorage } from './runtime/storage';
 import { baseLayerWorkflow } from './workflows/baselayer';
 import { climbingPipelineWorkflow } from './workflows/climbing';
 import { skiTouringPipelineWorkflow } from './workflows/ski-touring';
@@ -31,34 +29,11 @@ export type {
   ClimbingGardenBasePreprocessorOutput,
 } from '@hikr/shared';
 
-const defaultMastraTracesDatabaseUrl =
-  'postgresql://mastra:mastra@127.0.0.1:5436/hikr_data_processing_mastra_traces';
-
-const mastraObservabilityEnabled = readBooleanEnv('MASTRA_OBSERVABILITY_ENABLED', true);
-const observabilityStore = mastraObservabilityEnabled ? createObservabilityStore() : undefined;
+const mastraObservabilityEnabled = isMastraObservabilityEnabled();
 
 export const mastra = new Mastra({
-  storage: new MastraCompositeStore({
-    id: 'hikr-mastra-storage',
-    default: new LibSQLStore({
-      id: 'hikr-mastra-libsql',
-      url: 'file:./mastra.db',
-    }),
-    ...(observabilityStore ? { domains: { observability: observabilityStore } } : {}),
-  }),
-  ...(mastraObservabilityEnabled
-    ? {
-        observability: new Observability({
-          configs: {
-            default: {
-              serviceName: 'hikr-agent',
-              sampling: { type: SamplingStrategyType.ALWAYS },
-              exporters: [new MastraStorageExporter()],
-            },
-          },
-        }),
-      }
-    : {}),
+  storage: createMastraStorage({ observabilityEnabled: mastraObservabilityEnabled }),
+  ...(mastraObservabilityEnabled ? { observability: createObservabilityConfig() } : {}),
   agents: {
     'baselayer-gate-agent': baseLayerGateAgent,
     'climbing-extraction-agent': climbingExtractionAgent,
@@ -70,77 +45,3 @@ export const mastra = new Mastra({
     'ski-touring-pipeline': skiTouringPipelineWorkflow,
   },
 });
-
-function createObservabilityStore() {
-  const observabilityStorage = new PostgresStore({
-    id: 'hikr-observability',
-    connectionString: process.env.MASTRA_TRACES_DATABASE_URL ?? defaultMastraTracesDatabaseUrl,
-  });
-  const store = observabilityStorage.stores.observability;
-
-  if (!store) {
-    throw new Error('Postgres observability storage is not available');
-  }
-
-  // The Studio route calls this lightweight method directly.
-  store.listTracesLight = async (args) => {
-    const { spans, pagination } = await store.listTraces(args);
-
-    return {
-      pagination,
-      spans: spans.map(
-        ({
-          createdAt,
-          updatedAt,
-          name,
-          spanType,
-          isEvent,
-          startedAt,
-          parentSpanId,
-          endedAt,
-          error,
-          entityType,
-          entityId,
-          entityName,
-          traceId,
-          spanId,
-        }) => ({
-          createdAt,
-          updatedAt,
-          name,
-          spanType,
-          isEvent,
-          startedAt,
-          parentSpanId,
-          endedAt,
-          error,
-          entityType,
-          entityId,
-          entityName,
-          traceId,
-          spanId,
-        }),
-      ),
-    };
-  };
-
-  return store;
-}
-
-function readBooleanEnv(name: string, defaultValue: boolean): boolean {
-  const value = process.env[name]?.trim().toLowerCase();
-
-  if (!value) {
-    return defaultValue;
-  }
-
-  if (value === 'true') {
-    return true;
-  }
-
-  if (value === 'false') {
-    return false;
-  }
-
-  throw new Error(`${name} must be true or false`);
-}
