@@ -211,6 +211,21 @@ describe('climbing extraction', () => {
     expect(result).toEqual(partialOutput);
   });
 
+  test('accepts gear items with independently missing size or count', () => {
+    const output: ClimbingExtractionAgentResult = {
+      schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+      ausruestung: {
+        mobile_absicherung: {
+          friends: [{ groesse: '0.75' }, { anzahl: 3 }],
+          keile: [{ groesse: 'satz' }, { anzahl: 5 }],
+        },
+        schlingen: [{ laenge_cm: 120 }, { typ: 'reepschnur' }, { anzahl: 2 }],
+      },
+    };
+
+    expect(climbingExtractionAgentResultSchema.safeParse(output).success).toBe(true);
+  });
+
   test('accepts the prompt-design extraction field set', () => {
     const output: ClimbingExtractionAgentResult = {
       schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
@@ -324,6 +339,19 @@ describe('climbing extraction', () => {
     };
 
     expect(climbingExtractionAgentResultSchema.safeParse(output).success).toBe(true);
+  });
+
+  test('rejects invalid exposition values', () => {
+    const output = {
+      schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+      gelaende_und_gefahren: {
+        charakter: {
+          exposition: 'NNO',
+        },
+      },
+    };
+
+    expect(climbingExtractionAgentResultSchema.safeParse(output).success).toBe(false);
   });
 
   test('rejects invalid structured extraction output', async () => {

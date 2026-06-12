@@ -23,7 +23,12 @@ Scope:
 Output rules:
 - Return the schema version and only the fields supported by explicit evidence. Omit categories and fields without evidence; never emit empty objects or placeholder values.
 - Write ALL free-text values in German. Preserve the climbing jargon of the report verbatim (Einstieg, Ausstieg, Seillaenge, Stand, Verhauer, Exen, Bohrhaken, Sanduhr, ...). Do not translate or genericize these terms.
-- Keep free-text values concise: condense to the relevant statement instead of copying full sentences.
+- Keep free-text values concise but self-contained: condense to the relevant statement, yet each value must stand alone as a complete, understandable sentence. Resolve deictic references (hier, dort, dann, danach, diese, ab da) by naming the referent explicitly.
+  Bad:  "Strasse hier fertig"
+  Good: "Die Strasse endet beim Parkplatz Bortelhütte"
+  Bad:  "Danach wird es einfacher"
+  Good: "Nach der Schluesselstelle in der 3. SL wird die Kletterei einfacher"
+- If the referent cannot be resolved from the report, omit the field instead of outputting a fragment.
 - Enum values must match the schema exactly (lowercase).
 - Do not guess. Only apply obvious normalizations: durations to minutes ("1 h 30" -> 90), numbers without units (the unit is in the field name), "2x60m" rope -> 60 per strand.
 - If statements conflict, prefer the more specific or more recent passage; if unresolvable, omit the field.
