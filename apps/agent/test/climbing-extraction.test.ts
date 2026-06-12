@@ -4,6 +4,7 @@ import {
   CLIMBING_EXTRACTION_SCHEMA_VERSION,
   CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
   CLIMBING_SUB_ACTIVITY,
+  climbingExtractionAgentResultSchema,
   createMastraClimbingExtractor,
   extractPreparedClimbingReport,
   type ClimbingExtractionAgentResult,
@@ -208,5 +209,140 @@ describe('climbing extraction', () => {
     });
 
     expect(result).toEqual(partialOutput);
+  });
+
+  test('accepts the prompt-design extraction field set', () => {
+    const output: ClimbingExtractionAgentResult = {
+      schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+      ausruestung: {
+        seil: { art: 'halbseil', laenge_m: 60 },
+        mobile_absicherung: {
+          erforderlich: true,
+          empfohlen: false,
+          verwendet: true,
+          moeglichkeiten: 'gute Rissstrukturen fuer Friends',
+          friends: [{ groesse: '0.3-2', anzahl: null }],
+          keile: [{ groesse: 'satz', anzahl: null }],
+        },
+        schlingen: [{ typ: 'bandschlinge', laenge_cm: 120, anzahl: 2 }],
+        expresskarabiner: { anzahl: 10 },
+        zusaetzlich: ['helm'],
+      },
+      zeitbedarf: {
+        zustieg_min: 45,
+        reine_kletterzeit_min: 180,
+        abstieg_min: 60,
+      },
+      absicherung: {
+        hakenabstaende: { bewertung: 'mittel', beschreibung: 'teils weite Abstaende' },
+        staende: { gebohrt: true, beschreibung: 'Bohrhakenstaende mit Ringen' },
+        hakenzustand: { bewertung: 'gut', beschreibung: 'solide Klebehaken' },
+      },
+      schuhwerk: {
+        zustieg: { typ: 'zustiegsschuhe' },
+        klettern: { typ: 'kletterschuhe' },
+        abstieg: { typ: 'bergschuhe' },
+      },
+      gelaende_und_gefahren: {
+        charakter: {
+          exposition: 'SO',
+          sonnig: true,
+          schnell_trocknend: false,
+          felsart: 'kalk',
+        },
+        gefahren: [{ typ: 'steinschlag', beschreibung: 'durch andere Seilschaften' }],
+      },
+      klettern: {
+        schluesselstellen: {
+          vorhanden: true,
+          stellen: [{ wo: '3. Seillaenge', beschreibung: 'technische Platte' }],
+        },
+        schwierigkeit: {
+          verhaeltnis: 'schwerer',
+          beschreibung: 'hart fuer 5c',
+        },
+        abseilen: {
+          moeglich: true,
+          anzahl: 4,
+          laengen_m: [25, 50],
+          zum_einstieg: true,
+          abseilpiste: false,
+        },
+        charakter: {
+          kletterstil: ['platte', 'riss'],
+        },
+        routenverlauf: {
+          routenfindung: 'mittel',
+          beschreibung: 'etwas Spuersinn noetig',
+          rueckzug_moeglich: true,
+          rueckzug_beschreibung: 'bis zur 4. SL abseilbar',
+        },
+        seillaengen_verbinden: {
+          moeglich: true,
+          beschreibung: 'SL 3 und 4 mit 60m-Seil zusammenhaengbar',
+        },
+        seillaengen: [
+          {
+            nummer: 1,
+            schwierigkeit: '5c',
+            anzahl_bohrhaken: 6,
+            laenge_m: 35,
+            beschreibung: 'Plattenkletterei',
+          },
+        ],
+      },
+      anreise: {
+        parkplatz: {
+          ort: 'Parkplatz Saentisbahn',
+          kosten: '5 CHF/Tag',
+          besonderheiten: 'wenige Plaetze',
+        },
+        oev: {
+          verkehrsmittel: ['zug', 'bus'],
+          endstation: 'Wasserauen',
+          luftseilbahn_moeglich: true,
+          anmeldung_noetig: false,
+        },
+      },
+      zustieg_und_abstieg: {
+        zustieg: {
+          einstiegsfindung: 'einfach',
+          beschreibung: 'Route name on rock',
+          schwierigkeit: 'T3',
+        },
+        abstieg: {
+          fuehrt_zum_einstieg: true,
+          verpflegung_moeglich: true,
+          verpflegung_beschreibung: 'Berggasthaus Aescher',
+          schwierigkeit: 'scree and old snowfields',
+        },
+      },
+      besonderes: {
+        saisonalitaet: 'ideal im Herbst',
+        hinweise: ['Topo mitnehmen'],
+      },
+    };
+
+    expect(climbingExtractionAgentResultSchema.safeParse(output).success).toBe(true);
+  });
+
+  test('rejects invalid structured extraction output', async () => {
+    const extractClimbing = createMastraClimbingExtractor({
+      generate: async () => ({
+        object: {
+          schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+          zeitbedarf: {
+            zustieg_min: '45',
+          },
+        },
+      }),
+    });
+
+    await expect(
+      extractClimbing({
+        title: 'Gross Turm - Sudgrat',
+        preprocessed: climbingOutput(),
+      }),
+    ).rejects.toThrow('Mastra climbing extraction agent returned invalid structured output');
   });
 });
