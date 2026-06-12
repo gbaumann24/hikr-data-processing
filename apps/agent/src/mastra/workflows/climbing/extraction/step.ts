@@ -1,10 +1,12 @@
 import { createStep } from '@mastra/core/workflows';
+import { z } from 'zod';
 import { climbingPreprocessorOutputSchema } from '../preprocessor';
 import { PREPROCESSOR_STATUS, type HikrOrgPostBaseLayerInput } from '../../baselayer';
 import { createMastraClimbingExtractor } from './agent-caller';
 import { extractPreparedClimbingReport } from './extraction';
+import type { ClimbingExtractionOutput } from './types';
 
-export const climbingExtractionOutputSchema = climbingPreprocessorOutputSchema;
+export const climbingExtractionOutputSchema = z.custom<ClimbingExtractionOutput>();
 
 export const climbingExtractionStep = createStep({
   id: 'climbing-extraction',
@@ -13,7 +15,7 @@ export const climbingExtractionStep = createStep({
   outputSchema: climbingExtractionOutputSchema,
   execute: async ({ inputData, getInitData, mastra }) => {
     if (inputData.base.status !== PREPROCESSOR_STATUS.READY) {
-      return inputData;
+      return { ...inputData, extraction: null };
     }
 
     const post = getInitData<HikrOrgPostBaseLayerInput>();

@@ -3,7 +3,7 @@ import { RequestContext } from '@mastra/core/request-context';
 import { toAsyncIterable } from '@hikr/utils';
 import { mapReportBaseToSchemaWrite, type PreprocessorStatus } from '../workflows/baselayer';
 import type { ClimbingDataPipelineDatabase } from '@hikr/shared';
-import type { ClimbingPreprocessorOutput } from '../workflows/climbing';
+import type { ClimbingExtractionOutput } from '../workflows/climbing';
 import { PREPROCESSOR_STATUS } from '../workflows/baselayer';
 import {
   CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY,
@@ -114,7 +114,7 @@ export async function runClimbingPipelineService({
       const result = await run.start({ inputData: post, requestContext });
 
       if (result.status === 'success') {
-        const climbing = result.result as ClimbingPreprocessorOutput;
+        const climbing = result.result as ClimbingExtractionOutput;
         await database.upsertReportBase(
           mapReportBaseToSchemaWrite(climbing.base, climbing.reasons),
         );
@@ -122,6 +122,12 @@ export async function runClimbingPipelineService({
         if (climbing.base.status === PREPROCESSOR_STATUS.READY) {
           if (climbing.climbingTourBase) {
             await database.upsertClimbingTourBase(climbing.climbingTourBase);
+            if (climbing.extraction) {
+              await database.upsertClimbingTourDetails({
+                reportId: climbing.climbingTourBase.reportId,
+                ...climbing.extraction,
+              });
+            }
           }
           if (climbing.climbingGardenBase) {
             await database.upsertClimbingGardenBase(climbing.climbingGardenBase);

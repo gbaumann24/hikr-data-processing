@@ -147,17 +147,18 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
 describe('climbing extraction', () => {
   test('runs extraction for ready climbing preprocessor output', async () => {
     const input = climbingOutput();
+    const extractionOutput = emptyExtractionOutput();
     const calls: unknown[] = [];
 
     const result = await extractPreparedClimbingReport(input, {
       title: 'Gross Turm - Sudgrat',
       extractClimbing: async (extractorInput) => {
         calls.push(extractorInput);
-        return emptyExtractionOutput();
+        return extractionOutput;
       },
     });
 
-    expect(result).toBe(input);
+    expect(result).toEqual({ ...input, extraction: extractionOutput });
     expect(calls).toHaveLength(1);
     expect(calls[0]).toMatchObject({
       title: 'Gross Turm - Sudgrat',
@@ -185,7 +186,7 @@ describe('climbing extraction', () => {
       },
     });
 
-    expect(result).toBe(input);
+    expect(result).toEqual({ ...input, extraction: null });
     expect(callCount).toBe(0);
   });
 

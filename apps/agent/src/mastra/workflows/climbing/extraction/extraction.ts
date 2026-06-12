@@ -1,19 +1,19 @@
 import { PREPROCESSOR_STATUS } from '../../baselayer';
 import type { ClimbingPreprocessorOutput } from '../preprocessor';
-import type { ClimbingExtractor } from './types';
+import type { ClimbingExtractionOutput, ClimbingExtractor } from './types';
 
 export async function extractPreparedClimbingReport(
   input: ClimbingPreprocessorOutput,
   options: { title?: string | null; extractClimbing?: ClimbingExtractor } = {},
-): Promise<ClimbingPreprocessorOutput> {
+): Promise<ClimbingExtractionOutput> {
   if (input.base.status !== PREPROCESSOR_STATUS.READY || !options.extractClimbing) {
-    return input;
+    return { ...input, extraction: null };
   }
 
-  await options.extractClimbing({
+  const extraction = await options.extractClimbing({
     title: options.title ?? null,
     preprocessed: input,
   });
 
-  return input;
+  return { ...input, extraction };
 }

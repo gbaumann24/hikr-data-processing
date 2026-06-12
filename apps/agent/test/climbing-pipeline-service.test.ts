@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'bun:test';
+import type { ClimbingTourDetailsSchemaWriteInput } from '@hikr/shared';
 import { runClimbingPipelineService } from '../src/mastra/services/climbing-pipeline-service';
 import {
   ACTIVITY,
@@ -7,10 +8,14 @@ import {
   type ReportBaseSchemaWriteInput,
 } from '../src/mastra/workflows/baselayer';
 import {
+  CLIMBING_EXTRACTION_SCHEMA_VERSION,
   CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
   CLIMBING_SUB_ACTIVITY,
+  extractPreparedClimbingReport,
+  preprocessHikrReportForClimbing,
+  type ClimbingExtractionAgentResult,
+  type ClimbingExtractionOutput,
   type ClimbingGardenBasePreprocessorOutput,
-  type ClimbingPreprocessorOutput,
   type ClimbingTourBasePreprocessorOutput,
 } from '../src/mastra/workflows/climbing';
 import { CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY } from '../src/mastra/tools/climbing-route-lookup-tool';
@@ -18,7 +23,7 @@ import { CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY } from '../src/mastra/tools/climbing-
 const longDescription = 'Kletterbericht '.repeat(150);
 
 type ClimbingPipelineMastra = Parameters<typeof runClimbingPipelineService>[0]['mastra'];
-type WorkflowResult = { status: 'success'; result: ClimbingPreprocessorOutput };
+type WorkflowResult = { status: 'success'; result: ClimbingExtractionOutput };
 
 function hikrOrgPost(
   overrides: Partial<HikrOrgPostBaseLayerInput> = {},
@@ -43,8 +48,8 @@ function hikrOrgPost(
 }
 
 function climbingOutput(
-  overrides: Partial<ClimbingPreprocessorOutput> = {},
-): ClimbingPreprocessorOutput {
+  overrides: Partial<ClimbingExtractionOutput> = {},
+): ClimbingExtractionOutput {
   return {
     base: {
       reportId: 42n,
@@ -67,6 +72,27 @@ function climbingOutput(
     normalizedDescriptionLength: longDescription.length,
     reasons: ['ready'],
     skipReason: null,
+    extraction: climbingExtraction(),
+    ...overrides,
+  };
+}
+
+// Builds a minimal climbing extraction payload for service persistence assertions.
+function climbingExtraction(
+  overrides: Partial<ClimbingExtractionAgentResult> = {},
+): ClimbingExtractionAgentResult {
+  return {
+    schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+    zeitbedarf: {
+      zustieg_min: 45,
+      reine_kletterzeit_min: 180,
+    },
+    klettern: {
+      schluesselstellen: {
+        vorhanden: true,
+        stellen: [{ wo: '2. Seillänge', beschreibung: 'kurzer Plattenzug' }],
+      },
+    },
     ...overrides,
   };
 }
@@ -98,6 +124,7 @@ describe('climbing pipeline service', () => {
     const reportBaseWrites: ReportBaseSchemaWriteInput[] = [];
     const climbingTourBaseWrites: ClimbingTourBasePreprocessorOutput[] = [];
     const climbingGardenBaseWrites: ClimbingGardenBasePreprocessorOutput[] = [];
+    const climbingTourDetailsWrites: ClimbingTourDetailsSchemaWriteInput[] = [];
     const workflowStartArgs: Array<{
       requestContext?: { get: (key: string) => unknown };
     }> = [];
@@ -120,6 +147,7 @@ describe('climbing pipeline service', () => {
                 region: 'Melchtal',
               },
               climbingTourBase: null,
+              extraction: null,
               reasons: ['description_too_short'],
             }),
           },
@@ -142,6 +170,9 @@ describe('climbing pipeline service', () => {
         },
         upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => {
           climbingGardenBaseWrites.push(input);
+        },
+        upsertClimbingTourDetails: (input: ClimbingTourDetailsSchemaWriteInput) => {
+          climbingTourDetailsWrites.push(input);
         },
       },
       onProgress: (event) => {
@@ -193,6 +224,22 @@ describe('climbing pipeline service', () => {
       },
     ]);
     expect(climbingGardenBaseWrites).toEqual([]);
+    expect(climbingTourDetailsWrites).toEqual([
+      {
+        reportId: 42n,
+        schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+        zeitbedarf: {
+          zustieg_min: 45,
+          reine_kletterzeit_min: 180,
+        },
+        klettern: {
+          schluesselstellen: {
+            vorhanden: true,
+            stellen: [{ wo: '2. Seillänge', beschreibung: 'kurzer Plattenzug' }],
+          },
+        },
+      },
+    ]);
     expect(progressEvents.map((event) => event.type)).toEqual([
       'source-loaded',
       'post-start',
@@ -218,6 +265,123 @@ describe('climbing pipeline service', () => {
     });
   });
 
+  test('processes scraped source data through preprocessing and extraction before persistence', async () => {
+    const reportBaseWrites: ReportBaseSchemaWriteInput[] = [];
+    const climbingTourBaseWrites: ClimbingTourBasePreprocessorOutput[] = [];
+    const climbingTourDetailsWrites: ClimbingTourDetailsSchemaWriteInput[] = [];
+    const sourcePost = hikrOrgPost({
+      description:
+        `${'Zustieg zum Einstieg, danach Kletterei in gutem Fels. '.repeat(80)}` +
+        'Die Schluesselstelle folgt in der zweiten Seillaenge.',
+    });
+
+    const mastra = {
+      getWorkflow: (workflowId: string) => {
+        expect(workflowId).toBe('climbing-pipeline');
+
+        return {
+          createRun: async () => ({
+            start: async ({ inputData }: { inputData: HikrOrgPostBaseLayerInput }) => {
+              const preprocessed = await preprocessHikrReportForClimbing(inputData, {
+                runClimbingPreprocessorAgent: async () => ({
+                  activity: ACTIVITY.CLIMBING,
+                  subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+                  routeName: 'Südgrat',
+                  routeNames: ['Südgrat'],
+                  summit: 'Gross Turm',
+                }),
+              });
+              const extracted = await extractPreparedClimbingReport(preprocessed, {
+                title: inputData.title,
+                extractClimbing: async ({ preprocessed }) => {
+                  expect(preprocessed.climbingTourBase?.routeName).toBe('Südgrat');
+
+                  return climbingExtraction({
+                    zeitbedarf: {
+                      zustieg_min: 50,
+                    },
+                    klettern: {
+                      schluesselstellen: {
+                        vorhanden: true,
+                        stellen: [{ wo: 'zweite Seillänge', beschreibung: 'Schluesselstelle' }],
+                      },
+                    },
+                  });
+                },
+              });
+
+              return { status: 'success', result: extracted };
+            },
+          }),
+        };
+      },
+    } as unknown as ClimbingPipelineMastra;
+
+    const result = await runClimbingPipelineService({
+      mastra,
+      database: {
+        findHikrOrgPostsForPreprocessing: () => [sourcePost],
+        findRouteSummitNames: () => [],
+        findRouteNames: () => [],
+        findRouteCragNames: () => [],
+        upsertReportBase: (input: ReportBaseSchemaWriteInput) => {
+          reportBaseWrites.push(input);
+        },
+        upsertClimbingTourBase: (input: ClimbingTourBasePreprocessorOutput) => {
+          climbingTourBaseWrites.push(input);
+        },
+        upsertClimbingGardenBase: () => {},
+        upsertClimbingTourDetails: (input: ClimbingTourDetailsSchemaWriteInput) => {
+          climbingTourDetailsWrites.push(input);
+        },
+      },
+    });
+
+    expect(result).toEqual({
+      total: 1,
+      statusCounts: {
+        [PREPROCESSOR_STATUS.READY]: 1,
+        [PREPROCESSOR_STATUS.SKIPPED]: 0,
+        [PREPROCESSOR_STATUS.INSUFFICIENT]: 0,
+      },
+    });
+    expect(reportBaseWrites).toMatchObject([
+      {
+        reportId: 42n,
+        status: PREPROCESSOR_STATUS.READY,
+        activity: ACTIVITY.CLIMBING,
+        subActivity: CLIMBING_SUB_ACTIVITY.CLIMBING_TOUR,
+        canton: 'Obwalden',
+        region: 'Melchtal',
+        reasons: ['ready'],
+      },
+    ]);
+    expect(climbingTourBaseWrites).toEqual([
+      {
+        reportId: 42n,
+        schemaVersion: CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
+        routeName: 'Südgrat',
+        routeNames: ['Südgrat'],
+        summit: 'Gross Turm',
+      },
+    ]);
+    expect(climbingTourDetailsWrites).toEqual([
+      {
+        reportId: 42n,
+        schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+        zeitbedarf: {
+          zustieg_min: 50,
+        },
+        klettern: {
+          schluesselstellen: {
+            vorhanden: true,
+            stellen: [{ wo: 'zweite Seillänge', beschreibung: 'Schluesselstelle' }],
+          },
+        },
+      },
+    ]);
+  });
+
   test('supports async database cursors and limits processed rows', async () => {
     const reportBaseWrites: ReportBaseSchemaWriteInput[] = [];
 
@@ -241,6 +405,7 @@ describe('climbing pipeline service', () => {
               region: 'Melchtal',
             },
             climbingTourBase: null,
+            extraction: null,
             reasons: ['non_climbing_activity'],
           }),
         },
@@ -255,6 +420,7 @@ describe('climbing pipeline service', () => {
         },
         upsertClimbingTourBase: () => {},
         upsertClimbingGardenBase: () => {},
+        upsertClimbingTourDetails: () => {},
       },
       limit: 1,
     });

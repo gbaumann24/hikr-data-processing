@@ -6,6 +6,7 @@ import {
   findRouteSummitNames,
   upsertClimbingGardenBase,
   upsertClimbingTourBase,
+  upsertClimbingTourDetails,
   upsertReportBase,
 } from '@hikr/db';
 import type { ClimbingDataPipelineDatabase } from '@hikr/shared';
@@ -19,5 +20,6 @@ export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipeli
     findRouteCragNames: (input) => findRouteCragNames(prisma, input),
     upsertClimbingTourBase: (input) => upsertClimbingTourBase(prisma, input),
     upsertClimbingGardenBase: (input) => upsertClimbingGardenBase(prisma, input),
+    upsertClimbingTourDetails: (input) => upsertClimbingTourDetails(prisma, input),
   };
 }

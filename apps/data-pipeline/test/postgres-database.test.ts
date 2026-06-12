@@ -33,6 +33,7 @@ describe('postgres database adapter', () => {
 
   test('wires climbing persistence through operation modules', async () => {
     const calls: string[] = [];
+    const detailUpserts: unknown[] = [];
     const routeUpdates: unknown[] = [];
     const summitUpserts: unknown[] = [];
     const reportBase = {
@@ -67,6 +68,10 @@ describe('postgres database adapter', () => {
         },
       },
       climbingTourBaseSchema: {
+        findUnique: async () => {
+          calls.push('tx.climbingTourBaseSchema.findUnique');
+          return { reportId: 42n };
+        },
         upsert: async () => {
           calls.push('tx.climbingTourBaseSchema.upsert');
         },
@@ -74,6 +79,53 @@ describe('postgres database adapter', () => {
       climbingGardenBaseSchema: {
         upsert: async () => {
           calls.push('tx.climbingGardenBaseSchema.upsert');
+        },
+      },
+      climbingTourAusruestungSchema: {
+        deleteMany: async () => {
+          calls.push('tx.climbingTourAusruestungSchema.deleteMany');
+        },
+      },
+      climbingTourZeitbedarfSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourZeitbedarfSchema.upsert');
+          detailUpserts.push(input);
+        },
+      },
+      climbingTourAbsicherungSchema: {
+        deleteMany: async () => {
+          calls.push('tx.climbingTourAbsicherungSchema.deleteMany');
+        },
+      },
+      climbingTourSchuhwerkSchema: {
+        deleteMany: async () => {
+          calls.push('tx.climbingTourSchuhwerkSchema.deleteMany');
+        },
+      },
+      climbingTourGelaendeUndGefahrenSchema: {
+        deleteMany: async () => {
+          calls.push('tx.climbingTourGelaendeUndGefahrenSchema.deleteMany');
+        },
+      },
+      climbingTourKletternSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourKletternSchema.upsert');
+          detailUpserts.push(input);
+        },
+      },
+      climbingTourAnreiseSchema: {
+        deleteMany: async () => {
+          calls.push('tx.climbingTourAnreiseSchema.deleteMany');
+        },
+      },
+      climbingTourZustiegUndAbstiegSchema: {
+        deleteMany: async () => {
+          calls.push('tx.climbingTourZustiegUndAbstiegSchema.deleteMany');
+        },
+      },
+      climbingTourBesonderesSchema: {
+        deleteMany: async () => {
+          calls.push('tx.climbingTourBesonderesSchema.deleteMany');
         },
       },
     };
@@ -157,6 +209,19 @@ describe('postgres database adapter', () => {
       reportId: 43n,
       name: 'Melchtal',
     });
+    await database.upsertClimbingTourDetails({
+      reportId: 42n,
+      schemaVersion: 'climbing-extraction-v1',
+      zeitbedarf: {
+        zustieg_min: 45,
+      },
+      klettern: {
+        schluesselstellen: {
+          vorhanden: true,
+          stellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
+        },
+      },
+    });
 
     expect(calls).toEqual([
       'reportBaseSchema.upsert',
@@ -172,6 +237,45 @@ describe('postgres database adapter', () => {
       '$transaction',
       'tx.routeSchema.upsert',
       'tx.climbingGardenBaseSchema.upsert',
+      '$transaction',
+      'tx.climbingTourBaseSchema.findUnique',
+      'tx.climbingTourAusruestungSchema.deleteMany',
+      'tx.climbingTourZeitbedarfSchema.upsert',
+      'tx.climbingTourAbsicherungSchema.deleteMany',
+      'tx.climbingTourSchuhwerkSchema.deleteMany',
+      'tx.climbingTourGelaendeUndGefahrenSchema.deleteMany',
+      'tx.climbingTourKletternSchema.upsert',
+      'tx.climbingTourAnreiseSchema.deleteMany',
+      'tx.climbingTourZustiegUndAbstiegSchema.deleteMany',
+      'tx.climbingTourBesonderesSchema.deleteMany',
+    ]);
+    expect(detailUpserts).toMatchObject([
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          zustiegMin: 45,
+          reineKletterzeitMin: null,
+          abstiegMin: null,
+        },
+        update: {
+          zustiegMin: 45,
+          reineKletterzeitMin: null,
+          abstiegMin: null,
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          schluesselstellenVorhanden: true,
+          schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
+        },
+        update: {
+          schluesselstellenVorhanden: true,
+          schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
+        },
+      },
     ]);
     expect(routeUpdates).toEqual([
       {

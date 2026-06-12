@@ -1,5 +1,12 @@
-import type { ClimbingGardenBaseSchema, ClimbingTourBaseSchema, RouteSchema } from '@hikr/db';
+import type {
+  ClimbingGardenBaseSchema,
+  ClimbingTourBaseSchema,
+  ClimbingTourDetailsSchemaWriteInput,
+  RouteSchema,
+} from '@hikr/db';
 import type { CLIMBING_PREPROCESSOR_SCHEMA_VERSION } from './domain';
+
+export type { ClimbingTourDetailsSchemaWriteInput };
 
 export type ClimbingTourBaseSchemaWriteInput = Pick<
   ClimbingTourBaseSchema,

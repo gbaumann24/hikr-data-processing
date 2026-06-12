@@ -758,6 +758,10 @@ export type ClimbingExtractionAgentResult = {
   schemaVersion: typeof CLIMBING_EXTRACTION_SCHEMA_VERSION;
 } & DeepOptional<ClimbingExtractionFields>;
 
+export type ClimbingExtractionOutput = ClimbingPreprocessorOutput & {
+  extraction: ClimbingExtractionAgentResult | null;
+};
+
 export type ClimbingExtractorInput = {
   title: string | null;
   preprocessed: ClimbingPreprocessorOutput;
