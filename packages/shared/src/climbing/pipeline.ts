@@ -17,4 +17,9 @@ export type ClimbingDataPipelineDatabase = BaseLayerDataPipelineDatabase & {
   upsertClimbingTourBase: (input: ClimbingTourBasePreprocessorOutput) => MaybePromise<void>;
   upsertClimbingGardenBase: (input: ClimbingGardenBasePreprocessorOutput) => MaybePromise<void>;
   upsertClimbingTourDetails: (input: ClimbingTourDetailsSchemaWriteInput) => MaybePromise<void>;
+  updateSummitHeightIfMissing: (input: {
+    canton: string;
+    summitName: string;
+    heightMeters: number;
+  }) => MaybePromise<void>;
 };

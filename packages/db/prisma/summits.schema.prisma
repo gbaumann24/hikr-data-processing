@@ -3,6 +3,7 @@ model SummitSchema {
   summitName      String   @map("summit_name")
   summitNames     String[] @default([]) @map("summit_names")
   canton          String
+  heightMeters    Int?     @map("height_m")
   duplicationRisk Boolean  @default(false) @map("duplication_risk")
 
   routes RouteSchema[]

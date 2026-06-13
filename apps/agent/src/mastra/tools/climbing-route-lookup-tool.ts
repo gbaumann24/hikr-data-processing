@@ -6,14 +6,23 @@ export const CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY = 'climbingRouteLookup';
 
 export type ClimbingRouteLookup = Pick<
   ClimbingDataPipelineDatabase,
-  'findRouteSummitNames' | 'findRouteNames' | 'findRouteCragNames'
+  | 'findRouteSummitNames'
+  | 'findRouteNames'
+  | 'findRouteCragNames'
+  | 'updateSummitHeightIfMissing'
 >;
 
 const lookupInputSchema = z
   .object({
-    mode: z.enum(['summitsByCanton', 'routesByCantonAndSummit', 'cragsByCanton']),
+    mode: z.enum([
+      'summitsByCanton',
+      'routesByCantonAndSummit',
+      'cragsByCanton',
+      'updateSummitHeight',
+    ]),
     canton: z.string().min(1),
     summitName: z.string().min(1).optional(),
+    heightMeters: z.number().int().positive().optional(),
   })
   .superRefine((input, context) => {
     if (input.mode === 'routesByCantonAndSummit' && !input.summitName) {
@@ -22,6 +31,24 @@ const lookupInputSchema = z
         message: 'summitName is required when mode is routesByCantonAndSummit',
         path: ['summitName'],
       });
+    }
+
+    if (input.mode === 'updateSummitHeight') {
+      if (!input.summitName) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'summitName is required when mode is updateSummitHeight',
+          path: ['summitName'],
+        });
+      }
+
+      if (input.heightMeters === undefined) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'heightMeters is required when mode is updateSummitHeight',
+          path: ['heightMeters'],
+        });
+      }
     }
   });
 
@@ -35,12 +62,13 @@ const lookupOutputSchema = z.object({
       }),
     )
     .optional(),
+  updated: z.boolean().optional(),
 });
 
 export const climbingRouteLookupTool = createTool({
   id: 'climbing-route-lookup-tool',
   description:
-    'Lists existing climbing summit names for a canton, canonical route names and stored route aliases for a canton and summit, or crag names for a canton.',
+    'Lists existing climbing summit names for a canton, canonical route names and stored route aliases for a canton and summit, crag names for a canton, or updates a summit height if it is not yet set.',
   inputSchema: lookupInputSchema,
   outputSchema: lookupOutputSchema,
   execute: async (input, context) => {
@@ -70,6 +98,20 @@ export const climbingRouteLookupTool = createTool({
       });
 
       return { names: normalizeNames(names) };
+    }
+
+    if (input.mode === 'updateSummitHeight') {
+      if (!input.summitName || input.heightMeters === undefined) {
+        throw new Error('summitName and heightMeters are required when mode is updateSummitHeight');
+      }
+
+      await lookup.updateSummitHeightIfMissing({
+        canton: input.canton,
+        summitName: input.summitName,
+        heightMeters: input.heightMeters,
+      });
+
+      return { names: [], updated: true };
     }
 
     if (!input.summitName) {

@@ -138,9 +138,8 @@ exports.Prisma.ClimbingTourAusruestungSchemaScalarFieldEnum = {
   baseId: 'baseId',
   seilArt: 'seilArt',
   seilLaengeM: 'seilLaengeM',
-  mobileAbsicherungErforderlich: 'mobileAbsicherungErforderlich',
-  mobileAbsicherungEmpfohlen: 'mobileAbsicherungEmpfohlen',
-  mobileAbsicherungVerwendet: 'mobileAbsicherungVerwendet',
+  mobileAbsicherungNotwendigkeit: 'mobileAbsicherungNotwendigkeit',
+  mobileAbsicherungBegruendung: 'mobileAbsicherungBegruendung',
   mobileAbsicherungMoeglichkeiten: 'mobileAbsicherungMoeglichkeiten',
   mobileAbsicherungFriends: 'mobileAbsicherungFriends',
   mobileAbsicherungKeile: 'mobileAbsicherungKeile',
@@ -158,6 +157,7 @@ exports.Prisma.ClimbingTourZeitbedarfSchemaScalarFieldEnum = {
 
 exports.Prisma.ClimbingTourAbsicherungSchemaScalarFieldEnum = {
   baseId: 'baseId',
+  charakter: 'charakter',
   hakenabstaendeBewertung: 'hakenabstaendeBewertung',
   hakenabstaendeBeschreibung: 'hakenabstaendeBeschreibung',
   staendeGebohrt: 'staendeGebohrt',
@@ -179,25 +179,32 @@ exports.Prisma.ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum = {
   charakterSonnig: 'charakterSonnig',
   charakterSchnellTrocknend: 'charakterSchnellTrocknend',
   charakterFelsart: 'charakterFelsart',
+  charakterBeschreibung: 'charakterBeschreibung',
   gefahren: 'gefahren'
 };
 
 exports.Prisma.ClimbingTourKletternSchemaScalarFieldEnum = {
   baseId: 'baseId',
-  schluesselstellenVorhanden: 'schluesselstellenVorhanden',
   schluesselstellenStellen: 'schluesselstellenStellen',
   schwierigkeitVerhaeltnis: 'schwierigkeitVerhaeltnis',
   schwierigkeitBeschreibung: 'schwierigkeitBeschreibung',
+  schwierigkeitMinKlettererfahrung: 'schwierigkeitMinKlettererfahrung',
   abseilenMoeglich: 'abseilenMoeglich',
   abseilenAnzahl: 'abseilenAnzahl',
   abseilenLaengenM: 'abseilenLaengenM',
   abseilenZumEinstieg: 'abseilenZumEinstieg',
   abseilenAbseilpiste: 'abseilenAbseilpiste',
   charakterKletterstil: 'charakterKletterstil',
+  charakterBeschreibung: 'charakterBeschreibung',
+  charakterSchoenheit: 'charakterSchoenheit',
+  charakterErnsthaftigkeit: 'charakterErnsthaftigkeit',
+  charakterWandhoehe: 'charakterWandhoehe',
   routenverlaufRoutenfindung: 'routenverlaufRoutenfindung',
   routenverlaufBeschreibung: 'routenverlaufBeschreibung',
   routenverlaufRueckzugMoeglich: 'routenverlaufRueckzugMoeglich',
   routenverlaufRueckzugBeschreibung: 'routenverlaufRueckzugBeschreibung',
+  routenverlaufEinstiegshoehe: 'routenverlaufEinstiegshoehe',
+  seillaengenInfoAnzahlTotal: 'seillaengenInfoAnzahlTotal',
   seillaengenVerbindenMoeglich: 'seillaengenVerbindenMoeglich',
   seillaengenVerbindenBeschreibung: 'seillaengenVerbindenBeschreibung',
   seillaengen: 'seillaengen'
@@ -211,7 +218,8 @@ exports.Prisma.ClimbingTourAnreiseSchemaScalarFieldEnum = {
   oevVerkehrsmittel: 'oevVerkehrsmittel',
   oevEndstation: 'oevEndstation',
   oevLuftseilbahnMoeglich: 'oevLuftseilbahnMoeglich',
-  oevAnmeldungNoetig: 'oevAnmeldungNoetig'
+  oevAnmeldungNoetig: 'oevAnmeldungNoetig',
+  vonPasshoeheAus: 'vonPasshoeheAus'
 };
 
 exports.Prisma.ClimbingTourZustiegUndAbstiegSchemaScalarFieldEnum = {
@@ -219,15 +227,20 @@ exports.Prisma.ClimbingTourZustiegUndAbstiegSchemaScalarFieldEnum = {
   zustiegEinstiegsfindung: 'zustiegEinstiegsfindung',
   zustiegBeschreibung: 'zustiegBeschreibung',
   zustiegSchwierigkeit: 'zustiegSchwierigkeit',
+  zustiegHmAufstieg: 'zustiegHmAufstieg',
+  zustiegHmAbstieg: 'zustiegHmAbstieg',
   abstiegFuehrtZumEinstieg: 'abstiegFuehrtZumEinstieg',
-  abstiegVerpflegungMoeglich: 'abstiegVerpflegungMoeglich',
-  abstiegVerpflegungBeschreibung: 'abstiegVerpflegungBeschreibung',
-  abstiegSchwierigkeit: 'abstiegSchwierigkeit'
+  abstiegSchwierigkeit: 'abstiegSchwierigkeit',
+  abstiegHmAufstieg: 'abstiegHmAufstieg',
+  abstiegHmAbstieg: 'abstiegHmAbstieg',
+  verpflegungTyp: 'verpflegungTyp'
 };
 
 exports.Prisma.ClimbingTourBesonderesSchemaScalarFieldEnum = {
   baseId: 'baseId',
   saisonalitaet: 'saisonalitaet',
+  frequentierung: 'frequentierung',
+  bedingungen: 'bedingungen',
   hinweise: 'hinweise'
 };
 
@@ -333,6 +346,7 @@ exports.Prisma.SummitSchemaScalarFieldEnum = {
   summitName: 'summitName',
   summitNames: 'summitNames',
   canton: 'canton',
+  heightMeters: 'heightMeters',
   duplicationRisk: 'duplicationRisk',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

@@ -61,23 +61,34 @@ type DeepOptional<T> =
       ? { [K in keyof T]?: DeepOptional<T[K]> }
       : T;
 
+type ClimbingTourSeasonality = {
+  geeignet?: string[];
+  ungeeignet?: string[];
+  anders?: string | null;
+};
+
+type NamedExtractionItem = {
+  typ: string | null;
+  anders?: string | null;
+};
+
 type ClimbingTourDetailsFields = {
   ausruestung: {
     seil: {
-      art: 'halbseil' | 'zwillingsseil' | 'einfachseil' | null;
+      art: string | null;
+      anders?: string | null;
       laenge_m: number | null;
     };
     mobile_absicherung: {
-      erforderlich: boolean | null;
-      empfohlen: boolean | null;
-      verwendet: boolean | null;
+      notwendigkeit: string[];
+      begruendung: string | null;
       moeglichkeiten: string | null;
       friends: Array<{ groesse: string | null; anzahl: number | null }>;
       keile: Array<{ groesse: string | null; anzahl: number | null }>;
     };
-    schlingen: Array<{ typ: string | null; laenge_cm: number | null; anzahl: number | null }>;
+    schlingen: Array<NamedExtractionItem & { laenge_cm: number | null; anzahl: number | null }>;
     expresskarabiner: { anzahl: number | null };
-    zusaetzlich: string[];
+    zusaetzlich: Array<string | NamedExtractionItem>;
   };
   zeitbedarf: {
     zustieg_min: number | null;
@@ -85,8 +96,11 @@ type ClimbingTourDetailsFields = {
     abstieg_min: number | null;
   };
   absicherung: {
+    charakter: string | null;
+    hakentypen: string[];
+    hakentypen_anders: string[];
     hakenabstaende: {
-      bewertung: 'sehr_gut' | 'gut' | 'mittel' | 'schlecht' | null;
+      bewertung: string | null;
       beschreibung: string | null;
     };
     staende: {
@@ -94,44 +108,34 @@ type ClimbingTourDetailsFields = {
       beschreibung: string | null;
     };
     hakenzustand: {
-      bewertung: 'gut' | 'mittel' | 'schlecht' | null;
+      bewertung: string | null;
       beschreibung: string | null;
     };
   };
   schuhwerk: {
-    zustieg: { typ: 'bergschuhe' | 'zustiegsschuhe' | 'turnschuhe' | null };
-    klettern: { typ: 'kletterschuhe' | 'bergschuhe' | 'zustiegsschuhe' | null };
-    abstieg: { typ: 'bergschuhe' | 'zustiegsschuhe' | 'turnschuhe' | null };
+    zustieg: NamedExtractionItem;
+    klettern: NamedExtractionItem;
+    abstieg: NamedExtractionItem;
   };
   gelaende_und_gefahren: {
     charakter: {
       exposition: string | null;
       sonnig: boolean | null;
       schnell_trocknend: boolean | null;
-      felsart:
-        | 'granit'
-        | 'gneis'
-        | 'kalk'
-        | 'dolomit'
-        | 'sandstein'
-        | 'quarzit'
-        | 'schiefer'
-        | 'konglomerat'
-        | 'nagelfluh'
-        | 'serpentinit'
-        | 'basalt'
-        | null;
+      felsart: string | null;
+      anders?: string | null;
+      beschreibung: string | null;
     };
-    gefahren: Array<{ typ: string; beschreibung: string | null }>;
+    gefahren: Array<NamedExtractionItem & { beschreibung: string | null }>;
   };
   klettern: {
     schluesselstellen: {
-      vorhanden: boolean | null;
       stellen: Array<{ wo: string | null; beschreibung: string | null }>;
     };
     schwierigkeit: {
-      verhaeltnis: 'leichter' | 'wie_bewertet' | 'schwerer' | null;
+      verhaeltnis: string | null;
       beschreibung: string | null;
+      min_klettererfahrung: string | null;
     };
     abseilen: {
       moeglich: boolean | null;
@@ -141,36 +145,34 @@ type ClimbingTourDetailsFields = {
       abseilpiste: boolean | null;
     };
     charakter: {
-      kletterstil: Array<
-        | 'platte'
-        | 'riss'
-        | 'grat'
-        | 'kante'
-        | 'wand'
-        | 'verschneidung'
-        | 'ueberhang'
-        | 'dach'
-        | 'pfeiler'
-        | 'kamin'
-      >;
+      kletterstil: string[];
+      anders: string[];
+      beschreibung: string | null;
+      schoenheit: string | null;
+      ernsthaftigkeit: string | null;
+      wandhoehe_m: number | null;
     };
     routenverlauf: {
-      routenfindung: 'einfach' | 'mittel' | 'schwierig' | null;
+      routenfindung: string | null;
       beschreibung: string | null;
       rueckzug_moeglich: boolean | null;
       rueckzug_beschreibung: string | null;
+      einstiegshoehe_m: number | null;
     };
-    seillaengen_verbinden: {
-      moeglich: boolean | null;
-      beschreibung: string | null;
+    seillaengen_info: {
+      anzahl_total: number | null;
+      verbinden: {
+        moeglich: boolean | null;
+        beschreibung: string | null;
+      };
+      seillaengen: Array<{
+        nummer: number | null;
+        schwierigkeit: string | null;
+        anzahl_bohrhaken: number | null;
+        laenge_m: number | null;
+        beschreibung: string | null;
+      }>;
     };
-    seillaengen: Array<{
-      nummer: number | null;
-      schwierigkeit: string | null;
-      anzahl_bohrhaken: number | null;
-      laenge_m: number | null;
-      beschreibung: string | null;
-    }>;
   };
   anreise: {
     parkplatz: {
@@ -179,27 +181,37 @@ type ClimbingTourDetailsFields = {
       besonderheiten: string | null;
     };
     oev: {
-      verkehrsmittel: string[];
+      verkehrsmittel: Array<string | NamedExtractionItem>;
       endstation: string | null;
       luftseilbahn_moeglich: boolean | null;
       anmeldung_noetig: boolean | null;
     };
+    von_passhoehe_aus: string | null;
   };
   zustieg_und_abstieg: {
     zustieg: {
-      einstiegsfindung: 'einfach' | 'mittel' | 'schwer' | null;
+      einstiegsfindung: string | null;
       beschreibung: string | null;
       schwierigkeit: string | null;
+      hm_aufstieg: number | null;
+      hm_abstieg: number | null;
     };
     abstieg: {
       fuehrt_zum_einstieg: boolean | null;
-      verpflegung_moeglich: boolean | null;
-      verpflegung_beschreibung: string | null;
       schwierigkeit: string | null;
+      hm_aufstieg: number | null;
+      hm_abstieg: number | null;
     };
+    verpflegung_typ: string | null;
   };
   besonderes: {
-    saisonalitaet: string | null;
+    saisonalitaet: string | ClimbingTourSeasonality | null;
+    frequentierung: string | null;
+    bedingungen: {
+      fels_zustand: string | null;
+      altschnee_auf_zustieg: boolean | null;
+      beschreibung: string | null;
+    } | null;
     hinweise: string[];
   };
 };

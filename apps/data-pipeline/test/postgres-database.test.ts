@@ -124,6 +124,10 @@ describe('postgres database adapter', () => {
         },
       },
       climbingTourBesonderesSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourBesonderesSchema.upsert');
+          detailUpserts.push(input);
+        },
         deleteMany: async () => {
           calls.push('tx.climbingTourBesonderesSchema.deleteMany');
         },
@@ -217,9 +221,16 @@ describe('postgres database adapter', () => {
       },
       klettern: {
         schluesselstellen: {
-          vorhanden: true,
           stellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
         },
+      },
+      besonderes: {
+        saisonalitaet: {
+          geeignet: [],
+          ungeeignet: [],
+          anders: undefined,
+        },
+        hinweise: ['Am Einstieg warten'],
       },
     });
 
@@ -247,7 +258,7 @@ describe('postgres database adapter', () => {
       'tx.climbingTourKletternSchema.upsert',
       'tx.climbingTourAnreiseSchema.deleteMany',
       'tx.climbingTourZustiegUndAbstiegSchema.deleteMany',
-      'tx.climbingTourBesonderesSchema.deleteMany',
+      'tx.climbingTourBesonderesSchema.upsert',
     ]);
     expect(detailUpserts).toMatchObject([
       {
@@ -274,6 +285,18 @@ describe('postgres database adapter', () => {
         update: {
           schluesselstellenVorhanden: true,
           schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          saisonalitaet: { geeignet: [], ungeeignet: [] },
+          hinweise: ['Am Einstieg warten'],
+        },
+        update: {
+          saisonalitaet: { geeignet: [], ungeeignet: [] },
+          hinweise: ['Am Einstieg warten'],
         },
       },
     ]);

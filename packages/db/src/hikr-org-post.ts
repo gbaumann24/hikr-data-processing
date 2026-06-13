@@ -21,6 +21,7 @@ export const HIKR_ORG_POST_BASE_LAYER_SELECT = {
       waypoint: {
         select: {
           name: true,
+          heightMeters: true,
         },
       },
     },

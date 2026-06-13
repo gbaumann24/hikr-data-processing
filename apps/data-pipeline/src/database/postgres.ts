@@ -4,6 +4,7 @@ import {
   findRouteCragNames,
   findRouteNames,
   findRouteSummitNames,
+  updateSummitHeightIfMissing,
   upsertClimbingGardenBase,
   upsertClimbingTourBase,
   upsertClimbingTourDetails,
@@ -21,5 +22,6 @@ export function createPostgresDatabase(prisma: PrismaClient): ClimbingDataPipeli
     upsertClimbingTourBase: (input) => upsertClimbingTourBase(prisma, input),
     upsertClimbingGardenBase: (input) => upsertClimbingGardenBase(prisma, input),
     upsertClimbingTourDetails: (input) => upsertClimbingTourDetails(prisma, input),
+    updateSummitHeightIfMissing: (input) => updateSummitHeightIfMissing(prisma, input),
   };
 }

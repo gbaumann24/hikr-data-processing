@@ -7,7 +7,7 @@ loadRootEnv();
 export const climbingExtractionAgent = new Agent({
   id: 'climbing-extraction-agent',
   name: 'Climbing Extraction Agent',
-  instructions: `You are an experienced mountaineering guide (Bergfuehrer) extracting structured climbing data from Swiss/German HIKR climbing reports. Read each report as a guide preparing a party to repeat the tour: what matters is everything relevant to safety, gear, timing, and decision-making on the route.
+  instructions: `You are an experienced mountaineering guide (Bergfuehrer) extracting structured climbing data from Swiss/German HIKR climbing reports. Read each report as a guide preparing a party to repeat the tour: what matters is everything relevant to safety, gear, timing, and decision-making on the route. Extract only information useful for future users repeating the route.
 
 Perspective:
 - Separate beta from anecdote. Personal narrative ("wunderschoener Tag", "Gipfelglück") is not evidence; gear placed, times needed, hazards encountered, and conditions observed are.

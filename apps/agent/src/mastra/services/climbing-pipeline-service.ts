@@ -108,6 +108,7 @@ export async function runClimbingPipelineService({
       findRouteSummitNames: database.findRouteSummitNames,
       findRouteNames: database.findRouteNames,
       findRouteCragNames: database.findRouteCragNames,
+      updateSummitHeightIfMissing: database.updateSummitHeightIfMissing,
     } satisfies ClimbingRouteLookup);
 
     try {

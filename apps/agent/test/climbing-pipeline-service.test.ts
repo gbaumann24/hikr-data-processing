@@ -89,7 +89,6 @@ function climbingExtraction(
     },
     klettern: {
       schluesselstellen: {
-        vorhanden: true,
         stellen: [{ wo: '2. Seillänge', beschreibung: 'kurzer Plattenzug' }],
       },
     },
@@ -174,6 +173,7 @@ describe('climbing pipeline service', () => {
         upsertClimbingTourDetails: (input: ClimbingTourDetailsSchemaWriteInput) => {
           climbingTourDetailsWrites.push(input);
         },
+        updateSummitHeightIfMissing: () => {},
       },
       onProgress: (event) => {
         progressEvents.push(event);
@@ -234,7 +234,6 @@ describe('climbing pipeline service', () => {
         },
         klettern: {
           schluesselstellen: {
-            vorhanden: true,
             stellen: [{ wo: '2. Seillänge', beschreibung: 'kurzer Plattenzug' }],
           },
         },
@@ -302,7 +301,6 @@ describe('climbing pipeline service', () => {
                     },
                     klettern: {
                       schluesselstellen: {
-                        vorhanden: true,
                         stellen: [{ wo: 'zweite Seillänge', beschreibung: 'Schluesselstelle' }],
                       },
                     },
@@ -334,6 +332,7 @@ describe('climbing pipeline service', () => {
         upsertClimbingTourDetails: (input: ClimbingTourDetailsSchemaWriteInput) => {
           climbingTourDetailsWrites.push(input);
         },
+        updateSummitHeightIfMissing: () => {},
       },
     });
 
@@ -374,7 +373,6 @@ describe('climbing pipeline service', () => {
         },
         klettern: {
           schluesselstellen: {
-            vorhanden: true,
             stellen: [{ wo: 'zweite Seillänge', beschreibung: 'Schluesselstelle' }],
           },
         },
@@ -421,6 +419,7 @@ describe('climbing pipeline service', () => {
         upsertClimbingTourBase: () => {},
         upsertClimbingGardenBase: () => {},
         upsertClimbingTourDetails: () => {},
+        updateSummitHeightIfMissing: () => {},
       },
       limit: 1,
     });

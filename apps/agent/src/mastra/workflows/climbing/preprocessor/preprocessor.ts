@@ -153,7 +153,10 @@ export async function preprocessPreparedBaseLayerForClimbing(
 function extractHikrWaypointNames(input: HikrOrgPostBaseLayerInput): string[] {
   const waypointNames = [...input.reportWaypoints]
     .sort((left, right) => left.position - right.position)
-    .map(({ waypoint }) => normalizeDescription(waypoint.name))
+    .map(({ waypoint }) => {
+      const name = normalizeDescription(waypoint.name);
+      return name && waypoint.heightMeters ? `${name} (${waypoint.heightMeters}m)` : name;
+    })
     .filter(Boolean);
 
   return [...new Set(waypointNames)];

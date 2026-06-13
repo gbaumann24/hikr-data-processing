@@ -155,10 +155,10 @@ describe('climbing preprocessor', () => {
     const result = await preprocessHikrReportForClimbing(
       baseInput({
         reportWaypoints: [
-          { position: 2, waypoint: { name: 'Gross Turm' } },
-          { position: 1, waypoint: { name: 'Ausgangspunkt Melchtal' } },
-          { position: 3, waypoint: { name: 'Gross Turm' } },
-          { position: 4, waypoint: { name: '  ' } },
+          { position: 2, waypoint: { name: 'Gross Turm', heightMeters: null } },
+          { position: 1, waypoint: { name: 'Ausgangspunkt Melchtal', heightMeters: null } },
+          { position: 3, waypoint: { name: 'Gross Turm', heightMeters: null } },
+          { position: 4, waypoint: { name: '  ', heightMeters: null } },
         ],
       }),
       {

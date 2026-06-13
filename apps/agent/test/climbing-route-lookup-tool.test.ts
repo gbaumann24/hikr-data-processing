@@ -17,6 +17,7 @@ describe('climbing route lookup tool', () => {
       },
       findRouteNames: () => [],
       findRouteCragNames: () => [],
+      updateSummitHeightIfMissing: () => Promise.resolve(),
     });
 
     const result = await climbingRouteLookupTool.execute!(
@@ -47,6 +48,7 @@ describe('climbing route lookup tool', () => {
         ];
       },
       findRouteCragNames: () => [],
+      updateSummitHeightIfMissing: () => Promise.resolve(),
     });
 
     const result = await climbingRouteLookupTool.execute!(
@@ -84,6 +86,7 @@ describe('climbing route lookup tool', () => {
         cragInputs.push(input);
         return ['Klettergarten Melchtal', 'Klettergarten Melchtal', 'Ofen'];
       },
+      updateSummitHeightIfMissing: () => Promise.resolve(),
     });
 
     const result = await climbingRouteLookupTool.execute!(

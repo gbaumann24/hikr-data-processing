@@ -1,4 +1,4 @@
-export const MIN_DESCRIPTION_LENGTH = 1750;
+export const MIN_DESCRIPTION_LENGTH = 4000;
 
 export const PREPROCESSOR_STATUS = {
   READY: 'ready',

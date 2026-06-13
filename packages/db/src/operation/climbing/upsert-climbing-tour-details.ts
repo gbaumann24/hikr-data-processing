@@ -1,4 +1,4 @@
-import type { Prisma, PrismaClient } from '../../../generated/client';
+import { Prisma, type PrismaClient } from '../../../generated/client';
 import type { ClimbingTourDetailsSchemaWriteInput } from '../types';
 
 type ClimbingTourDetailsTransaction = Prisma.TransactionClient;
@@ -54,9 +54,8 @@ async function persistAusruestung(
   const data = {
     seilArt: nullable(details.seil?.art),
     seilLaengeM: nullable(details.seil?.laenge_m),
-    mobileAbsicherungErforderlich: nullable(details.mobile_absicherung?.erforderlich),
-    mobileAbsicherungEmpfohlen: nullable(details.mobile_absicherung?.empfohlen),
-    mobileAbsicherungVerwendet: nullable(details.mobile_absicherung?.verwendet),
+    mobileAbsicherungNotwendigkeit: jsonArray(details.mobile_absicherung?.notwendigkeit),
+    mobileAbsicherungBegruendung: nullable(details.mobile_absicherung?.begruendung),
     mobileAbsicherungMoeglichkeiten: nullable(details.mobile_absicherung?.moeglichkeiten),
     mobileAbsicherungFriends: jsonArray(details.mobile_absicherung?.friends),
     mobileAbsicherungKeile: jsonArray(details.mobile_absicherung?.keile),
@@ -110,6 +109,7 @@ async function persistAbsicherung(
   }
 
   const data = {
+    charakter: nullable(details.charakter),
     hakenabstaendeBewertung: nullable(details.hakenabstaende?.bewertung),
     hakenabstaendeBeschreibung: nullable(details.hakenabstaende?.beschreibung),
     staendeGebohrt: nullable(details.staende?.gebohrt),
@@ -169,6 +169,7 @@ async function persistGelaendeUndGefahren(
     charakterSonnig: nullable(details.charakter?.sonnig),
     charakterSchnellTrocknend: nullable(details.charakter?.schnell_trocknend),
     charakterFelsart: nullable(details.charakter?.felsart),
+    charakterBeschreibung: nullable(details.charakter?.beschreibung),
     gefahren: jsonArray(details.gefahren),
   };
 
@@ -192,23 +193,29 @@ async function persistKlettern(
   }
 
   const data = {
-    schluesselstellenVorhanden: nullable(details.schluesselstellen?.vorhanden),
     schluesselstellenStellen: jsonArray(details.schluesselstellen?.stellen),
     schwierigkeitVerhaeltnis: nullable(details.schwierigkeit?.verhaeltnis),
     schwierigkeitBeschreibung: nullable(details.schwierigkeit?.beschreibung),
+    schwierigkeitMinKlettererfahrung: nullable(details.schwierigkeit?.min_klettererfahrung),
     abseilenMoeglich: nullable(details.abseilen?.moeglich),
     abseilenAnzahl: nullable(details.abseilen?.anzahl),
     abseilenLaengenM: jsonArray(details.abseilen?.laengen_m),
     abseilenZumEinstieg: nullable(details.abseilen?.zum_einstieg),
     abseilenAbseilpiste: nullable(details.abseilen?.abseilpiste),
     charakterKletterstil: jsonArray(details.charakter?.kletterstil),
+    charakterBeschreibung: nullable(details.charakter?.beschreibung),
+    charakterSchoenheit: nullable(details.charakter?.schoenheit),
+    charakterErnsthaftigkeit: nullable(details.charakter?.ernsthaftigkeit),
+    charakterWandhoehe: nullable(details.charakter?.wandhoehe_m),
     routenverlaufRoutenfindung: nullable(details.routenverlauf?.routenfindung),
     routenverlaufBeschreibung: nullable(details.routenverlauf?.beschreibung),
     routenverlaufRueckzugMoeglich: nullable(details.routenverlauf?.rueckzug_moeglich),
     routenverlaufRueckzugBeschreibung: nullable(details.routenverlauf?.rueckzug_beschreibung),
-    seillaengenVerbindenMoeglich: nullable(details.seillaengen_verbinden?.moeglich),
-    seillaengenVerbindenBeschreibung: nullable(details.seillaengen_verbinden?.beschreibung),
-    seillaengen: jsonArray(details.seillaengen),
+    routenverlaufEinstiegshoehe: nullable(details.routenverlauf?.einstiegshoehe_m),
+    seillaengenInfoAnzahlTotal: nullable(details.seillaengen_info?.anzahl_total),
+    seillaengenVerbindenMoeglich: nullable(details.seillaengen_info?.verbinden?.moeglich),
+    seillaengenVerbindenBeschreibung: nullable(details.seillaengen_info?.verbinden?.beschreibung),
+    seillaengen: jsonArray(details.seillaengen_info?.seillaengen),
   };
 
   await tx.climbingTourKletternSchema.upsert({
@@ -238,6 +245,7 @@ async function persistAnreise(
     oevEndstation: nullable(details.oev?.endstation),
     oevLuftseilbahnMoeglich: nullable(details.oev?.luftseilbahn_moeglich),
     oevAnmeldungNoetig: nullable(details.oev?.anmeldung_noetig),
+    vonPasshoeheAus: nullable(details.von_passhoehe_aus),
   };
 
   await tx.climbingTourAnreiseSchema.upsert({
@@ -265,10 +273,13 @@ async function persistZustiegUndAbstieg(
     zustiegEinstiegsfindung: nullable(details.zustieg?.einstiegsfindung),
     zustiegBeschreibung: nullable(details.zustieg?.beschreibung),
     zustiegSchwierigkeit: nullable(details.zustieg?.schwierigkeit),
+    zustiegHmAufstieg: nullable(details.zustieg?.hm_aufstieg),
+    zustiegHmAbstieg: nullable(details.zustieg?.hm_abstieg),
     abstiegFuehrtZumEinstieg: nullable(details.abstieg?.fuehrt_zum_einstieg),
-    abstiegVerpflegungMoeglich: nullable(details.abstieg?.verpflegung_moeglich),
-    abstiegVerpflegungBeschreibung: nullable(details.abstieg?.verpflegung_beschreibung),
     abstiegSchwierigkeit: nullable(details.abstieg?.schwierigkeit),
+    abstiegHmAufstieg: nullable(details.abstieg?.hm_aufstieg),
+    abstiegHmAbstieg: nullable(details.abstieg?.hm_abstieg),
+    verpflegungTyp: nullable(details.verpflegung_typ),
   };
 
   await tx.climbingTourZustiegUndAbstiegSchema.upsert({
@@ -291,7 +302,9 @@ async function persistBesonderes(
   }
 
   const data = {
-    saisonalitaet: nullable(details.saisonalitaet),
+    saisonalitaet: jsonNullable(details.saisonalitaet),
+    frequentierung: nullable(details.frequentierung),
+    bedingungen: jsonNullable(details.bedingungen),
     hinweise: jsonArray(details.hinweise),
   };
 
@@ -305,6 +318,31 @@ async function persistBesonderes(
 // Converts missing optional scalar values into explicit nullable column writes.
 function nullable<T>(value: T | null | undefined): T | null {
   return value ?? null;
+}
+
+// Converts missing optional extractor JSON into explicit SQL null writes.
+function jsonNullable(value: unknown): Prisma.NullableJsonNullValueInput | Prisma.InputJsonValue {
+  const jsonValue = stripUndefined(value);
+  return jsonValue === undefined || jsonValue === null
+    ? Prisma.DbNull
+    : (jsonValue as Prisma.InputJsonValue);
+}
+
+// Removes undefined object properties because JSON fields can only store JSON values.
+function stripUndefined(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map((item) => stripUndefined(item) ?? null);
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([, nestedValue]) => nestedValue !== undefined)
+        .map(([key, nestedValue]) => [key, stripUndefined(nestedValue)]),
+    );
+  }
+
+  return value;
 }
 
 // Converts missing optional extractor arrays into empty JSON array writes.

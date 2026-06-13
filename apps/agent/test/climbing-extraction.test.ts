@@ -46,9 +46,8 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
     ausruestung: {
       seil: { art: null, laenge_m: null },
       mobile_absicherung: {
-        erforderlich: null,
-        empfohlen: null,
-        verwendet: null,
+        notwendigkeit: undefined,
+        begruendung: null,
         moeglichkeiten: null,
         friends: [],
         keile: [],
@@ -83,7 +82,6 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
     },
     klettern: {
       schluesselstellen: {
-        vorhanden: null,
         stellen: [],
       },
       schwierigkeit: {
@@ -106,11 +104,13 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
         rueckzug_moeglich: null,
         rueckzug_beschreibung: null,
       },
-      seillaengen_verbinden: {
-        moeglich: null,
-        beschreibung: null,
+      seillaengen_info: {
+        verbinden: {
+          moeglich: null,
+          beschreibung: null,
+        },
+        seillaengen: [],
       },
-      seillaengen: [],
     },
     anreise: {
       parkplatz: {
@@ -133,13 +133,10 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
       },
       abstieg: {
         fuehrt_zum_einstieg: null,
-        verpflegung_moeglich: null,
-        verpflegung_beschreibung: null,
         schwierigkeit: null,
       },
     },
     besonderes: {
-      saisonalitaet: null,
       hinweise: [],
     },
   };
@@ -232,16 +229,15 @@ describe('climbing extraction', () => {
       ausruestung: {
         seil: { art: 'halbseil', laenge_m: 60 },
         mobile_absicherung: {
-          erforderlich: true,
-          empfohlen: false,
-          verwendet: true,
+          notwendigkeit: ['erforderlich', 'verwendet'],
+          begruendung: 'Route hat kaum Fixhaken, Keile zwingend',
           moeglichkeiten: 'gute Rissstrukturen fuer Friends',
           friends: [{ groesse: '0.3-2', anzahl: null }],
           keile: [{ groesse: 'satz', anzahl: null }],
         },
         schlingen: [{ typ: 'bandschlinge', laenge_cm: 120, anzahl: 2 }],
         expresskarabiner: { anzahl: 10 },
-        zusaetzlich: ['helm'],
+        zusaetzlich: [{ typ: 'helm' }],
       },
       zeitbedarf: {
         zustieg_min: 45,
@@ -269,7 +265,6 @@ describe('climbing extraction', () => {
       },
       klettern: {
         schluesselstellen: {
-          vorhanden: true,
           stellen: [{ wo: '3. Seillaenge', beschreibung: 'technische Platte' }],
         },
         schwierigkeit: {
@@ -292,19 +287,21 @@ describe('climbing extraction', () => {
           rueckzug_moeglich: true,
           rueckzug_beschreibung: 'bis zur 4. SL abseilbar',
         },
-        seillaengen_verbinden: {
-          moeglich: true,
-          beschreibung: 'SL 3 und 4 mit 60m-Seil zusammenhaengbar',
-        },
-        seillaengen: [
-          {
-            nummer: 1,
-            schwierigkeit: '5c',
-            anzahl_bohrhaken: 6,
-            laenge_m: 35,
-            beschreibung: 'Plattenkletterei',
+        seillaengen_info: {
+          verbinden: {
+            moeglich: true,
+            beschreibung: 'SL 3 und 4 mit 60m-Seil zusammenhaengbar',
           },
-        ],
+          seillaengen: [
+            {
+              nummer: 1,
+              schwierigkeit: '5c',
+              anzahl_bohrhaken: 6,
+              laenge_m: 35,
+              beschreibung: 'Plattenkletterei',
+            },
+          ],
+        },
       },
       anreise: {
         parkplatz: {
@@ -313,7 +310,7 @@ describe('climbing extraction', () => {
           besonderheiten: 'wenige Plaetze',
         },
         oev: {
-          verkehrsmittel: ['zug', 'bus'],
+          verkehrsmittel: [{ typ: 'zug' }, { typ: 'bus' }],
           endstation: 'Wasserauen',
           luftseilbahn_moeglich: true,
           anmeldung_noetig: false,
@@ -327,13 +324,11 @@ describe('climbing extraction', () => {
         },
         abstieg: {
           fuehrt_zum_einstieg: true,
-          verpflegung_moeglich: true,
-          verpflegung_beschreibung: 'Berggasthaus Aescher',
           schwierigkeit: 'scree and old snowfields',
         },
       },
       besonderes: {
-        saisonalitaet: 'ideal im Herbst',
+        saisonalitaet: { geeignet: ['herbst'] },
         hinweise: ['Topo mitnehmen'],
       },
     };
