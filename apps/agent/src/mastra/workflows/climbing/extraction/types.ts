@@ -561,6 +561,7 @@ export const climbingExtractionAgentResultSchema = z
         routenverlauf: optionalObject(
           {
             routenfindung: nullableEnum(
+              
               ['einfach', 'mittel', 'schwierig'],
               'How difficult it is to identify the line of the route. "logische Linie", "Haken immer sichtbar" → einfach; "etwas Spuersinn noetig" → mittel; "Verhauer-Gefahr", "Topo zwingend", "lange gesucht" → schwierig.',
             ),
