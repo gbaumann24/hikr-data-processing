@@ -1,6 +1,11 @@
 import { describe, expect, test } from 'bun:test';
 import type { PrismaClient } from '@hikr/db';
 import {
+  deleteStaleClimbingTourAggregates,
+  findClimbingTourAggregationReports,
+  upsertClimbingTourAggregate,
+} from '@hikr/db';
+import {
   ACTIVITY,
   CLIMBING_PREPROCESSOR_SCHEMA_VERSION,
   CLIMBING_SUB_ACTIVITY,
@@ -787,6 +792,137 @@ describe('postgres database adapter', () => {
         },
         update: {
           duplicationRisk: true,
+        },
+      },
+    ]);
+  });
+
+  test('upserts climbing tour aggregates and deletes stale rows', async () => {
+    const upserts: unknown[] = [];
+    const deletes: unknown[] = [];
+    const prisma = {
+      climbingTourAggregateSchema: {
+        upsert: async (input: unknown) => {
+          upserts.push(input);
+        },
+        deleteMany: async (input?: unknown) => {
+          deletes.push(input);
+          return { count: 2 };
+        },
+      },
+    } as unknown as PrismaClient;
+
+    await upsertClimbingTourAggregate(prisma, {
+      routeId: 7n,
+      schemaVersion: 'climbing-tour-aggregation-v1',
+      sourceReportCount: 2,
+      sourceReportIds: ['1', '2'],
+      agentStatus: 'success',
+      agentErrorMessage: null,
+      agentErrorDetails: null,
+      aggregatedAt: new Date('2026-01-01T00:00:00.000Z'),
+      payload: {
+        schemaVersion: 'climbing-tour-aggregation-v1',
+        source_report_count: 2,
+      },
+    });
+    await expect(deleteStaleClimbingTourAggregates(prisma, [7n])).resolves.toBe(2);
+
+    expect(upserts).toMatchObject([
+      {
+        where: { routeId: 7n },
+        create: {
+          routeId: 7n,
+          schemaVersion: 'climbing-tour-aggregation-v1',
+          sourceReportCount: 2,
+          sourceReportIds: ['1', '2'],
+          agentStatus: 'success',
+          agentErrorMessage: null,
+          payload: {
+            schemaVersion: 'climbing-tour-aggregation-v1',
+            source_report_count: 2,
+          },
+        },
+        update: {
+          schemaVersion: 'climbing-tour-aggregation-v1',
+          sourceReportCount: 2,
+          sourceReportIds: ['1', '2'],
+          agentStatus: 'success',
+          agentErrorMessage: null,
+        },
+      },
+    ]);
+    expect(deletes).toEqual([
+      {
+        where: {
+          routeId: { notIn: [7n] },
+        },
+      },
+    ]);
+  });
+
+  test('loads only extracted climbing tour reports for aggregation', async () => {
+    const findManyCalls: unknown[] = [];
+    const prisma = {
+      climbingTourBaseSchema: {
+        findMany: async (input: unknown) => {
+          findManyCalls.push(input);
+          return [
+            {
+              reportId: 42n,
+              routeId: 7n,
+              schemaVersion: 'climbing-preprocessor-v1',
+              zusammenfassung: 'Die Tour bietet griffige Platten.',
+              base: { tourDate: new Date('2026-06-01T00:00:00.000Z') },
+              ausruestung: null,
+              zeitbedarf: null,
+              absicherung: null,
+              schuhwerk: null,
+              gelaendeUndGefahren: null,
+              klettern: null,
+              anreise: null,
+              zustiegUndAbstieg: null,
+              stuetzpunkt: null,
+              quellen: null,
+              berichtsqualitaet: {
+                score: 4,
+                begruendung: 'Viele konkrete Angaben.',
+                extractionSchemaVersion: 'climbing-extraction-v1',
+                vollstaendigkeitScore: 0.82,
+                vollstaendigkeitFilledFields: 82,
+                vollstaendigkeitPossibleFields: 100,
+              },
+              besonderes: null,
+            },
+          ];
+        },
+      },
+    } as unknown as PrismaClient;
+
+    await expect(findClimbingTourAggregationReports(prisma)).resolves.toMatchObject([
+      {
+        routeId: 7n,
+        reportId: 42n,
+        qualityScore: 4,
+        completeness: {
+          score: 0.82,
+          filledFields: 82,
+          possibleFields: 100,
+        },
+        details: {
+          schemaVersion: 'climbing-extraction-v1',
+          zusammenfassung: 'Die Tour bietet griffige Platten.',
+        },
+      },
+    ]);
+    expect(findManyCalls).toMatchObject([
+      {
+        where: {
+          berichtsqualitaet: {
+            is: {
+              extractionSchemaVersion: { not: null },
+            },
+          },
         },
       },
     ]);

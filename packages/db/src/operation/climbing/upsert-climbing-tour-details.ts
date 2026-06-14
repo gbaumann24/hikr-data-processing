@@ -1,5 +1,6 @@
 import { Prisma, type PrismaClient } from '../../../generated/client';
 import type { ClimbingTourDetailsSchemaWriteInput } from '../types';
+import { computeClimbingTourCompleteness } from './climbing-tour-completeness';
 
 type ClimbingTourDetailsTransaction = Prisma.TransactionClient;
 
@@ -373,17 +374,15 @@ async function persistBerichtsqualitaet(
   input: ClimbingTourDetailsSchemaWriteInput,
 ): Promise<void> {
   const details = input.berichtsqualitaet;
-
-  if (!details) {
-    await tx.climbingTourBerichtsqualitaetSchema.deleteMany({
-      where: { baseId: input.reportId },
-    });
-    return;
-  }
+  const completeness = computeClimbingTourCompleteness(input);
 
   const data = {
-    score: nullable(details.score),
-    begruendung: nullable(details.begruendung),
+    score: nullable(details?.score),
+    begruendung: nullable(details?.begruendung),
+    extractionSchemaVersion: input.schemaVersion,
+    vollstaendigkeitScore: completeness.score,
+    vollstaendigkeitFilledFields: completeness.filledFields,
+    vollstaendigkeitPossibleFields: completeness.possibleFields,
   };
 
   await tx.climbingTourBerichtsqualitaetSchema.upsert({

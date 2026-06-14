@@ -135,6 +135,20 @@ exports.Prisma.ClimbingTourBaseSchemaScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ClimbingTourAggregateSchemaScalarFieldEnum = {
+  routeId: 'routeId',
+  schemaVersion: 'schemaVersion',
+  sourceReportCount: 'sourceReportCount',
+  sourceReportIds: 'sourceReportIds',
+  agentStatus: 'agentStatus',
+  agentErrorMessage: 'agentErrorMessage',
+  agentErrorDetails: 'agentErrorDetails',
+  payload: 'payload',
+  aggregatedAt: 'aggregatedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ClimbingTourAusruestungSchemaScalarFieldEnum = {
   baseId: 'baseId',
   seilArt: 'seilArt',
@@ -267,7 +281,11 @@ exports.Prisma.ClimbingTourQuellenSchemaScalarFieldEnum = {
 exports.Prisma.ClimbingTourBerichtsqualitaetSchemaScalarFieldEnum = {
   baseId: 'baseId',
   score: 'score',
-  begruendung: 'begruendung'
+  begruendung: 'begruendung',
+  extractionSchemaVersion: 'extractionSchemaVersion',
+  vollstaendigkeitScore: 'vollstaendigkeitScore',
+  vollstaendigkeitFilledFields: 'vollstaendigkeitFilledFields',
+  vollstaendigkeitPossibleFields: 'vollstaendigkeitPossibleFields'
 };
 
 exports.Prisma.ClimbingTourBesonderesSchemaScalarFieldEnum = {
@@ -429,12 +447,12 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.JsonNullValueInput = {
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull
 };
 
-exports.Prisma.NullableJsonNullValueInput = {
-  DbNull: Prisma.DbNull,
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -466,6 +484,7 @@ exports.HikrCategory = exports.$Enums.HikrCategory = {
 exports.Prisma.ModelName = {
   ClimbingGardenBaseSchema: 'ClimbingGardenBaseSchema',
   ClimbingTourBaseSchema: 'ClimbingTourBaseSchema',
+  ClimbingTourAggregateSchema: 'ClimbingTourAggregateSchema',
   ClimbingTourAusruestungSchema: 'ClimbingTourAusruestungSchema',
   ClimbingTourZeitbedarfSchema: 'ClimbingTourZeitbedarfSchema',
   ClimbingTourAbsicherungSchema: 'ClimbingTourAbsicherungSchema',

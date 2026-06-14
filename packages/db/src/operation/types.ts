@@ -1,5 +1,6 @@
 import type {
   ClimbingGardenBaseSchema,
+  ClimbingTourAggregateSchema,
   ClimbingTourBaseSchema,
   ReportBaseSchema,
   RouteSchema,
@@ -61,18 +62,18 @@ type DeepOptional<T> =
       ? { [K in keyof T]?: DeepOptional<T[K]> }
       : T;
 
-type ClimbingTourSeasonality = {
+export type ClimbingTourSeasonality = {
   geeignet?: string[];
   ungeeignet?: string[];
   anders?: string | null;
 };
 
-type NamedExtractionItem = {
+export type NamedExtractionItem = {
   typ: string | null;
   anders?: string | null;
 };
 
-type ClimbingTourDetailsFields = {
+export type ClimbingTourDetailsFields = {
   zusammenfassung: string | null;
   ausruestung: {
     seil: {
@@ -243,3 +244,30 @@ type ClimbingTourDetailsFields = {
 export type ClimbingTourDetailsSchemaWriteInput = Pick<ClimbingTourBaseSchema, 'reportId'> & {
   schemaVersion: string;
 } & DeepOptional<ClimbingTourDetailsFields>;
+
+export type ClimbingTourAggregateSchemaWriteInput = Pick<
+  ClimbingTourAggregateSchema,
+  | 'routeId'
+  | 'schemaVersion'
+  | 'sourceReportCount'
+  | 'sourceReportIds'
+  | 'agentStatus'
+  | 'agentErrorMessage'
+  | 'aggregatedAt'
+> & {
+  agentErrorDetails?: unknown | null;
+  payload: unknown;
+};
+
+export type ClimbingTourAggregationReportRecord = {
+  routeId: bigint;
+  reportId: bigint;
+  tourDate: Date | null;
+  details: ClimbingTourDetailsSchemaWriteInput;
+  qualityScore: number | null;
+  completeness: {
+    score: number | null;
+    filledFields: number | null;
+    possibleFields: number | null;
+  };
+};

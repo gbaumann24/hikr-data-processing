@@ -35,6 +35,25 @@ model ClimbingTourBaseSchema {
   @@map("climbing_tour_base_schema")
 }
 
+model ClimbingTourAggregateSchema {
+  routeId           BigInt   @id @map("route_id")
+  schemaVersion     String   @map("schema_version")
+  sourceReportCount Int      @map("source_report_count")
+  sourceReportIds   String[] @default([]) @map("source_report_ids")
+  agentStatus       String   @map("agent_status")
+  agentErrorMessage String?  @map("agent_error_message")
+  agentErrorDetails Json?    @map("agent_error_details")
+  payload           Json
+  aggregatedAt      DateTime @default(now()) @map("aggregated_at") @db.Timestamptz(6)
+
+  route RouteSchema @relation(fields: [routeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("climbing_tour_aggregate_schema")
+}
+
 model ClimbingTourAusruestungSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
@@ -208,8 +227,12 @@ model ClimbingTourBerichtsqualitaetSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  score       Int?
-  begruendung String?
+  score                          Int?
+  begruendung                    String?
+  extractionSchemaVersion        String? @map("extraction_schema_version")
+  vollstaendigkeitScore          Float?  @map("vollstaendigkeit_score")
+  vollstaendigkeitFilledFields   Int?    @map("vollstaendigkeit_filled_fields")
+  vollstaendigkeitPossibleFields Int?    @map("vollstaendigkeit_possible_fields")
 
   @@map("climbing_tour_berichtsqualitaet_schema")
 }
@@ -432,8 +455,9 @@ model RouteSchema {
   cragName    String?  @map("crag_name")
   canton      String
 
-  summit                  SummitSchema?            @relation(fields: [summitId], references: [id], onDelete: Restrict)
+  summit                  SummitSchema?                @relation(fields: [summitId], references: [id], onDelete: Restrict)
   climbingTourBaseSchemas ClimbingTourBaseSchema[]
+  climbingTourAggregate   ClimbingTourAggregateSchema?
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
