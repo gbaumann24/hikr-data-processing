@@ -122,7 +122,10 @@ then runs the climbing workflow against the seeded rows.`);
 
 function logProgress(event: ClimbingPipelineProgressEvent): void {
   if (event.type === 'source-loaded') {
-    console.log(`Loaded ${formatTotal(event.total)} source posts for the climbing workflow.`);
+    const skipped = event.skippedTerminal > 0 ? `; skipped ${event.skippedTerminal} terminal` : '';
+    console.log(
+      `Loaded ${formatTotal(event.total)} source posts for extraction job ${event.extractionJobId.toString()}${skipped}.`,
+    );
     return;
   }
 

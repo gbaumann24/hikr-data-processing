@@ -33,18 +33,29 @@ export async function runDataPipelineWorkflow({
   workflow,
   database,
   limit,
+  extractionJobId,
+  continueOnError,
   onProgress,
 }: {
   workflow: DataPipelineWorkflow;
   database: ClimbingDataPipelineDatabase;
   limit?: number;
+  extractionJobId?: bigint;
+  continueOnError?: boolean;
   onProgress?: (event: ClimbingPipelineProgressEvent) => void;
 }) {
   if (workflow === 'baselayer') {
     return runBaseLayerPipelineService({ mastra, database, limit });
   }
 
-  return runClimbingPipelineService({ mastra, database, limit, onProgress });
+  return runClimbingPipelineService({
+    mastra,
+    database,
+    limit,
+    extractionJobId,
+    continueOnError,
+    onProgress,
+  });
 }
 
 export function formatDataPipelineWorkflow(workflow: DataPipelineWorkflow): string {

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import type { ClimbingTourDetailsSchemaWriteInput } from '@hikr/shared';
+import type { ClimbingTourDetailsSchemaWriteInput, ExtractionJobRecord } from '@hikr/shared';
 import { runClimbingPipelineService } from '../src/mastra/services/climbing-pipeline-service';
 import {
   ACTIVITY,
@@ -23,7 +23,10 @@ import { CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY } from '../src/mastra/tools/climbing-
 const longDescription = 'Kletterbericht '.repeat(150);
 
 type ClimbingPipelineMastra = Parameters<typeof runClimbingPipelineService>[0]['mastra'];
-type WorkflowResult = { status: 'success'; result: ClimbingExtractionOutput };
+type ClimbingPipelineDatabase = Parameters<typeof runClimbingPipelineService>[0]['database'];
+type WorkflowResult =
+  | { status: 'success'; result: ClimbingExtractionOutput }
+  | { status: 'failed'; error?: unknown };
 
 function hikrOrgPost(
   overrides: Partial<HikrOrgPostBaseLayerInput> = {},
@@ -118,6 +121,110 @@ function createMastraStub(
   } as unknown as ClimbingPipelineMastra;
 }
 
+// Builds a durable job record used by the in-memory tracking test stub.
+function extractionJobRecord(overrides: Partial<ExtractionJobRecord> = {}): ExtractionJobRecord {
+  return {
+    id: 100n,
+    workflow: 'climbing-pipeline',
+    status: 'running',
+    schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+    limit: null,
+    totalReports: null,
+    processedReports: 0,
+    succeededReports: 0,
+    failedReports: 0,
+    statusCounts: {},
+    lastReportId: null,
+    errorMessage: null,
+    errorDetails: null,
+    startedAt: new Date('2026-01-01T00:00:00.000Z'),
+    finishedAt: null,
+    lastHeartbeatAt: new Date('2026-01-01T00:00:00.000Z'),
+    ...overrides,
+  };
+}
+
+// Adds extraction-job tracking methods to focused pipeline database test doubles.
+function withExtractionJobTracking(
+  database: Partial<ClimbingPipelineDatabase>,
+  options: {
+    job?: ExtractionJobRecord;
+    terminalReportIds?: Set<bigint>;
+    trackingEvents?: Array<{ type: string; [key: string]: unknown }>;
+  } = {},
+): ClimbingPipelineDatabase {
+  let job = options.job ?? extractionJobRecord();
+  const terminalReportIds = options.terminalReportIds ?? new Set<bigint>();
+  const trackingEvents = options.trackingEvents;
+
+  return {
+    createExtractionJob: (input) => {
+      trackingEvents?.push({ type: 'create-job', input });
+      job = extractionJobRecord({
+        workflow: input.workflow,
+        schemaVersion: input.schemaVersion ?? null,
+        limit: input.limit ?? null,
+        totalReports: input.totalReports ?? null,
+      });
+      return job;
+    },
+    findExtractionJob: (jobId) => {
+      trackingEvents?.push({ type: 'find-job', jobId });
+      return job.id === jobId ? job : null;
+    },
+    updateExtractionJobTotals: (input) => {
+      trackingEvents?.push({ type: 'update-job-totals', input });
+      job = {
+        ...job,
+        limit: input.limit ?? job.limit,
+        totalReports: input.totalReports ?? job.totalReports,
+      };
+    },
+    findTerminalExtractionJobReportIds: (jobId) => {
+      trackingEvents?.push({ type: 'find-terminal-reports', jobId });
+      return terminalReportIds;
+    },
+    startExtractionJobReport: (input) => {
+      trackingEvents?.push({ type: 'start-report', input });
+    },
+    finishExtractionJobReport: (input) => {
+      trackingEvents?.push({ type: 'finish-report', input });
+      const wasTerminal = terminalReportIds.has(input.reportId);
+      terminalReportIds.add(input.reportId);
+      job = {
+        ...job,
+        processedReports: job.processedReports + (wasTerminal ? 0 : 1),
+        succeededReports:
+          job.succeededReports + (input.status === 'success' && !wasTerminal ? 1 : 0),
+        failedReports: job.failedReports + (input.status !== 'success' && !wasTerminal ? 1 : 0),
+        lastReportId: input.reportId,
+      };
+    },
+    finishExtractionJob: (input) => {
+      trackingEvents?.push({ type: 'finish-job', input });
+      job = {
+        ...job,
+        status: input.status,
+        statusCounts: input.statusCounts,
+        processedReports: input.processedReports,
+        succeededReports: input.succeededReports,
+        failedReports: input.failedReports,
+        lastReportId: input.lastReportId ?? null,
+      };
+    },
+    findHikrOrgPostsForPreprocessing: () => [],
+    findRouteSummitNames: () => [],
+    findRouteNames: () => [],
+    findRouteCragNames: () => [],
+    upsertReportBase: () => {},
+    upsertClimbingTourBase: () => {},
+    upsertClimbingGardenBase: () => {},
+    upsertClimbingTourDetails: () => {},
+    updateSummitHeightIfMissing: () => {},
+    ...database,
+  };
+}
+
 describe('climbing pipeline service', () => {
   test('runs the climbing workflow and writes ready climbing rows', async () => {
     const reportBaseWrites: ReportBaseSchemaWriteInput[] = [];
@@ -153,7 +260,7 @@ describe('climbing pipeline service', () => {
         ],
         workflowStartArgs,
       ),
-      database: {
+      database: withExtractionJobTracking({
         findHikrOrgPostsForPreprocessing: () => [
           hikrOrgPost(),
           hikrOrgPost({ id: 43n, description: 'zu kurz' }),
@@ -174,7 +281,7 @@ describe('climbing pipeline service', () => {
           climbingTourDetailsWrites.push(input);
         },
         updateSummitHeightIfMissing: () => {},
-      },
+      }),
       onProgress: (event) => {
         progressEvents.push(event);
       },
@@ -317,7 +424,7 @@ describe('climbing pipeline service', () => {
 
     const result = await runClimbingPipelineService({
       mastra,
-      database: {
+      database: withExtractionJobTracking({
         findHikrOrgPostsForPreprocessing: () => [sourcePost],
         findRouteSummitNames: () => [],
         findRouteNames: () => [],
@@ -333,7 +440,7 @@ describe('climbing pipeline service', () => {
           climbingTourDetailsWrites.push(input);
         },
         updateSummitHeightIfMissing: () => {},
-      },
+      }),
     });
 
     expect(result).toEqual({
@@ -343,6 +450,10 @@ describe('climbing pipeline service', () => {
         [PREPROCESSOR_STATUS.SKIPPED]: 0,
         [PREPROCESSOR_STATUS.INSUFFICIENT]: 0,
       },
+      extractionJobId: 100n,
+      succeeded: 1,
+      failed: 0,
+      skippedTerminal: 0,
     });
     expect(reportBaseWrites).toMatchObject([
       {
@@ -408,7 +519,7 @@ describe('climbing pipeline service', () => {
           }),
         },
       ]),
-      database: {
+      database: withExtractionJobTracking({
         findHikrOrgPostsForPreprocessing,
         findRouteSummitNames: () => [],
         findRouteNames: () => [],
@@ -420,7 +531,7 @@ describe('climbing pipeline service', () => {
         upsertClimbingGardenBase: () => {},
         upsertClimbingTourDetails: () => {},
         updateSummitHeightIfMissing: () => {},
-      },
+      }),
       limit: 1,
     });
 
@@ -432,5 +543,171 @@ describe('climbing pipeline service', () => {
     });
     expect(reportBaseWrites.map((write) => write.reportId)).toEqual([1n]);
     expect(reportBaseWrites[0].reasons).toEqual(['non_climbing_activity']);
+  });
+
+  test('continues after workflow failures and thrown report errors', async () => {
+    const trackingEvents: Array<{ type: string; [key: string]: unknown }> = [];
+    const progressEvents: Array<{ type: string; [key: string]: unknown }> = [];
+    let runIndex = 0;
+    const mastra = {
+      getWorkflow: () => ({
+        createRun: async () => ({
+          runId: `run-${runIndex + 1}`,
+          start: async () => {
+            runIndex += 1;
+
+            if (runIndex === 1) {
+              return { status: 'success', result: climbingOutput() };
+            }
+
+            if (runIndex === 2) {
+              return { status: 'failed', error: { message: 'model rejected output' } };
+            }
+
+            throw new Error('extractor timeout');
+          },
+        }),
+      }),
+    } as unknown as ClimbingPipelineMastra;
+
+    const result = await runClimbingPipelineService({
+      mastra,
+      database: withExtractionJobTracking(
+        {
+          findHikrOrgPostsForPreprocessing: () => [
+            hikrOrgPost({ id: 42n }),
+            hikrOrgPost({ id: 43n }),
+            hikrOrgPost({ id: 44n }),
+          ],
+        },
+        { trackingEvents },
+      ),
+      onProgress: (event) => {
+        progressEvents.push(event);
+      },
+    });
+
+    expect(result).toMatchObject({
+      total: 3,
+      succeeded: 1,
+      failed: 2,
+      skippedTerminal: 0,
+      statusCounts: {
+        [PREPROCESSOR_STATUS.READY]: 1,
+        [PREPROCESSOR_STATUS.SKIPPED]: 0,
+        [PREPROCESSOR_STATUS.INSUFFICIENT]: 0,
+      },
+    });
+    expect(progressEvents.map((event) => event.type)).toEqual([
+      'source-loaded',
+      'post-start',
+      'post-success',
+      'post-start',
+      'post-failure',
+      'post-start',
+      'post-error',
+    ]);
+    expect(
+      trackingEvents
+        .filter((event) => event.type === 'finish-report')
+        .map((event) => (event.input as { status: string }).status),
+    ).toEqual(['success', 'workflow_failed', 'failed']);
+    expect(trackingEvents.find((event) => event.type === 'finish-job')?.input).toMatchObject({
+      status: 'completed_with_errors',
+      processedReports: 3,
+      succeededReports: 1,
+      failedReports: 2,
+    });
+  });
+
+  test('resumes an existing extraction job by skipping terminal reports', async () => {
+    const trackingEvents: Array<{ type: string; [key: string]: unknown }> = [];
+    const workflowStartArgs: Array<{ inputData?: HikrOrgPostBaseLayerInput }> = [];
+    const existingJob = extractionJobRecord({
+      id: 999n,
+      limit: 3,
+      processedReports: 1,
+      succeededReports: 1,
+      statusCounts: { [PREPROCESSOR_STATUS.READY]: 1 },
+    });
+
+    const result = await runClimbingPipelineService({
+      mastra: createMastraStub(
+        [
+          {
+            status: 'success',
+            result: climbingOutput({
+              base: {
+                reportId: 43n,
+                status: PREPROCESSOR_STATUS.SKIPPED,
+                activity: ACTIVITY.SKI_ALPINE_TOUR,
+                subActivity: null,
+                canton: 'Obwalden',
+                tourDate: null,
+                region: 'Melchtal',
+              },
+              climbingTourBase: null,
+              extraction: null,
+              reasons: ['non_climbing_activity'],
+            }),
+          },
+          {
+            status: 'success',
+            result: climbingOutput({
+              base: {
+                reportId: 44n,
+                status: PREPROCESSOR_STATUS.SKIPPED,
+                activity: ACTIVITY.SKI_ALPINE_TOUR,
+                subActivity: null,
+                canton: 'Obwalden',
+                tourDate: null,
+                region: 'Melchtal',
+              },
+              climbingTourBase: null,
+              extraction: null,
+              reasons: ['non_climbing_activity'],
+            }),
+          },
+        ],
+        workflowStartArgs,
+      ),
+      database: withExtractionJobTracking(
+        {
+          findHikrOrgPostsForPreprocessing: () => [
+            hikrOrgPost({ id: 42n }),
+            hikrOrgPost({ id: 43n }),
+            hikrOrgPost({ id: 44n }),
+            hikrOrgPost({ id: 45n }),
+          ],
+        },
+        {
+          job: existingJob,
+          terminalReportIds: new Set([42n]),
+          trackingEvents,
+        },
+      ),
+      extractionJobId: 999n,
+    });
+
+    expect(result).toMatchObject({
+      total: 2,
+      extractionJobId: 999n,
+      succeeded: 2,
+      failed: 0,
+      skippedTerminal: 1,
+      statusCounts: {
+        [PREPROCESSOR_STATUS.READY]: 1,
+        [PREPROCESSOR_STATUS.SKIPPED]: 2,
+        [PREPROCESSOR_STATUS.INSUFFICIENT]: 0,
+      },
+    });
+    expect(workflowStartArgs.map((args) => args.inputData?.id)).toEqual([43n, 44n]);
+    expect(trackingEvents.find((event) => event.type === 'update-job-totals')?.input).toMatchObject(
+      {
+        jobId: 999n,
+        totalReports: 3,
+        limit: 3,
+      },
+    );
   });
 });

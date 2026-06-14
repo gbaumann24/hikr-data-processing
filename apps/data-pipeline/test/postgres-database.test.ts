@@ -31,6 +31,144 @@ describe('postgres database adapter', () => {
     ]);
   });
 
+  test('wires extraction job tracking through operation modules', async () => {
+    const calls: string[] = [];
+    const jobUpdates: unknown[] = [];
+    const reportUpserts: unknown[] = [];
+    const now = new Date('2026-01-01T00:00:00.000Z');
+    const jobRow = {
+      id: 100n,
+      workflow: 'climbing-pipeline',
+      status: 'running',
+      schemaVersion: 'climbing-extraction-v1',
+      limit: 5,
+      totalReports: null,
+      processedReports: 0,
+      succeededReports: 0,
+      failedReports: 0,
+      statusCounts: {},
+      lastReportId: null,
+      errorMessage: null,
+      errorDetails: null,
+      startedAt: now,
+      finishedAt: null,
+      lastHeartbeatAt: now,
+      createdAt: now,
+      updatedAt: now,
+    };
+    const tx = {
+      extractionJobReportSchema: {
+        findUnique: async () => {
+          calls.push('tx.extractionJobReportSchema.findUnique');
+          return { status: 'running' };
+        },
+        upsert: async (input: unknown) => {
+          calls.push('tx.extractionJobReportSchema.upsert');
+          reportUpserts.push(input);
+        },
+      },
+      extractionJobSchema: {
+        update: async (input: unknown) => {
+          calls.push('tx.extractionJobSchema.update');
+          jobUpdates.push(input);
+        },
+      },
+    };
+    const prisma = {
+      extractionJobSchema: {
+        create: async () => {
+          calls.push('extractionJobSchema.create');
+          return jobRow;
+        },
+        findUnique: async () => {
+          calls.push('extractionJobSchema.findUnique');
+          return jobRow;
+        },
+        update: async (input: unknown) => {
+          calls.push('extractionJobSchema.update');
+          jobUpdates.push(input);
+        },
+      },
+      extractionJobReportSchema: {
+        findMany: async () => {
+          calls.push('extractionJobReportSchema.findMany');
+          return [{ reportId: 42n }];
+        },
+      },
+      $transaction: async (callback: (transaction: typeof tx) => Promise<void>) => {
+        calls.push('$transaction');
+        await callback(tx);
+      },
+    } as unknown as PrismaClient;
+
+    const database = createPostgresDatabase(prisma);
+
+    await expect(
+      database.createExtractionJob({
+        workflow: 'climbing-pipeline',
+        schemaVersion: 'climbing-extraction-v1',
+        limit: 5,
+      }),
+    ).resolves.toMatchObject({
+      id: 100n,
+      workflow: 'climbing-pipeline',
+      statusCounts: {},
+    });
+    await expect(database.findExtractionJob(100n)).resolves.toMatchObject({ id: 100n });
+    await database.updateExtractionJobTotals({ jobId: 100n, totalReports: 5, limit: 5 });
+    await expect(database.findTerminalExtractionJobReportIds(100n)).resolves.toEqual(
+      new Set([42n]),
+    );
+    await database.startExtractionJobReport({
+      jobId: 100n,
+      reportId: 42n,
+      mastraRunId: 'run-1',
+    });
+    await database.finishExtractionJobReport({
+      jobId: 100n,
+      reportId: 42n,
+      status: 'success',
+      workflowStatus: 'success',
+      preprocessorStatus: PREPROCESSOR_STATUS.READY,
+      elapsedMs: 25,
+    });
+    await database.finishExtractionJob({
+      jobId: 100n,
+      status: 'completed',
+      statusCounts: { ready: 1 },
+      processedReports: 1,
+      succeededReports: 1,
+      failedReports: 0,
+      lastReportId: 42n,
+    });
+
+    expect(calls).toEqual([
+      'extractionJobSchema.create',
+      'extractionJobSchema.findUnique',
+      'extractionJobSchema.update',
+      'extractionJobReportSchema.findMany',
+      '$transaction',
+      'tx.extractionJobReportSchema.upsert',
+      'tx.extractionJobSchema.update',
+      '$transaction',
+      'tx.extractionJobReportSchema.findUnique',
+      'tx.extractionJobReportSchema.upsert',
+      'tx.extractionJobSchema.update',
+      'extractionJobSchema.update',
+    ]);
+    expect(reportUpserts).toHaveLength(2);
+    expect(jobUpdates.at(-1)).toMatchObject({
+      where: { id: 100n },
+      data: {
+        status: 'completed',
+        processedReports: 1,
+        succeededReports: 1,
+        failedReports: 0,
+        lastReportId: 42n,
+      },
+    });
+  });
+
   test('wires climbing persistence through operation modules', async () => {
     const calls: string[] = [];
     const detailUpserts: unknown[] = [];
@@ -279,11 +417,9 @@ describe('postgres database adapter', () => {
         where: { baseId: 42n },
         create: {
           baseId: 42n,
-          schluesselstellenVorhanden: true,
           schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
         },
         update: {
-          schluesselstellenVorhanden: true,
           schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
         },
       },

@@ -244,6 +244,44 @@ exports.Prisma.ClimbingTourBesonderesSchemaScalarFieldEnum = {
   hinweise: 'hinweise'
 };
 
+exports.Prisma.ExtractionJobSchemaScalarFieldEnum = {
+  id: 'id',
+  workflow: 'workflow',
+  status: 'status',
+  schemaVersion: 'schemaVersion',
+  limit: 'limit',
+  totalReports: 'totalReports',
+  processedReports: 'processedReports',
+  succeededReports: 'succeededReports',
+  failedReports: 'failedReports',
+  statusCounts: 'statusCounts',
+  lastReportId: 'lastReportId',
+  errorMessage: 'errorMessage',
+  errorDetails: 'errorDetails',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  lastHeartbeatAt: 'lastHeartbeatAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExtractionJobReportSchemaScalarFieldEnum = {
+  jobId: 'jobId',
+  reportId: 'reportId',
+  status: 'status',
+  workflowStatus: 'workflowStatus',
+  preprocessorStatus: 'preprocessorStatus',
+  mastraRunId: 'mastraRunId',
+  attempt: 'attempt',
+  elapsedMs: 'elapsedMs',
+  errorMessage: 'errorMessage',
+  errorDetails: 'errorDetails',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.HikrOrgPostSchemaScalarFieldEnum = {
   id: 'id',
   hikrPostId: 'hikrPostId',
@@ -403,6 +441,8 @@ exports.Prisma.ModelName = {
   ClimbingTourAnreiseSchema: 'ClimbingTourAnreiseSchema',
   ClimbingTourZustiegUndAbstiegSchema: 'ClimbingTourZustiegUndAbstiegSchema',
   ClimbingTourBesonderesSchema: 'ClimbingTourBesonderesSchema',
+  ExtractionJobSchema: 'ExtractionJobSchema',
+  ExtractionJobReportSchema: 'ExtractionJobReportSchema',
   HikrOrgPostSchema: 'HikrOrgPostSchema',
   HikrWaypointSchema: 'HikrWaypointSchema',
   HikrReportWaypointSchema: 'HikrReportWaypointSchema',

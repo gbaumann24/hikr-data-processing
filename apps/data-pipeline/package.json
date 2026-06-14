@@ -6,6 +6,7 @@
     "run": "bun src/run.ts",
     "run:baselayer": "WORKFLOW=baselayer bun src/run.ts",
     "run:climbing": "WORKFLOW=climbing bun src/run.ts",
+    "extract:climbing": "WORKFLOW=climbing bun src/run.ts",
     "test-run:climbing": "bun src/run-climbing-test.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit"

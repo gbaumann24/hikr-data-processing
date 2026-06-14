@@ -69,6 +69,16 @@ export type ClimbingTourZustiegUndAbstiegSchema = $Result.DefaultSelection<Prism
  */
 export type ClimbingTourBesonderesSchema = $Result.DefaultSelection<Prisma.$ClimbingTourBesonderesSchemaPayload>
 /**
+ * Model ExtractionJobSchema
+ * 
+ */
+export type ExtractionJobSchema = $Result.DefaultSelection<Prisma.$ExtractionJobSchemaPayload>
+/**
+ * Model ExtractionJobReportSchema
+ * 
+ */
+export type ExtractionJobReportSchema = $Result.DefaultSelection<Prisma.$ExtractionJobReportSchemaPayload>
+/**
  * Model HikrOrgPostSchema
  * 
  */
@@ -353,6 +363,26 @@ export class PrismaClient<
     * ```
     */
   get climbingTourBesonderesSchema(): Prisma.ClimbingTourBesonderesSchemaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.extractionJobSchema`: Exposes CRUD operations for the **ExtractionJobSchema** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExtractionJobSchemas
+    * const extractionJobSchemas = await prisma.extractionJobSchema.findMany()
+    * ```
+    */
+  get extractionJobSchema(): Prisma.ExtractionJobSchemaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.extractionJobReportSchema`: Exposes CRUD operations for the **ExtractionJobReportSchema** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExtractionJobReportSchemas
+    * const extractionJobReportSchemas = await prisma.extractionJobReportSchema.findMany()
+    * ```
+    */
+  get extractionJobReportSchema(): Prisma.ExtractionJobReportSchemaDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.hikrOrgPostSchema`: Exposes CRUD operations for the **HikrOrgPostSchema** model.
@@ -875,6 +905,8 @@ export namespace Prisma {
     ClimbingTourAnreiseSchema: 'ClimbingTourAnreiseSchema',
     ClimbingTourZustiegUndAbstiegSchema: 'ClimbingTourZustiegUndAbstiegSchema',
     ClimbingTourBesonderesSchema: 'ClimbingTourBesonderesSchema',
+    ExtractionJobSchema: 'ExtractionJobSchema',
+    ExtractionJobReportSchema: 'ExtractionJobReportSchema',
     HikrOrgPostSchema: 'HikrOrgPostSchema',
     HikrWaypointSchema: 'HikrWaypointSchema',
     HikrReportWaypointSchema: 'HikrReportWaypointSchema',
@@ -900,7 +932,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "climbingGardenBaseSchema" | "climbingTourBaseSchema" | "climbingTourAusruestungSchema" | "climbingTourZeitbedarfSchema" | "climbingTourAbsicherungSchema" | "climbingTourSchuhwerkSchema" | "climbingTourGelaendeUndGefahrenSchema" | "climbingTourKletternSchema" | "climbingTourAnreiseSchema" | "climbingTourZustiegUndAbstiegSchema" | "climbingTourBesonderesSchema" | "hikrOrgPostSchema" | "hikrWaypointSchema" | "hikrReportWaypointSchema" | "hikrScraperProgressSchema" | "reportBaseSchema" | "routeSchema" | "summitSchema"
+      modelProps: "climbingGardenBaseSchema" | "climbingTourBaseSchema" | "climbingTourAusruestungSchema" | "climbingTourZeitbedarfSchema" | "climbingTourAbsicherungSchema" | "climbingTourSchuhwerkSchema" | "climbingTourGelaendeUndGefahrenSchema" | "climbingTourKletternSchema" | "climbingTourAnreiseSchema" | "climbingTourZustiegUndAbstiegSchema" | "climbingTourBesonderesSchema" | "extractionJobSchema" | "extractionJobReportSchema" | "hikrOrgPostSchema" | "hikrWaypointSchema" | "hikrReportWaypointSchema" | "hikrScraperProgressSchema" | "reportBaseSchema" | "routeSchema" | "summitSchema"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1718,6 +1750,154 @@ export namespace Prisma {
           }
         }
       }
+      ExtractionJobSchema: {
+        payload: Prisma.$ExtractionJobSchemaPayload<ExtArgs>
+        fields: Prisma.ExtractionJobSchemaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExtractionJobSchemaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExtractionJobSchemaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>
+          }
+          findFirst: {
+            args: Prisma.ExtractionJobSchemaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExtractionJobSchemaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>
+          }
+          findMany: {
+            args: Prisma.ExtractionJobSchemaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>[]
+          }
+          create: {
+            args: Prisma.ExtractionJobSchemaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>
+          }
+          createMany: {
+            args: Prisma.ExtractionJobSchemaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExtractionJobSchemaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>[]
+          }
+          delete: {
+            args: Prisma.ExtractionJobSchemaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>
+          }
+          update: {
+            args: Prisma.ExtractionJobSchemaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExtractionJobSchemaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExtractionJobSchemaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExtractionJobSchemaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExtractionJobSchemaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobSchemaPayload>
+          }
+          aggregate: {
+            args: Prisma.ExtractionJobSchemaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExtractionJobSchema>
+          }
+          groupBy: {
+            args: Prisma.ExtractionJobSchemaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExtractionJobSchemaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExtractionJobSchemaCountArgs<ExtArgs>
+            result: $Utils.Optional<ExtractionJobSchemaCountAggregateOutputType> | number
+          }
+        }
+      }
+      ExtractionJobReportSchema: {
+        payload: Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>
+        fields: Prisma.ExtractionJobReportSchemaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExtractionJobReportSchemaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExtractionJobReportSchemaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>
+          }
+          findFirst: {
+            args: Prisma.ExtractionJobReportSchemaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExtractionJobReportSchemaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>
+          }
+          findMany: {
+            args: Prisma.ExtractionJobReportSchemaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>[]
+          }
+          create: {
+            args: Prisma.ExtractionJobReportSchemaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>
+          }
+          createMany: {
+            args: Prisma.ExtractionJobReportSchemaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExtractionJobReportSchemaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>[]
+          }
+          delete: {
+            args: Prisma.ExtractionJobReportSchemaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>
+          }
+          update: {
+            args: Prisma.ExtractionJobReportSchemaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExtractionJobReportSchemaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExtractionJobReportSchemaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExtractionJobReportSchemaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExtractionJobReportSchemaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExtractionJobReportSchemaPayload>
+          }
+          aggregate: {
+            args: Prisma.ExtractionJobReportSchemaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExtractionJobReportSchema>
+          }
+          groupBy: {
+            args: Prisma.ExtractionJobReportSchemaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExtractionJobReportSchemaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExtractionJobReportSchemaCountArgs<ExtArgs>
+            result: $Utils.Optional<ExtractionJobReportSchemaCountAggregateOutputType> | number
+          }
+        }
+      }
       HikrOrgPostSchema: {
         payload: Prisma.$HikrOrgPostSchemaPayload<ExtArgs>
         fields: Prisma.HikrOrgPostSchemaFieldRefs
@@ -2343,6 +2523,8 @@ export namespace Prisma {
     climbingTourAnreiseSchema?: ClimbingTourAnreiseSchemaOmit
     climbingTourZustiegUndAbstiegSchema?: ClimbingTourZustiegUndAbstiegSchemaOmit
     climbingTourBesonderesSchema?: ClimbingTourBesonderesSchemaOmit
+    extractionJobSchema?: ExtractionJobSchemaOmit
+    extractionJobReportSchema?: ExtractionJobReportSchemaOmit
     hikrOrgPostSchema?: HikrOrgPostSchemaOmit
     hikrWaypointSchema?: HikrWaypointSchemaOmit
     hikrReportWaypointSchema?: HikrReportWaypointSchemaOmit
@@ -2423,6 +2605,37 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+
+  /**
+   * Count Type ExtractionJobSchemaCountOutputType
+   */
+
+  export type ExtractionJobSchemaCountOutputType = {
+    reports: number
+  }
+
+  export type ExtractionJobSchemaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reports?: boolean | ExtractionJobSchemaCountOutputTypeCountReportsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ExtractionJobSchemaCountOutputType without action
+   */
+  export type ExtractionJobSchemaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchemaCountOutputType
+     */
+    select?: ExtractionJobSchemaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ExtractionJobSchemaCountOutputType without action
+   */
+  export type ExtractionJobSchemaCountOutputTypeCountReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExtractionJobReportSchemaWhereInput
+  }
 
 
   /**
@@ -15240,6 +15453,2512 @@ export namespace Prisma {
 
 
   /**
+   * Model ExtractionJobSchema
+   */
+
+  export type AggregateExtractionJobSchema = {
+    _count: ExtractionJobSchemaCountAggregateOutputType | null
+    _avg: ExtractionJobSchemaAvgAggregateOutputType | null
+    _sum: ExtractionJobSchemaSumAggregateOutputType | null
+    _min: ExtractionJobSchemaMinAggregateOutputType | null
+    _max: ExtractionJobSchemaMaxAggregateOutputType | null
+  }
+
+  export type ExtractionJobSchemaAvgAggregateOutputType = {
+    id: number | null
+    limit: number | null
+    totalReports: number | null
+    processedReports: number | null
+    succeededReports: number | null
+    failedReports: number | null
+    lastReportId: number | null
+  }
+
+  export type ExtractionJobSchemaSumAggregateOutputType = {
+    id: bigint | null
+    limit: number | null
+    totalReports: number | null
+    processedReports: number | null
+    succeededReports: number | null
+    failedReports: number | null
+    lastReportId: bigint | null
+  }
+
+  export type ExtractionJobSchemaMinAggregateOutputType = {
+    id: bigint | null
+    workflow: string | null
+    status: string | null
+    schemaVersion: string | null
+    limit: number | null
+    totalReports: number | null
+    processedReports: number | null
+    succeededReports: number | null
+    failedReports: number | null
+    lastReportId: bigint | null
+    errorMessage: string | null
+    startedAt: Date | null
+    finishedAt: Date | null
+    lastHeartbeatAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExtractionJobSchemaMaxAggregateOutputType = {
+    id: bigint | null
+    workflow: string | null
+    status: string | null
+    schemaVersion: string | null
+    limit: number | null
+    totalReports: number | null
+    processedReports: number | null
+    succeededReports: number | null
+    failedReports: number | null
+    lastReportId: bigint | null
+    errorMessage: string | null
+    startedAt: Date | null
+    finishedAt: Date | null
+    lastHeartbeatAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExtractionJobSchemaCountAggregateOutputType = {
+    id: number
+    workflow: number
+    status: number
+    schemaVersion: number
+    limit: number
+    totalReports: number
+    processedReports: number
+    succeededReports: number
+    failedReports: number
+    statusCounts: number
+    lastReportId: number
+    errorMessage: number
+    errorDetails: number
+    startedAt: number
+    finishedAt: number
+    lastHeartbeatAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ExtractionJobSchemaAvgAggregateInputType = {
+    id?: true
+    limit?: true
+    totalReports?: true
+    processedReports?: true
+    succeededReports?: true
+    failedReports?: true
+    lastReportId?: true
+  }
+
+  export type ExtractionJobSchemaSumAggregateInputType = {
+    id?: true
+    limit?: true
+    totalReports?: true
+    processedReports?: true
+    succeededReports?: true
+    failedReports?: true
+    lastReportId?: true
+  }
+
+  export type ExtractionJobSchemaMinAggregateInputType = {
+    id?: true
+    workflow?: true
+    status?: true
+    schemaVersion?: true
+    limit?: true
+    totalReports?: true
+    processedReports?: true
+    succeededReports?: true
+    failedReports?: true
+    lastReportId?: true
+    errorMessage?: true
+    startedAt?: true
+    finishedAt?: true
+    lastHeartbeatAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExtractionJobSchemaMaxAggregateInputType = {
+    id?: true
+    workflow?: true
+    status?: true
+    schemaVersion?: true
+    limit?: true
+    totalReports?: true
+    processedReports?: true
+    succeededReports?: true
+    failedReports?: true
+    lastReportId?: true
+    errorMessage?: true
+    startedAt?: true
+    finishedAt?: true
+    lastHeartbeatAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExtractionJobSchemaCountAggregateInputType = {
+    id?: true
+    workflow?: true
+    status?: true
+    schemaVersion?: true
+    limit?: true
+    totalReports?: true
+    processedReports?: true
+    succeededReports?: true
+    failedReports?: true
+    statusCounts?: true
+    lastReportId?: true
+    errorMessage?: true
+    errorDetails?: true
+    startedAt?: true
+    finishedAt?: true
+    lastHeartbeatAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ExtractionJobSchemaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExtractionJobSchema to aggregate.
+     */
+    where?: ExtractionJobSchemaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExtractionJobSchemas to fetch.
+     */
+    orderBy?: ExtractionJobSchemaOrderByWithRelationInput | ExtractionJobSchemaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExtractionJobSchemaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExtractionJobSchemas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExtractionJobSchemas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExtractionJobSchemas
+    **/
+    _count?: true | ExtractionJobSchemaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExtractionJobSchemaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExtractionJobSchemaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExtractionJobSchemaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExtractionJobSchemaMaxAggregateInputType
+  }
+
+  export type GetExtractionJobSchemaAggregateType<T extends ExtractionJobSchemaAggregateArgs> = {
+        [P in keyof T & keyof AggregateExtractionJobSchema]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExtractionJobSchema[P]>
+      : GetScalarType<T[P], AggregateExtractionJobSchema[P]>
+  }
+
+
+
+
+  export type ExtractionJobSchemaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExtractionJobSchemaWhereInput
+    orderBy?: ExtractionJobSchemaOrderByWithAggregationInput | ExtractionJobSchemaOrderByWithAggregationInput[]
+    by: ExtractionJobSchemaScalarFieldEnum[] | ExtractionJobSchemaScalarFieldEnum
+    having?: ExtractionJobSchemaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExtractionJobSchemaCountAggregateInputType | true
+    _avg?: ExtractionJobSchemaAvgAggregateInputType
+    _sum?: ExtractionJobSchemaSumAggregateInputType
+    _min?: ExtractionJobSchemaMinAggregateInputType
+    _max?: ExtractionJobSchemaMaxAggregateInputType
+  }
+
+  export type ExtractionJobSchemaGroupByOutputType = {
+    id: bigint
+    workflow: string
+    status: string
+    schemaVersion: string | null
+    limit: number | null
+    totalReports: number | null
+    processedReports: number
+    succeededReports: number
+    failedReports: number
+    statusCounts: JsonValue
+    lastReportId: bigint | null
+    errorMessage: string | null
+    errorDetails: JsonValue | null
+    startedAt: Date
+    finishedAt: Date | null
+    lastHeartbeatAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: ExtractionJobSchemaCountAggregateOutputType | null
+    _avg: ExtractionJobSchemaAvgAggregateOutputType | null
+    _sum: ExtractionJobSchemaSumAggregateOutputType | null
+    _min: ExtractionJobSchemaMinAggregateOutputType | null
+    _max: ExtractionJobSchemaMaxAggregateOutputType | null
+  }
+
+  type GetExtractionJobSchemaGroupByPayload<T extends ExtractionJobSchemaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExtractionJobSchemaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExtractionJobSchemaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExtractionJobSchemaGroupByOutputType[P]>
+            : GetScalarType<T[P], ExtractionJobSchemaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExtractionJobSchemaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workflow?: boolean
+    status?: boolean
+    schemaVersion?: boolean
+    limit?: boolean
+    totalReports?: boolean
+    processedReports?: boolean
+    succeededReports?: boolean
+    failedReports?: boolean
+    statusCounts?: boolean
+    lastReportId?: boolean
+    errorMessage?: boolean
+    errorDetails?: boolean
+    startedAt?: boolean
+    finishedAt?: boolean
+    lastHeartbeatAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    reports?: boolean | ExtractionJobSchema$reportsArgs<ExtArgs>
+    _count?: boolean | ExtractionJobSchemaCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["extractionJobSchema"]>
+
+  export type ExtractionJobSchemaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workflow?: boolean
+    status?: boolean
+    schemaVersion?: boolean
+    limit?: boolean
+    totalReports?: boolean
+    processedReports?: boolean
+    succeededReports?: boolean
+    failedReports?: boolean
+    statusCounts?: boolean
+    lastReportId?: boolean
+    errorMessage?: boolean
+    errorDetails?: boolean
+    startedAt?: boolean
+    finishedAt?: boolean
+    lastHeartbeatAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["extractionJobSchema"]>
+
+  export type ExtractionJobSchemaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workflow?: boolean
+    status?: boolean
+    schemaVersion?: boolean
+    limit?: boolean
+    totalReports?: boolean
+    processedReports?: boolean
+    succeededReports?: boolean
+    failedReports?: boolean
+    statusCounts?: boolean
+    lastReportId?: boolean
+    errorMessage?: boolean
+    errorDetails?: boolean
+    startedAt?: boolean
+    finishedAt?: boolean
+    lastHeartbeatAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["extractionJobSchema"]>
+
+  export type ExtractionJobSchemaSelectScalar = {
+    id?: boolean
+    workflow?: boolean
+    status?: boolean
+    schemaVersion?: boolean
+    limit?: boolean
+    totalReports?: boolean
+    processedReports?: boolean
+    succeededReports?: boolean
+    failedReports?: boolean
+    statusCounts?: boolean
+    lastReportId?: boolean
+    errorMessage?: boolean
+    errorDetails?: boolean
+    startedAt?: boolean
+    finishedAt?: boolean
+    lastHeartbeatAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ExtractionJobSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workflow" | "status" | "schemaVersion" | "limit" | "totalReports" | "processedReports" | "succeededReports" | "failedReports" | "statusCounts" | "lastReportId" | "errorMessage" | "errorDetails" | "startedAt" | "finishedAt" | "lastHeartbeatAt" | "createdAt" | "updatedAt", ExtArgs["result"]["extractionJobSchema"]>
+  export type ExtractionJobSchemaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reports?: boolean | ExtractionJobSchema$reportsArgs<ExtArgs>
+    _count?: boolean | ExtractionJobSchemaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ExtractionJobSchemaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ExtractionJobSchemaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ExtractionJobSchemaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExtractionJobSchema"
+    objects: {
+      reports: Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      workflow: string
+      status: string
+      schemaVersion: string | null
+      limit: number | null
+      totalReports: number | null
+      processedReports: number
+      succeededReports: number
+      failedReports: number
+      statusCounts: Prisma.JsonValue
+      lastReportId: bigint | null
+      errorMessage: string | null
+      errorDetails: Prisma.JsonValue | null
+      startedAt: Date
+      finishedAt: Date | null
+      lastHeartbeatAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["extractionJobSchema"]>
+    composites: {}
+  }
+
+  type ExtractionJobSchemaGetPayload<S extends boolean | null | undefined | ExtractionJobSchemaDefaultArgs> = $Result.GetResult<Prisma.$ExtractionJobSchemaPayload, S>
+
+  type ExtractionJobSchemaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExtractionJobSchemaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExtractionJobSchemaCountAggregateInputType | true
+    }
+
+  export interface ExtractionJobSchemaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExtractionJobSchema'], meta: { name: 'ExtractionJobSchema' } }
+    /**
+     * Find zero or one ExtractionJobSchema that matches the filter.
+     * @param {ExtractionJobSchemaFindUniqueArgs} args - Arguments to find a ExtractionJobSchema
+     * @example
+     * // Get one ExtractionJobSchema
+     * const extractionJobSchema = await prisma.extractionJobSchema.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExtractionJobSchemaFindUniqueArgs>(args: SelectSubset<T, ExtractionJobSchemaFindUniqueArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExtractionJobSchema that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExtractionJobSchemaFindUniqueOrThrowArgs} args - Arguments to find a ExtractionJobSchema
+     * @example
+     * // Get one ExtractionJobSchema
+     * const extractionJobSchema = await prisma.extractionJobSchema.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExtractionJobSchemaFindUniqueOrThrowArgs>(args: SelectSubset<T, ExtractionJobSchemaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExtractionJobSchema that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobSchemaFindFirstArgs} args - Arguments to find a ExtractionJobSchema
+     * @example
+     * // Get one ExtractionJobSchema
+     * const extractionJobSchema = await prisma.extractionJobSchema.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExtractionJobSchemaFindFirstArgs>(args?: SelectSubset<T, ExtractionJobSchemaFindFirstArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExtractionJobSchema that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobSchemaFindFirstOrThrowArgs} args - Arguments to find a ExtractionJobSchema
+     * @example
+     * // Get one ExtractionJobSchema
+     * const extractionJobSchema = await prisma.extractionJobSchema.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExtractionJobSchemaFindFirstOrThrowArgs>(args?: SelectSubset<T, ExtractionJobSchemaFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExtractionJobSchemas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobSchemaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExtractionJobSchemas
+     * const extractionJobSchemas = await prisma.extractionJobSchema.findMany()
+     * 
+     * // Get first 10 ExtractionJobSchemas
+     * const extractionJobSchemas = await prisma.extractionJobSchema.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const extractionJobSchemaWithIdOnly = await prisma.extractionJobSchema.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExtractionJobSchemaFindManyArgs>(args?: SelectSubset<T, ExtractionJobSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExtractionJobSchema.
+     * @param {ExtractionJobSchemaCreateArgs} args - Arguments to create a ExtractionJobSchema.
+     * @example
+     * // Create one ExtractionJobSchema
+     * const ExtractionJobSchema = await prisma.extractionJobSchema.create({
+     *   data: {
+     *     // ... data to create a ExtractionJobSchema
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExtractionJobSchemaCreateArgs>(args: SelectSubset<T, ExtractionJobSchemaCreateArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExtractionJobSchemas.
+     * @param {ExtractionJobSchemaCreateManyArgs} args - Arguments to create many ExtractionJobSchemas.
+     * @example
+     * // Create many ExtractionJobSchemas
+     * const extractionJobSchema = await prisma.extractionJobSchema.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExtractionJobSchemaCreateManyArgs>(args?: SelectSubset<T, ExtractionJobSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExtractionJobSchemas and returns the data saved in the database.
+     * @param {ExtractionJobSchemaCreateManyAndReturnArgs} args - Arguments to create many ExtractionJobSchemas.
+     * @example
+     * // Create many ExtractionJobSchemas
+     * const extractionJobSchema = await prisma.extractionJobSchema.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExtractionJobSchemas and only return the `id`
+     * const extractionJobSchemaWithIdOnly = await prisma.extractionJobSchema.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExtractionJobSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ExtractionJobSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExtractionJobSchema.
+     * @param {ExtractionJobSchemaDeleteArgs} args - Arguments to delete one ExtractionJobSchema.
+     * @example
+     * // Delete one ExtractionJobSchema
+     * const ExtractionJobSchema = await prisma.extractionJobSchema.delete({
+     *   where: {
+     *     // ... filter to delete one ExtractionJobSchema
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExtractionJobSchemaDeleteArgs>(args: SelectSubset<T, ExtractionJobSchemaDeleteArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExtractionJobSchema.
+     * @param {ExtractionJobSchemaUpdateArgs} args - Arguments to update one ExtractionJobSchema.
+     * @example
+     * // Update one ExtractionJobSchema
+     * const extractionJobSchema = await prisma.extractionJobSchema.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExtractionJobSchemaUpdateArgs>(args: SelectSubset<T, ExtractionJobSchemaUpdateArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExtractionJobSchemas.
+     * @param {ExtractionJobSchemaDeleteManyArgs} args - Arguments to filter ExtractionJobSchemas to delete.
+     * @example
+     * // Delete a few ExtractionJobSchemas
+     * const { count } = await prisma.extractionJobSchema.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExtractionJobSchemaDeleteManyArgs>(args?: SelectSubset<T, ExtractionJobSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExtractionJobSchemas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobSchemaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExtractionJobSchemas
+     * const extractionJobSchema = await prisma.extractionJobSchema.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExtractionJobSchemaUpdateManyArgs>(args: SelectSubset<T, ExtractionJobSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExtractionJobSchemas and returns the data updated in the database.
+     * @param {ExtractionJobSchemaUpdateManyAndReturnArgs} args - Arguments to update many ExtractionJobSchemas.
+     * @example
+     * // Update many ExtractionJobSchemas
+     * const extractionJobSchema = await prisma.extractionJobSchema.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExtractionJobSchemas and only return the `id`
+     * const extractionJobSchemaWithIdOnly = await prisma.extractionJobSchema.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExtractionJobSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ExtractionJobSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExtractionJobSchema.
+     * @param {ExtractionJobSchemaUpsertArgs} args - Arguments to update or create a ExtractionJobSchema.
+     * @example
+     * // Update or create a ExtractionJobSchema
+     * const extractionJobSchema = await prisma.extractionJobSchema.upsert({
+     *   create: {
+     *     // ... data to create a ExtractionJobSchema
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExtractionJobSchema we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExtractionJobSchemaUpsertArgs>(args: SelectSubset<T, ExtractionJobSchemaUpsertArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExtractionJobSchemas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobSchemaCountArgs} args - Arguments to filter ExtractionJobSchemas to count.
+     * @example
+     * // Count the number of ExtractionJobSchemas
+     * const count = await prisma.extractionJobSchema.count({
+     *   where: {
+     *     // ... the filter for the ExtractionJobSchemas we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExtractionJobSchemaCountArgs>(
+      args?: Subset<T, ExtractionJobSchemaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExtractionJobSchemaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExtractionJobSchema.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobSchemaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExtractionJobSchemaAggregateArgs>(args: Subset<T, ExtractionJobSchemaAggregateArgs>): Prisma.PrismaPromise<GetExtractionJobSchemaAggregateType<T>>
+
+    /**
+     * Group by ExtractionJobSchema.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobSchemaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExtractionJobSchemaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExtractionJobSchemaGroupByArgs['orderBy'] }
+        : { orderBy?: ExtractionJobSchemaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExtractionJobSchemaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExtractionJobSchemaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExtractionJobSchema model
+   */
+  readonly fields: ExtractionJobSchemaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExtractionJobSchema.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExtractionJobSchemaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    reports<T extends ExtractionJobSchema$reportsArgs<ExtArgs> = {}>(args?: Subset<T, ExtractionJobSchema$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExtractionJobSchema model
+   */
+  interface ExtractionJobSchemaFieldRefs {
+    readonly id: FieldRef<"ExtractionJobSchema", 'BigInt'>
+    readonly workflow: FieldRef<"ExtractionJobSchema", 'String'>
+    readonly status: FieldRef<"ExtractionJobSchema", 'String'>
+    readonly schemaVersion: FieldRef<"ExtractionJobSchema", 'String'>
+    readonly limit: FieldRef<"ExtractionJobSchema", 'Int'>
+    readonly totalReports: FieldRef<"ExtractionJobSchema", 'Int'>
+    readonly processedReports: FieldRef<"ExtractionJobSchema", 'Int'>
+    readonly succeededReports: FieldRef<"ExtractionJobSchema", 'Int'>
+    readonly failedReports: FieldRef<"ExtractionJobSchema", 'Int'>
+    readonly statusCounts: FieldRef<"ExtractionJobSchema", 'Json'>
+    readonly lastReportId: FieldRef<"ExtractionJobSchema", 'BigInt'>
+    readonly errorMessage: FieldRef<"ExtractionJobSchema", 'String'>
+    readonly errorDetails: FieldRef<"ExtractionJobSchema", 'Json'>
+    readonly startedAt: FieldRef<"ExtractionJobSchema", 'DateTime'>
+    readonly finishedAt: FieldRef<"ExtractionJobSchema", 'DateTime'>
+    readonly lastHeartbeatAt: FieldRef<"ExtractionJobSchema", 'DateTime'>
+    readonly createdAt: FieldRef<"ExtractionJobSchema", 'DateTime'>
+    readonly updatedAt: FieldRef<"ExtractionJobSchema", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExtractionJobSchema findUnique
+   */
+  export type ExtractionJobSchemaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobSchema to fetch.
+     */
+    where: ExtractionJobSchemaWhereUniqueInput
+  }
+
+  /**
+   * ExtractionJobSchema findUniqueOrThrow
+   */
+  export type ExtractionJobSchemaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobSchema to fetch.
+     */
+    where: ExtractionJobSchemaWhereUniqueInput
+  }
+
+  /**
+   * ExtractionJobSchema findFirst
+   */
+  export type ExtractionJobSchemaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobSchema to fetch.
+     */
+    where?: ExtractionJobSchemaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExtractionJobSchemas to fetch.
+     */
+    orderBy?: ExtractionJobSchemaOrderByWithRelationInput | ExtractionJobSchemaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExtractionJobSchemas.
+     */
+    cursor?: ExtractionJobSchemaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExtractionJobSchemas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExtractionJobSchemas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExtractionJobSchemas.
+     */
+    distinct?: ExtractionJobSchemaScalarFieldEnum | ExtractionJobSchemaScalarFieldEnum[]
+  }
+
+  /**
+   * ExtractionJobSchema findFirstOrThrow
+   */
+  export type ExtractionJobSchemaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobSchema to fetch.
+     */
+    where?: ExtractionJobSchemaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExtractionJobSchemas to fetch.
+     */
+    orderBy?: ExtractionJobSchemaOrderByWithRelationInput | ExtractionJobSchemaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExtractionJobSchemas.
+     */
+    cursor?: ExtractionJobSchemaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExtractionJobSchemas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExtractionJobSchemas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExtractionJobSchemas.
+     */
+    distinct?: ExtractionJobSchemaScalarFieldEnum | ExtractionJobSchemaScalarFieldEnum[]
+  }
+
+  /**
+   * ExtractionJobSchema findMany
+   */
+  export type ExtractionJobSchemaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobSchemas to fetch.
+     */
+    where?: ExtractionJobSchemaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExtractionJobSchemas to fetch.
+     */
+    orderBy?: ExtractionJobSchemaOrderByWithRelationInput | ExtractionJobSchemaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExtractionJobSchemas.
+     */
+    cursor?: ExtractionJobSchemaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExtractionJobSchemas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExtractionJobSchemas.
+     */
+    skip?: number
+    distinct?: ExtractionJobSchemaScalarFieldEnum | ExtractionJobSchemaScalarFieldEnum[]
+  }
+
+  /**
+   * ExtractionJobSchema create
+   */
+  export type ExtractionJobSchemaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExtractionJobSchema.
+     */
+    data: XOR<ExtractionJobSchemaCreateInput, ExtractionJobSchemaUncheckedCreateInput>
+  }
+
+  /**
+   * ExtractionJobSchema createMany
+   */
+  export type ExtractionJobSchemaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExtractionJobSchemas.
+     */
+    data: ExtractionJobSchemaCreateManyInput | ExtractionJobSchemaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExtractionJobSchema createManyAndReturn
+   */
+  export type ExtractionJobSchemaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExtractionJobSchemas.
+     */
+    data: ExtractionJobSchemaCreateManyInput | ExtractionJobSchemaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExtractionJobSchema update
+   */
+  export type ExtractionJobSchemaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExtractionJobSchema.
+     */
+    data: XOR<ExtractionJobSchemaUpdateInput, ExtractionJobSchemaUncheckedUpdateInput>
+    /**
+     * Choose, which ExtractionJobSchema to update.
+     */
+    where: ExtractionJobSchemaWhereUniqueInput
+  }
+
+  /**
+   * ExtractionJobSchema updateMany
+   */
+  export type ExtractionJobSchemaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExtractionJobSchemas.
+     */
+    data: XOR<ExtractionJobSchemaUpdateManyMutationInput, ExtractionJobSchemaUncheckedUpdateManyInput>
+    /**
+     * Filter which ExtractionJobSchemas to update
+     */
+    where?: ExtractionJobSchemaWhereInput
+    /**
+     * Limit how many ExtractionJobSchemas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExtractionJobSchema updateManyAndReturn
+   */
+  export type ExtractionJobSchemaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * The data used to update ExtractionJobSchemas.
+     */
+    data: XOR<ExtractionJobSchemaUpdateManyMutationInput, ExtractionJobSchemaUncheckedUpdateManyInput>
+    /**
+     * Filter which ExtractionJobSchemas to update
+     */
+    where?: ExtractionJobSchemaWhereInput
+    /**
+     * Limit how many ExtractionJobSchemas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExtractionJobSchema upsert
+   */
+  export type ExtractionJobSchemaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExtractionJobSchema to update in case it exists.
+     */
+    where: ExtractionJobSchemaWhereUniqueInput
+    /**
+     * In case the ExtractionJobSchema found by the `where` argument doesn't exist, create a new ExtractionJobSchema with this data.
+     */
+    create: XOR<ExtractionJobSchemaCreateInput, ExtractionJobSchemaUncheckedCreateInput>
+    /**
+     * In case the ExtractionJobSchema was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExtractionJobSchemaUpdateInput, ExtractionJobSchemaUncheckedUpdateInput>
+  }
+
+  /**
+   * ExtractionJobSchema delete
+   */
+  export type ExtractionJobSchemaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+    /**
+     * Filter which ExtractionJobSchema to delete.
+     */
+    where: ExtractionJobSchemaWhereUniqueInput
+  }
+
+  /**
+   * ExtractionJobSchema deleteMany
+   */
+  export type ExtractionJobSchemaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExtractionJobSchemas to delete
+     */
+    where?: ExtractionJobSchemaWhereInput
+    /**
+     * Limit how many ExtractionJobSchemas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExtractionJobSchema.reports
+   */
+  export type ExtractionJobSchema$reportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    where?: ExtractionJobReportSchemaWhereInput
+    orderBy?: ExtractionJobReportSchemaOrderByWithRelationInput | ExtractionJobReportSchemaOrderByWithRelationInput[]
+    cursor?: ExtractionJobReportSchemaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExtractionJobReportSchemaScalarFieldEnum | ExtractionJobReportSchemaScalarFieldEnum[]
+  }
+
+  /**
+   * ExtractionJobSchema without action
+   */
+  export type ExtractionJobSchemaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobSchema
+     */
+    select?: ExtractionJobSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobSchema
+     */
+    omit?: ExtractionJobSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobSchemaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ExtractionJobReportSchema
+   */
+
+  export type AggregateExtractionJobReportSchema = {
+    _count: ExtractionJobReportSchemaCountAggregateOutputType | null
+    _avg: ExtractionJobReportSchemaAvgAggregateOutputType | null
+    _sum: ExtractionJobReportSchemaSumAggregateOutputType | null
+    _min: ExtractionJobReportSchemaMinAggregateOutputType | null
+    _max: ExtractionJobReportSchemaMaxAggregateOutputType | null
+  }
+
+  export type ExtractionJobReportSchemaAvgAggregateOutputType = {
+    jobId: number | null
+    reportId: number | null
+    attempt: number | null
+    elapsedMs: number | null
+  }
+
+  export type ExtractionJobReportSchemaSumAggregateOutputType = {
+    jobId: bigint | null
+    reportId: bigint | null
+    attempt: number | null
+    elapsedMs: number | null
+  }
+
+  export type ExtractionJobReportSchemaMinAggregateOutputType = {
+    jobId: bigint | null
+    reportId: bigint | null
+    status: string | null
+    workflowStatus: string | null
+    preprocessorStatus: string | null
+    mastraRunId: string | null
+    attempt: number | null
+    elapsedMs: number | null
+    errorMessage: string | null
+    startedAt: Date | null
+    finishedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExtractionJobReportSchemaMaxAggregateOutputType = {
+    jobId: bigint | null
+    reportId: bigint | null
+    status: string | null
+    workflowStatus: string | null
+    preprocessorStatus: string | null
+    mastraRunId: string | null
+    attempt: number | null
+    elapsedMs: number | null
+    errorMessage: string | null
+    startedAt: Date | null
+    finishedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExtractionJobReportSchemaCountAggregateOutputType = {
+    jobId: number
+    reportId: number
+    status: number
+    workflowStatus: number
+    preprocessorStatus: number
+    mastraRunId: number
+    attempt: number
+    elapsedMs: number
+    errorMessage: number
+    errorDetails: number
+    startedAt: number
+    finishedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ExtractionJobReportSchemaAvgAggregateInputType = {
+    jobId?: true
+    reportId?: true
+    attempt?: true
+    elapsedMs?: true
+  }
+
+  export type ExtractionJobReportSchemaSumAggregateInputType = {
+    jobId?: true
+    reportId?: true
+    attempt?: true
+    elapsedMs?: true
+  }
+
+  export type ExtractionJobReportSchemaMinAggregateInputType = {
+    jobId?: true
+    reportId?: true
+    status?: true
+    workflowStatus?: true
+    preprocessorStatus?: true
+    mastraRunId?: true
+    attempt?: true
+    elapsedMs?: true
+    errorMessage?: true
+    startedAt?: true
+    finishedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExtractionJobReportSchemaMaxAggregateInputType = {
+    jobId?: true
+    reportId?: true
+    status?: true
+    workflowStatus?: true
+    preprocessorStatus?: true
+    mastraRunId?: true
+    attempt?: true
+    elapsedMs?: true
+    errorMessage?: true
+    startedAt?: true
+    finishedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExtractionJobReportSchemaCountAggregateInputType = {
+    jobId?: true
+    reportId?: true
+    status?: true
+    workflowStatus?: true
+    preprocessorStatus?: true
+    mastraRunId?: true
+    attempt?: true
+    elapsedMs?: true
+    errorMessage?: true
+    errorDetails?: true
+    startedAt?: true
+    finishedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ExtractionJobReportSchemaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExtractionJobReportSchema to aggregate.
+     */
+    where?: ExtractionJobReportSchemaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExtractionJobReportSchemas to fetch.
+     */
+    orderBy?: ExtractionJobReportSchemaOrderByWithRelationInput | ExtractionJobReportSchemaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExtractionJobReportSchemaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExtractionJobReportSchemas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExtractionJobReportSchemas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExtractionJobReportSchemas
+    **/
+    _count?: true | ExtractionJobReportSchemaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExtractionJobReportSchemaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExtractionJobReportSchemaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExtractionJobReportSchemaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExtractionJobReportSchemaMaxAggregateInputType
+  }
+
+  export type GetExtractionJobReportSchemaAggregateType<T extends ExtractionJobReportSchemaAggregateArgs> = {
+        [P in keyof T & keyof AggregateExtractionJobReportSchema]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExtractionJobReportSchema[P]>
+      : GetScalarType<T[P], AggregateExtractionJobReportSchema[P]>
+  }
+
+
+
+
+  export type ExtractionJobReportSchemaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExtractionJobReportSchemaWhereInput
+    orderBy?: ExtractionJobReportSchemaOrderByWithAggregationInput | ExtractionJobReportSchemaOrderByWithAggregationInput[]
+    by: ExtractionJobReportSchemaScalarFieldEnum[] | ExtractionJobReportSchemaScalarFieldEnum
+    having?: ExtractionJobReportSchemaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExtractionJobReportSchemaCountAggregateInputType | true
+    _avg?: ExtractionJobReportSchemaAvgAggregateInputType
+    _sum?: ExtractionJobReportSchemaSumAggregateInputType
+    _min?: ExtractionJobReportSchemaMinAggregateInputType
+    _max?: ExtractionJobReportSchemaMaxAggregateInputType
+  }
+
+  export type ExtractionJobReportSchemaGroupByOutputType = {
+    jobId: bigint
+    reportId: bigint
+    status: string
+    workflowStatus: string | null
+    preprocessorStatus: string | null
+    mastraRunId: string | null
+    attempt: number
+    elapsedMs: number | null
+    errorMessage: string | null
+    errorDetails: JsonValue | null
+    startedAt: Date | null
+    finishedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ExtractionJobReportSchemaCountAggregateOutputType | null
+    _avg: ExtractionJobReportSchemaAvgAggregateOutputType | null
+    _sum: ExtractionJobReportSchemaSumAggregateOutputType | null
+    _min: ExtractionJobReportSchemaMinAggregateOutputType | null
+    _max: ExtractionJobReportSchemaMaxAggregateOutputType | null
+  }
+
+  type GetExtractionJobReportSchemaGroupByPayload<T extends ExtractionJobReportSchemaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExtractionJobReportSchemaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExtractionJobReportSchemaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExtractionJobReportSchemaGroupByOutputType[P]>
+            : GetScalarType<T[P], ExtractionJobReportSchemaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExtractionJobReportSchemaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    jobId?: boolean
+    reportId?: boolean
+    status?: boolean
+    workflowStatus?: boolean
+    preprocessorStatus?: boolean
+    mastraRunId?: boolean
+    attempt?: boolean
+    elapsedMs?: boolean
+    errorMessage?: boolean
+    errorDetails?: boolean
+    startedAt?: boolean
+    finishedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    job?: boolean | ExtractionJobSchemaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["extractionJobReportSchema"]>
+
+  export type ExtractionJobReportSchemaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    jobId?: boolean
+    reportId?: boolean
+    status?: boolean
+    workflowStatus?: boolean
+    preprocessorStatus?: boolean
+    mastraRunId?: boolean
+    attempt?: boolean
+    elapsedMs?: boolean
+    errorMessage?: boolean
+    errorDetails?: boolean
+    startedAt?: boolean
+    finishedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    job?: boolean | ExtractionJobSchemaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["extractionJobReportSchema"]>
+
+  export type ExtractionJobReportSchemaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    jobId?: boolean
+    reportId?: boolean
+    status?: boolean
+    workflowStatus?: boolean
+    preprocessorStatus?: boolean
+    mastraRunId?: boolean
+    attempt?: boolean
+    elapsedMs?: boolean
+    errorMessage?: boolean
+    errorDetails?: boolean
+    startedAt?: boolean
+    finishedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    job?: boolean | ExtractionJobSchemaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["extractionJobReportSchema"]>
+
+  export type ExtractionJobReportSchemaSelectScalar = {
+    jobId?: boolean
+    reportId?: boolean
+    status?: boolean
+    workflowStatus?: boolean
+    preprocessorStatus?: boolean
+    mastraRunId?: boolean
+    attempt?: boolean
+    elapsedMs?: boolean
+    errorMessage?: boolean
+    errorDetails?: boolean
+    startedAt?: boolean
+    finishedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ExtractionJobReportSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"jobId" | "reportId" | "status" | "workflowStatus" | "preprocessorStatus" | "mastraRunId" | "attempt" | "elapsedMs" | "errorMessage" | "errorDetails" | "startedAt" | "finishedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["extractionJobReportSchema"]>
+  export type ExtractionJobReportSchemaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    job?: boolean | ExtractionJobSchemaDefaultArgs<ExtArgs>
+  }
+  export type ExtractionJobReportSchemaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    job?: boolean | ExtractionJobSchemaDefaultArgs<ExtArgs>
+  }
+  export type ExtractionJobReportSchemaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    job?: boolean | ExtractionJobSchemaDefaultArgs<ExtArgs>
+  }
+
+  export type $ExtractionJobReportSchemaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExtractionJobReportSchema"
+    objects: {
+      job: Prisma.$ExtractionJobSchemaPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      jobId: bigint
+      reportId: bigint
+      status: string
+      workflowStatus: string | null
+      preprocessorStatus: string | null
+      mastraRunId: string | null
+      attempt: number
+      elapsedMs: number | null
+      errorMessage: string | null
+      errorDetails: Prisma.JsonValue | null
+      startedAt: Date | null
+      finishedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["extractionJobReportSchema"]>
+    composites: {}
+  }
+
+  type ExtractionJobReportSchemaGetPayload<S extends boolean | null | undefined | ExtractionJobReportSchemaDefaultArgs> = $Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload, S>
+
+  type ExtractionJobReportSchemaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExtractionJobReportSchemaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExtractionJobReportSchemaCountAggregateInputType | true
+    }
+
+  export interface ExtractionJobReportSchemaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExtractionJobReportSchema'], meta: { name: 'ExtractionJobReportSchema' } }
+    /**
+     * Find zero or one ExtractionJobReportSchema that matches the filter.
+     * @param {ExtractionJobReportSchemaFindUniqueArgs} args - Arguments to find a ExtractionJobReportSchema
+     * @example
+     * // Get one ExtractionJobReportSchema
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExtractionJobReportSchemaFindUniqueArgs>(args: SelectSubset<T, ExtractionJobReportSchemaFindUniqueArgs<ExtArgs>>): Prisma__ExtractionJobReportSchemaClient<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExtractionJobReportSchema that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExtractionJobReportSchemaFindUniqueOrThrowArgs} args - Arguments to find a ExtractionJobReportSchema
+     * @example
+     * // Get one ExtractionJobReportSchema
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExtractionJobReportSchemaFindUniqueOrThrowArgs>(args: SelectSubset<T, ExtractionJobReportSchemaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExtractionJobReportSchemaClient<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExtractionJobReportSchema that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobReportSchemaFindFirstArgs} args - Arguments to find a ExtractionJobReportSchema
+     * @example
+     * // Get one ExtractionJobReportSchema
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExtractionJobReportSchemaFindFirstArgs>(args?: SelectSubset<T, ExtractionJobReportSchemaFindFirstArgs<ExtArgs>>): Prisma__ExtractionJobReportSchemaClient<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExtractionJobReportSchema that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobReportSchemaFindFirstOrThrowArgs} args - Arguments to find a ExtractionJobReportSchema
+     * @example
+     * // Get one ExtractionJobReportSchema
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExtractionJobReportSchemaFindFirstOrThrowArgs>(args?: SelectSubset<T, ExtractionJobReportSchemaFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExtractionJobReportSchemaClient<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExtractionJobReportSchemas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobReportSchemaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExtractionJobReportSchemas
+     * const extractionJobReportSchemas = await prisma.extractionJobReportSchema.findMany()
+     * 
+     * // Get first 10 ExtractionJobReportSchemas
+     * const extractionJobReportSchemas = await prisma.extractionJobReportSchema.findMany({ take: 10 })
+     * 
+     * // Only select the `jobId`
+     * const extractionJobReportSchemaWithJobIdOnly = await prisma.extractionJobReportSchema.findMany({ select: { jobId: true } })
+     * 
+     */
+    findMany<T extends ExtractionJobReportSchemaFindManyArgs>(args?: SelectSubset<T, ExtractionJobReportSchemaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExtractionJobReportSchema.
+     * @param {ExtractionJobReportSchemaCreateArgs} args - Arguments to create a ExtractionJobReportSchema.
+     * @example
+     * // Create one ExtractionJobReportSchema
+     * const ExtractionJobReportSchema = await prisma.extractionJobReportSchema.create({
+     *   data: {
+     *     // ... data to create a ExtractionJobReportSchema
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExtractionJobReportSchemaCreateArgs>(args: SelectSubset<T, ExtractionJobReportSchemaCreateArgs<ExtArgs>>): Prisma__ExtractionJobReportSchemaClient<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExtractionJobReportSchemas.
+     * @param {ExtractionJobReportSchemaCreateManyArgs} args - Arguments to create many ExtractionJobReportSchemas.
+     * @example
+     * // Create many ExtractionJobReportSchemas
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExtractionJobReportSchemaCreateManyArgs>(args?: SelectSubset<T, ExtractionJobReportSchemaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExtractionJobReportSchemas and returns the data saved in the database.
+     * @param {ExtractionJobReportSchemaCreateManyAndReturnArgs} args - Arguments to create many ExtractionJobReportSchemas.
+     * @example
+     * // Create many ExtractionJobReportSchemas
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExtractionJobReportSchemas and only return the `jobId`
+     * const extractionJobReportSchemaWithJobIdOnly = await prisma.extractionJobReportSchema.createManyAndReturn({
+     *   select: { jobId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExtractionJobReportSchemaCreateManyAndReturnArgs>(args?: SelectSubset<T, ExtractionJobReportSchemaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExtractionJobReportSchema.
+     * @param {ExtractionJobReportSchemaDeleteArgs} args - Arguments to delete one ExtractionJobReportSchema.
+     * @example
+     * // Delete one ExtractionJobReportSchema
+     * const ExtractionJobReportSchema = await prisma.extractionJobReportSchema.delete({
+     *   where: {
+     *     // ... filter to delete one ExtractionJobReportSchema
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExtractionJobReportSchemaDeleteArgs>(args: SelectSubset<T, ExtractionJobReportSchemaDeleteArgs<ExtArgs>>): Prisma__ExtractionJobReportSchemaClient<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExtractionJobReportSchema.
+     * @param {ExtractionJobReportSchemaUpdateArgs} args - Arguments to update one ExtractionJobReportSchema.
+     * @example
+     * // Update one ExtractionJobReportSchema
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExtractionJobReportSchemaUpdateArgs>(args: SelectSubset<T, ExtractionJobReportSchemaUpdateArgs<ExtArgs>>): Prisma__ExtractionJobReportSchemaClient<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExtractionJobReportSchemas.
+     * @param {ExtractionJobReportSchemaDeleteManyArgs} args - Arguments to filter ExtractionJobReportSchemas to delete.
+     * @example
+     * // Delete a few ExtractionJobReportSchemas
+     * const { count } = await prisma.extractionJobReportSchema.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExtractionJobReportSchemaDeleteManyArgs>(args?: SelectSubset<T, ExtractionJobReportSchemaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExtractionJobReportSchemas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobReportSchemaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExtractionJobReportSchemas
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExtractionJobReportSchemaUpdateManyArgs>(args: SelectSubset<T, ExtractionJobReportSchemaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExtractionJobReportSchemas and returns the data updated in the database.
+     * @param {ExtractionJobReportSchemaUpdateManyAndReturnArgs} args - Arguments to update many ExtractionJobReportSchemas.
+     * @example
+     * // Update many ExtractionJobReportSchemas
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExtractionJobReportSchemas and only return the `jobId`
+     * const extractionJobReportSchemaWithJobIdOnly = await prisma.extractionJobReportSchema.updateManyAndReturn({
+     *   select: { jobId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExtractionJobReportSchemaUpdateManyAndReturnArgs>(args: SelectSubset<T, ExtractionJobReportSchemaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExtractionJobReportSchema.
+     * @param {ExtractionJobReportSchemaUpsertArgs} args - Arguments to update or create a ExtractionJobReportSchema.
+     * @example
+     * // Update or create a ExtractionJobReportSchema
+     * const extractionJobReportSchema = await prisma.extractionJobReportSchema.upsert({
+     *   create: {
+     *     // ... data to create a ExtractionJobReportSchema
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExtractionJobReportSchema we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExtractionJobReportSchemaUpsertArgs>(args: SelectSubset<T, ExtractionJobReportSchemaUpsertArgs<ExtArgs>>): Prisma__ExtractionJobReportSchemaClient<$Result.GetResult<Prisma.$ExtractionJobReportSchemaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExtractionJobReportSchemas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobReportSchemaCountArgs} args - Arguments to filter ExtractionJobReportSchemas to count.
+     * @example
+     * // Count the number of ExtractionJobReportSchemas
+     * const count = await prisma.extractionJobReportSchema.count({
+     *   where: {
+     *     // ... the filter for the ExtractionJobReportSchemas we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExtractionJobReportSchemaCountArgs>(
+      args?: Subset<T, ExtractionJobReportSchemaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExtractionJobReportSchemaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExtractionJobReportSchema.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobReportSchemaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExtractionJobReportSchemaAggregateArgs>(args: Subset<T, ExtractionJobReportSchemaAggregateArgs>): Prisma.PrismaPromise<GetExtractionJobReportSchemaAggregateType<T>>
+
+    /**
+     * Group by ExtractionJobReportSchema.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExtractionJobReportSchemaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExtractionJobReportSchemaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExtractionJobReportSchemaGroupByArgs['orderBy'] }
+        : { orderBy?: ExtractionJobReportSchemaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExtractionJobReportSchemaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExtractionJobReportSchemaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExtractionJobReportSchema model
+   */
+  readonly fields: ExtractionJobReportSchemaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExtractionJobReportSchema.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExtractionJobReportSchemaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    job<T extends ExtractionJobSchemaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExtractionJobSchemaDefaultArgs<ExtArgs>>): Prisma__ExtractionJobSchemaClient<$Result.GetResult<Prisma.$ExtractionJobSchemaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExtractionJobReportSchema model
+   */
+  interface ExtractionJobReportSchemaFieldRefs {
+    readonly jobId: FieldRef<"ExtractionJobReportSchema", 'BigInt'>
+    readonly reportId: FieldRef<"ExtractionJobReportSchema", 'BigInt'>
+    readonly status: FieldRef<"ExtractionJobReportSchema", 'String'>
+    readonly workflowStatus: FieldRef<"ExtractionJobReportSchema", 'String'>
+    readonly preprocessorStatus: FieldRef<"ExtractionJobReportSchema", 'String'>
+    readonly mastraRunId: FieldRef<"ExtractionJobReportSchema", 'String'>
+    readonly attempt: FieldRef<"ExtractionJobReportSchema", 'Int'>
+    readonly elapsedMs: FieldRef<"ExtractionJobReportSchema", 'Int'>
+    readonly errorMessage: FieldRef<"ExtractionJobReportSchema", 'String'>
+    readonly errorDetails: FieldRef<"ExtractionJobReportSchema", 'Json'>
+    readonly startedAt: FieldRef<"ExtractionJobReportSchema", 'DateTime'>
+    readonly finishedAt: FieldRef<"ExtractionJobReportSchema", 'DateTime'>
+    readonly createdAt: FieldRef<"ExtractionJobReportSchema", 'DateTime'>
+    readonly updatedAt: FieldRef<"ExtractionJobReportSchema", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExtractionJobReportSchema findUnique
+   */
+  export type ExtractionJobReportSchemaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobReportSchema to fetch.
+     */
+    where: ExtractionJobReportSchemaWhereUniqueInput
+  }
+
+  /**
+   * ExtractionJobReportSchema findUniqueOrThrow
+   */
+  export type ExtractionJobReportSchemaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobReportSchema to fetch.
+     */
+    where: ExtractionJobReportSchemaWhereUniqueInput
+  }
+
+  /**
+   * ExtractionJobReportSchema findFirst
+   */
+  export type ExtractionJobReportSchemaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobReportSchema to fetch.
+     */
+    where?: ExtractionJobReportSchemaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExtractionJobReportSchemas to fetch.
+     */
+    orderBy?: ExtractionJobReportSchemaOrderByWithRelationInput | ExtractionJobReportSchemaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExtractionJobReportSchemas.
+     */
+    cursor?: ExtractionJobReportSchemaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExtractionJobReportSchemas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExtractionJobReportSchemas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExtractionJobReportSchemas.
+     */
+    distinct?: ExtractionJobReportSchemaScalarFieldEnum | ExtractionJobReportSchemaScalarFieldEnum[]
+  }
+
+  /**
+   * ExtractionJobReportSchema findFirstOrThrow
+   */
+  export type ExtractionJobReportSchemaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobReportSchema to fetch.
+     */
+    where?: ExtractionJobReportSchemaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExtractionJobReportSchemas to fetch.
+     */
+    orderBy?: ExtractionJobReportSchemaOrderByWithRelationInput | ExtractionJobReportSchemaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExtractionJobReportSchemas.
+     */
+    cursor?: ExtractionJobReportSchemaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExtractionJobReportSchemas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExtractionJobReportSchemas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExtractionJobReportSchemas.
+     */
+    distinct?: ExtractionJobReportSchemaScalarFieldEnum | ExtractionJobReportSchemaScalarFieldEnum[]
+  }
+
+  /**
+   * ExtractionJobReportSchema findMany
+   */
+  export type ExtractionJobReportSchemaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * Filter, which ExtractionJobReportSchemas to fetch.
+     */
+    where?: ExtractionJobReportSchemaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExtractionJobReportSchemas to fetch.
+     */
+    orderBy?: ExtractionJobReportSchemaOrderByWithRelationInput | ExtractionJobReportSchemaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExtractionJobReportSchemas.
+     */
+    cursor?: ExtractionJobReportSchemaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExtractionJobReportSchemas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExtractionJobReportSchemas.
+     */
+    skip?: number
+    distinct?: ExtractionJobReportSchemaScalarFieldEnum | ExtractionJobReportSchemaScalarFieldEnum[]
+  }
+
+  /**
+   * ExtractionJobReportSchema create
+   */
+  export type ExtractionJobReportSchemaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExtractionJobReportSchema.
+     */
+    data: XOR<ExtractionJobReportSchemaCreateInput, ExtractionJobReportSchemaUncheckedCreateInput>
+  }
+
+  /**
+   * ExtractionJobReportSchema createMany
+   */
+  export type ExtractionJobReportSchemaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExtractionJobReportSchemas.
+     */
+    data: ExtractionJobReportSchemaCreateManyInput | ExtractionJobReportSchemaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExtractionJobReportSchema createManyAndReturn
+   */
+  export type ExtractionJobReportSchemaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExtractionJobReportSchemas.
+     */
+    data: ExtractionJobReportSchemaCreateManyInput | ExtractionJobReportSchemaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExtractionJobReportSchema update
+   */
+  export type ExtractionJobReportSchemaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExtractionJobReportSchema.
+     */
+    data: XOR<ExtractionJobReportSchemaUpdateInput, ExtractionJobReportSchemaUncheckedUpdateInput>
+    /**
+     * Choose, which ExtractionJobReportSchema to update.
+     */
+    where: ExtractionJobReportSchemaWhereUniqueInput
+  }
+
+  /**
+   * ExtractionJobReportSchema updateMany
+   */
+  export type ExtractionJobReportSchemaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExtractionJobReportSchemas.
+     */
+    data: XOR<ExtractionJobReportSchemaUpdateManyMutationInput, ExtractionJobReportSchemaUncheckedUpdateManyInput>
+    /**
+     * Filter which ExtractionJobReportSchemas to update
+     */
+    where?: ExtractionJobReportSchemaWhereInput
+    /**
+     * Limit how many ExtractionJobReportSchemas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExtractionJobReportSchema updateManyAndReturn
+   */
+  export type ExtractionJobReportSchemaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * The data used to update ExtractionJobReportSchemas.
+     */
+    data: XOR<ExtractionJobReportSchemaUpdateManyMutationInput, ExtractionJobReportSchemaUncheckedUpdateManyInput>
+    /**
+     * Filter which ExtractionJobReportSchemas to update
+     */
+    where?: ExtractionJobReportSchemaWhereInput
+    /**
+     * Limit how many ExtractionJobReportSchemas to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExtractionJobReportSchema upsert
+   */
+  export type ExtractionJobReportSchemaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExtractionJobReportSchema to update in case it exists.
+     */
+    where: ExtractionJobReportSchemaWhereUniqueInput
+    /**
+     * In case the ExtractionJobReportSchema found by the `where` argument doesn't exist, create a new ExtractionJobReportSchema with this data.
+     */
+    create: XOR<ExtractionJobReportSchemaCreateInput, ExtractionJobReportSchemaUncheckedCreateInput>
+    /**
+     * In case the ExtractionJobReportSchema was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExtractionJobReportSchemaUpdateInput, ExtractionJobReportSchemaUncheckedUpdateInput>
+  }
+
+  /**
+   * ExtractionJobReportSchema delete
+   */
+  export type ExtractionJobReportSchemaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+    /**
+     * Filter which ExtractionJobReportSchema to delete.
+     */
+    where: ExtractionJobReportSchemaWhereUniqueInput
+  }
+
+  /**
+   * ExtractionJobReportSchema deleteMany
+   */
+  export type ExtractionJobReportSchemaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExtractionJobReportSchemas to delete
+     */
+    where?: ExtractionJobReportSchemaWhereInput
+    /**
+     * Limit how many ExtractionJobReportSchemas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExtractionJobReportSchema without action
+   */
+  export type ExtractionJobReportSchemaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExtractionJobReportSchema
+     */
+    select?: ExtractionJobReportSchemaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExtractionJobReportSchema
+     */
+    omit?: ExtractionJobReportSchemaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExtractionJobReportSchemaInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model HikrOrgPostSchema
    */
 
@@ -23867,6 +26586,50 @@ export namespace Prisma {
   export type ClimbingTourBesonderesSchemaScalarFieldEnum = (typeof ClimbingTourBesonderesSchemaScalarFieldEnum)[keyof typeof ClimbingTourBesonderesSchemaScalarFieldEnum]
 
 
+  export const ExtractionJobSchemaScalarFieldEnum: {
+    id: 'id',
+    workflow: 'workflow',
+    status: 'status',
+    schemaVersion: 'schemaVersion',
+    limit: 'limit',
+    totalReports: 'totalReports',
+    processedReports: 'processedReports',
+    succeededReports: 'succeededReports',
+    failedReports: 'failedReports',
+    statusCounts: 'statusCounts',
+    lastReportId: 'lastReportId',
+    errorMessage: 'errorMessage',
+    errorDetails: 'errorDetails',
+    startedAt: 'startedAt',
+    finishedAt: 'finishedAt',
+    lastHeartbeatAt: 'lastHeartbeatAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ExtractionJobSchemaScalarFieldEnum = (typeof ExtractionJobSchemaScalarFieldEnum)[keyof typeof ExtractionJobSchemaScalarFieldEnum]
+
+
+  export const ExtractionJobReportSchemaScalarFieldEnum: {
+    jobId: 'jobId',
+    reportId: 'reportId',
+    status: 'status',
+    workflowStatus: 'workflowStatus',
+    preprocessorStatus: 'preprocessorStatus',
+    mastraRunId: 'mastraRunId',
+    attempt: 'attempt',
+    elapsedMs: 'elapsedMs',
+    errorMessage: 'errorMessage',
+    errorDetails: 'errorDetails',
+    startedAt: 'startedAt',
+    finishedAt: 'finishedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ExtractionJobReportSchemaScalarFieldEnum = (typeof ExtractionJobReportSchemaScalarFieldEnum)[keyof typeof ExtractionJobReportSchemaScalarFieldEnum]
+
+
   export const HikrOrgPostSchemaScalarFieldEnum: {
     id: 'id',
     hikrPostId: 'hikrPostId',
@@ -24987,6 +27750,231 @@ export namespace Prisma {
     frequentierung?: StringNullableWithAggregatesFilter<"ClimbingTourBesonderesSchema"> | string | null
     bedingungen?: JsonNullableWithAggregatesFilter<"ClimbingTourBesonderesSchema">
     hinweise?: JsonWithAggregatesFilter<"ClimbingTourBesonderesSchema">
+  }
+
+  export type ExtractionJobSchemaWhereInput = {
+    AND?: ExtractionJobSchemaWhereInput | ExtractionJobSchemaWhereInput[]
+    OR?: ExtractionJobSchemaWhereInput[]
+    NOT?: ExtractionJobSchemaWhereInput | ExtractionJobSchemaWhereInput[]
+    id?: BigIntFilter<"ExtractionJobSchema"> | bigint | number
+    workflow?: StringFilter<"ExtractionJobSchema"> | string
+    status?: StringFilter<"ExtractionJobSchema"> | string
+    schemaVersion?: StringNullableFilter<"ExtractionJobSchema"> | string | null
+    limit?: IntNullableFilter<"ExtractionJobSchema"> | number | null
+    totalReports?: IntNullableFilter<"ExtractionJobSchema"> | number | null
+    processedReports?: IntFilter<"ExtractionJobSchema"> | number
+    succeededReports?: IntFilter<"ExtractionJobSchema"> | number
+    failedReports?: IntFilter<"ExtractionJobSchema"> | number
+    statusCounts?: JsonFilter<"ExtractionJobSchema">
+    lastReportId?: BigIntNullableFilter<"ExtractionJobSchema"> | bigint | number | null
+    errorMessage?: StringNullableFilter<"ExtractionJobSchema"> | string | null
+    errorDetails?: JsonNullableFilter<"ExtractionJobSchema">
+    startedAt?: DateTimeFilter<"ExtractionJobSchema"> | Date | string
+    finishedAt?: DateTimeNullableFilter<"ExtractionJobSchema"> | Date | string | null
+    lastHeartbeatAt?: DateTimeFilter<"ExtractionJobSchema"> | Date | string
+    createdAt?: DateTimeFilter<"ExtractionJobSchema"> | Date | string
+    updatedAt?: DateTimeFilter<"ExtractionJobSchema"> | Date | string
+    reports?: ExtractionJobReportSchemaListRelationFilter
+  }
+
+  export type ExtractionJobSchemaOrderByWithRelationInput = {
+    id?: SortOrder
+    workflow?: SortOrder
+    status?: SortOrder
+    schemaVersion?: SortOrderInput | SortOrder
+    limit?: SortOrderInput | SortOrder
+    totalReports?: SortOrderInput | SortOrder
+    processedReports?: SortOrder
+    succeededReports?: SortOrder
+    failedReports?: SortOrder
+    statusCounts?: SortOrder
+    lastReportId?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    errorDetails?: SortOrderInput | SortOrder
+    startedAt?: SortOrder
+    finishedAt?: SortOrderInput | SortOrder
+    lastHeartbeatAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    reports?: ExtractionJobReportSchemaOrderByRelationAggregateInput
+  }
+
+  export type ExtractionJobSchemaWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: ExtractionJobSchemaWhereInput | ExtractionJobSchemaWhereInput[]
+    OR?: ExtractionJobSchemaWhereInput[]
+    NOT?: ExtractionJobSchemaWhereInput | ExtractionJobSchemaWhereInput[]
+    workflow?: StringFilter<"ExtractionJobSchema"> | string
+    status?: StringFilter<"ExtractionJobSchema"> | string
+    schemaVersion?: StringNullableFilter<"ExtractionJobSchema"> | string | null
+    limit?: IntNullableFilter<"ExtractionJobSchema"> | number | null
+    totalReports?: IntNullableFilter<"ExtractionJobSchema"> | number | null
+    processedReports?: IntFilter<"ExtractionJobSchema"> | number
+    succeededReports?: IntFilter<"ExtractionJobSchema"> | number
+    failedReports?: IntFilter<"ExtractionJobSchema"> | number
+    statusCounts?: JsonFilter<"ExtractionJobSchema">
+    lastReportId?: BigIntNullableFilter<"ExtractionJobSchema"> | bigint | number | null
+    errorMessage?: StringNullableFilter<"ExtractionJobSchema"> | string | null
+    errorDetails?: JsonNullableFilter<"ExtractionJobSchema">
+    startedAt?: DateTimeFilter<"ExtractionJobSchema"> | Date | string
+    finishedAt?: DateTimeNullableFilter<"ExtractionJobSchema"> | Date | string | null
+    lastHeartbeatAt?: DateTimeFilter<"ExtractionJobSchema"> | Date | string
+    createdAt?: DateTimeFilter<"ExtractionJobSchema"> | Date | string
+    updatedAt?: DateTimeFilter<"ExtractionJobSchema"> | Date | string
+    reports?: ExtractionJobReportSchemaListRelationFilter
+  }, "id">
+
+  export type ExtractionJobSchemaOrderByWithAggregationInput = {
+    id?: SortOrder
+    workflow?: SortOrder
+    status?: SortOrder
+    schemaVersion?: SortOrderInput | SortOrder
+    limit?: SortOrderInput | SortOrder
+    totalReports?: SortOrderInput | SortOrder
+    processedReports?: SortOrder
+    succeededReports?: SortOrder
+    failedReports?: SortOrder
+    statusCounts?: SortOrder
+    lastReportId?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    errorDetails?: SortOrderInput | SortOrder
+    startedAt?: SortOrder
+    finishedAt?: SortOrderInput | SortOrder
+    lastHeartbeatAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ExtractionJobSchemaCountOrderByAggregateInput
+    _avg?: ExtractionJobSchemaAvgOrderByAggregateInput
+    _max?: ExtractionJobSchemaMaxOrderByAggregateInput
+    _min?: ExtractionJobSchemaMinOrderByAggregateInput
+    _sum?: ExtractionJobSchemaSumOrderByAggregateInput
+  }
+
+  export type ExtractionJobSchemaScalarWhereWithAggregatesInput = {
+    AND?: ExtractionJobSchemaScalarWhereWithAggregatesInput | ExtractionJobSchemaScalarWhereWithAggregatesInput[]
+    OR?: ExtractionJobSchemaScalarWhereWithAggregatesInput[]
+    NOT?: ExtractionJobSchemaScalarWhereWithAggregatesInput | ExtractionJobSchemaScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"ExtractionJobSchema"> | bigint | number
+    workflow?: StringWithAggregatesFilter<"ExtractionJobSchema"> | string
+    status?: StringWithAggregatesFilter<"ExtractionJobSchema"> | string
+    schemaVersion?: StringNullableWithAggregatesFilter<"ExtractionJobSchema"> | string | null
+    limit?: IntNullableWithAggregatesFilter<"ExtractionJobSchema"> | number | null
+    totalReports?: IntNullableWithAggregatesFilter<"ExtractionJobSchema"> | number | null
+    processedReports?: IntWithAggregatesFilter<"ExtractionJobSchema"> | number
+    succeededReports?: IntWithAggregatesFilter<"ExtractionJobSchema"> | number
+    failedReports?: IntWithAggregatesFilter<"ExtractionJobSchema"> | number
+    statusCounts?: JsonWithAggregatesFilter<"ExtractionJobSchema">
+    lastReportId?: BigIntNullableWithAggregatesFilter<"ExtractionJobSchema"> | bigint | number | null
+    errorMessage?: StringNullableWithAggregatesFilter<"ExtractionJobSchema"> | string | null
+    errorDetails?: JsonNullableWithAggregatesFilter<"ExtractionJobSchema">
+    startedAt?: DateTimeWithAggregatesFilter<"ExtractionJobSchema"> | Date | string
+    finishedAt?: DateTimeNullableWithAggregatesFilter<"ExtractionJobSchema"> | Date | string | null
+    lastHeartbeatAt?: DateTimeWithAggregatesFilter<"ExtractionJobSchema"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"ExtractionJobSchema"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ExtractionJobSchema"> | Date | string
+  }
+
+  export type ExtractionJobReportSchemaWhereInput = {
+    AND?: ExtractionJobReportSchemaWhereInput | ExtractionJobReportSchemaWhereInput[]
+    OR?: ExtractionJobReportSchemaWhereInput[]
+    NOT?: ExtractionJobReportSchemaWhereInput | ExtractionJobReportSchemaWhereInput[]
+    jobId?: BigIntFilter<"ExtractionJobReportSchema"> | bigint | number
+    reportId?: BigIntFilter<"ExtractionJobReportSchema"> | bigint | number
+    status?: StringFilter<"ExtractionJobReportSchema"> | string
+    workflowStatus?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    preprocessorStatus?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    mastraRunId?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    attempt?: IntFilter<"ExtractionJobReportSchema"> | number
+    elapsedMs?: IntNullableFilter<"ExtractionJobReportSchema"> | number | null
+    errorMessage?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    errorDetails?: JsonNullableFilter<"ExtractionJobReportSchema">
+    startedAt?: DateTimeNullableFilter<"ExtractionJobReportSchema"> | Date | string | null
+    finishedAt?: DateTimeNullableFilter<"ExtractionJobReportSchema"> | Date | string | null
+    createdAt?: DateTimeFilter<"ExtractionJobReportSchema"> | Date | string
+    updatedAt?: DateTimeFilter<"ExtractionJobReportSchema"> | Date | string
+    job?: XOR<ExtractionJobSchemaScalarRelationFilter, ExtractionJobSchemaWhereInput>
+  }
+
+  export type ExtractionJobReportSchemaOrderByWithRelationInput = {
+    jobId?: SortOrder
+    reportId?: SortOrder
+    status?: SortOrder
+    workflowStatus?: SortOrderInput | SortOrder
+    preprocessorStatus?: SortOrderInput | SortOrder
+    mastraRunId?: SortOrderInput | SortOrder
+    attempt?: SortOrder
+    elapsedMs?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    errorDetails?: SortOrderInput | SortOrder
+    startedAt?: SortOrderInput | SortOrder
+    finishedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    job?: ExtractionJobSchemaOrderByWithRelationInput
+  }
+
+  export type ExtractionJobReportSchemaWhereUniqueInput = Prisma.AtLeast<{
+    jobId_reportId?: ExtractionJobReportSchemaJobIdReportIdCompoundUniqueInput
+    AND?: ExtractionJobReportSchemaWhereInput | ExtractionJobReportSchemaWhereInput[]
+    OR?: ExtractionJobReportSchemaWhereInput[]
+    NOT?: ExtractionJobReportSchemaWhereInput | ExtractionJobReportSchemaWhereInput[]
+    jobId?: BigIntFilter<"ExtractionJobReportSchema"> | bigint | number
+    reportId?: BigIntFilter<"ExtractionJobReportSchema"> | bigint | number
+    status?: StringFilter<"ExtractionJobReportSchema"> | string
+    workflowStatus?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    preprocessorStatus?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    mastraRunId?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    attempt?: IntFilter<"ExtractionJobReportSchema"> | number
+    elapsedMs?: IntNullableFilter<"ExtractionJobReportSchema"> | number | null
+    errorMessage?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    errorDetails?: JsonNullableFilter<"ExtractionJobReportSchema">
+    startedAt?: DateTimeNullableFilter<"ExtractionJobReportSchema"> | Date | string | null
+    finishedAt?: DateTimeNullableFilter<"ExtractionJobReportSchema"> | Date | string | null
+    createdAt?: DateTimeFilter<"ExtractionJobReportSchema"> | Date | string
+    updatedAt?: DateTimeFilter<"ExtractionJobReportSchema"> | Date | string
+    job?: XOR<ExtractionJobSchemaScalarRelationFilter, ExtractionJobSchemaWhereInput>
+  }, "jobId_reportId">
+
+  export type ExtractionJobReportSchemaOrderByWithAggregationInput = {
+    jobId?: SortOrder
+    reportId?: SortOrder
+    status?: SortOrder
+    workflowStatus?: SortOrderInput | SortOrder
+    preprocessorStatus?: SortOrderInput | SortOrder
+    mastraRunId?: SortOrderInput | SortOrder
+    attempt?: SortOrder
+    elapsedMs?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    errorDetails?: SortOrderInput | SortOrder
+    startedAt?: SortOrderInput | SortOrder
+    finishedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ExtractionJobReportSchemaCountOrderByAggregateInput
+    _avg?: ExtractionJobReportSchemaAvgOrderByAggregateInput
+    _max?: ExtractionJobReportSchemaMaxOrderByAggregateInput
+    _min?: ExtractionJobReportSchemaMinOrderByAggregateInput
+    _sum?: ExtractionJobReportSchemaSumOrderByAggregateInput
+  }
+
+  export type ExtractionJobReportSchemaScalarWhereWithAggregatesInput = {
+    AND?: ExtractionJobReportSchemaScalarWhereWithAggregatesInput | ExtractionJobReportSchemaScalarWhereWithAggregatesInput[]
+    OR?: ExtractionJobReportSchemaScalarWhereWithAggregatesInput[]
+    NOT?: ExtractionJobReportSchemaScalarWhereWithAggregatesInput | ExtractionJobReportSchemaScalarWhereWithAggregatesInput[]
+    jobId?: BigIntWithAggregatesFilter<"ExtractionJobReportSchema"> | bigint | number
+    reportId?: BigIntWithAggregatesFilter<"ExtractionJobReportSchema"> | bigint | number
+    status?: StringWithAggregatesFilter<"ExtractionJobReportSchema"> | string
+    workflowStatus?: StringNullableWithAggregatesFilter<"ExtractionJobReportSchema"> | string | null
+    preprocessorStatus?: StringNullableWithAggregatesFilter<"ExtractionJobReportSchema"> | string | null
+    mastraRunId?: StringNullableWithAggregatesFilter<"ExtractionJobReportSchema"> | string | null
+    attempt?: IntWithAggregatesFilter<"ExtractionJobReportSchema"> | number
+    elapsedMs?: IntNullableWithAggregatesFilter<"ExtractionJobReportSchema"> | number | null
+    errorMessage?: StringNullableWithAggregatesFilter<"ExtractionJobReportSchema"> | string | null
+    errorDetails?: JsonNullableWithAggregatesFilter<"ExtractionJobReportSchema">
+    startedAt?: DateTimeNullableWithAggregatesFilter<"ExtractionJobReportSchema"> | Date | string | null
+    finishedAt?: DateTimeNullableWithAggregatesFilter<"ExtractionJobReportSchema"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ExtractionJobReportSchema"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ExtractionJobReportSchema"> | Date | string
   }
 
   export type HikrOrgPostSchemaWhereInput = {
@@ -26549,6 +29537,275 @@ export namespace Prisma {
     frequentierung?: NullableStringFieldUpdateOperationsInput | string | null
     bedingungen?: NullableJsonNullValueInput | InputJsonValue
     hinweise?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ExtractionJobSchemaCreateInput = {
+    id?: bigint | number
+    workflow: string
+    status: string
+    schemaVersion?: string | null
+    limit?: number | null
+    totalReports?: number | null
+    processedReports?: number
+    succeededReports?: number
+    failedReports?: number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: bigint | number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string
+    finishedAt?: Date | string | null
+    lastHeartbeatAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reports?: ExtractionJobReportSchemaCreateNestedManyWithoutJobInput
+  }
+
+  export type ExtractionJobSchemaUncheckedCreateInput = {
+    id?: bigint | number
+    workflow: string
+    status: string
+    schemaVersion?: string | null
+    limit?: number | null
+    totalReports?: number | null
+    processedReports?: number
+    succeededReports?: number
+    failedReports?: number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: bigint | number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string
+    finishedAt?: Date | string | null
+    lastHeartbeatAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reports?: ExtractionJobReportSchemaUncheckedCreateNestedManyWithoutJobInput
+  }
+
+  export type ExtractionJobSchemaUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    workflow?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    schemaVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    limit?: NullableIntFieldUpdateOperationsInput | number | null
+    totalReports?: NullableIntFieldUpdateOperationsInput | number | null
+    processedReports?: IntFieldUpdateOperationsInput | number
+    succeededReports?: IntFieldUpdateOperationsInput | number
+    failedReports?: IntFieldUpdateOperationsInput | number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastHeartbeatAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reports?: ExtractionJobReportSchemaUpdateManyWithoutJobNestedInput
+  }
+
+  export type ExtractionJobSchemaUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    workflow?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    schemaVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    limit?: NullableIntFieldUpdateOperationsInput | number | null
+    totalReports?: NullableIntFieldUpdateOperationsInput | number | null
+    processedReports?: IntFieldUpdateOperationsInput | number
+    succeededReports?: IntFieldUpdateOperationsInput | number
+    failedReports?: IntFieldUpdateOperationsInput | number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastHeartbeatAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reports?: ExtractionJobReportSchemaUncheckedUpdateManyWithoutJobNestedInput
+  }
+
+  export type ExtractionJobSchemaCreateManyInput = {
+    id?: bigint | number
+    workflow: string
+    status: string
+    schemaVersion?: string | null
+    limit?: number | null
+    totalReports?: number | null
+    processedReports?: number
+    succeededReports?: number
+    failedReports?: number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: bigint | number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string
+    finishedAt?: Date | string | null
+    lastHeartbeatAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExtractionJobSchemaUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    workflow?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    schemaVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    limit?: NullableIntFieldUpdateOperationsInput | number | null
+    totalReports?: NullableIntFieldUpdateOperationsInput | number | null
+    processedReports?: IntFieldUpdateOperationsInput | number
+    succeededReports?: IntFieldUpdateOperationsInput | number
+    failedReports?: IntFieldUpdateOperationsInput | number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastHeartbeatAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExtractionJobSchemaUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    workflow?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    schemaVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    limit?: NullableIntFieldUpdateOperationsInput | number | null
+    totalReports?: NullableIntFieldUpdateOperationsInput | number | null
+    processedReports?: IntFieldUpdateOperationsInput | number
+    succeededReports?: IntFieldUpdateOperationsInput | number
+    failedReports?: IntFieldUpdateOperationsInput | number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastHeartbeatAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExtractionJobReportSchemaCreateInput = {
+    reportId: bigint | number
+    status: string
+    workflowStatus?: string | null
+    preprocessorStatus?: string | null
+    mastraRunId?: string | null
+    attempt?: number
+    elapsedMs?: number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string | null
+    finishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    job: ExtractionJobSchemaCreateNestedOneWithoutReportsInput
+  }
+
+  export type ExtractionJobReportSchemaUncheckedCreateInput = {
+    jobId: bigint | number
+    reportId: bigint | number
+    status: string
+    workflowStatus?: string | null
+    preprocessorStatus?: string | null
+    mastraRunId?: string | null
+    attempt?: number
+    elapsedMs?: number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string | null
+    finishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExtractionJobReportSchemaUpdateInput = {
+    reportId?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: StringFieldUpdateOperationsInput | string
+    workflowStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    preprocessorStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mastraRunId?: NullableStringFieldUpdateOperationsInput | string | null
+    attempt?: IntFieldUpdateOperationsInput | number
+    elapsedMs?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    job?: ExtractionJobSchemaUpdateOneRequiredWithoutReportsNestedInput
+  }
+
+  export type ExtractionJobReportSchemaUncheckedUpdateInput = {
+    jobId?: BigIntFieldUpdateOperationsInput | bigint | number
+    reportId?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: StringFieldUpdateOperationsInput | string
+    workflowStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    preprocessorStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mastraRunId?: NullableStringFieldUpdateOperationsInput | string | null
+    attempt?: IntFieldUpdateOperationsInput | number
+    elapsedMs?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExtractionJobReportSchemaCreateManyInput = {
+    jobId: bigint | number
+    reportId: bigint | number
+    status: string
+    workflowStatus?: string | null
+    preprocessorStatus?: string | null
+    mastraRunId?: string | null
+    attempt?: number
+    elapsedMs?: number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string | null
+    finishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExtractionJobReportSchemaUpdateManyMutationInput = {
+    reportId?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: StringFieldUpdateOperationsInput | string
+    workflowStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    preprocessorStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mastraRunId?: NullableStringFieldUpdateOperationsInput | string | null
+    attempt?: IntFieldUpdateOperationsInput | number
+    elapsedMs?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExtractionJobReportSchemaUncheckedUpdateManyInput = {
+    jobId?: BigIntFieldUpdateOperationsInput | bigint | number
+    reportId?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: StringFieldUpdateOperationsInput | string
+    workflowStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    preprocessorStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mastraRunId?: NullableStringFieldUpdateOperationsInput | string | null
+    attempt?: IntFieldUpdateOperationsInput | number
+    elapsedMs?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HikrOrgPostSchemaCreateInput = {
@@ -28119,11 +31376,15 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type EnumHikrCategoryFilter<$PrismaModel = never> = {
-    equals?: $Enums.HikrCategory | EnumHikrCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumHikrCategoryFilter<$PrismaModel> | $Enums.HikrCategory
+  export type BigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -28135,6 +31396,221 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type ExtractionJobReportSchemaListRelationFilter = {
+    every?: ExtractionJobReportSchemaWhereInput
+    some?: ExtractionJobReportSchemaWhereInput
+    none?: ExtractionJobReportSchemaWhereInput
+  }
+
+  export type ExtractionJobReportSchemaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExtractionJobSchemaCountOrderByAggregateInput = {
+    id?: SortOrder
+    workflow?: SortOrder
+    status?: SortOrder
+    schemaVersion?: SortOrder
+    limit?: SortOrder
+    totalReports?: SortOrder
+    processedReports?: SortOrder
+    succeededReports?: SortOrder
+    failedReports?: SortOrder
+    statusCounts?: SortOrder
+    lastReportId?: SortOrder
+    errorMessage?: SortOrder
+    errorDetails?: SortOrder
+    startedAt?: SortOrder
+    finishedAt?: SortOrder
+    lastHeartbeatAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExtractionJobSchemaAvgOrderByAggregateInput = {
+    id?: SortOrder
+    limit?: SortOrder
+    totalReports?: SortOrder
+    processedReports?: SortOrder
+    succeededReports?: SortOrder
+    failedReports?: SortOrder
+    lastReportId?: SortOrder
+  }
+
+  export type ExtractionJobSchemaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    workflow?: SortOrder
+    status?: SortOrder
+    schemaVersion?: SortOrder
+    limit?: SortOrder
+    totalReports?: SortOrder
+    processedReports?: SortOrder
+    succeededReports?: SortOrder
+    failedReports?: SortOrder
+    lastReportId?: SortOrder
+    errorMessage?: SortOrder
+    startedAt?: SortOrder
+    finishedAt?: SortOrder
+    lastHeartbeatAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExtractionJobSchemaMinOrderByAggregateInput = {
+    id?: SortOrder
+    workflow?: SortOrder
+    status?: SortOrder
+    schemaVersion?: SortOrder
+    limit?: SortOrder
+    totalReports?: SortOrder
+    processedReports?: SortOrder
+    succeededReports?: SortOrder
+    failedReports?: SortOrder
+    lastReportId?: SortOrder
+    errorMessage?: SortOrder
+    startedAt?: SortOrder
+    finishedAt?: SortOrder
+    lastHeartbeatAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExtractionJobSchemaSumOrderByAggregateInput = {
+    id?: SortOrder
+    limit?: SortOrder
+    totalReports?: SortOrder
+    processedReports?: SortOrder
+    succeededReports?: SortOrder
+    failedReports?: SortOrder
+    lastReportId?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type ExtractionJobSchemaScalarRelationFilter = {
+    is?: ExtractionJobSchemaWhereInput
+    isNot?: ExtractionJobSchemaWhereInput
+  }
+
+  export type ExtractionJobReportSchemaJobIdReportIdCompoundUniqueInput = {
+    jobId: bigint | number
+    reportId: bigint | number
+  }
+
+  export type ExtractionJobReportSchemaCountOrderByAggregateInput = {
+    jobId?: SortOrder
+    reportId?: SortOrder
+    status?: SortOrder
+    workflowStatus?: SortOrder
+    preprocessorStatus?: SortOrder
+    mastraRunId?: SortOrder
+    attempt?: SortOrder
+    elapsedMs?: SortOrder
+    errorMessage?: SortOrder
+    errorDetails?: SortOrder
+    startedAt?: SortOrder
+    finishedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExtractionJobReportSchemaAvgOrderByAggregateInput = {
+    jobId?: SortOrder
+    reportId?: SortOrder
+    attempt?: SortOrder
+    elapsedMs?: SortOrder
+  }
+
+  export type ExtractionJobReportSchemaMaxOrderByAggregateInput = {
+    jobId?: SortOrder
+    reportId?: SortOrder
+    status?: SortOrder
+    workflowStatus?: SortOrder
+    preprocessorStatus?: SortOrder
+    mastraRunId?: SortOrder
+    attempt?: SortOrder
+    elapsedMs?: SortOrder
+    errorMessage?: SortOrder
+    startedAt?: SortOrder
+    finishedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExtractionJobReportSchemaMinOrderByAggregateInput = {
+    jobId?: SortOrder
+    reportId?: SortOrder
+    status?: SortOrder
+    workflowStatus?: SortOrder
+    preprocessorStatus?: SortOrder
+    mastraRunId?: SortOrder
+    attempt?: SortOrder
+    elapsedMs?: SortOrder
+    errorMessage?: SortOrder
+    startedAt?: SortOrder
+    finishedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExtractionJobReportSchemaSumOrderByAggregateInput = {
+    jobId?: SortOrder
+    reportId?: SortOrder
+    attempt?: SortOrder
+    elapsedMs?: SortOrder
+  }
+
+  export type EnumHikrCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.HikrCategory | EnumHikrCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumHikrCategoryFilter<$PrismaModel> | $Enums.HikrCategory
   }
 
   export type StringNullableListFilter<$PrismaModel = never> = {
@@ -28270,22 +31746,6 @@ export namespace Prisma {
     descentMeters?: SortOrder
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
   export type EnumHikrCategoryWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.HikrCategory | EnumHikrCategoryFieldRefInput<$PrismaModel>
     in?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
@@ -28294,20 +31754,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumHikrCategoryFilter<$PrismaModel>
     _max?: NestedEnumHikrCategoryFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -28564,17 +32010,6 @@ export namespace Prisma {
     reportId?: SortOrder
   }
 
-  export type BigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
-  }
-
   export type SummitSchemaNullableScalarRelationFilter = {
     is?: SummitSchemaWhereInput | null
     isNot?: SummitSchemaWhereInput | null
@@ -28659,22 +32094,6 @@ export namespace Prisma {
   export type RouteSchemaSumOrderByAggregateInput = {
     id?: SortOrder
     summitId?: SortOrder
-  }
-
-  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -29234,6 +32653,82 @@ export namespace Prisma {
     update?: XOR<XOR<ClimbingTourBaseSchemaUpdateToOneWithWhereWithoutBesonderesInput, ClimbingTourBaseSchemaUpdateWithoutBesonderesInput>, ClimbingTourBaseSchemaUncheckedUpdateWithoutBesonderesInput>
   }
 
+  export type ExtractionJobReportSchemaCreateNestedManyWithoutJobInput = {
+    create?: XOR<ExtractionJobReportSchemaCreateWithoutJobInput, ExtractionJobReportSchemaUncheckedCreateWithoutJobInput> | ExtractionJobReportSchemaCreateWithoutJobInput[] | ExtractionJobReportSchemaUncheckedCreateWithoutJobInput[]
+    connectOrCreate?: ExtractionJobReportSchemaCreateOrConnectWithoutJobInput | ExtractionJobReportSchemaCreateOrConnectWithoutJobInput[]
+    createMany?: ExtractionJobReportSchemaCreateManyJobInputEnvelope
+    connect?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+  }
+
+  export type ExtractionJobReportSchemaUncheckedCreateNestedManyWithoutJobInput = {
+    create?: XOR<ExtractionJobReportSchemaCreateWithoutJobInput, ExtractionJobReportSchemaUncheckedCreateWithoutJobInput> | ExtractionJobReportSchemaCreateWithoutJobInput[] | ExtractionJobReportSchemaUncheckedCreateWithoutJobInput[]
+    connectOrCreate?: ExtractionJobReportSchemaCreateOrConnectWithoutJobInput | ExtractionJobReportSchemaCreateOrConnectWithoutJobInput[]
+    createMany?: ExtractionJobReportSchemaCreateManyJobInputEnvelope
+    connect?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableBigIntFieldUpdateOperationsInput = {
+    set?: bigint | number | null
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type ExtractionJobReportSchemaUpdateManyWithoutJobNestedInput = {
+    create?: XOR<ExtractionJobReportSchemaCreateWithoutJobInput, ExtractionJobReportSchemaUncheckedCreateWithoutJobInput> | ExtractionJobReportSchemaCreateWithoutJobInput[] | ExtractionJobReportSchemaUncheckedCreateWithoutJobInput[]
+    connectOrCreate?: ExtractionJobReportSchemaCreateOrConnectWithoutJobInput | ExtractionJobReportSchemaCreateOrConnectWithoutJobInput[]
+    upsert?: ExtractionJobReportSchemaUpsertWithWhereUniqueWithoutJobInput | ExtractionJobReportSchemaUpsertWithWhereUniqueWithoutJobInput[]
+    createMany?: ExtractionJobReportSchemaCreateManyJobInputEnvelope
+    set?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+    disconnect?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+    delete?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+    connect?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+    update?: ExtractionJobReportSchemaUpdateWithWhereUniqueWithoutJobInput | ExtractionJobReportSchemaUpdateWithWhereUniqueWithoutJobInput[]
+    updateMany?: ExtractionJobReportSchemaUpdateManyWithWhereWithoutJobInput | ExtractionJobReportSchemaUpdateManyWithWhereWithoutJobInput[]
+    deleteMany?: ExtractionJobReportSchemaScalarWhereInput | ExtractionJobReportSchemaScalarWhereInput[]
+  }
+
+  export type ExtractionJobReportSchemaUncheckedUpdateManyWithoutJobNestedInput = {
+    create?: XOR<ExtractionJobReportSchemaCreateWithoutJobInput, ExtractionJobReportSchemaUncheckedCreateWithoutJobInput> | ExtractionJobReportSchemaCreateWithoutJobInput[] | ExtractionJobReportSchemaUncheckedCreateWithoutJobInput[]
+    connectOrCreate?: ExtractionJobReportSchemaCreateOrConnectWithoutJobInput | ExtractionJobReportSchemaCreateOrConnectWithoutJobInput[]
+    upsert?: ExtractionJobReportSchemaUpsertWithWhereUniqueWithoutJobInput | ExtractionJobReportSchemaUpsertWithWhereUniqueWithoutJobInput[]
+    createMany?: ExtractionJobReportSchemaCreateManyJobInputEnvelope
+    set?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+    disconnect?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+    delete?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+    connect?: ExtractionJobReportSchemaWhereUniqueInput | ExtractionJobReportSchemaWhereUniqueInput[]
+    update?: ExtractionJobReportSchemaUpdateWithWhereUniqueWithoutJobInput | ExtractionJobReportSchemaUpdateWithWhereUniqueWithoutJobInput[]
+    updateMany?: ExtractionJobReportSchemaUpdateManyWithWhereWithoutJobInput | ExtractionJobReportSchemaUpdateManyWithWhereWithoutJobInput[]
+    deleteMany?: ExtractionJobReportSchemaScalarWhereInput | ExtractionJobReportSchemaScalarWhereInput[]
+  }
+
+  export type ExtractionJobSchemaCreateNestedOneWithoutReportsInput = {
+    create?: XOR<ExtractionJobSchemaCreateWithoutReportsInput, ExtractionJobSchemaUncheckedCreateWithoutReportsInput>
+    connectOrCreate?: ExtractionJobSchemaCreateOrConnectWithoutReportsInput
+    connect?: ExtractionJobSchemaWhereUniqueInput
+  }
+
+  export type ExtractionJobSchemaUpdateOneRequiredWithoutReportsNestedInput = {
+    create?: XOR<ExtractionJobSchemaCreateWithoutReportsInput, ExtractionJobSchemaUncheckedCreateWithoutReportsInput>
+    connectOrCreate?: ExtractionJobSchemaCreateOrConnectWithoutReportsInput
+    upsert?: ExtractionJobSchemaUpsertWithoutReportsInput
+    connect?: ExtractionJobSchemaWhereUniqueInput
+    update?: XOR<XOR<ExtractionJobSchemaUpdateToOneWithWhereWithoutReportsInput, ExtractionJobSchemaUpdateWithoutReportsInput>, ExtractionJobSchemaUncheckedUpdateWithoutReportsInput>
+  }
+
   export type HikrOrgPostSchemaCreateaccessStartPointSbbInput = {
     set: string[]
   }
@@ -29272,20 +32767,8 @@ export namespace Prisma {
     connect?: HikrReportWaypointSchemaWhereUniqueInput | HikrReportWaypointSchemaWhereUniqueInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type EnumHikrCategoryFieldUpdateOperationsInput = {
     set?: $Enums.HikrCategory
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type HikrOrgPostSchemaUpdateaccessStartPointSbbInput = {
@@ -29567,14 +33050,6 @@ export namespace Prisma {
     update?: ClimbingTourBaseSchemaUpdateWithWhereUniqueWithoutRouteInput | ClimbingTourBaseSchemaUpdateWithWhereUniqueWithoutRouteInput[]
     updateMany?: ClimbingTourBaseSchemaUpdateManyWithWhereWithoutRouteInput | ClimbingTourBaseSchemaUpdateManyWithWhereWithoutRouteInput[]
     deleteMany?: ClimbingTourBaseSchemaScalarWhereInput | ClimbingTourBaseSchemaScalarWhereInput[]
-  }
-
-  export type NullableBigIntFieldUpdateOperationsInput = {
-    set?: bigint | number | null
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
   }
 
   export type ClimbingTourBaseSchemaUncheckedUpdateManyWithoutRouteNestedInput = {
@@ -29879,11 +33354,15 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type NestedEnumHikrCategoryFilter<$PrismaModel = never> = {
-    equals?: $Enums.HikrCategory | EnumHikrCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumHikrCategoryFilter<$PrismaModel> | $Enums.HikrCategory
+  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -29913,14 +33392,20 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type NestedEnumHikrCategoryWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.HikrCategory | EnumHikrCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumHikrCategoryWithAggregatesFilter<$PrismaModel> | $Enums.HikrCategory
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumHikrCategoryFilter<$PrismaModel>
-    _max?: NestedEnumHikrCategoryFilter<$PrismaModel>
+  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -29937,6 +33422,23 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumHikrCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.HikrCategory | EnumHikrCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumHikrCategoryFilter<$PrismaModel> | $Enums.HikrCategory
+  }
+
+  export type NestedEnumHikrCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HikrCategory | EnumHikrCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HikrCategory[] | ListEnumHikrCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumHikrCategoryWithAggregatesFilter<$PrismaModel> | $Enums.HikrCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHikrCategoryFilter<$PrismaModel>
+    _max?: NestedEnumHikrCategoryFilter<$PrismaModel>
+  }
+
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -29951,33 +33453,6 @@ export namespace Prisma {
     _sum?: NestedFloatNullableFilter<$PrismaModel>
     _min?: NestedFloatNullableFilter<$PrismaModel>
     _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
-  }
-
-  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -31477,6 +34952,184 @@ export namespace Prisma {
     zustiegUndAbstieg?: ClimbingTourZustiegUndAbstiegSchemaUncheckedUpdateOneWithoutBaseNestedInput
   }
 
+  export type ExtractionJobReportSchemaCreateWithoutJobInput = {
+    reportId: bigint | number
+    status: string
+    workflowStatus?: string | null
+    preprocessorStatus?: string | null
+    mastraRunId?: string | null
+    attempt?: number
+    elapsedMs?: number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string | null
+    finishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExtractionJobReportSchemaUncheckedCreateWithoutJobInput = {
+    reportId: bigint | number
+    status: string
+    workflowStatus?: string | null
+    preprocessorStatus?: string | null
+    mastraRunId?: string | null
+    attempt?: number
+    elapsedMs?: number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string | null
+    finishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExtractionJobReportSchemaCreateOrConnectWithoutJobInput = {
+    where: ExtractionJobReportSchemaWhereUniqueInput
+    create: XOR<ExtractionJobReportSchemaCreateWithoutJobInput, ExtractionJobReportSchemaUncheckedCreateWithoutJobInput>
+  }
+
+  export type ExtractionJobReportSchemaCreateManyJobInputEnvelope = {
+    data: ExtractionJobReportSchemaCreateManyJobInput | ExtractionJobReportSchemaCreateManyJobInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExtractionJobReportSchemaUpsertWithWhereUniqueWithoutJobInput = {
+    where: ExtractionJobReportSchemaWhereUniqueInput
+    update: XOR<ExtractionJobReportSchemaUpdateWithoutJobInput, ExtractionJobReportSchemaUncheckedUpdateWithoutJobInput>
+    create: XOR<ExtractionJobReportSchemaCreateWithoutJobInput, ExtractionJobReportSchemaUncheckedCreateWithoutJobInput>
+  }
+
+  export type ExtractionJobReportSchemaUpdateWithWhereUniqueWithoutJobInput = {
+    where: ExtractionJobReportSchemaWhereUniqueInput
+    data: XOR<ExtractionJobReportSchemaUpdateWithoutJobInput, ExtractionJobReportSchemaUncheckedUpdateWithoutJobInput>
+  }
+
+  export type ExtractionJobReportSchemaUpdateManyWithWhereWithoutJobInput = {
+    where: ExtractionJobReportSchemaScalarWhereInput
+    data: XOR<ExtractionJobReportSchemaUpdateManyMutationInput, ExtractionJobReportSchemaUncheckedUpdateManyWithoutJobInput>
+  }
+
+  export type ExtractionJobReportSchemaScalarWhereInput = {
+    AND?: ExtractionJobReportSchemaScalarWhereInput | ExtractionJobReportSchemaScalarWhereInput[]
+    OR?: ExtractionJobReportSchemaScalarWhereInput[]
+    NOT?: ExtractionJobReportSchemaScalarWhereInput | ExtractionJobReportSchemaScalarWhereInput[]
+    jobId?: BigIntFilter<"ExtractionJobReportSchema"> | bigint | number
+    reportId?: BigIntFilter<"ExtractionJobReportSchema"> | bigint | number
+    status?: StringFilter<"ExtractionJobReportSchema"> | string
+    workflowStatus?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    preprocessorStatus?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    mastraRunId?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    attempt?: IntFilter<"ExtractionJobReportSchema"> | number
+    elapsedMs?: IntNullableFilter<"ExtractionJobReportSchema"> | number | null
+    errorMessage?: StringNullableFilter<"ExtractionJobReportSchema"> | string | null
+    errorDetails?: JsonNullableFilter<"ExtractionJobReportSchema">
+    startedAt?: DateTimeNullableFilter<"ExtractionJobReportSchema"> | Date | string | null
+    finishedAt?: DateTimeNullableFilter<"ExtractionJobReportSchema"> | Date | string | null
+    createdAt?: DateTimeFilter<"ExtractionJobReportSchema"> | Date | string
+    updatedAt?: DateTimeFilter<"ExtractionJobReportSchema"> | Date | string
+  }
+
+  export type ExtractionJobSchemaCreateWithoutReportsInput = {
+    id?: bigint | number
+    workflow: string
+    status: string
+    schemaVersion?: string | null
+    limit?: number | null
+    totalReports?: number | null
+    processedReports?: number
+    succeededReports?: number
+    failedReports?: number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: bigint | number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string
+    finishedAt?: Date | string | null
+    lastHeartbeatAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExtractionJobSchemaUncheckedCreateWithoutReportsInput = {
+    id?: bigint | number
+    workflow: string
+    status: string
+    schemaVersion?: string | null
+    limit?: number | null
+    totalReports?: number | null
+    processedReports?: number
+    succeededReports?: number
+    failedReports?: number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: bigint | number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string
+    finishedAt?: Date | string | null
+    lastHeartbeatAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExtractionJobSchemaCreateOrConnectWithoutReportsInput = {
+    where: ExtractionJobSchemaWhereUniqueInput
+    create: XOR<ExtractionJobSchemaCreateWithoutReportsInput, ExtractionJobSchemaUncheckedCreateWithoutReportsInput>
+  }
+
+  export type ExtractionJobSchemaUpsertWithoutReportsInput = {
+    update: XOR<ExtractionJobSchemaUpdateWithoutReportsInput, ExtractionJobSchemaUncheckedUpdateWithoutReportsInput>
+    create: XOR<ExtractionJobSchemaCreateWithoutReportsInput, ExtractionJobSchemaUncheckedCreateWithoutReportsInput>
+    where?: ExtractionJobSchemaWhereInput
+  }
+
+  export type ExtractionJobSchemaUpdateToOneWithWhereWithoutReportsInput = {
+    where?: ExtractionJobSchemaWhereInput
+    data: XOR<ExtractionJobSchemaUpdateWithoutReportsInput, ExtractionJobSchemaUncheckedUpdateWithoutReportsInput>
+  }
+
+  export type ExtractionJobSchemaUpdateWithoutReportsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    workflow?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    schemaVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    limit?: NullableIntFieldUpdateOperationsInput | number | null
+    totalReports?: NullableIntFieldUpdateOperationsInput | number | null
+    processedReports?: IntFieldUpdateOperationsInput | number
+    succeededReports?: IntFieldUpdateOperationsInput | number
+    failedReports?: IntFieldUpdateOperationsInput | number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastHeartbeatAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExtractionJobSchemaUncheckedUpdateWithoutReportsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    workflow?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    schemaVersion?: NullableStringFieldUpdateOperationsInput | string | null
+    limit?: NullableIntFieldUpdateOperationsInput | number | null
+    totalReports?: NullableIntFieldUpdateOperationsInput | number | null
+    processedReports?: IntFieldUpdateOperationsInput | number
+    succeededReports?: IntFieldUpdateOperationsInput | number
+    failedReports?: IntFieldUpdateOperationsInput | number
+    statusCounts?: JsonNullValueInput | InputJsonValue
+    lastReportId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastHeartbeatAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ReportBaseSchemaCreateWithoutHikrOrgPostSchemaInput = {
     status: string
     activity?: string | null
@@ -32332,6 +35985,70 @@ export namespace Prisma {
     canton?: StringFilter<"RouteSchema"> | string
     createdAt?: DateTimeFilter<"RouteSchema"> | Date | string
     updatedAt?: DateTimeFilter<"RouteSchema"> | Date | string
+  }
+
+  export type ExtractionJobReportSchemaCreateManyJobInput = {
+    reportId: bigint | number
+    status: string
+    workflowStatus?: string | null
+    preprocessorStatus?: string | null
+    mastraRunId?: string | null
+    attempt?: number
+    elapsedMs?: number | null
+    errorMessage?: string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: Date | string | null
+    finishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExtractionJobReportSchemaUpdateWithoutJobInput = {
+    reportId?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: StringFieldUpdateOperationsInput | string
+    workflowStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    preprocessorStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mastraRunId?: NullableStringFieldUpdateOperationsInput | string | null
+    attempt?: IntFieldUpdateOperationsInput | number
+    elapsedMs?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExtractionJobReportSchemaUncheckedUpdateWithoutJobInput = {
+    reportId?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: StringFieldUpdateOperationsInput | string
+    workflowStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    preprocessorStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mastraRunId?: NullableStringFieldUpdateOperationsInput | string | null
+    attempt?: IntFieldUpdateOperationsInput | number
+    elapsedMs?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExtractionJobReportSchemaUncheckedUpdateManyWithoutJobInput = {
+    reportId?: BigIntFieldUpdateOperationsInput | bigint | number
+    status?: StringFieldUpdateOperationsInput | string
+    workflowStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    preprocessorStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    mastraRunId?: NullableStringFieldUpdateOperationsInput | string | null
+    attempt?: IntFieldUpdateOperationsInput | number
+    elapsedMs?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    errorDetails?: NullableJsonNullValueInput | InputJsonValue
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HikrReportWaypointSchemaCreateManyReportInput = {

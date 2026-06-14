@@ -1,0 +1,51 @@
+model ExtractionJobSchema {
+  id               BigInt    @id @default(autoincrement())
+  workflow         String
+  status           String
+  schemaVersion    String?   @map("schema_version")
+  limit            Int?
+  totalReports     Int?      @map("total_reports")
+  processedReports Int       @default(0) @map("processed_reports")
+  succeededReports Int       @default(0) @map("succeeded_reports")
+  failedReports    Int       @default(0) @map("failed_reports")
+  statusCounts     Json      @default("{}") @map("status_counts")
+  lastReportId     BigInt?   @map("last_report_id")
+  errorMessage     String?   @map("error_message")
+  errorDetails     Json?     @map("error_details")
+  startedAt        DateTime  @default(now()) @map("started_at") @db.Timestamptz(6)
+  finishedAt       DateTime? @map("finished_at") @db.Timestamptz(6)
+  lastHeartbeatAt  DateTime  @default(now()) @map("last_heartbeat_at") @db.Timestamptz(6)
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  reports ExtractionJobReportSchema[]
+
+  @@index([workflow], map: "extraction_jobs_workflow_idx")
+  @@index([status], map: "extraction_jobs_status_idx")
+  @@index([startedAt], map: "extraction_jobs_started_at_idx")
+  @@map("extraction_jobs")
+}
+
+model ExtractionJobReportSchema {
+  jobId              BigInt    @map("job_id")
+  reportId           BigInt    @map("report_id")
+  status             String
+  workflowStatus     String?   @map("workflow_status")
+  preprocessorStatus String?   @map("preprocessor_status")
+  mastraRunId        String?   @map("mastra_run_id")
+  attempt            Int       @default(0)
+  elapsedMs          Int?      @map("elapsed_ms")
+  errorMessage       String?   @map("error_message")
+  errorDetails       Json?     @map("error_details")
+  startedAt          DateTime? @map("started_at") @db.Timestamptz(6)
+  finishedAt         DateTime? @map("finished_at") @db.Timestamptz(6)
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  job ExtractionJobSchema @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@id([jobId, reportId])
+  @@index([reportId], map: "extraction_job_reports_report_id_idx")
+  @@index([jobId, status], map: "extraction_job_reports_job_status_idx")
+  @@map("extraction_job_reports")
+}

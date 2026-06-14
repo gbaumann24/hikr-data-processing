@@ -7,6 +7,8 @@ export type PrismaClient = generatedClient.PrismaClient;
 export type {
   ClimbingGardenBaseSchema,
   ClimbingTourBaseSchema,
+  ExtractionJobReportSchema,
+  ExtractionJobSchema,
   Prisma,
   ReportBaseSchema,
   RouteSchema,
