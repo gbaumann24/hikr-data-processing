@@ -225,6 +225,10 @@ describe('postgres database adapter', () => {
         },
       },
       climbingTourAusruestungSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourAusruestungSchema.upsert');
+          detailUpserts.push(input);
+        },
         deleteMany: async () => {
           calls.push('tx.climbingTourAusruestungSchema.deleteMany');
         },
@@ -236,11 +240,19 @@ describe('postgres database adapter', () => {
         },
       },
       climbingTourAbsicherungSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourAbsicherungSchema.upsert');
+          detailUpserts.push(input);
+        },
         deleteMany: async () => {
           calls.push('tx.climbingTourAbsicherungSchema.deleteMany');
         },
       },
       climbingTourSchuhwerkSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourSchuhwerkSchema.upsert');
+          detailUpserts.push(input);
+        },
         deleteMany: async () => {
           calls.push('tx.climbingTourSchuhwerkSchema.deleteMany');
         },
@@ -381,18 +393,48 @@ describe('postgres database adapter', () => {
       schemaVersion: 'climbing-extraction-v1',
       zusammenfassung:
         'Die Tour bietet gut abgesicherte Plattenkletterei mit kurzem Zustieg und klarer Linie.',
+      ausruestung: {
+        seil: {
+          art: 'anders',
+          anders: 'Doppelseil',
+          laenge_m: 50,
+        },
+      },
       zeitbedarf: {
         zustieg_min: 45,
       },
+      absicherung: {
+        charakter: 'plaisir',
+        hakentypen: ['bohrhaken', 'anders'],
+        hakentypen_anders: ['Bühlerhaken'],
+      },
+      schuhwerk: {
+        zustieg: {
+          typ: 'anders',
+          anders: 'Trailrunner',
+        },
+        klettern: {
+          typ: 'anders',
+          anders: 'Kletterfinken',
+        },
+        abstieg: {
+          typ: 'zustiegsschuhe',
+        },
+      },
       gelaende_und_gefahren: {
         charakter: {
-          felsart: 'kalk',
+          felsart: 'anders',
+          anders: 'Marmor',
         },
         felsqualitaet: ['griffig', 'kompakt'],
       },
       klettern: {
         schluesselstellen: {
           stellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
+        },
+        charakter: {
+          kletterstil: ['platte', 'anders'],
+          anders: ['Wasserrillenkletterei'],
         },
       },
       anreise: {
@@ -448,10 +490,10 @@ describe('postgres database adapter', () => {
       '$transaction',
       'tx.climbingTourBaseSchema.findUnique',
       'tx.climbingTourBaseSchema.update',
-      'tx.climbingTourAusruestungSchema.deleteMany',
+      'tx.climbingTourAusruestungSchema.upsert',
       'tx.climbingTourZeitbedarfSchema.upsert',
-      'tx.climbingTourAbsicherungSchema.deleteMany',
-      'tx.climbingTourSchuhwerkSchema.deleteMany',
+      'tx.climbingTourAbsicherungSchema.upsert',
+      'tx.climbingTourSchuhwerkSchema.upsert',
       'tx.climbingTourGelaendeUndGefahrenSchema.upsert',
       'tx.climbingTourKletternSchema.upsert',
       'tx.climbingTourAnreiseSchema.upsert',
@@ -466,6 +508,30 @@ describe('postgres database adapter', () => {
         where: { baseId: 42n },
         create: {
           baseId: 42n,
+          seilArt: 'anders',
+          seilAnders: 'Doppelseil',
+          seilLaengeM: 50,
+          mobileAbsicherungNotwendigkeit: [],
+          mobileAbsicherungFriends: [],
+          mobileAbsicherungKeile: [],
+          schlingen: [],
+          zusaetzlich: [],
+        },
+        update: {
+          seilArt: 'anders',
+          seilAnders: 'Doppelseil',
+          seilLaengeM: 50,
+          mobileAbsicherungNotwendigkeit: [],
+          mobileAbsicherungFriends: [],
+          mobileAbsicherungKeile: [],
+          schlingen: [],
+          zusaetzlich: [],
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
           zustiegMin: 45,
           reineKletterzeitMin: null,
           abstiegMin: null,
@@ -480,13 +546,47 @@ describe('postgres database adapter', () => {
         where: { baseId: 42n },
         create: {
           baseId: 42n,
-          charakterFelsart: 'kalk',
+          charakter: 'plaisir',
+          hakentypen: ['bohrhaken', 'anders'],
+          hakentypenAnders: ['Bühlerhaken'],
+        },
+        update: {
+          charakter: 'plaisir',
+          hakentypen: ['bohrhaken', 'anders'],
+          hakentypenAnders: ['Bühlerhaken'],
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          zustiegTyp: 'anders',
+          zustiegAnders: 'Trailrunner',
+          kletternTyp: 'anders',
+          kletternAnders: 'Kletterfinken',
+          abstiegTyp: 'zustiegsschuhe',
+        },
+        update: {
+          zustiegTyp: 'anders',
+          zustiegAnders: 'Trailrunner',
+          kletternTyp: 'anders',
+          kletternAnders: 'Kletterfinken',
+          abstiegTyp: 'zustiegsschuhe',
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          charakterFelsart: 'anders',
+          charakterAnders: 'Marmor',
           gefahren: [],
           felsqualitaet: ['griffig', 'kompakt'],
           felsqualitaetAnders: [],
         },
         update: {
-          charakterFelsart: 'kalk',
+          charakterFelsart: 'anders',
+          charakterAnders: 'Marmor',
           gefahren: [],
           felsqualitaet: ['griffig', 'kompakt'],
           felsqualitaetAnders: [],
@@ -497,9 +597,13 @@ describe('postgres database adapter', () => {
         create: {
           baseId: 42n,
           schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
+          charakterKletterstil: ['platte', 'anders'],
+          charakterAnders: ['Wasserrillenkletterei'],
         },
         update: {
           schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
+          charakterKletterstil: ['platte', 'anders'],
+          charakterAnders: ['Wasserrillenkletterei'],
         },
       },
       {

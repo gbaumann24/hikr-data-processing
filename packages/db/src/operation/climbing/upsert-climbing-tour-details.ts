@@ -68,6 +68,7 @@ async function persistAusruestung(
 
   const data = {
     seilArt: nullable(details.seil?.art),
+    seilAnders: nullable(details.seil?.anders),
     seilLaengeM: nullable(details.seil?.laenge_m),
     mobileAbsicherungNotwendigkeit: jsonArray(details.mobile_absicherung?.notwendigkeit),
     mobileAbsicherungBegruendung: nullable(details.mobile_absicherung?.begruendung),
@@ -125,6 +126,8 @@ async function persistAbsicherung(
 
   const data = {
     charakter: nullable(details.charakter),
+    hakentypen: jsonArray(details.hakentypen),
+    hakentypenAnders: jsonArray(details.hakentypen_anders),
     hakenabstaendeBewertung: nullable(details.hakenabstaende?.bewertung),
     hakenabstaendeBeschreibung: nullable(details.hakenabstaende?.beschreibung),
     staendeGebohrt: nullable(details.staende?.gebohrt),
@@ -154,8 +157,11 @@ async function persistSchuhwerk(
 
   const data = {
     zustiegTyp: nullable(details.zustieg?.typ),
+    zustiegAnders: nullable(details.zustieg?.anders),
     kletternTyp: nullable(details.klettern?.typ),
+    kletternAnders: nullable(details.klettern?.anders),
     abstiegTyp: nullable(details.abstieg?.typ),
+    abstiegAnders: nullable(details.abstieg?.anders),
   };
 
   await tx.climbingTourSchuhwerkSchema.upsert({
@@ -184,6 +190,7 @@ async function persistGelaendeUndGefahren(
     charakterSonnig: nullable(details.charakter?.sonnig),
     charakterSchnellTrocknend: nullable(details.charakter?.schnell_trocknend),
     charakterFelsart: nullable(details.charakter?.felsart),
+    charakterAnders: nullable(details.charakter?.anders),
     charakterBeschreibung: nullable(details.charakter?.beschreibung),
     gefahren: jsonArray(details.gefahren),
     felsqualitaet: jsonArray(details.felsqualitaet),
@@ -220,6 +227,7 @@ async function persistKlettern(
     abseilenAbseilpiste: nullable(details.abseilen?.abseilpiste),
     abseilenBeschreibung: nullable(details.abseilen?.beschreibung),
     charakterKletterstil: jsonArray(details.charakter?.kletterstil),
+    charakterAnders: jsonArray(details.charakter?.anders),
     charakterBeschreibung: nullable(details.charakter?.beschreibung),
     charakterSchoenheit: nullable(details.charakter?.schoenheit),
     charakterErnsthaftigkeit: nullable(details.charakter?.ernsthaftigkeit),

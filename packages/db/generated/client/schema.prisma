@@ -40,6 +40,7 @@ model ClimbingTourAusruestungSchema {
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   seilArt                         String? @map("seil_art")
+  seilAnders                      String? @map("seil_anders")
   seilLaengeM                     Int?    @map("seil_laenge_m")
   mobileAbsicherungNotwendigkeit  Json    @default("[]") @map("mobile_absicherung_notwendigkeit")
   mobileAbsicherungBegruendung    String? @map("mobile_absicherung_begruendung")
@@ -69,6 +70,8 @@ model ClimbingTourAbsicherungSchema {
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
   charakter                  String?  @map("charakter")
+  hakentypen                 Json     @default("[]")
+  hakentypenAnders           Json     @default("[]") @map("hakentypen_anders")
   hakenabstaendeBewertung    String?  @map("hakenabstaende_bewertung")
   hakenabstaendeBeschreibung String?  @map("hakenabstaende_beschreibung")
   staendeGebohrt             Boolean? @map("staende_gebohrt")
@@ -83,9 +86,12 @@ model ClimbingTourSchuhwerkSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  zustiegTyp  String? @map("zustieg_typ")
-  kletternTyp String? @map("klettern_typ")
-  abstiegTyp  String? @map("abstieg_typ")
+  zustiegTyp     String? @map("zustieg_typ")
+  zustiegAnders  String? @map("zustieg_anders")
+  kletternTyp    String? @map("klettern_typ")
+  kletternAnders String? @map("klettern_anders")
+  abstiegTyp     String? @map("abstieg_typ")
+  abstiegAnders  String? @map("abstieg_anders")
 
   @@map("climbing_tour_schuhwerk_schema")
 }
@@ -98,6 +104,7 @@ model ClimbingTourGelaendeUndGefahrenSchema {
   charakterSonnig           Boolean? @map("charakter_sonnig")
   charakterSchnellTrocknend Boolean? @map("charakter_schnell_trocknend")
   charakterFelsart          String?  @map("charakter_felsart")
+  charakterAnders           String?  @map("charakter_anders")
   charakterBeschreibung     String?  @map("charakter_beschreibung")
   gefahren                  Json     @default("[]")
   felsqualitaet             Json     @default("[]")
@@ -120,6 +127,7 @@ model ClimbingTourKletternSchema {
   abseilenAbseilpiste               Boolean? @map("abseilen_abseilpiste")
   abseilenBeschreibung              String?  @map("abseilen_beschreibung")
   charakterKletterstil              Json     @default("[]") @map("charakter_kletterstil")
+  charakterAnders                   Json     @default("[]") @map("charakter_anders")
   charakterBeschreibung             String?  @map("charakter_beschreibung")
   charakterSchoenheit               String?  @map("charakter_schoenheit")
   charakterErnsthaftigkeit          String?  @map("charakter_ernsthaftigkeit")

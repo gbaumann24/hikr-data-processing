@@ -138,6 +138,7 @@ exports.Prisma.ClimbingTourBaseSchemaScalarFieldEnum = {
 exports.Prisma.ClimbingTourAusruestungSchemaScalarFieldEnum = {
   baseId: 'baseId',
   seilArt: 'seilArt',
+  seilAnders: 'seilAnders',
   seilLaengeM: 'seilLaengeM',
   mobileAbsicherungNotwendigkeit: 'mobileAbsicherungNotwendigkeit',
   mobileAbsicherungBegruendung: 'mobileAbsicherungBegruendung',
@@ -159,6 +160,8 @@ exports.Prisma.ClimbingTourZeitbedarfSchemaScalarFieldEnum = {
 exports.Prisma.ClimbingTourAbsicherungSchemaScalarFieldEnum = {
   baseId: 'baseId',
   charakter: 'charakter',
+  hakentypen: 'hakentypen',
+  hakentypenAnders: 'hakentypenAnders',
   hakenabstaendeBewertung: 'hakenabstaendeBewertung',
   hakenabstaendeBeschreibung: 'hakenabstaendeBeschreibung',
   staendeGebohrt: 'staendeGebohrt',
@@ -170,8 +173,11 @@ exports.Prisma.ClimbingTourAbsicherungSchemaScalarFieldEnum = {
 exports.Prisma.ClimbingTourSchuhwerkSchemaScalarFieldEnum = {
   baseId: 'baseId',
   zustiegTyp: 'zustiegTyp',
+  zustiegAnders: 'zustiegAnders',
   kletternTyp: 'kletternTyp',
-  abstiegTyp: 'abstiegTyp'
+  kletternAnders: 'kletternAnders',
+  abstiegTyp: 'abstiegTyp',
+  abstiegAnders: 'abstiegAnders'
 };
 
 exports.Prisma.ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum = {
@@ -180,6 +186,7 @@ exports.Prisma.ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum = {
   charakterSonnig: 'charakterSonnig',
   charakterSchnellTrocknend: 'charakterSchnellTrocknend',
   charakterFelsart: 'charakterFelsart',
+  charakterAnders: 'charakterAnders',
   charakterBeschreibung: 'charakterBeschreibung',
   gefahren: 'gefahren',
   felsqualitaet: 'felsqualitaet',
@@ -198,6 +205,7 @@ exports.Prisma.ClimbingTourKletternSchemaScalarFieldEnum = {
   abseilenAbseilpiste: 'abseilenAbseilpiste',
   abseilenBeschreibung: 'abseilenBeschreibung',
   charakterKletterstil: 'charakterKletterstil',
+  charakterAnders: 'charakterAnders',
   charakterBeschreibung: 'charakterBeschreibung',
   charakterSchoenheit: 'charakterSchoenheit',
   charakterErnsthaftigkeit: 'charakterErnsthaftigkeit',
