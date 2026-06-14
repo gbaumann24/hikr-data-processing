@@ -10504,7 +10504,7 @@ export namespace Prisma {
 
   export type ClimbingTourKletternSchemaAvgAggregateOutputType = {
     baseId: number | null
-    abseilenAnzahl: number | null
+    abseilenMaxLaengeM: number | null
     charakterWandhoehe: number | null
     routenverlaufEinstiegshoehe: number | null
     seillaengenInfoAnzahlTotal: number | null
@@ -10512,7 +10512,7 @@ export namespace Prisma {
 
   export type ClimbingTourKletternSchemaSumAggregateOutputType = {
     baseId: bigint | null
-    abseilenAnzahl: number | null
+    abseilenMaxLaengeM: number | null
     charakterWandhoehe: number | null
     routenverlaufEinstiegshoehe: number | null
     seillaengenInfoAnzahlTotal: number | null
@@ -10524,9 +10524,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung: string | null
     schwierigkeitMinKlettererfahrung: string | null
     abseilenMoeglich: boolean | null
-    abseilenAnzahl: number | null
+    abseilenMaxLaengeM: number | null
     abseilenZumEinstieg: boolean | null
     abseilenAbseilpiste: boolean | null
+    abseilenBeschreibung: string | null
     charakterBeschreibung: string | null
     charakterSchoenheit: string | null
     charakterErnsthaftigkeit: string | null
@@ -10547,9 +10548,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung: string | null
     schwierigkeitMinKlettererfahrung: string | null
     abseilenMoeglich: boolean | null
-    abseilenAnzahl: number | null
+    abseilenMaxLaengeM: number | null
     abseilenZumEinstieg: boolean | null
     abseilenAbseilpiste: boolean | null
+    abseilenBeschreibung: string | null
     charakterBeschreibung: string | null
     charakterSchoenheit: string | null
     charakterErnsthaftigkeit: string | null
@@ -10571,10 +10573,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung: number
     schwierigkeitMinKlettererfahrung: number
     abseilenMoeglich: number
-    abseilenAnzahl: number
-    abseilenLaengenM: number
+    abseilenMaxLaengeM: number
     abseilenZumEinstieg: number
     abseilenAbseilpiste: number
+    abseilenBeschreibung: number
     charakterKletterstil: number
     charakterBeschreibung: number
     charakterSchoenheit: number
@@ -10595,7 +10597,7 @@ export namespace Prisma {
 
   export type ClimbingTourKletternSchemaAvgAggregateInputType = {
     baseId?: true
-    abseilenAnzahl?: true
+    abseilenMaxLaengeM?: true
     charakterWandhoehe?: true
     routenverlaufEinstiegshoehe?: true
     seillaengenInfoAnzahlTotal?: true
@@ -10603,7 +10605,7 @@ export namespace Prisma {
 
   export type ClimbingTourKletternSchemaSumAggregateInputType = {
     baseId?: true
-    abseilenAnzahl?: true
+    abseilenMaxLaengeM?: true
     charakterWandhoehe?: true
     routenverlaufEinstiegshoehe?: true
     seillaengenInfoAnzahlTotal?: true
@@ -10615,9 +10617,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: true
     schwierigkeitMinKlettererfahrung?: true
     abseilenMoeglich?: true
-    abseilenAnzahl?: true
+    abseilenMaxLaengeM?: true
     abseilenZumEinstieg?: true
     abseilenAbseilpiste?: true
+    abseilenBeschreibung?: true
     charakterBeschreibung?: true
     charakterSchoenheit?: true
     charakterErnsthaftigkeit?: true
@@ -10638,9 +10641,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: true
     schwierigkeitMinKlettererfahrung?: true
     abseilenMoeglich?: true
-    abseilenAnzahl?: true
+    abseilenMaxLaengeM?: true
     abseilenZumEinstieg?: true
     abseilenAbseilpiste?: true
+    abseilenBeschreibung?: true
     charakterBeschreibung?: true
     charakterSchoenheit?: true
     charakterErnsthaftigkeit?: true
@@ -10662,10 +10666,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: true
     schwierigkeitMinKlettererfahrung?: true
     abseilenMoeglich?: true
-    abseilenAnzahl?: true
-    abseilenLaengenM?: true
+    abseilenMaxLaengeM?: true
     abseilenZumEinstieg?: true
     abseilenAbseilpiste?: true
+    abseilenBeschreibung?: true
     charakterKletterstil?: true
     charakterBeschreibung?: true
     charakterSchoenheit?: true
@@ -10776,10 +10780,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung: string | null
     schwierigkeitMinKlettererfahrung: string | null
     abseilenMoeglich: boolean | null
-    abseilenAnzahl: number | null
-    abseilenLaengenM: JsonValue
+    abseilenMaxLaengeM: number | null
     abseilenZumEinstieg: boolean | null
     abseilenAbseilpiste: boolean | null
+    abseilenBeschreibung: string | null
     charakterKletterstil: JsonValue
     charakterBeschreibung: string | null
     charakterSchoenheit: string | null
@@ -10822,10 +10826,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: boolean
     schwierigkeitMinKlettererfahrung?: boolean
     abseilenMoeglich?: boolean
-    abseilenAnzahl?: boolean
-    abseilenLaengenM?: boolean
+    abseilenMaxLaengeM?: boolean
     abseilenZumEinstieg?: boolean
     abseilenAbseilpiste?: boolean
+    abseilenBeschreibung?: boolean
     charakterKletterstil?: boolean
     charakterBeschreibung?: boolean
     charakterSchoenheit?: boolean
@@ -10850,10 +10854,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: boolean
     schwierigkeitMinKlettererfahrung?: boolean
     abseilenMoeglich?: boolean
-    abseilenAnzahl?: boolean
-    abseilenLaengenM?: boolean
+    abseilenMaxLaengeM?: boolean
     abseilenZumEinstieg?: boolean
     abseilenAbseilpiste?: boolean
+    abseilenBeschreibung?: boolean
     charakterKletterstil?: boolean
     charakterBeschreibung?: boolean
     charakterSchoenheit?: boolean
@@ -10878,10 +10882,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: boolean
     schwierigkeitMinKlettererfahrung?: boolean
     abseilenMoeglich?: boolean
-    abseilenAnzahl?: boolean
-    abseilenLaengenM?: boolean
+    abseilenMaxLaengeM?: boolean
     abseilenZumEinstieg?: boolean
     abseilenAbseilpiste?: boolean
+    abseilenBeschreibung?: boolean
     charakterKletterstil?: boolean
     charakterBeschreibung?: boolean
     charakterSchoenheit?: boolean
@@ -10906,10 +10910,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: boolean
     schwierigkeitMinKlettererfahrung?: boolean
     abseilenMoeglich?: boolean
-    abseilenAnzahl?: boolean
-    abseilenLaengenM?: boolean
+    abseilenMaxLaengeM?: boolean
     abseilenZumEinstieg?: boolean
     abseilenAbseilpiste?: boolean
+    abseilenBeschreibung?: boolean
     charakterKletterstil?: boolean
     charakterBeschreibung?: boolean
     charakterSchoenheit?: boolean
@@ -10926,7 +10930,7 @@ export namespace Prisma {
     seillaengen?: boolean
   }
 
-  export type ClimbingTourKletternSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"baseId" | "schluesselstellenStellen" | "schwierigkeitVerhaeltnis" | "schwierigkeitBeschreibung" | "schwierigkeitMinKlettererfahrung" | "abseilenMoeglich" | "abseilenAnzahl" | "abseilenLaengenM" | "abseilenZumEinstieg" | "abseilenAbseilpiste" | "charakterKletterstil" | "charakterBeschreibung" | "charakterSchoenheit" | "charakterErnsthaftigkeit" | "charakterWandhoehe" | "routenverlaufRoutenfindung" | "routenverlaufBeschreibung" | "routenverlaufRueckzugMoeglich" | "routenverlaufRueckzugBeschreibung" | "routenverlaufEinstiegshoehe" | "seillaengenInfoAnzahlTotal" | "seillaengenVerbindenMoeglich" | "seillaengenVerbindenBeschreibung" | "seillaengen", ExtArgs["result"]["climbingTourKletternSchema"]>
+  export type ClimbingTourKletternSchemaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"baseId" | "schluesselstellenStellen" | "schwierigkeitVerhaeltnis" | "schwierigkeitBeschreibung" | "schwierigkeitMinKlettererfahrung" | "abseilenMoeglich" | "abseilenMaxLaengeM" | "abseilenZumEinstieg" | "abseilenAbseilpiste" | "abseilenBeschreibung" | "charakterKletterstil" | "charakterBeschreibung" | "charakterSchoenheit" | "charakterErnsthaftigkeit" | "charakterWandhoehe" | "routenverlaufRoutenfindung" | "routenverlaufBeschreibung" | "routenverlaufRueckzugMoeglich" | "routenverlaufRueckzugBeschreibung" | "routenverlaufEinstiegshoehe" | "seillaengenInfoAnzahlTotal" | "seillaengenVerbindenMoeglich" | "seillaengenVerbindenBeschreibung" | "seillaengen", ExtArgs["result"]["climbingTourKletternSchema"]>
   export type ClimbingTourKletternSchemaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     base?: boolean | ClimbingTourBaseSchemaDefaultArgs<ExtArgs>
   }
@@ -10949,10 +10953,10 @@ export namespace Prisma {
       schwierigkeitBeschreibung: string | null
       schwierigkeitMinKlettererfahrung: string | null
       abseilenMoeglich: boolean | null
-      abseilenAnzahl: number | null
-      abseilenLaengenM: Prisma.JsonValue
+      abseilenMaxLaengeM: number | null
       abseilenZumEinstieg: boolean | null
       abseilenAbseilpiste: boolean | null
+      abseilenBeschreibung: string | null
       charakterKletterstil: Prisma.JsonValue
       charakterBeschreibung: string | null
       charakterSchoenheit: string | null
@@ -11397,10 +11401,10 @@ export namespace Prisma {
     readonly schwierigkeitBeschreibung: FieldRef<"ClimbingTourKletternSchema", 'String'>
     readonly schwierigkeitMinKlettererfahrung: FieldRef<"ClimbingTourKletternSchema", 'String'>
     readonly abseilenMoeglich: FieldRef<"ClimbingTourKletternSchema", 'Boolean'>
-    readonly abseilenAnzahl: FieldRef<"ClimbingTourKletternSchema", 'Int'>
-    readonly abseilenLaengenM: FieldRef<"ClimbingTourKletternSchema", 'Json'>
+    readonly abseilenMaxLaengeM: FieldRef<"ClimbingTourKletternSchema", 'Int'>
     readonly abseilenZumEinstieg: FieldRef<"ClimbingTourKletternSchema", 'Boolean'>
     readonly abseilenAbseilpiste: FieldRef<"ClimbingTourKletternSchema", 'Boolean'>
+    readonly abseilenBeschreibung: FieldRef<"ClimbingTourKletternSchema", 'String'>
     readonly charakterKletterstil: FieldRef<"ClimbingTourKletternSchema", 'Json'>
     readonly charakterBeschreibung: FieldRef<"ClimbingTourKletternSchema", 'String'>
     readonly charakterSchoenheit: FieldRef<"ClimbingTourKletternSchema", 'String'>
@@ -23797,10 +23801,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung: 'schwierigkeitBeschreibung',
     schwierigkeitMinKlettererfahrung: 'schwierigkeitMinKlettererfahrung',
     abseilenMoeglich: 'abseilenMoeglich',
-    abseilenAnzahl: 'abseilenAnzahl',
-    abseilenLaengenM: 'abseilenLaengenM',
+    abseilenMaxLaengeM: 'abseilenMaxLaengeM',
     abseilenZumEinstieg: 'abseilenZumEinstieg',
     abseilenAbseilpiste: 'abseilenAbseilpiste',
+    abseilenBeschreibung: 'abseilenBeschreibung',
     charakterKletterstil: 'charakterKletterstil',
     charakterBeschreibung: 'charakterBeschreibung',
     charakterSchoenheit: 'charakterSchoenheit',
@@ -24622,10 +24626,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
     schwierigkeitMinKlettererfahrung?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
     abseilenMoeglich?: BoolNullableFilter<"ClimbingTourKletternSchema"> | boolean | null
-    abseilenAnzahl?: IntNullableFilter<"ClimbingTourKletternSchema"> | number | null
-    abseilenLaengenM?: JsonFilter<"ClimbingTourKletternSchema">
+    abseilenMaxLaengeM?: IntNullableFilter<"ClimbingTourKletternSchema"> | number | null
     abseilenZumEinstieg?: BoolNullableFilter<"ClimbingTourKletternSchema"> | boolean | null
     abseilenAbseilpiste?: BoolNullableFilter<"ClimbingTourKletternSchema"> | boolean | null
+    abseilenBeschreibung?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
     charakterKletterstil?: JsonFilter<"ClimbingTourKletternSchema">
     charakterBeschreibung?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
     charakterSchoenheit?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
@@ -24650,10 +24654,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: SortOrderInput | SortOrder
     schwierigkeitMinKlettererfahrung?: SortOrderInput | SortOrder
     abseilenMoeglich?: SortOrderInput | SortOrder
-    abseilenAnzahl?: SortOrderInput | SortOrder
-    abseilenLaengenM?: SortOrder
+    abseilenMaxLaengeM?: SortOrderInput | SortOrder
     abseilenZumEinstieg?: SortOrderInput | SortOrder
     abseilenAbseilpiste?: SortOrderInput | SortOrder
+    abseilenBeschreibung?: SortOrderInput | SortOrder
     charakterKletterstil?: SortOrder
     charakterBeschreibung?: SortOrderInput | SortOrder
     charakterSchoenheit?: SortOrderInput | SortOrder
@@ -24681,10 +24685,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
     schwierigkeitMinKlettererfahrung?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
     abseilenMoeglich?: BoolNullableFilter<"ClimbingTourKletternSchema"> | boolean | null
-    abseilenAnzahl?: IntNullableFilter<"ClimbingTourKletternSchema"> | number | null
-    abseilenLaengenM?: JsonFilter<"ClimbingTourKletternSchema">
+    abseilenMaxLaengeM?: IntNullableFilter<"ClimbingTourKletternSchema"> | number | null
     abseilenZumEinstieg?: BoolNullableFilter<"ClimbingTourKletternSchema"> | boolean | null
     abseilenAbseilpiste?: BoolNullableFilter<"ClimbingTourKletternSchema"> | boolean | null
+    abseilenBeschreibung?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
     charakterKletterstil?: JsonFilter<"ClimbingTourKletternSchema">
     charakterBeschreibung?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
     charakterSchoenheit?: StringNullableFilter<"ClimbingTourKletternSchema"> | string | null
@@ -24709,10 +24713,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: SortOrderInput | SortOrder
     schwierigkeitMinKlettererfahrung?: SortOrderInput | SortOrder
     abseilenMoeglich?: SortOrderInput | SortOrder
-    abseilenAnzahl?: SortOrderInput | SortOrder
-    abseilenLaengenM?: SortOrder
+    abseilenMaxLaengeM?: SortOrderInput | SortOrder
     abseilenZumEinstieg?: SortOrderInput | SortOrder
     abseilenAbseilpiste?: SortOrderInput | SortOrder
+    abseilenBeschreibung?: SortOrderInput | SortOrder
     charakterKletterstil?: SortOrder
     charakterBeschreibung?: SortOrderInput | SortOrder
     charakterSchoenheit?: SortOrderInput | SortOrder
@@ -24744,10 +24748,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: StringNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | string | null
     schwierigkeitMinKlettererfahrung?: StringNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | string | null
     abseilenMoeglich?: BoolNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | boolean | null
-    abseilenAnzahl?: IntNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | number | null
-    abseilenLaengenM?: JsonWithAggregatesFilter<"ClimbingTourKletternSchema">
+    abseilenMaxLaengeM?: IntNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | number | null
     abseilenZumEinstieg?: BoolNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | boolean | null
     abseilenAbseilpiste?: BoolNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | boolean | null
+    abseilenBeschreibung?: StringNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | string | null
     charakterKletterstil?: JsonWithAggregatesFilter<"ClimbingTourKletternSchema">
     charakterBeschreibung?: StringNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | string | null
     charakterSchoenheit?: StringNullableWithAggregatesFilter<"ClimbingTourKletternSchema"> | string | null
@@ -26130,10 +26134,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: string | null
     schwierigkeitMinKlettererfahrung?: string | null
     abseilenMoeglich?: boolean | null
-    abseilenAnzahl?: number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: number | null
     abseilenZumEinstieg?: boolean | null
     abseilenAbseilpiste?: boolean | null
+    abseilenBeschreibung?: string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: string | null
     charakterSchoenheit?: string | null
@@ -26158,10 +26162,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: string | null
     schwierigkeitMinKlettererfahrung?: string | null
     abseilenMoeglich?: boolean | null
-    abseilenAnzahl?: number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: number | null
     abseilenZumEinstieg?: boolean | null
     abseilenAbseilpiste?: boolean | null
+    abseilenBeschreibung?: string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: string | null
     charakterSchoenheit?: string | null
@@ -26184,10 +26188,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     schwierigkeitMinKlettererfahrung?: NullableStringFieldUpdateOperationsInput | string | null
     abseilenMoeglich?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    abseilenAnzahl?: NullableIntFieldUpdateOperationsInput | number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: NullableIntFieldUpdateOperationsInput | number | null
     abseilenZumEinstieg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     abseilenAbseilpiste?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    abseilenBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterSchoenheit?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26212,10 +26216,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     schwierigkeitMinKlettererfahrung?: NullableStringFieldUpdateOperationsInput | string | null
     abseilenMoeglich?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    abseilenAnzahl?: NullableIntFieldUpdateOperationsInput | number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: NullableIntFieldUpdateOperationsInput | number | null
     abseilenZumEinstieg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     abseilenAbseilpiste?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    abseilenBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterSchoenheit?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26239,10 +26243,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: string | null
     schwierigkeitMinKlettererfahrung?: string | null
     abseilenMoeglich?: boolean | null
-    abseilenAnzahl?: number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: number | null
     abseilenZumEinstieg?: boolean | null
     abseilenAbseilpiste?: boolean | null
+    abseilenBeschreibung?: string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: string | null
     charakterSchoenheit?: string | null
@@ -26265,10 +26269,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     schwierigkeitMinKlettererfahrung?: NullableStringFieldUpdateOperationsInput | string | null
     abseilenMoeglich?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    abseilenAnzahl?: NullableIntFieldUpdateOperationsInput | number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: NullableIntFieldUpdateOperationsInput | number | null
     abseilenZumEinstieg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     abseilenAbseilpiste?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    abseilenBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterSchoenheit?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26292,10 +26296,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     schwierigkeitMinKlettererfahrung?: NullableStringFieldUpdateOperationsInput | string | null
     abseilenMoeglich?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    abseilenAnzahl?: NullableIntFieldUpdateOperationsInput | number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: NullableIntFieldUpdateOperationsInput | number | null
     abseilenZumEinstieg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     abseilenAbseilpiste?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    abseilenBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterSchoenheit?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27845,10 +27849,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: SortOrder
     schwierigkeitMinKlettererfahrung?: SortOrder
     abseilenMoeglich?: SortOrder
-    abseilenAnzahl?: SortOrder
-    abseilenLaengenM?: SortOrder
+    abseilenMaxLaengeM?: SortOrder
     abseilenZumEinstieg?: SortOrder
     abseilenAbseilpiste?: SortOrder
+    abseilenBeschreibung?: SortOrder
     charakterKletterstil?: SortOrder
     charakterBeschreibung?: SortOrder
     charakterSchoenheit?: SortOrder
@@ -27867,7 +27871,7 @@ export namespace Prisma {
 
   export type ClimbingTourKletternSchemaAvgOrderByAggregateInput = {
     baseId?: SortOrder
-    abseilenAnzahl?: SortOrder
+    abseilenMaxLaengeM?: SortOrder
     charakterWandhoehe?: SortOrder
     routenverlaufEinstiegshoehe?: SortOrder
     seillaengenInfoAnzahlTotal?: SortOrder
@@ -27879,9 +27883,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: SortOrder
     schwierigkeitMinKlettererfahrung?: SortOrder
     abseilenMoeglich?: SortOrder
-    abseilenAnzahl?: SortOrder
+    abseilenMaxLaengeM?: SortOrder
     abseilenZumEinstieg?: SortOrder
     abseilenAbseilpiste?: SortOrder
+    abseilenBeschreibung?: SortOrder
     charakterBeschreibung?: SortOrder
     charakterSchoenheit?: SortOrder
     charakterErnsthaftigkeit?: SortOrder
@@ -27902,9 +27907,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: SortOrder
     schwierigkeitMinKlettererfahrung?: SortOrder
     abseilenMoeglich?: SortOrder
-    abseilenAnzahl?: SortOrder
+    abseilenMaxLaengeM?: SortOrder
     abseilenZumEinstieg?: SortOrder
     abseilenAbseilpiste?: SortOrder
+    abseilenBeschreibung?: SortOrder
     charakterBeschreibung?: SortOrder
     charakterSchoenheit?: SortOrder
     charakterErnsthaftigkeit?: SortOrder
@@ -27921,7 +27927,7 @@ export namespace Prisma {
 
   export type ClimbingTourKletternSchemaSumOrderByAggregateInput = {
     baseId?: SortOrder
-    abseilenAnzahl?: SortOrder
+    abseilenMaxLaengeM?: SortOrder
     charakterWandhoehe?: SortOrder
     routenverlaufEinstiegshoehe?: SortOrder
     seillaengenInfoAnzahlTotal?: SortOrder
@@ -30244,10 +30250,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: string | null
     schwierigkeitMinKlettererfahrung?: string | null
     abseilenMoeglich?: boolean | null
-    abseilenAnzahl?: number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: number | null
     abseilenZumEinstieg?: boolean | null
     abseilenAbseilpiste?: boolean | null
+    abseilenBeschreibung?: string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: string | null
     charakterSchoenheit?: string | null
@@ -30270,10 +30276,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: string | null
     schwierigkeitMinKlettererfahrung?: string | null
     abseilenMoeglich?: boolean | null
-    abseilenAnzahl?: number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: number | null
     abseilenZumEinstieg?: boolean | null
     abseilenAbseilpiste?: boolean | null
+    abseilenBeschreibung?: string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: string | null
     charakterSchoenheit?: string | null
@@ -30610,10 +30616,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     schwierigkeitMinKlettererfahrung?: NullableStringFieldUpdateOperationsInput | string | null
     abseilenMoeglich?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    abseilenAnzahl?: NullableIntFieldUpdateOperationsInput | number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: NullableIntFieldUpdateOperationsInput | number | null
     abseilenZumEinstieg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     abseilenAbseilpiste?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    abseilenBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterSchoenheit?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30636,10 +30642,10 @@ export namespace Prisma {
     schwierigkeitBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     schwierigkeitMinKlettererfahrung?: NullableStringFieldUpdateOperationsInput | string | null
     abseilenMoeglich?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    abseilenAnzahl?: NullableIntFieldUpdateOperationsInput | number | null
-    abseilenLaengenM?: JsonNullValueInput | InputJsonValue
+    abseilenMaxLaengeM?: NullableIntFieldUpdateOperationsInput | number | null
     abseilenZumEinstieg?: NullableBoolFieldUpdateOperationsInput | boolean | null
     abseilenAbseilpiste?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    abseilenBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterKletterstil?: JsonNullValueInput | InputJsonValue
     charakterBeschreibung?: NullableStringFieldUpdateOperationsInput | string | null
     charakterSchoenheit?: NullableStringFieldUpdateOperationsInput | string | null

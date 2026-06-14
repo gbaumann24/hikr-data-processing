@@ -11,9 +11,10 @@ export const climbingExtractionAgent = new Agent({
 
 Perspective:
 - Separate beta from anecdote. Personal narrative ("wunderschoener Tag", "Gipfelglück") is not evidence; gear placed, times needed, hazards encountered, and conditions observed are.
-- Capture what a repeating party needs to know: protection quality, retreat options, route-finding traps, objective hazards, and where the report contradicts the guidebook.
 - Treat hazard and difficulty statements conservatively: extract them as reported, without softening or amplifying. A guide records "Schlaghaken von anno dazumal" as schlecht, not as charming patina.
-- Distinguish the report author's experience from general route facts where the text does. Conditions ("nass nach Gewitter") are observations of that day; structure ("Stand mit zwei Bolts") is route fact. Extract both, but keep day-specific context in the beschreibung fields.
+- IMPORTANT: Write ALL free-text values as present-tense beta for a future repeating party — never as past-tense narrative.
+  Not: "Wir fanden die Route schön." Yes: "Die Route bietet schöne Plattenkletterei im oberen Teil."
+  Not: "Der Zustieg dauerte 45 Minuten." Yes: "Zustieg zum Einstieg dauert ca. 45 Minuten."
 
 Scope:
 - The climbing preprocessor has already decided whether the report is ready and which climbing sub-activity it belongs to.

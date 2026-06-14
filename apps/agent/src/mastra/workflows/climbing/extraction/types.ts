@@ -35,9 +35,6 @@ const optionalObject = <Shape extends ZodRawShape>(shape: Shape, description: st
 
 const stringArray = (description: string) => z.array(z.string()).optional().describe(description);
 
-const integerArray = (description: string) =>
-  z.array(z.number().int()).optional().describe(description);
-
 // ─── Reusable item schemas ────────────────────────────────────────────────────
 
 const friendProtectionItemSchema = z
@@ -46,7 +43,7 @@ const friendProtectionItemSchema = z
       .string()
       .nullable()
       .optional()
-      .describe('Friend/Cam size, e.g. "0.75" or "0.3-2". "Ein set Friends" or "ein Paar Friends" is also legit. Omit when only a count is mentioned.'),
+      .describe('Friend/Cam size, e.g. "0.75" or "0.3-2". Omit when only a count is mentioned.'),
     anzahl: z
       .number()
       .int()
@@ -64,7 +61,7 @@ const nutProtectionItemSchema = z
       .string()
       .nullable()
       .optional()
-      .describe('Nut/Klemmkeil size or set description. "Ein set Klemmkeile" or "ein Paar Klemmkeile" is also legit. Omit when only a count is mentioned.'),
+      .describe('Nut/Klemmkeil size or set description. Omit when only a count is mentioned.'),
     anzahl: z
       .number()
       .int()
@@ -78,32 +75,6 @@ const nutProtectionItemSchema = z
 
 const slingSchema = z
   .object({
-    typ: z
-      .enum([
-        'bandschlinge',
-        'dyneemaschlinge',
-        'kevlarschlinge',
-        'reepschnur',
-        'prusikschlinge',
-        'sanduhrschlinge',
-        'zackenschlinge',
-        'expressschlinge',
-        'anders',
-      ])
-      .nullable()
-      .optional()
-      .describe(
-        'Sling type. Use "anders" for types not in the list and fill the `anders` field. ' +
-          'bandschlinge: flat nylon/polyamid sling. ' +
-          'dyneemaschlinge: lightweight polyethylene; alias: Dyneema. ' +
-          'kevlarschlinge: aramid; alias: Kevlar, aramid. ' +
-          'reepschnur: thin cord 4–8 mm; alias: Kordel, Repschnur. ' +
-          'prusikschlinge: friction-hitch loop; alias: Prusik, Kurzprusik. ' +
-          'sanduhrschlinge: threaded through a rock thread; alias: Sanduhr. ' +
-          'zackenschlinge: slung over a rock spike; alias: Koepflschlinge, Koepferlschlinge. ' +
-          'expressschlinge: quickdraw sling only (no karabiner); alias: Exe, Express.',
-      ),
-    anders: nullableString('Free-text sling type when `typ` is "anders".'),
     laenge_cm: z
       .number()
       .int()
@@ -115,9 +86,7 @@ const slingSchema = z
       .int()
       .nullable()
       .optional()
-      .describe(
-        'Number of slings. Omit when no count is mentioned, even if type or length is present.',
-      ),
+      .describe('Number of slings. Omit when no count is mentioned.'),
   })
   .strict();
 
@@ -141,29 +110,13 @@ const hazardSchema = z
         'geroell',
         'anders',
       ])
-      .describe(
-        'Hazard type. Use "anders" and fill the `anders` field for hazards not in the list. ' +
-          'steinschlag: rockfall, also from other parties. ' +
-          'eisschlag: falling ice. ' +
-          'bruechiger_fels: loose/crumbly rock; alias: brüchiger Fels, loser Fels. ' +
-          'naesse: wet rock or seeping water. ' +
-          'absturz: exposed terrain with fall potential; alias: Absturzgelände, ausgesetzt. ' +
-          'verhauer: risk of going off-route; alias: Orientierungsproblem. ' +
-          'wechten: cornices. ' +
-          'spalten: crevasses; alias: Gletscherspalte, Bergschrund, Randkluft. ' +
-          'gras: grassy sections on the route. ' +
-          'lawine: avalanche. ' +
-          'altschnee: old snow / névé; alias: Firn, Schneefeld, Blankeis. ' +
-          'kaelte: cold, hypothermia risk. ' +
-          'schrofen: mixed rock-and-grass scrambling terrain. ' +
-          'geroell: scree, loose rock debris; alias: Geröll, Schutt, Blockgelände.',
-      ),
+      .describe('Hazard type. Use "anders" and fill `anders` for types not in the list.'),
     anders: nullableString('Free-text hazard type when `typ` is "anders", e.g. "Wildbach".'),
     beschreibung: z
       .string()
       .nullable()
       .describe(
-        'Location and context as a self-contained sentence. Resolve deictic references by naming the location explicitly, e.g. "Steinschlaggefahr im oberen Wandteil durch andere Seilschaften."',
+        'Location and severity as a self-contained present-tense sentence, e.g. "Steinschlaggefahr im oberen Wandteil durch andere Seilschaften."',
       ),
   })
   .strict();
@@ -213,29 +166,7 @@ const ausruestungZusaetzlichItemSchema = z
         'anders',
       ])
       .describe(
-        'Equipment type not captured by the dedicated fields (seil, mobile_absicherung, schlingen, expresskarabiner). ' +
-          'Use "anders" for items not in the list and fill the `anders` field. Do not capture clothing, food, or drink. ' +
-          'helm: alias: Kletterhelm, Hartschalenhelm. ' +
-          'klettergurt: alias: Gurt, Hüftgurt, Anseilgurt. ' +
-          'sicherungsgeraet: tube/tuber; alias: Tube, ATC, Reverso (dynamic mode). ' +
-          'abseilgeraet: rappel-specific; alias: Abseilachter, Achter. ' +
-          'hms: HMS karabiner / Halbmastwurf; alias: HMS-Karabiner, Safebiner. ' +
-          'karabiner: non-locking snapgate; alias: Schnappkarabiner, Einzelkarabiner. ' +
-          'schraubkarabiner: locking; alias: Verschlusskarabiner, Twistlock, Balllock. ' +
-          'steigklemme: ascender; alias: Jümar, Jumar, Tibloc, Mini-Traxion. ' +
-          'klemmkeilentferner: alias: Nutkey, Nut-Key, Fummelhaken. ' +
-          'steigeisen: crampons; alias: Grödel, Spikes (for light variants). ' +
-          'pickel: ice axe; alias: Eispickel, Kombipickel. ' +
-          'stirnlampe: headlamp; alias: Kopflampe, Helmlampe. ' +
-          'biwaksack: bivy sack; alias: Bivy, Notfallsack. ' +
-          'chalkbag: alias: Magnesiabeutel, Chalkbeutel. ' +
-          'topo: route description; alias: Kletterführer, Führer, Wandbuch. ' +
-          'erste_hilfe_set: alias: Verbandszeug, Notfallapotheke. ' +
-          'rettungsdecke: emergency blanket; alias: Alurettungsdecke, Biwakdecke. ' +
-          'prusikschlinge: friction-hitch cord; alias: Prusik, Kurzprusik. ' +
-          'funkgeraet: radio; alias: Funk, Walkie-Talkie. ' +
-          'mobiltelefon: alias: Handy, Smartphone. ' +
-          'wanderstoecke: trekking poles; alias: Stöcke, Teleskopstöcke.',
+        'Equipment type not covered by seil, mobile_absicherung, schlingen, or expresskarabiner. Use "anders" and fill `anders` for items not in the list. Do not capture clothing, food, or drink.',
       ),
     anders: nullableString(
       'Free-text equipment name when `typ` is "anders", e.g. "GPS-Geraet", "Seilsack", "Haulbag".',
@@ -262,22 +193,7 @@ const verkehrsmittelItemSchema = z
         'rufbus',
         'anders',
       ])
-      .describe(
-        'Public transport mode. Use "anders" for modes not in the list and fill the `anders` field. ' +
-          'zug: alias: Bahn, SBB, Eisenbahn, Regionalzug, S-Bahn. ' +
-          'bus: alias: Autobus, Linienbus, Ortsbus. ' +
-          'postauto: alias: Postbus. ' +
-          'tram: alias: Strassenbahn, Trolleybus. ' +
-          'luftseilbahn: generic cable car (use when subtype is unclear); alias: Seilbahn. ' +
-          'gondelbahn: gondola / circulating cabin; alias: Gondel, Umlaufbahn, Kabinenbahn. ' +
-          'pendelbahn: aerial tramway / back-and-forth; alias: Pendel, Seilschwebebahn. ' +
-          'sesselbahn: chairlift; alias: Sessellift, Sessel. ' +
-          'standseilbahn: funicular / rack-and-track; alias: Funicular, Drahtseilbahn. ' +
-          'zahnradbahn: cog railway; alias: Zahnrad. ' +
-          'schiff: boat / ferry; alias: Boot, Fähre, Kursschiff. ' +
-          'taxi: alias: Bergtaxi, Sammeltaxi, Alpentaxi. ' +
-          'rufbus: on-demand bus; alias: Anrufbus, Taxibus.',
-      ),
+      .describe('Public transport mode. Use "anders" and fill `anders` for modes not in the list.'),
     anders: nullableString('Free-text transport mode when `typ` is "anders".'),
   })
   .strict();
@@ -296,7 +212,7 @@ export const climbingExtractionAgentResultSchema = z
           {
             art: nullableEnum(
               ['einfachseil', 'halbseil', 'zwillingsseil', 'statikseil', 'anders'],
-              '`einfachseil`: single strand (norm mark ①), often written as "50er Seil" or simply "Seil" without qualifier — then `null` unless clearly named. `halbseil`: two strands 8–9 mm (norm mark ½), strands clipped individually; signal words: "Halbseile", "Doppelseil 2x50m". `zwillingsseil`: thin double rope ~7.5–8 mm (norm mark ∞), always used as a paired strand; signal word: "Zwillingsseile". `statikseil`: non-dynamic fixed line. Use "anders" and fill the `anders` field for rope types not in the list.',
+              'Rope type. Use "anders" and fill `anders` for types not in the list.',
             ),
             anders: nullableString('Free-text rope type when `art` is "anders".'),
             laenge_m: nullableInteger(
@@ -330,10 +246,10 @@ export const climbingExtractionAgentResultSchema = z
                   '"nicht_verwendet": authors explicitly did not place any mobile gear.',
               ),
             begruendung: nullableString(
-              'Why this level of notwendigkeit was chosen: route condition, bolt spacing, author decision, etc.',
+              'Why this level of notwendigkeit applies: route condition, bolt spacing, author decision, etc. Present tense.',
             ),
             moeglichkeiten: nullableString(
-              'Free text: how well, how often, and where mobile protection can be placed. Examples: "gute Rissstrukturen fuer Friends", "kaum Placements", "Sanduhren vorhanden". Briefly preserve the original wording.',
+              'How well and where mobile protection can be placed, e.g. "Gute Rissstrukturen für Friends in der Verschneidung."',
             ),
             friends: z
               .array(friendProtectionItemSchema)
@@ -545,17 +461,11 @@ export const climbingExtractionAgentResultSchema = z
                 'diorit',
                 'anders',
               ],
-              'Rock type of the route, if mentioned. Do not guess from the region. Use "anders" and fill the `anders` field for rock types not in the list. ' +
-                'granit: alias: Urgestein (crystalline context), Aaregranit. ' +
-                'gneis: alias: Urgestein (foliated context), Arollagneis, Orthogneis. ' +
-                'kalk: alias: Malmkalk, Oberjurakalk, Wettersteinkalk, Helvetischer Kalk. ' +
-                'schiefer: alias: Grünschiefer, Glimmerschiefer, Bündnerschiefer. ' +
-                'nagelfluh: alias: Nagelflue. ' +
-                'serpentinit: alias: Serpentin.',
+              'Rock type of the route, if mentioned. Do not guess from the region. Use "anders" and fill `anders` for rock types not in the list.',
             ),
             anders: nullableString('Free-text rock type when `felsart` is "anders".'),
             beschreibung: nullableString(
-              'Free-text summary of the route or wall character: general impression, notable features, atmosphere.',
+              'Free-text summary of the route or wall character: general impression, notable features, atmosphere. Present tense.',
             ),
           },
           'Route or wall character explicitly described in the report.',
@@ -579,7 +489,7 @@ export const climbingExtractionAgentResultSchema = z
               .array(cruxSchema)
               .optional()
               .describe(
-                'Position (`wo`, e.g. "3. Seillaenge", "kurz vor dem Ausstieg") and description of each Schluesselstelle (climbing style, grade, how it feels).',
+                'Position (`wo`, e.g. "3. Seillaenge", "kurz vor dem Ausstieg") and description of each Schluesselstelle (climbing style, grade, how it feels). Present tense.',
               ),
           },
           'Crux information explicitly mentioned in the report.',
@@ -592,10 +502,10 @@ export const climbingExtractionAgentResultSchema = z
               'Authors\' subjective impression vs. the official grade (UIAA or French from the Topo). "gut machbar fuer den Grad", "weich bewertet" → leichter; "Bewertung passt" → wie_bewertet; "hart fuer 5c", "anspruchsvoller als angegeben" → schwerer.',
             ),
             beschreibung: nullableString(
-              'Justification of the difficulty impression: why it felt harder or easier (e.g. abgespeckt, kraftraubend, technisch, Mut noetig).',
+              'Justification: why it feels harder or easier (e.g. abgespeckt, kraftraubend, technisch, Mut noetig). Present tense.',
             ),
             min_klettererfahrung: nullableString(
-              'Recommended minimum climbing experience as free text. Appears often at the start of reports, e.g. "sicheres Klettern im 5. Grad im Vorstieg vorausgesetzt". Valuable for departure-recommendation logic.',
+              'Recommended minimum climbing experience as free text, e.g. "Sicheres Klettern im 5. Grad im Vorstieg vorausgesetzt". Valuable for departure-recommendation logic.',
             ),
           },
           'Difficulty impression compared with the official or expected grade.',
@@ -606,17 +516,17 @@ export const climbingExtractionAgentResultSchema = z
             moeglich: nullableBoolean(
               'Whether Abseilen is mentioned as a descent or retreat option. Signal words: "abseilen ueber die Route", "Abseilstellen eingerichtet".',
             ),
-            anzahl: nullableInteger(
-              'Number of rappels. "4x abseilen", "in 5 Abseilern" → the corresponding number.',
-            ),
-            laengen_m: integerArray(
-              'Individual rappel lengths in meters ("abseilen 25m, dann 50m" → `[25, 50]`). Important for determining whether an Einfachseil suffices.',
+            abseil_max_laenge_m: nullableInteger(
+              'Maximum single rappel length in meters. Determines whether a single rope suffices. Signal words: "laengste Abseile 50m", "bis zu 45m abseilen".',
             ),
             zum_einstieg: nullableBoolean(
               'Whether rappelling leads back to the Einstieg. Signal words: "abseilen zum Einstieg", "ueber die Route zurueck zum Wandfuss".',
             ),
             abseilpiste: nullableBoolean(
               'Whether a dedicated Abseilpiste (fixed-anchor rappel line, often separate from the route) exists. Signal words: "Abseilpiste", "eingerichtete Abseilstrecke".',
+            ),
+            beschreibung: nullableString(
+              'How to descend via rappel: which anchors to use, where to find them, any tricky sections. Present tense.',
             ),
           },
           'Rappelling information for descent or retreat.',
@@ -670,7 +580,7 @@ export const climbingExtractionAgentResultSchema = z
               ),
             anders: stringArray('Free-text climbing styles when "anders" appears in kletterstil.'),
             beschreibung: nullableString(
-              'Free-text summary of the overall climbing character: style, quality, atmosphere, what makes this route memorable.',
+              'Overall climbing character: style, quality, atmosphere, what makes this route memorable. Present tense.',
             ),
             schoenheit: nullableEnum(
               ['uninteressant', 'nett', 'schoen', 'sehr_schoen', 'traumhaft'],
@@ -693,18 +603,17 @@ export const climbingExtractionAgentResultSchema = z
         routenverlauf: optionalObject(
           {
             routenfindung: nullableEnum(
-              
               ['einfach', 'mittel', 'schwierig'],
               'How difficult it is to identify the line of the route. "logische Linie", "Haken immer sichtbar" → einfach; "etwas Spuersinn noetig" → mittel; "Verhauer-Gefahr", "Topo zwingend", "lange gesucht" → schwierig.',
             ),
             beschreibung: nullableString(
-              'Free text about the line and orientation: prominent features, where Verhauer risk is high, what to orient by.',
+              'The line and orientation: prominent features, where Verhauer risk is high, what to orient by. Present tense.',
             ),
             rueckzug_moeglich: nullableBoolean(
               'Whether Rueckzug or escape options are mentioned, e.g. rappelling from every Stand, traversing into easier terrain, exiting onto a Band.',
             ),
             rueckzug_beschreibung: nullableString(
-              'Where and how a Rueckzug is possible, as a self-contained sentence.',
+              'Where and how a Rueckzug is possible, as a self-contained present-tense sentence.',
             ),
             einstiegshoehe_m: nullableInteger(
               'Elevation of the Einstieg (start of the climbing route) in meters, as stated in the report or derived from waypoint names.',
@@ -733,7 +642,7 @@ export const climbingExtractionAgentResultSchema = z
               .array(pitchSchema)
               .optional()
               .describe(
-                'Structured description of individual Seillaengen if the report covers them one by one. `nummer`: 1 = first pitch; `schwierigkeit`: grade as given in the report (e.g. "5c", "VI-", "4a"); `anzahl_bohrhaken`: fixed Bohrhaken count; `laenge_m`: length in meters; `beschreibung`: character, crux, remarks.',
+                'Structured description of individual Seillaengen if the report covers them one by one. `nummer`: 1 = first pitch; `schwierigkeit`: grade as given in the report (e.g. "5c", "VI-", "4a"); `anzahl_bohrhaken`: fixed Bohrhaken count; `laenge_m`: length in meters; `beschreibung`: character, crux, remarks. Present tense.',
               ),
           },
           'Pitch count, linkable pitches, and individual pitch details.',
@@ -796,7 +705,7 @@ export const climbingExtractionAgentResultSchema = z
               'How easy it is to find the Einstieg. "nicht zu verfehlen", "beschriftet", "Steinmann markiert" → einfach; "etwas suchen" → mittel; "lange gesucht", "ohne GPS kaum zu finden" → schwer.',
             ),
             beschreibung: nullableString(
-              'Where the Einstieg is and how to recognize it: directions, markings (Steinmaenner, route name on rock, first Bohrhaken), prominent features.',
+              'Where the Einstieg is and how to recognize it: directions, markings (Steinmaenner, route name on rock, first Bohrhaken), prominent features. Present tense.',
             ),
             schwierigkeit: nullableString(
               'Technical or alpine difficulty of the Zustieg as free text: hiking scale (e.g. "T3"), scrambling sections, snowfields, scree, fixed cables, exposed passages.',
@@ -865,8 +774,7 @@ export const climbingExtractionAgentResultSchema = z
               )
               .optional()
               .describe(
-                'Seasons explicitly described as suitable for the route. Signal words: "ideal im Herbst", "Sommertour", "ganzjährig begehbar". ' +
-                  'fruehling: March–May. fruehsommer: June. sommer: July–August. hochsommer: peak heat period. spaetsommer: September. herbst: October–November. winter: December–February.',
+                'Seasons explicitly described as suitable for the route. Signal words: "ideal im Herbst", "Sommertour", "ganzjährig begehbar".',
               ),
           },
           'Seasonality information explicitly mentioned in the report.',
@@ -888,7 +796,7 @@ export const climbingExtractionAgentResultSchema = z
               'Whether old snow or névé was present on the approach on tour day. Signal words: "Altschnee auf dem Zustieg", "Firnfeld noch vorhanden".',
             ),
             beschreibung: nullableString(
-              'Free-text description of tour-day conditions: temperature, weather, overall state of the mountain.',
+              'Tour-day conditions: temperature, weather, overall state of the mountain.',
             ),
           },
           'Tour-day conditions — ephemeral but useful for interpreting other fields and for ML training on seasonal patterns.',

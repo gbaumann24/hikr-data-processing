@@ -90,8 +90,7 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
       },
       abseilen: {
         moeglich: null,
-        anzahl: null,
-        laengen_m: [],
+        abseil_max_laenge_m: null,
         zum_einstieg: null,
         abseilpiste: null,
       },
@@ -216,7 +215,7 @@ describe('climbing extraction', () => {
           friends: [{ groesse: '0.75' }, { anzahl: 3 }],
           keile: [{ groesse: 'satz' }, { anzahl: 5 }],
         },
-        schlingen: [{ laenge_cm: 120 }, { typ: 'reepschnur' }, { anzahl: 2 }],
+        schlingen: [{ laenge_cm: 120 }, { anzahl: 2 }],
       },
     };
 
@@ -235,7 +234,7 @@ describe('climbing extraction', () => {
           friends: [{ groesse: '0.3-2', anzahl: null }],
           keile: [{ groesse: 'satz', anzahl: null }],
         },
-        schlingen: [{ typ: 'bandschlinge', laenge_cm: 120, anzahl: 2 }],
+        schlingen: [{ laenge_cm: 120, anzahl: 2 }],
         expresskarabiner: { anzahl: 10 },
         zusaetzlich: [{ typ: 'helm' }],
       },
@@ -273,8 +272,7 @@ describe('climbing extraction', () => {
         },
         abseilen: {
           moeglich: true,
-          anzahl: 4,
-          laengen_m: [25, 50],
+          abseil_max_laenge_m: 50,
           zum_einstieg: true,
           abseilpiste: false,
         },

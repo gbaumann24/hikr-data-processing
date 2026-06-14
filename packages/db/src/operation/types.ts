@@ -86,7 +86,7 @@ type ClimbingTourDetailsFields = {
       friends: Array<{ groesse: string | null; anzahl: number | null }>;
       keile: Array<{ groesse: string | null; anzahl: number | null }>;
     };
-    schlingen: Array<NamedExtractionItem & { laenge_cm: number | null; anzahl: number | null }>;
+    schlingen: Array<{ laenge_cm: number | null; anzahl: number | null }>;
     expresskarabiner: { anzahl: number | null };
     zusaetzlich: Array<string | NamedExtractionItem>;
   };
@@ -139,10 +139,10 @@ type ClimbingTourDetailsFields = {
     };
     abseilen: {
       moeglich: boolean | null;
-      anzahl: number | null;
-      laengen_m: number[];
+      abseil_max_laenge_m: number | null;
       zum_einstieg: boolean | null;
       abseilpiste: boolean | null;
+      beschreibung: string | null;
     };
     charakter: {
       kletterstil: string[];
