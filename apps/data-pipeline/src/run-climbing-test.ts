@@ -3,6 +3,11 @@ import { join } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { PrismaClient, purgePipelineOutput } from '@hikr/db';
 import { loadRootEnv } from '@hikr/utils';
+import {
+  runClimbingTourAggregationService,
+  type ClimbingTourAggregationProgressEvent,
+} from './climbing-aggregation';
+import { createMastraClimbingTourAggregationSummarizer } from './climbing-aggregation/agent-caller';
 import { createPostgresDatabase } from './database/postgres';
 import { seedHikrReportsFromSqlite } from './database/sqlite-source-seed';
 import type { ClimbingPipelineProgressEvent } from './utils/workflow-runner';
@@ -117,7 +122,8 @@ function printUsage(): void {
   bun src/run-climbing-test.ts --special-case
 
 Always purges the local Postgres test DB, seeds source posts from SQLite,
-then runs the climbing workflow against the seeded rows.`);
+then runs the climbing workflow against the seeded rows. With --special-case,
+it also runs the climbing tour aggregation job afterward.`);
 }
 
 function logProgress(event: ClimbingPipelineProgressEvent): void {
@@ -163,6 +169,24 @@ function logProgress(event: ClimbingPipelineProgressEvent): void {
   console.log(
     `${formatProgress(event.index, event.total)} error report ${event.reportId.toString()} after ${formatDuration(event.elapsedMs)}: ${formatError(event.error)}`,
   );
+}
+
+function logAggregationProgress(event: ClimbingTourAggregationProgressEvent): void {
+  if (event.type === 'route-aggregated') {
+    console.log(
+      `Aggregated route ${event.routeId.toString()} from ${event.sourceReportCount} report(s); agent=${event.agentStatus}`,
+    );
+    return;
+  }
+
+  if (event.type === 'route-skipped') {
+    console.log(
+      `Skipped aggregation for route ${event.routeId.toString()} from ${event.sourceReportCount} report(s); reason=${event.reason}`,
+    );
+    return;
+  }
+
+  console.log(`Deleted ${event.count} stale aggregate row(s)`);
 }
 
 function formatDatabaseUrl(value: string | undefined): string {
@@ -218,6 +242,7 @@ type TestDatabasePurgeResult = {
 type TestDatabaseCounts = TestDatabasePurgeResult & {
   climbingGardenRows: number;
   climbingTourRows: number;
+  climbingTourAggregateRows: number;
 };
 
 async function purgeTestDatabase(prisma: PrismaClient): Promise<TestDatabasePurgeResult> {
@@ -252,6 +277,7 @@ async function countTestDatabaseRows(prisma: PrismaClient): Promise<TestDatabase
     scraperProgressRows,
     climbingTourRows,
     climbingGardenRows,
+    climbingTourAggregateRows,
   ] = await prisma.$transaction([
     prisma.hikrOrgPostSchema.count(),
     prisma.reportBaseSchema.count(),
@@ -261,6 +287,7 @@ async function countTestDatabaseRows(prisma: PrismaClient): Promise<TestDatabase
     prisma.hikrScraperProgressSchema.count(),
     prisma.climbingTourBaseSchema.count(),
     prisma.climbingGardenBaseSchema.count(),
+    prisma.climbingTourAggregateSchema.count(),
   ]);
 
   return {
@@ -272,6 +299,7 @@ async function countTestDatabaseRows(prisma: PrismaClient): Promise<TestDatabase
     scraperProgressRows,
     climbingTourRows,
     climbingGardenRows,
+    climbingTourAggregateRows,
   };
 }
 
@@ -380,9 +408,26 @@ async function main(): Promise<void> {
 
     console.log(`\nDone. Processed ${result.total} posts`);
     console.log('Status counts:', result.statusCounts);
+
+    if (args.useSpecialCaseFixture) {
+      console.log('\nRunning climbing tour aggregation job for special-case data...');
+      const { mastra } = await import('agent/mastra');
+      const aggregateResult = await runClimbingTourAggregationService({
+        prisma,
+        summarize: createMastraClimbingTourAggregationSummarizer(
+          mastra.getAgent('climbing-tour-aggregation-agent'),
+        ),
+        onProgress: logAggregationProgress,
+      });
+
+      console.log(
+        `Aggregation done. Routes seen: ${aggregateResult.totalRoutes}; aggregated: ${aggregateResult.aggregatedRoutes}; skipped: ${aggregateResult.skippedRoutes}; stale deleted: ${aggregateResult.staleDeleted}.`,
+      );
+    }
+
     const counts = await countTestDatabaseRows(prisma);
     console.log(
-      `Persisted rows: ${counts.sourcePostRows} source posts, ${counts.reportBaseRows} report_base_schema rows, ${counts.routeRows} routes, ${counts.climbingTourRows} climbing tours, ${counts.climbingGardenRows} climbing gardens.`,
+      `Persisted rows: ${counts.sourcePostRows} source posts, ${counts.reportBaseRows} report_base_schema rows, ${counts.routeRows} routes, ${counts.climbingTourRows} climbing tours, ${counts.climbingGardenRows} climbing gardens, ${counts.climbingTourAggregateRows} climbing tour aggregates.`,
     );
     assertRunPersistedExpectedRows({
       counts,
