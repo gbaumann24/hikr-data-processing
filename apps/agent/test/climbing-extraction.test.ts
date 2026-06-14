@@ -248,6 +248,45 @@ describe('climbing extraction', () => {
     expect(climbingExtractionAgentResultSchema.safeParse(output).success).toBe(true);
   });
 
+  test('documents refined extraction semantics in schema and agent instructions', async () => {
+    const schemaSource = await Bun.file(
+      new URL('../src/mastra/workflows/climbing/extraction/types.ts', import.meta.url),
+    ).text();
+    const agentSource = await Bun.file(
+      new URL('../src/mastra/agents/climbing-extraction-agent.ts', import.meta.url),
+    ).text();
+
+    expect(schemaSource).toContain('Actual point where the approach starts on foot');
+    expect(schemaSource).toContain('Car parking information only');
+    expect(schemaSource).toContain('fixed/equipped rappel line');
+    expect(schemaSource).toContain('directly reaches the route Einstieg');
+    expect(schemaSource).toContain('abandon the climb during the actual climbing route');
+    expect(schemaSource).toContain('store `nummer: 5`, not `1`');
+    expect(schemaSource).toContain('Tourenschuhe');
+    expect(agentSource).toContain('Normalize pitch climbing grades where possible');
+  });
+
+  test('accepts sparse explicit pitch numbering', () => {
+    const output: ClimbingExtractionAgentResult = {
+      schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+      klettern: {
+        seillaengen_info: {
+          seillaengen: [
+            {
+              nummer: 5,
+              schwierigkeit: '6a',
+              anzahl_bohrhaken: null,
+              laenge_m: null,
+              beschreibung: 'Die dokumentierte 5. SL fuehrt ueber eine kurze Platte.',
+            },
+          ],
+        },
+      },
+    };
+
+    expect(climbingExtractionAgentResultSchema.safeParse(output).success).toBe(true);
+  });
+
   test('accepts the prompt-design extraction field set', () => {
     const output: ClimbingExtractionAgentResult = {
       schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,

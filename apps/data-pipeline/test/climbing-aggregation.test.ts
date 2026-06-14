@@ -144,8 +144,10 @@ describe('climbing tour aggregation', () => {
       observed_count: 2,
     });
     expect(typed.ausruestung.mobile_absicherung.notwendigkeit).toEqual({
+      primary: 'empfohlen',
       values: ['empfohlen', 'verwendet'],
       counts: { empfohlen: 2, verwendet: 1 },
+      weighted_counts: { empfohlen: 7, verwendet: 5 },
       observed_count: 2,
     });
     expect(typed.ausruestung.seil.laenge_m).toEqual({
@@ -207,6 +209,107 @@ describe('climbing tour aggregation', () => {
     });
     expect(agentInput.text.zusammenfassung).toHaveLength(2);
     expect(typed.zusammenfassung).toEqual({ observed_count: 2 });
+  });
+
+  test('applies refined deterministic aggregation rules', () => {
+    const reports = [
+      report({
+        reportId: 1n,
+        qualityScore: 4,
+        details: {
+          ausruestung: {
+            mobile_absicherung: {
+              notwendigkeit: ['nicht_notwendig'],
+              friends: [{ groesse: '0,75' }],
+              keile: [{ groesse: '0,5' }],
+            },
+          },
+          klettern: {
+            routenverlauf: { routenfindung: 'mittel' },
+            seillaengen_info: {
+              seillaengen: [{ nummer: 5, schwierigkeit: 'VI+' }],
+            },
+          },
+        },
+      }),
+      report({
+        reportId: 2n,
+        qualityScore: 4,
+        details: {
+          ausruestung: {
+            mobile_absicherung: {
+              notwendigkeit: ['empfohlen'],
+              friends: [{ groesse: '0.75' }],
+              keile: [{ groesse: '0.5' }],
+            },
+          },
+          klettern: {
+            routenverlauf: { routenfindung: 'einfach' },
+            seillaengen_info: {
+              seillaengen: [{ nummer: 5, schwierigkeit: '6a' }],
+            },
+          },
+        },
+      }),
+      report({
+        reportId: 3n,
+        qualityScore: 4,
+        details: {
+          ausruestung: {
+            mobile_absicherung: {
+              notwendigkeit: ['nicht_verwendet'],
+            },
+          },
+          klettern: {
+            routenverlauf: { routenfindung: 'schwierig' },
+          },
+        },
+      }),
+    ];
+
+    const { payload } = buildDeterministicAggregation(7n, reports);
+    const typed = payload as any;
+
+    expect(typed.klettern.routenverlauf.routenfindung).toMatchObject({
+      primary: 'mittel',
+      counts: { mittel: 1, einfach: 1, schwierig: 1 },
+      weighted_counts: { mittel: 4, einfach: 4, schwierig: 4 },
+      ordinal: { min: 'einfach', median: 'mittel', max: 'schwierig' },
+      observed_count: 3,
+    });
+    expect(typed.ausruestung.mobile_absicherung.notwendigkeit).toMatchObject({
+      primary: 'empfohlen',
+      counts: { nicht_notwendig: 1, empfohlen: 1, nicht_verwendet: 1 },
+      weighted_counts: { nicht_notwendig: 4, empfohlen: 4, nicht_verwendet: 4 },
+      observed_count: 3,
+    });
+    expect(typed.ausruestung.mobile_absicherung.friends.groesse).toEqual({
+      values: ['0.75'],
+      counts: { '0.75': 2 },
+      observed_count: 2,
+    });
+    expect(typed.ausruestung.mobile_absicherung.keile.groesse).toEqual({
+      values: ['0.5'],
+      counts: { '0.5': 2 },
+      observed_count: 2,
+    });
+    expect(typed.klettern.seillaengen_info.seillaengen.by_nummer['5'].schwierigkeit).toMatchObject({
+      primary: '6a',
+      counts: { '6a': 2 },
+      weighted_counts: { '6a': 8 },
+      observed_count: 2,
+    });
+    expect(Object.keys(payload)).toEqual([
+      'schemaVersion',
+      'route_id',
+      'source_report_count',
+      'source_report_ids',
+      'input_schema_versions',
+      'source_quality',
+      'ausruestung',
+      'klettern',
+      'berichtsqualitaet',
+    ]);
   });
 
   test('merges structured agent output into deterministic payload', () => {

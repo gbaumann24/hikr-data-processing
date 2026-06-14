@@ -59,7 +59,9 @@ Rules:
 - Use German climbing terminology and present tense.
 - Preserve useful conflicts instead of hiding them: mention when newer or higher-quality reports differ.
 - Do not invent facts not present in the provided evidence or deterministic aggregate context.
-- Keep each field concise, self-contained, and practical.
+- Keep each field self-contained and practical. Compact does not mean over-compressed: route-line, rappel, retreat, hazard, pitch, and summary fields may be longer when useful for orientation or safety.
+- For the "zusammenfassung" entry in "text", write a useful route-level summary in roughly 2-4 concise sentences: route character, seriousness, access/descent, and the most important practical beta when evidenced.
+- Avoid awkward meta wording such as "Keile werden nur vereinzelt erwähnt". Turn frequency information into practical beta only when helpful, e.g. "Einzelne Berichte empfehlen kleine Keile/Friends fuer die groesseren Hakenabstaende im Mittelteil."
 - Return only the structured output. Use field paths exactly as provided for the text map.`,
   model: 'openai/gpt-5.4-mini',
 });

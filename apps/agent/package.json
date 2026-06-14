@@ -9,7 +9,8 @@
     "./mastra/agents/baselayer-gate-agent": "./src/mastra/agents/baselayer-gate-agent.ts",
     "./mastra/agents/climbing-extraction-agent": "./src/mastra/agents/climbing-extraction-agent.ts",
     "./mastra/agents/climbing-tour-aggregation-agent": "./src/mastra/agents/climbing-tour-aggregation-agent.ts",
-    "./mastra/agents/climbing-preprocessor-agent": "./src/mastra/agents/climbing-preprocessor-agent.ts"
+    "./mastra/agents/climbing-preprocessor-agent": "./src/mastra/agents/climbing-preprocessor-agent.ts",
+    "./mastra/workflows/baselayer/utils/difficulty": "./src/mastra/workflows/baselayer/utils/difficulty.ts"
   },
   "devDependencies": {
     "mastra": "^1.9.3"

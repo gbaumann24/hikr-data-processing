@@ -130,8 +130,19 @@ const cruxSchema = z
 
 const pitchSchema = z
   .object({
-    nummer: z.number().int().nullable(),
-    schwierigkeit: z.string().nullable(),
+    nummer: z
+      .number()
+      .int()
+      .nullable()
+      .describe(
+        'Actual pitch number or position stated by the report. Preserve sparse numbering: if only "5. SL" is documented, store `5`, not `1`. Use null only when no pitch number or position is explicit.',
+      ),
+    schwierigkeit: z
+      .string()
+      .nullable()
+      .describe(
+        'Normalized pitch grade where possible. Use French grades when the UIAA-to-French mapping applies (e.g. "VI+" -> "6a"); otherwise keep the report spelling.',
+      ),
     anzahl_bohrhaken: z.number().int().nullable(),
     laenge_m: z.number().int().nullable(),
     beschreibung: z.string().nullable(),
@@ -212,7 +223,7 @@ export const climbingExtractionAgentResultSchema = z
       .describe('Version identifier for this climbing extraction output schema.'),
 
     zusammenfassung: nullableString(
-      'One concise German present-tense sentence summarizing what a party planning this climbing tour should expect: route character, seriousness, or the defining experience. Use exactly one sentence and only explicit evidence from the report.',
+      'Compact German present-tense summary of what a party planning this climbing tour should expect: route character, seriousness, or the defining experience. Usually one sentence; allow two short sentences when the route character needs it. Use only explicit evidence from the report.',
     ),
 
     ausruestung: optionalObject(
@@ -402,7 +413,7 @@ export const climbingExtractionAgentResultSchema = z
           {
             typ: nullableEnum(
               ['bergschuhe', 'zustiegsschuhe', 'turnschuhe', 'wanderschuhe', 'anders'],
-              'Footwear for the Zustieg to the Einstieg. Aliases: Approachschuhe → zustiegsschuhe; Bergstiefel/Hochtourenschuhe → bergschuhe. Only fill if the report explicitly addresses Zustieg footwear. Use "anders" and fill the `anders` field for types not in the list.',
+              'Footwear for the Zustieg to the Einstieg. Aliases: Approachschuhe → zustiegsschuhe; Bergstiefel/Hochtourenschuhe/Tourenschuhe → bergschuhe. Only fill if the report explicitly addresses Zustieg footwear. Use "anders" and fill the `anders` field for types not in the list.',
             ),
             anders: nullableString('Free-text footwear type when `typ` is "anders".'),
           },
@@ -419,7 +430,7 @@ export const climbingExtractionAgentResultSchema = z
                 'turnschuhe',
                 'anders',
               ],
-              'Footwear worn or recommended on the climbing route itself. Aliases: Kletterfinken/Finken/Kletterpatschen → kletterschuhe; Approachschuhe → zustiegsschuhe; Bergstiefel / Hochtourenschuhe → bergschuhe. `bergschuhe` or `zustiegsschuhe` occur when the route is easy enough ("alles in Bergschuhen kletterbar"). Use "anders" and fill the `anders` field for types not in the list.',
+              'Footwear worn or recommended on the climbing route itself. Aliases: Kletterfinken/Finken/Kletterpatschen → kletterschuhe; Approachschuhe → zustiegsschuhe; Bergstiefel/Hochtourenschuhe/Tourenschuhe → bergschuhe. `bergschuhe` or `zustiegsschuhe` occur when the route is easy enough ("alles in Bergschuhen kletterbar"). Use "anders" and fill the `anders` field for types not in the list.',
             ),
             anders: nullableString('Free-text footwear type when `typ` is "anders".'),
           },
@@ -429,7 +440,7 @@ export const climbingExtractionAgentResultSchema = z
           {
             typ: nullableEnum(
               ['bergschuhe', 'zustiegsschuhe', 'turnschuhe', 'wanderschuhe', 'anders'],
-              'Footwear for the Abstieg. Common signal: "Schuhe fuer den Abstieg mitnehmen" or stashing shoes at the Einstieg. Same aliases as Zustieg. Use "anders" and fill the `anders` field for types not in the list.',
+              'Footwear for the Abstieg. Common signal: "Schuhe fuer den Abstieg mitnehmen" or stashing shoes at the Einstieg. Aliases: Approachschuhe → zustiegsschuhe; Bergstiefel/Hochtourenschuhe/Tourenschuhe → bergschuhe. Use "anders" and fill the `anders` field for types not in the list.',
             ),
             anders: nullableString('Free-text footwear type when `typ` is "anders".'),
           },
@@ -554,10 +565,10 @@ export const climbingExtractionAgentResultSchema = z
               'Maximum single rappel length in meters. Determines whether a single rope suffices. Signal words: "laengste Abseile 50m", "bis zu 45m abseilen".',
             ),
             zum_einstieg: nullableBoolean(
-              'Whether rappelling leads back to the Einstieg. Signal words: "abseilen zum Einstieg", "ueber die Route zurueck zum Wandfuss".',
+              'Whether rappelling directly reaches the route Einstieg again. Signal words: "abseilen zum Einstieg", "ueber die Route zurueck zum Wandfuss". Do not use this for a general descent that only eventually passes the approach trail.',
             ),
             abseilpiste: nullableBoolean(
-              'Whether a dedicated Abseilpiste (fixed-anchor rappel line, often separate from the route) exists. Signal words: "Abseilpiste", "eingerichtete Abseilstrecke".',
+              'Whether a dedicated Abseilpiste exists: a fixed/equipped rappel line made for descent, often separate from the climbing route after Mehrseillaengen routes. This is less typical for ridge climbs. Signal words: "Abseilpiste", "eingerichtete Abseilstrecke".',
             ),
             beschreibung: nullableString(
               'How to descend via rappel: which anchors to use, where to find them, any tricky sections. Present tense.',
@@ -641,13 +652,13 @@ export const climbingExtractionAgentResultSchema = z
               'How difficult it is to identify the line of the route. "logische Linie", "Haken immer sichtbar" → einfach; "etwas Spuersinn noetig" → mittel; "Verhauer-Gefahr", "Topo zwingend", "lange gesucht" → schwierig.',
             ),
             beschreibung: nullableString(
-              'The line and orientation: prominent features, where Verhauer risk is high, what to orient by. Present tense.',
+              'The route line and orientation. This field may be longer and more detailed than short factual fields when route-finding benefits from it: prominent features, pitch sequence, where Verhauer risk is high, and what to orient by. Present tense.',
             ),
             rueckzug_moeglich: nullableBoolean(
               'Whether Rueckzug or escape options are mentioned, e.g. rappelling from every Stand, traversing into easier terrain, exiting onto a Band.',
             ),
             rueckzug_beschreibung: nullableString(
-              'Where and how a Rueckzug is possible, as a self-contained present-tense sentence.',
+              'Where and how the party can abandon the climb during the actual climbing route: rappel from a Stand, escape via Band, traverse into easier terrain, walk off from a shoulder, etc. Do not describe the normal descent after completing the route.',
             ),
             einstiegshoehe_m: nullableInteger(
               'Elevation of the Einstieg (start of the climbing route) in meters, as stated in the report or derived from waypoint names.',
@@ -676,7 +687,7 @@ export const climbingExtractionAgentResultSchema = z
               .array(pitchSchema)
               .optional()
               .describe(
-                'Structured description of individual Seillaengen if the report covers them one by one. `nummer`: 1 = first pitch; `schwierigkeit`: grade as given in the report (e.g. "5c", "VI-", "4a"); `anzahl_bohrhaken`: fixed Bohrhaken count; `laenge_m`: length in meters; `beschreibung`: character, crux, remarks. Present tense.',
+                'Structured description of individual Seillaengen if the report covers them one by one. `nummer`: use the actual pitch number or position from the report; do not renumber sparse pitch descriptions chronologically. Example: if only "5. SL" is documented, store `nummer: 5`, not `1`. `schwierigkeit`: normalized French grade where possible (e.g. "VI+" -> "6a"); `anzahl_bohrhaken`: fixed Bohrhaken count; `laenge_m`: length in meters; `beschreibung`: character, crux, remarks. Present tense.',
               ),
           },
           'Pitch count, linkable pitches, and individual pitch details.',
@@ -691,7 +702,7 @@ export const climbingExtractionAgentResultSchema = z
           {
             ...namedElevationPointShape,
           },
-          'Named starting point of the tour or approach, e.g. Parkplatz, hamlet, pass road point, or trailhead. Capture elevation when explicitly stated.',
+          'Actual point where the approach starts on foot, i.e. where the party leaves the car, public transport, lift station, hut, pass road, or trailhead and begins walking toward the route. This is not automatically identical with `parkplatz`; use `parkplatz` only for car parking details. Capture elevation when explicitly stated.',
         ),
 
         parkplatz: optionalObject(
@@ -709,7 +720,7 @@ export const climbingExtractionAgentResultSchema = z
               'Practical notes: few spots, fills up early, tight, driving ban beyond a point, private road, key pickup.',
             ),
           },
-          'Parking information.',
+          'Car parking information only: where a car is parked and practical parking details. Do not use this for the walking start when the report distinguishes a separate trailhead, hut, lift station, or approach starting point.',
         ),
 
         talstation: optionalObject(

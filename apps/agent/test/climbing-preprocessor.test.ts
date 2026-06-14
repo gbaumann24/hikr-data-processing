@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import {
   ACTIVITY,
+  MIN_DESCRIPTION_LENGTH,
   PREPROCESSOR_STATUS,
   normalizeDescription,
   parseRegionPath,
@@ -15,7 +16,10 @@ import {
   type ClimbingPreprocessorAgentInput,
 } from '../src/mastra/workflows/climbing';
 
-const longDescription = 'Kletterbericht '.repeat(150);
+const longEnough = (text: string) =>
+  text.repeat(Math.ceil((MIN_DESCRIPTION_LENGTH + 50) / text.length));
+
+const longDescription = longEnough('Kletterbericht ');
 
 function baseInput(overrides: Partial<HikrOrgPostBaseLayerInput> = {}): HikrOrgPostBaseLayerInput {
   return {
@@ -232,7 +236,7 @@ describe('climbing preprocessor', () => {
   test('changes activity to hiking when the agent says hiking outweighs climbing', async () => {
     const result = await preprocessHikrReportForClimbing(
       baseInput({
-        description: `${'Wanderbericht auf markiertem Weg mit langer Zustiegspassage. '.repeat(35)}Kurze leichte Kletterstelle im I. Grad, danach weiter als Wanderung zum Gipfel.`,
+        description: `${longEnough('Wanderbericht auf markiertem Weg mit langer Zustiegspassage. ')}Kurze leichte Kletterstelle im I. Grad, danach weiter als Wanderung zum Gipfel.`,
         climbingDifficulty: 'I',
       }),
       {

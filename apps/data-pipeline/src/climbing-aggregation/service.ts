@@ -10,7 +10,11 @@ import {
   type ClimbingTourAggregationReport,
   type ClimbingTourAggregationSummarizer,
 } from './types';
-import { buildDeterministicAggregation, mergeAgentOutput } from './deterministic';
+import {
+  buildDeterministicAggregation,
+  mergeAgentOutput,
+  orderAggregationPayload,
+} from './deterministic';
 
 export type ClimbingTourAggregationProgressEvent =
   | {
@@ -92,7 +96,7 @@ export async function runClimbingTourAggregationService({
       agentStatus,
       agentErrorMessage,
       agentErrorDetails,
-      payload,
+      payload: orderAggregationPayload(payload),
       aggregatedAt: now(),
     });
 

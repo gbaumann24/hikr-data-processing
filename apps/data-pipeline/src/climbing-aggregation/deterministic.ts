@@ -1,4 +1,5 @@
 import type { ClimbingTourAggregationAgentOutput } from 'agent/mastra/agents/climbing-tour-aggregation-agent';
+import { normalizeClimbingDifficultyValue } from 'agent/mastra/workflows/baselayer/utils/difficulty';
 import {
   CLIMBING_TOUR_AGGREGATION_SCHEMA_VERSION,
   type ClimbingTourAggregationReport,
@@ -124,6 +125,167 @@ const ORDINAL_PATHS: Array<{ path: string; order: string[] }> = [
   },
 ];
 
+const MOBILE_PROTECTION_NECESSITY_ORDER = [
+  'erforderlich',
+  'empfohlen',
+  'verwendet',
+  'nicht_notwendig',
+  'nicht_empfohlen',
+  'nicht_verwendet',
+];
+
+const TOP_LEVEL_KEY_ORDER = [
+  'schemaVersion',
+  'route_id',
+  'source_report_count',
+  'source_report_ids',
+  'input_schema_versions',
+  'source_quality',
+  'zusammenfassung',
+  'ausruestung',
+  'zeitbedarf',
+  'absicherung',
+  'schuhwerk',
+  'gelaende_und_gefahren',
+  'klettern',
+  'anreise',
+  'zustieg_und_abstieg',
+  'stuetzpunkt',
+  'quellen',
+  'berichtsqualitaet',
+  'besonderes',
+];
+
+const GENERIC_AGGREGATE_KEY_ORDER = [
+  'primary',
+  'consensus',
+  'values',
+  'counts',
+  'weighted_counts',
+  'true_count',
+  'false_count',
+  'weighted_true',
+  'weighted_false',
+  'min',
+  'median',
+  'max',
+  'mode',
+  'ordinal',
+  'summary',
+  'by_typ',
+  'by_nummer',
+  'groesse',
+  'anzahl',
+  'laenge_cm',
+  'typ',
+  'anders',
+  'schwierigkeit',
+  'anzahl_bohrhaken',
+  'laenge_m',
+  'beschreibung',
+  'observed_count',
+];
+
+const KEY_ORDER_BY_PATH: Record<string, string[]> = {
+  '': TOP_LEVEL_KEY_ORDER,
+  source_quality: ['completeness', 'report_quality_score'],
+  ausruestung: ['seil', 'mobile_absicherung', 'schlingen', 'expresskarabiner', 'zusaetzlich'],
+  'ausruestung.seil': ['art', 'anders', 'laenge_m'],
+  'ausruestung.mobile_absicherung': [
+    'notwendigkeit',
+    'begruendung',
+    'moeglichkeiten',
+    'friends',
+    'keile',
+  ],
+  zeitbedarf: ['zustieg_min', 'reine_kletterzeit_min', 'abstieg_min'],
+  absicherung: [
+    'charakter',
+    'hakentypen',
+    'hakentypen_anders',
+    'hakenabstaende',
+    'staende',
+    'hakenzustand',
+  ],
+  'absicherung.hakenabstaende': ['bewertung', 'beschreibung'],
+  'absicherung.staende': ['gebohrt', 'beschreibung'],
+  'absicherung.hakenzustand': ['bewertung', 'beschreibung'],
+  schuhwerk: ['zustieg', 'klettern', 'abstieg'],
+  'schuhwerk.zustieg': ['typ', 'anders'],
+  'schuhwerk.klettern': ['typ', 'anders'],
+  'schuhwerk.abstieg': ['typ', 'anders'],
+  gelaende_und_gefahren: ['charakter', 'gefahren', 'felsqualitaet', 'felsqualitaet_anders'],
+  'gelaende_und_gefahren.charakter': [
+    'exposition',
+    'sonnig',
+    'schnell_trocknend',
+    'felsart',
+    'anders',
+    'beschreibung',
+  ],
+  'gelaende_und_gefahren.gefahren': ['typ', 'anders', 'by_typ', 'observed_count'],
+  klettern: [
+    'schluesselstellen',
+    'schwierigkeit',
+    'abseilen',
+    'charakter',
+    'routenverlauf',
+    'seillaengen_info',
+  ],
+  'klettern.schluesselstellen': ['stellen'],
+  'klettern.schwierigkeit': ['verhaeltnis', 'beschreibung', 'min_klettererfahrung'],
+  'klettern.abseilen': [
+    'moeglich',
+    'abseil_max_laenge_m',
+    'zum_einstieg',
+    'abseilpiste',
+    'beschreibung',
+  ],
+  'klettern.charakter': [
+    'kletterstil',
+    'anders',
+    'beschreibung',
+    'schoenheit',
+    'ernsthaftigkeit',
+    'wandhoehe_m',
+  ],
+  'klettern.routenverlauf': [
+    'routenfindung',
+    'beschreibung',
+    'rueckzug_moeglich',
+    'rueckzug_beschreibung',
+    'einstiegshoehe_m',
+  ],
+  'klettern.seillaengen_info': ['anzahl_total', 'verbinden', 'seillaengen'],
+  'klettern.seillaengen_info.verbinden': ['moeglich', 'beschreibung'],
+  'klettern.seillaengen_info.seillaengen': ['by_nummer', 'observed_count'],
+  anreise: ['ausgangspunkt', 'parkplatz', 'talstation', 'oev', 'von_passhoehe_aus'],
+  'anreise.ausgangspunkt': ['name', 'hoehe_m'],
+  'anreise.parkplatz': ['ort', 'hoehe_m', 'kosten', 'besonderheiten'],
+  'anreise.talstation': ['name', 'hoehe_m'],
+  'anreise.oev': ['verkehrsmittel', 'endstation', 'luftseilbahn_moeglich', 'anmeldung_noetig'],
+  zustieg_und_abstieg: ['zustieg', 'abstieg', 'verpflegung_typ'],
+  'zustieg_und_abstieg.zustieg': [
+    'einstiegsfindung',
+    'beschreibung',
+    'schwierigkeit',
+    'hm_aufstieg',
+    'hm_abstieg',
+  ],
+  'zustieg_und_abstieg.abstieg': [
+    'fuehrt_zum_einstieg',
+    'schwierigkeit',
+    'hm_aufstieg',
+    'hm_abstieg',
+  ],
+  stuetzpunkt: ['typ', 'mehrtags'],
+  quellen: ['kletterfuehrer', 'topo_url'],
+  berichtsqualitaet: ['score', 'begruendung'],
+  besonderes: ['saisonalitaet', 'frequentierung', 'bedingungen', 'hinweise'],
+  'besonderes.saisonalitaet': ['geeignet'],
+  'besonderes.bedingungen': ['fels_zustand', 'altschnee_auf_zustieg', 'beschreibung'],
+};
+
 export function buildDeterministicAggregation(
   routeId: bigint,
   reports: ClimbingTourAggregationReport[],
@@ -171,15 +333,7 @@ export function buildDeterministicAggregation(
   setIfPresent(
     payload,
     'ausruestung.mobile_absicherung.notwendigkeit',
-    aggregateMultiDistribution(
-      reports,
-      'ausruestung.mobile_absicherung.notwendigkeit',
-      normalizeLiteral,
-      {
-        weighted: false,
-        primary: false,
-      },
-    ),
+    aggregateMobileProtectionNecessity(reports),
   );
 
   for (const path of BOOLEAN_PATHS) {
@@ -275,7 +429,18 @@ export function buildDeterministicAggregation(
 
   const agentInput = buildAgentInput(routeId, reports, payload);
   addTextEvidenceCounts(payload, agentInput);
-  return { payload, agentInput };
+  const orderedPayload = orderAggregationPayload(payload);
+  return {
+    payload: orderedPayload,
+    agentInput: {
+      ...agentInput,
+      deterministicPayload: orderedPayload,
+    },
+  };
+}
+
+export function orderAggregationPayload(payload: Record<string, unknown>): Record<string, unknown> {
+  return orderObject(payload) as Record<string, unknown>;
 }
 
 export function mergeAgentOutput(
@@ -557,6 +722,45 @@ function aggregateMultiDistribution(
   return result;
 }
 
+function aggregateMobileProtectionNecessity(
+  reports: ClimbingTourAggregationReport[],
+): Record<string, unknown> | null {
+  const entries: Array<{ value: string; weight: number }> = [];
+  let observedCount = 0;
+
+  for (const report of reports) {
+    const reportValues = new Set(
+      getArray<unknown>(report, 'ausruestung.mobile_absicherung.notwendigkeit')
+        .map((value) => (typeof value === 'string' ? normalizeLiteral(value) : ''))
+        .filter(Boolean),
+    );
+
+    if (reportValues.size === 0) {
+      continue;
+    }
+
+    observedCount += 1;
+    for (const value of reportValues) {
+      entries.push({ value, weight: getWeight(report) });
+    }
+  }
+
+  if (entries.length === 0) {
+    return null;
+  }
+
+  const counts = countEntries(entries.map((entry) => entry.value));
+  const weightedCounts = countWeightedEntries(entries);
+
+  return {
+    primary: chooseConservativePrimary(counts, MOBILE_PROTECTION_NECESSITY_ORDER),
+    values: Object.keys(counts),
+    counts,
+    weighted_counts: weightedCounts,
+    observed_count: observedCount,
+  };
+}
+
 function aggregateBoolean(
   reports: ClimbingTourAggregationReport[],
   path: string,
@@ -647,22 +851,34 @@ function aggregateOrdinal(
   path: string,
   order: string[],
 ): Record<string, unknown> | null {
-  const aggregate = aggregateScalarDistribution(reports, path, normalizeLiteral);
-  if (!aggregate) {
+  const entries = collectScalarValues(reports, path, normalizeLiteral);
+  if (entries.length === 0) {
     return null;
   }
 
+  const counts = countEntries(entries.map((entry) => entry.value));
+  const weightedCounts = countWeightedEntries(entries);
   const rank = new Map(order.map((value, index) => [value, index]));
-  const values = collectScalarValues(reports, path, normalizeLiteral)
+  const rankedEntries = entries
+    .filter((entry) => rank.has(entry.value))
+    .sort((left, right) => (rank.get(left.value) ?? 0) - (rank.get(right.value) ?? 0));
+  const rankedValues = rankedEntries
     .map((entry) => entry.value)
-    .filter((value) => rank.has(value))
     .sort((left, right) => (rank.get(left) ?? 0) - (rank.get(right) ?? 0));
+  const weightedMedian = chooseWeightedOrdinalMedian(rankedEntries, order);
+  const aggregate: Record<string, unknown> = {
+    primary: weightedMedian ?? choosePrimary(counts, weightedCounts),
+    values: Object.keys(counts),
+    counts,
+    weighted_counts: weightedCounts,
+    observed_count: entries.length,
+  };
 
-  if (values.length > 0) {
+  if (rankedValues.length > 0) {
     aggregate.ordinal = {
-      min: values[0],
-      median: values[Math.floor((values.length - 1) / 2)],
-      max: values[values.length - 1],
+      min: rankedValues[0],
+      median: weightedMedian,
+      max: rankedValues[rankedValues.length - 1],
     };
   }
 
@@ -685,7 +901,7 @@ function aggregateSizedItems(
 
     for (const item of items) {
       if (typeof item.groesse === 'string') {
-        const groesse = normalizeFreeValue(item.groesse);
+        const groesse = normalizeProtectionSize(item.groesse);
         if (groesse) {
           groessen.push(groesse);
         }
@@ -913,7 +1129,7 @@ function aggregatePitches(
       .map(({ pitch, weight }) => {
         const value =
           typeof pitch.schwierigkeit === 'string'
-            ? normalizePreservingCase(pitch.schwierigkeit)
+            ? normalizePitchDifficulty(pitch.schwierigkeit)
             : '';
         return value ? { value, weight } : null;
       })
@@ -1034,6 +1250,10 @@ function choosePrimary(counts: Counts, weightedCounts: WeightedCounts): string |
   );
 }
 
+function chooseConservativePrimary(counts: Counts, order: string[]): string | null {
+  return order.find((value) => (counts[value] ?? 0) > 0) ?? chooseMode(counts);
+}
+
 function chooseMode(counts: Counts): string | null {
   return (
     Object.keys(counts).sort((left, right) => {
@@ -1041,6 +1261,38 @@ function chooseMode(counts: Counts): string | null {
       return countDifference === 0 ? left.localeCompare(right) : countDifference;
     })[0] ?? null
   );
+}
+
+function chooseWeightedOrdinalMedian(
+  entries: Array<{ value: string; weight: number }>,
+  order: string[],
+): string | null {
+  if (entries.length === 0) {
+    return null;
+  }
+
+  const rank = new Map(order.map((value, index) => [value, index]));
+  const sorted = entries
+    .filter((entry) => rank.has(entry.value))
+    .sort((left, right) => (rank.get(left.value) ?? 0) - (rank.get(right.value) ?? 0));
+  const totalWeight = sorted.reduce((sum, entry) => sum + entry.weight, 0);
+  if (totalWeight <= 0) {
+    return null;
+  }
+
+  const midpoint = totalWeight / 2;
+  let cumulative = 0;
+  for (const [index, entry] of sorted.entries()) {
+    cumulative += entry.weight;
+    if (cumulative > midpoint) {
+      return entry.value;
+    }
+    if (cumulative === midpoint) {
+      return sorted[index + 1]?.value ?? entry.value;
+    }
+  }
+
+  return sorted[sorted.length - 1]?.value ?? null;
 }
 
 function median(values: number[]): number {
@@ -1134,6 +1386,16 @@ function normalizeFreeValue(value: string): string {
   return normalizePreservingCase(value).toLowerCase();
 }
 
+function normalizeProtectionSize(value: string): string {
+  return normalizeFreeValue(value)
+    .replace(/(\d),(\d)/g, '$1.$2')
+    .replace(/\s*[-–—]\s*/g, '-');
+}
+
+function normalizePitchDifficulty(value: string): string {
+  return normalizeClimbingDifficultyValue(value) ?? normalizePreservingCase(value);
+}
+
 function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim() !== '';
 }
@@ -1144,4 +1406,35 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value);
+}
+
+function orderObject(value: unknown, path = ''): unknown {
+  if (Array.isArray(value)) {
+    return value.map((item) => orderObject(item, path));
+  }
+
+  if (!isPlainObject(value)) {
+    return value;
+  }
+
+  const keys = Object.keys(value);
+  const keyOrder = KEY_ORDER_BY_PATH[path] ?? inferGenericKeyOrder(keys);
+  const orderedKeys = [
+    ...keyOrder.filter((key) => Object.prototype.hasOwnProperty.call(value, key)),
+    ...keys
+      .filter((key) => !keyOrder.includes(key))
+      .sort((left, right) => left.localeCompare(right)),
+  ];
+
+  return orderedKeys.reduce<Record<string, unknown>>((ordered, key) => {
+    const childPath = path ? `${path}.${key}` : key;
+    ordered[key] = orderObject(value[key], childPath);
+    return ordered;
+  }, {});
+}
+
+function inferGenericKeyOrder(keys: string[]): string[] {
+  return keys.some((key) => GENERIC_AGGREGATE_KEY_ORDER.includes(key))
+    ? GENERIC_AGGREGATE_KEY_ORDER
+    : [];
 }

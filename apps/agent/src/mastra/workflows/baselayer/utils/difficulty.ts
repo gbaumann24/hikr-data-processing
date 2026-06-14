@@ -25,7 +25,9 @@ const DIFFICULTY_FIELDS: Array<{
   { scale: HIKR_DIFFICULTY_SCALE.MOUNTAIN_BIKE, getValue: (input) => input.mountainBikeDifficulty },
 ];
 
-export function extractDifficultyScales(input: HikrOrgPostBaseLayerInput): DifficultyScaleExtraction {
+export function extractDifficultyScales(
+  input: HikrOrgPostBaseLayerInput,
+): DifficultyScaleExtraction {
   const presentScales: HikrDifficultyScale[] = [];
   const valuesByScale: Partial<Record<HikrDifficultyScale, string>> = {};
 
@@ -42,7 +44,7 @@ export function extractDifficultyScales(input: HikrOrgPostBaseLayerInput): Diffi
   return { presentScales, valuesByScale };
 }
 
-const UIAA_TO_FRENCH_CLIMBING_GRADE: Record<string, string> = {
+export const UIAA_TO_FRENCH_CLIMBING_GRADE: Record<string, string> = {
   I: '1',
   II: '2',
   III: '3',
@@ -72,7 +74,7 @@ const UIAA_TO_FRENCH_CLIMBING_GRADE: Record<string, string> = {
   'XII-': '9b+',
 };
 
-function normalizeClimbingDifficultyValue(value: string | null | undefined): string | null {
+export function normalizeClimbingDifficultyValue(value: string | null | undefined): string | null {
   const normalized = normalizeDifficultyValue(value);
   if (!normalized) {
     return null;

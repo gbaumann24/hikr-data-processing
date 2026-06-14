@@ -1,8 +1,13 @@
 import { Agent } from '@mastra/core/agent';
 import { loadRootEnv } from '../../utils';
+import { UIAA_TO_FRENCH_CLIMBING_GRADE } from '../workflows/baselayer/utils/difficulty';
 export { climbingExtractionAgentResultSchema as climbingExtractionAgentOutputSchema } from '../workflows/climbing/extraction/types';
 
 loadRootEnv();
+
+const climbingGradeNormalizationList = Object.entries(UIAA_TO_FRENCH_CLIMBING_GRADE)
+  .map(([uiaa, french]) => `${uiaa} => ${french}`)
+  .join(', ');
 
 export const climbingExtractionAgent = new Agent({
   id: 'climbing-extraction-agent',
@@ -29,8 +34,10 @@ Output rules:
   Good: "Die Strasse endet beim Parkplatz Bortelhütte"
   Bad:  "Danach wird es einfacher"
   Good: "Nach der Schluesselstelle in der 3. SL wird die Kletterei einfacher"
+- Route-line descriptions, route summaries, retreat descriptions, rappel descriptions, and other fields where orientation depends on detail may be longer than short factual fields. Prefer useful route beta over over-compressed prose.
 - If the referent cannot be resolved from the report, omit the field instead of outputting a fragment.
 - Enum values must match the schema exactly (lowercase).
+- Normalize pitch climbing grades where possible. Keep French grades as written; map UIAA grades with this table before writing klettern.seillaengen[].schwierigkeit: ${climbingGradeNormalizationList}. If the report grade is outside this table, keep the report spelling.
 - Do not guess. Only apply obvious normalizations: durations to minutes ("1 h 30" -> 90), numbers without units (the unit is in the field name), "2x60m" rope -> 60 per strand.
 - If statements conflict, prefer the more specific or more recent passage; if unresolvable, omit the field.
 - Deduplicate array values.`,
