@@ -130,6 +130,7 @@ exports.Prisma.ClimbingTourBaseSchemaScalarFieldEnum = {
   reportId: 'reportId',
   schemaVersion: 'schemaVersion',
   routeId: 'routeId',
+  zusammenfassung: 'zusammenfassung',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -180,7 +181,9 @@ exports.Prisma.ClimbingTourGelaendeUndGefahrenSchemaScalarFieldEnum = {
   charakterSchnellTrocknend: 'charakterSchnellTrocknend',
   charakterFelsart: 'charakterFelsart',
   charakterBeschreibung: 'charakterBeschreibung',
-  gefahren: 'gefahren'
+  gefahren: 'gefahren',
+  felsqualitaet: 'felsqualitaet',
+  felsqualitaetAnders: 'felsqualitaetAnders'
 };
 
 exports.Prisma.ClimbingTourKletternSchemaScalarFieldEnum = {
@@ -212,9 +215,14 @@ exports.Prisma.ClimbingTourKletternSchemaScalarFieldEnum = {
 
 exports.Prisma.ClimbingTourAnreiseSchemaScalarFieldEnum = {
   baseId: 'baseId',
+  ausgangspunktName: 'ausgangspunktName',
+  ausgangspunktHoeheM: 'ausgangspunktHoeheM',
   parkplatzOrt: 'parkplatzOrt',
+  parkplatzHoeheM: 'parkplatzHoeheM',
   parkplatzKosten: 'parkplatzKosten',
   parkplatzBesonderheiten: 'parkplatzBesonderheiten',
+  talstationName: 'talstationName',
+  talstationHoeheM: 'talstationHoeheM',
   oevVerkehrsmittel: 'oevVerkehrsmittel',
   oevEndstation: 'oevEndstation',
   oevLuftseilbahnMoeglich: 'oevLuftseilbahnMoeglich',
@@ -234,6 +242,24 @@ exports.Prisma.ClimbingTourZustiegUndAbstiegSchemaScalarFieldEnum = {
   abstiegHmAufstieg: 'abstiegHmAufstieg',
   abstiegHmAbstieg: 'abstiegHmAbstieg',
   verpflegungTyp: 'verpflegungTyp'
+};
+
+exports.Prisma.ClimbingTourStuetzpunktSchemaScalarFieldEnum = {
+  baseId: 'baseId',
+  typ: 'typ',
+  mehrtags: 'mehrtags'
+};
+
+exports.Prisma.ClimbingTourQuellenSchemaScalarFieldEnum = {
+  baseId: 'baseId',
+  kletterfuehrer: 'kletterfuehrer',
+  topoUrl: 'topoUrl'
+};
+
+exports.Prisma.ClimbingTourBerichtsqualitaetSchemaScalarFieldEnum = {
+  baseId: 'baseId',
+  score: 'score',
+  begruendung: 'begruendung'
 };
 
 exports.Prisma.ClimbingTourBesonderesSchemaScalarFieldEnum = {
@@ -409,15 +435,15 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
-};
-
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
 };
 exports.HikrCategory = exports.$Enums.HikrCategory = {
   SKI: 'SKI',
@@ -440,6 +466,9 @@ exports.Prisma.ModelName = {
   ClimbingTourKletternSchema: 'ClimbingTourKletternSchema',
   ClimbingTourAnreiseSchema: 'ClimbingTourAnreiseSchema',
   ClimbingTourZustiegUndAbstiegSchema: 'ClimbingTourZustiegUndAbstiegSchema',
+  ClimbingTourStuetzpunktSchema: 'ClimbingTourStuetzpunktSchema',
+  ClimbingTourQuellenSchema: 'ClimbingTourQuellenSchema',
+  ClimbingTourBerichtsqualitaetSchema: 'ClimbingTourBerichtsqualitaetSchema',
   ClimbingTourBesonderesSchema: 'ClimbingTourBesonderesSchema',
   ExtractionJobSchema: 'ExtractionJobSchema',
   ExtractionJobReportSchema: 'ExtractionJobReportSchema',

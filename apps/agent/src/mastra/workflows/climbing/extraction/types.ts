@@ -198,6 +198,11 @@ const verkehrsmittelItemSchema = z
   })
   .strict();
 
+const namedElevationPointShape = {
+  name: nullableString('Name or description of the point.'),
+  hoehe_m: nullableInteger('Elevation of the point in meters.'),
+};
+
 // ─── Main schema ──────────────────────────────────────────────────────────────
 
 export const climbingExtractionAgentResultSchema = z
@@ -205,6 +210,10 @@ export const climbingExtractionAgentResultSchema = z
     schemaVersion: z
       .literal(CLIMBING_EXTRACTION_SCHEMA_VERSION)
       .describe('Version identifier for this climbing extraction output schema.'),
+
+    zusammenfassung: nullableString(
+      'One concise German present-tense sentence summarizing what a party planning this climbing tour should expect: route character, seriousness, or the defining experience. Use exactly one sentence and only explicit evidence from the report.',
+    ),
 
     ausruestung: optionalObject(
       {
@@ -477,6 +486,31 @@ export const climbingExtractionAgentResultSchema = z
           .describe(
             'All hazards explicitly mentioned on the Zustieg, route, or Abstieg. One entry per distinct hazard.',
           ),
+
+        felsqualitaet: z
+          .array(
+            z.enum([
+              'griffig',
+              'kompakt',
+              'abgespeckt',
+              'reibungsarm',
+              'wasserrillen',
+              'bruechig',
+              'gestuft',
+              'speckig',
+              'scharf',
+              'bombenfest',
+              'plattig',
+              'anders',
+            ]),
+          )
+          .optional()
+          .describe(
+            'Explicit rock quality descriptions independent of rock type. Collect all that are mentioned. Use "anders" and fill `felsqualitaet_anders` for qualities not in the list.',
+          ),
+        felsqualitaet_anders: stringArray(
+          'Free-text rock qualities when "anders" appears in felsqualitaet.',
+        ),
       },
       'Terrain character and hazards explicitly mentioned in the report.',
     ),
@@ -653,10 +687,20 @@ export const climbingExtractionAgentResultSchema = z
 
     anreise: optionalObject(
       {
+        ausgangspunkt: optionalObject(
+          {
+            ...namedElevationPointShape,
+          },
+          'Named starting point of the tour or approach, e.g. Parkplatz, hamlet, pass road point, or trailhead. Capture elevation when explicitly stated.',
+        ),
+
         parkplatz: optionalObject(
           {
             ort: nullableString(
               'Name or location of the parking spot (e.g. "Parkplatz Saentisbahn", "Kehrplatz am Strassenende").',
+            ),
+            hoehe_m: nullableInteger(
+              'Elevation of the parking spot in meters, e.g. "ab Parkplatz oberi Bire, 1706m" -> 1706.',
             ),
             kosten: nullableString(
               'Costs or fee info as free text ("5 CHF/Tag", "Parkuhr", "gratis"). Also capture mere mention that fees apply.',
@@ -666,6 +710,13 @@ export const climbingExtractionAgentResultSchema = z
             ),
           },
           'Parking information.',
+        ),
+
+        talstation: optionalObject(
+          {
+            ...namedElevationPointShape,
+          },
+          'Base station of a cable car or lift used as access point, including elevation when explicitly stated.',
         ),
 
         oev: optionalObject(
@@ -753,6 +804,58 @@ export const climbingExtractionAgentResultSchema = z
         ),
       },
       'Approach and descent details explicitly mentioned in the report.',
+    ),
+
+    stuetzpunkt: optionalObject(
+      {
+        typ: nullableEnum(
+          ['huette', 'biwak'],
+          'Type of overnight base relevant to the route. Use "huette" for a hut/base/accommodation and "biwak" for a bivouac site or bivouacking option.',
+        ),
+        mehrtags: nullableBoolean(
+          'Whether the route or recommended itinerary is explicitly described as multi-day or worth splitting over more than one day.',
+        ),
+      },
+      'Hut, bivouac, or overnight base information relevant to repeating the route.',
+    ),
+
+    quellen: optionalObject(
+      {
+        kletterfuehrer: stringArray(
+          'Named guidebooks, printed topos, editions, authors, publishers, or ISBNs explicitly mentioned as sources.',
+        ),
+        topo_url: stringArray(
+          'Topo or guidebook URLs explicitly mentioned in the report. Keep the URL string as written when possible.',
+        ),
+      },
+      'Guidebook, topo, and source references explicitly mentioned in the report.',
+    ),
+
+    berichtsqualitaet: optionalObject(
+      {
+        score: z
+          .number()
+          .int()
+          .min(1)
+          .max(5)
+          .nullable()
+          .optional()
+          .describe(
+            'Bewertet nach: Spezifitaet der Angaben, Fachterminologie, interne Konsistenz, Detailtiefe (Pitch-Liste, Absicherungsdetail, Quellenangabe). ' +
+              '1 = "Tolle Tour, super Wetter, sehr empfehlenswert" - kein verwertbares Detail. ' +
+              '2 = Schwierigkeit und Absicherung erwaehnt, aber pauschal: "gut gesichert, anspruchsvoll". ' +
+              '3 = Konkrete Angaben zu Seil, Exen, Schwierigkeit; Absicherungscharakter klar; kleine Luecken oder ein Widerspruch. ' +
+              '4 = Per-Pitch-Detail, Hakentypen, Zeitangaben, Zustiegsbeschreibung; fachlich korrekt; konsistent. ' +
+              '5 = Wie 4, zusaetzlich: obligatory grade, Kletterfuehrer-Referenz, Sanierungsjahr oder Tourdatum im Text.',
+          ),
+        begruendung: nullableString(
+          'Ein Satz Begruendung. ' +
+            'Beispiel Score 2: "Nur Gesamtgrad ohne Begruendung, Absicherung pauschal, kein Zustieg." ' +
+            'Beispiel Score 4: "Pitch-Liste vollstaendig, Hakenabstaende beschrieben, ein Widerspruch bei SL-Anzahl." ' +
+            'Beispiel Score 5: "Obl. Grade, Topo-Referenz, Sanierungsjahr 2019, Tourdatum vorhanden."',
+        ),
+      },
+      'Qualitaetsurteil des Extraktors fuer den Aggregationsagenten.',
     ),
 
     besonderes: optionalObject(

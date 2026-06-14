@@ -1,7 +1,8 @@
 model ClimbingTourBaseSchema {
-  reportId      BigInt @id @map("report_id")
-  schemaVersion String @map("schema_version")
-  routeId       BigInt @map("route_id")
+  reportId        BigInt  @id @map("report_id")
+  schemaVersion   String  @map("schema_version")
+  routeId         BigInt  @map("route_id")
+  zusammenfassung String?
 
   base                ReportBaseSchema                       @relation(fields: [reportId], references: [reportId], onDelete: Cascade)
   route               RouteSchema                            @relation(fields: [routeId], references: [id], onDelete: Restrict)
@@ -13,6 +14,9 @@ model ClimbingTourBaseSchema {
   klettern            ClimbingTourKletternSchema?
   anreise             ClimbingTourAnreiseSchema?
   zustiegUndAbstieg   ClimbingTourZustiegUndAbstiegSchema?
+  stuetzpunkt         ClimbingTourStuetzpunktSchema?
+  quellen             ClimbingTourQuellenSchema?
+  berichtsqualitaet   ClimbingTourBerichtsqualitaetSchema?
   besonderes          ClimbingTourBesonderesSchema?
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
@@ -26,16 +30,16 @@ model ClimbingTourAusruestungSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  seilArt                          String?  @map("seil_art")
-  seilLaengeM                      Int?     @map("seil_laenge_m")
-  mobileAbsicherungNotwendigkeit   Json     @default("[]") @map("mobile_absicherung_notwendigkeit")
-  mobileAbsicherungBegruendung     String?  @map("mobile_absicherung_begruendung")
-  mobileAbsicherungMoeglichkeiten  String?  @map("mobile_absicherung_moeglichkeiten")
-  mobileAbsicherungFriends         Json     @default("[]") @map("mobile_absicherung_friends")
-  mobileAbsicherungKeile           Json     @default("[]") @map("mobile_absicherung_keile")
-  schlingen                        Json     @default("[]")
-  expresskarabinerAnzahl           Int?     @map("expresskarabiner_anzahl")
-  zusaetzlich                      Json     @default("[]")
+  seilArt                         String? @map("seil_art")
+  seilLaengeM                     Int?    @map("seil_laenge_m")
+  mobileAbsicherungNotwendigkeit  Json    @default("[]") @map("mobile_absicherung_notwendigkeit")
+  mobileAbsicherungBegruendung    String? @map("mobile_absicherung_begruendung")
+  mobileAbsicherungMoeglichkeiten String? @map("mobile_absicherung_moeglichkeiten")
+  mobileAbsicherungFriends        Json    @default("[]") @map("mobile_absicherung_friends")
+  mobileAbsicherungKeile          Json    @default("[]") @map("mobile_absicherung_keile")
+  schlingen                       Json    @default("[]")
+  expresskarabinerAnzahl          Int?    @map("expresskarabiner_anzahl")
+  zusaetzlich                     Json    @default("[]")
 
   @@map("climbing_tour_ausruestung_schema")
 }
@@ -87,6 +91,8 @@ model ClimbingTourGelaendeUndGefahrenSchema {
   charakterFelsart          String?  @map("charakter_felsart")
   charakterBeschreibung     String?  @map("charakter_beschreibung")
   gefahren                  Json     @default("[]")
+  felsqualitaet             Json     @default("[]")
+  felsqualitaetAnders       Json     @default("[]") @map("felsqualitaet_anders")
 
   @@map("climbing_tour_gelaende_und_gefahren_schema")
 }
@@ -126,9 +132,14 @@ model ClimbingTourAnreiseSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
+  ausgangspunktName       String?  @map("ausgangspunkt_name")
+  ausgangspunktHoeheM     Int?     @map("ausgangspunkt_hoehe_m")
   parkplatzOrt            String?  @map("parkplatz_ort")
+  parkplatzHoeheM         Int?     @map("parkplatz_hoehe_m")
   parkplatzKosten         String?  @map("parkplatz_kosten")
   parkplatzBesonderheiten String?  @map("parkplatz_besonderheiten")
+  talstationName          String?  @map("talstation_name")
+  talstationHoeheM        Int?     @map("talstation_hoehe_m")
   oevVerkehrsmittel       Json     @default("[]") @map("oev_verkehrsmittel")
   oevEndstation           String?  @map("oev_endstation")
   oevLuftseilbahnMoeglich Boolean? @map("oev_luftseilbahn_moeglich")
@@ -156,11 +167,41 @@ model ClimbingTourZustiegUndAbstiegSchema {
   @@map("climbing_tour_zustieg_und_abstieg_schema")
 }
 
+model ClimbingTourStuetzpunktSchema {
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
+
+  typ      String?
+  mehrtags Boolean?
+
+  @@map("climbing_tour_stuetzpunkt_schema")
+}
+
+model ClimbingTourQuellenSchema {
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
+
+  kletterfuehrer Json @default("[]")
+  topoUrl        Json @default("[]") @map("topo_url")
+
+  @@map("climbing_tour_quellen_schema")
+}
+
+model ClimbingTourBerichtsqualitaetSchema {
+  baseId BigInt                 @id @map("base_id")
+  base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
+
+  score       Int?
+  begruendung String?
+
+  @@map("climbing_tour_berichtsqualitaet_schema")
+}
+
 model ClimbingTourBesonderesSchema {
   baseId BigInt                 @id @map("base_id")
   base   ClimbingTourBaseSchema @relation(fields: [baseId], references: [reportId], onDelete: Cascade)
 
-  saisonalitaet Json?   @map("saisonalitaet")
+  saisonalitaet  Json?   @map("saisonalitaet")
   frequentierung String? @map("frequentierung")
   bedingungen    Json?   @map("bedingungen")
   hinweise       Json    @default("[]")

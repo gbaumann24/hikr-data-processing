@@ -43,6 +43,7 @@ function climbingOutput(
 function emptyExtractionOutput(): ClimbingExtractionAgentResult {
   return {
     schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+    zusammenfassung: null,
     ausruestung: {
       seil: { art: null, laenge_m: null },
       mobile_absicherung: {
@@ -79,6 +80,8 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
         felsart: null,
       },
       gefahren: [],
+      felsqualitaet: [],
+      felsqualitaet_anders: [],
     },
     klettern: {
       schluesselstellen: {
@@ -112,10 +115,19 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
       },
     },
     anreise: {
+      ausgangspunkt: {
+        name: null,
+        hoehe_m: null,
+      },
       parkplatz: {
         ort: null,
+        hoehe_m: null,
         kosten: null,
         besonderheiten: null,
+      },
+      talstation: {
+        name: null,
+        hoehe_m: null,
       },
       oev: {
         verkehrsmittel: [],
@@ -123,6 +135,18 @@ function emptyExtractionOutput(): ClimbingExtractionAgentResult {
         luftseilbahn_moeglich: null,
         anmeldung_noetig: null,
       },
+    },
+    stuetzpunkt: {
+      typ: null,
+      mehrtags: null,
+    },
+    quellen: {
+      kletterfuehrer: [],
+      topo_url: [],
+    },
+    berichtsqualitaet: {
+      score: null,
+      begruendung: null,
     },
     zustieg_und_abstieg: {
       zustieg: {
@@ -210,6 +234,8 @@ describe('climbing extraction', () => {
   test('accepts gear items with independently missing size or count', () => {
     const output: ClimbingExtractionAgentResult = {
       schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+      zusammenfassung:
+        'Die Tour bietet gut abgesicherte Plattenkletterei mit kurzem Zustieg und klarer Linie.',
       ausruestung: {
         mobile_absicherung: {
           friends: [{ groesse: '0.75' }, { anzahl: 3 }],
@@ -261,6 +287,7 @@ describe('climbing extraction', () => {
           felsart: 'kalk',
         },
         gefahren: [{ typ: 'steinschlag', beschreibung: 'durch andere Seilschaften' }],
+        felsqualitaet: ['griffig', 'kompakt', 'scharf'],
       },
       klettern: {
         schluesselstellen: {
@@ -302,10 +329,19 @@ describe('climbing extraction', () => {
         },
       },
       anreise: {
+        ausgangspunkt: {
+          name: 'Breitwald an der Grimselpass-Strasse',
+          hoehe_m: 1600,
+        },
         parkplatz: {
           ort: 'Parkplatz Saentisbahn',
+          hoehe_m: 1706,
           kosten: '5 CHF/Tag',
           besonderheiten: 'wenige Plaetze',
+        },
+        talstation: {
+          name: 'Talstation Saentisbahn',
+          hoehe_m: 1350,
         },
         oev: {
           verkehrsmittel: [{ typ: 'zug' }, { typ: 'bus' }],
@@ -325,6 +361,18 @@ describe('climbing extraction', () => {
           schwierigkeit: 'scree and old snowfields',
         },
       },
+      stuetzpunkt: {
+        typ: 'huette',
+        mehrtags: true,
+      },
+      quellen: {
+        kletterfuehrer: ['Plaisir West 2012'],
+        topo_url: ['https://www.wachauclimbing.net/'],
+      },
+      berichtsqualitaet: {
+        score: 5,
+        begruendung: 'Obl. Grade, Topo-Referenz, Sanierungsjahr 2019 und Tourdatum sind vorhanden.',
+      },
       besonderes: {
         saisonalitaet: { geeignet: ['herbst'] },
         hinweise: ['Topo mitnehmen'],
@@ -341,6 +389,28 @@ describe('climbing extraction', () => {
         charakter: {
           exposition: 'NNO',
         },
+      },
+    };
+
+    expect(climbingExtractionAgentResultSchema.safeParse(output).success).toBe(false);
+  });
+
+  test('rejects invalid rock quality values', () => {
+    const output = {
+      schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+      gelaende_und_gefahren: {
+        felsqualitaet: ['polished'],
+      },
+    };
+
+    expect(climbingExtractionAgentResultSchema.safeParse(output).success).toBe(false);
+  });
+
+  test('rejects invalid report quality scores', () => {
+    const output = {
+      schemaVersion: CLIMBING_EXTRACTION_SCHEMA_VERSION,
+      berichtsqualitaet: {
+        score: 6,
       },
     };
 

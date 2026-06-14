@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'bun:test';
+import { baseLayerGateInstructions } from '../src/mastra/agents/baselayer-gate-agent';
 import {
   BASELAYER_GATE_DECISION,
   BASELAYER_GATE_REASON,
@@ -9,7 +10,7 @@ import {
   type HikrOrgPostBaseLayerInput,
 } from '../src/mastra/workflows/baselayer';
 
-const longDescription = 'Baselayer Bericht '.repeat(150);
+const longDescription = 'Baselayer Bericht '.repeat(260);
 
 function baseInput(overrides: Partial<HikrOrgPostBaseLayerInput> = {}): HikrOrgPostBaseLayerInput {
   return {
@@ -71,6 +72,14 @@ describe('baselayer gate', () => {
 
     expect(result.base.status).toBe(PREPROCESSOR_STATUS.SKIPPED);
     expect(result.reasons).toEqual([BASELAYER_GATE_REASON.MULTIPLE_ROUTES_IN_REPORT]);
+  });
+
+  test('keeps two-day hut or bivouac reports when they describe one route', () => {
+    expect(baseLayerGateInstructions).toContain('only one route/objective');
+    expect(baseLayerGateInstructions).toContain('spans two calendar days');
+    expect(baseLayerGateInstructions).toContain('hut');
+    expect(baseLayerGateInstructions).toContain('bivouac');
+    expect(baseLayerGateInstructions).toContain('overnight stays');
   });
 
   test('skips reports that are not about a mountain activity', async () => {

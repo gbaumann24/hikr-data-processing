@@ -171,6 +171,7 @@ describe('postgres database adapter', () => {
 
   test('wires climbing persistence through operation modules', async () => {
     const calls: string[] = [];
+    const climbingTourBaseUpdates: unknown[] = [];
     const detailUpserts: unknown[] = [];
     const routeUpdates: unknown[] = [];
     const summitUpserts: unknown[] = [];
@@ -213,6 +214,10 @@ describe('postgres database adapter', () => {
         upsert: async () => {
           calls.push('tx.climbingTourBaseSchema.upsert');
         },
+        update: async (input: unknown) => {
+          calls.push('tx.climbingTourBaseSchema.update');
+          climbingTourBaseUpdates.push(input);
+        },
       },
       climbingGardenBaseSchema: {
         upsert: async () => {
@@ -241,8 +246,9 @@ describe('postgres database adapter', () => {
         },
       },
       climbingTourGelaendeUndGefahrenSchema: {
-        deleteMany: async () => {
-          calls.push('tx.climbingTourGelaendeUndGefahrenSchema.deleteMany');
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourGelaendeUndGefahrenSchema.upsert');
+          detailUpserts.push(input);
         },
       },
       climbingTourKletternSchema: {
@@ -252,13 +258,32 @@ describe('postgres database adapter', () => {
         },
       },
       climbingTourAnreiseSchema: {
-        deleteMany: async () => {
-          calls.push('tx.climbingTourAnreiseSchema.deleteMany');
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourAnreiseSchema.upsert');
+          detailUpserts.push(input);
         },
       },
       climbingTourZustiegUndAbstiegSchema: {
         deleteMany: async () => {
           calls.push('tx.climbingTourZustiegUndAbstiegSchema.deleteMany');
+        },
+      },
+      climbingTourStuetzpunktSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourStuetzpunktSchema.upsert');
+          detailUpserts.push(input);
+        },
+      },
+      climbingTourQuellenSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourQuellenSchema.upsert');
+          detailUpserts.push(input);
+        },
+      },
+      climbingTourBerichtsqualitaetSchema: {
+        upsert: async (input: unknown) => {
+          calls.push('tx.climbingTourBerichtsqualitaetSchema.upsert');
+          detailUpserts.push(input);
         },
       },
       climbingTourBesonderesSchema: {
@@ -354,13 +379,47 @@ describe('postgres database adapter', () => {
     await database.upsertClimbingTourDetails({
       reportId: 42n,
       schemaVersion: 'climbing-extraction-v1',
+      zusammenfassung:
+        'Die Tour bietet gut abgesicherte Plattenkletterei mit kurzem Zustieg und klarer Linie.',
       zeitbedarf: {
         zustieg_min: 45,
+      },
+      gelaende_und_gefahren: {
+        charakter: {
+          felsart: 'kalk',
+        },
+        felsqualitaet: ['griffig', 'kompakt'],
       },
       klettern: {
         schluesselstellen: {
           stellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
         },
+      },
+      anreise: {
+        ausgangspunkt: {
+          name: 'Breitwald',
+          hoehe_m: 1600,
+        },
+        parkplatz: {
+          ort: 'Oberi Bire',
+          hoehe_m: 1706,
+        },
+        talstation: {
+          name: 'Talstation Pfadfluh',
+          hoehe_m: 1200,
+        },
+      },
+      stuetzpunkt: {
+        typ: 'huette',
+        mehrtags: true,
+      },
+      quellen: {
+        kletterfuehrer: ['Plaisir West 2012'],
+        topo_url: ['https://www.wachauclimbing.net/'],
+      },
+      berichtsqualitaet: {
+        score: 5,
+        begruendung: 'Obl. Grade, Topo-Referenz, Sanierungsjahr 2019 und Tourdatum sind vorhanden.',
       },
       besonderes: {
         saisonalitaet: {
@@ -388,14 +447,18 @@ describe('postgres database adapter', () => {
       'tx.climbingGardenBaseSchema.upsert',
       '$transaction',
       'tx.climbingTourBaseSchema.findUnique',
+      'tx.climbingTourBaseSchema.update',
       'tx.climbingTourAusruestungSchema.deleteMany',
       'tx.climbingTourZeitbedarfSchema.upsert',
       'tx.climbingTourAbsicherungSchema.deleteMany',
       'tx.climbingTourSchuhwerkSchema.deleteMany',
-      'tx.climbingTourGelaendeUndGefahrenSchema.deleteMany',
+      'tx.climbingTourGelaendeUndGefahrenSchema.upsert',
       'tx.climbingTourKletternSchema.upsert',
-      'tx.climbingTourAnreiseSchema.deleteMany',
+      'tx.climbingTourAnreiseSchema.upsert',
       'tx.climbingTourZustiegUndAbstiegSchema.deleteMany',
+      'tx.climbingTourStuetzpunktSchema.upsert',
+      'tx.climbingTourQuellenSchema.upsert',
+      'tx.climbingTourBerichtsqualitaetSchema.upsert',
       'tx.climbingTourBesonderesSchema.upsert',
     ]);
     expect(detailUpserts).toMatchObject([
@@ -417,10 +480,86 @@ describe('postgres database adapter', () => {
         where: { baseId: 42n },
         create: {
           baseId: 42n,
+          charakterFelsart: 'kalk',
+          gefahren: [],
+          felsqualitaet: ['griffig', 'kompakt'],
+          felsqualitaetAnders: [],
+        },
+        update: {
+          charakterFelsart: 'kalk',
+          gefahren: [],
+          felsqualitaet: ['griffig', 'kompakt'],
+          felsqualitaetAnders: [],
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
           schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
         },
         update: {
           schluesselstellenStellen: [{ wo: '2. Seillänge', beschreibung: 'Platte' }],
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          ausgangspunktName: 'Breitwald',
+          ausgangspunktHoeheM: 1600,
+          parkplatzOrt: 'Oberi Bire',
+          parkplatzHoeheM: 1706,
+          talstationName: 'Talstation Pfadfluh',
+          talstationHoeheM: 1200,
+          oevVerkehrsmittel: [],
+        },
+        update: {
+          ausgangspunktName: 'Breitwald',
+          ausgangspunktHoeheM: 1600,
+          parkplatzOrt: 'Oberi Bire',
+          parkplatzHoeheM: 1706,
+          talstationName: 'Talstation Pfadfluh',
+          talstationHoeheM: 1200,
+          oevVerkehrsmittel: [],
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          typ: 'huette',
+          mehrtags: true,
+        },
+        update: {
+          typ: 'huette',
+          mehrtags: true,
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          kletterfuehrer: ['Plaisir West 2012'],
+          topoUrl: ['https://www.wachauclimbing.net/'],
+        },
+        update: {
+          kletterfuehrer: ['Plaisir West 2012'],
+          topoUrl: ['https://www.wachauclimbing.net/'],
+        },
+      },
+      {
+        where: { baseId: 42n },
+        create: {
+          baseId: 42n,
+          score: 5,
+          begruendung:
+            'Obl. Grade, Topo-Referenz, Sanierungsjahr 2019 und Tourdatum sind vorhanden.',
+        },
+        update: {
+          score: 5,
+          begruendung:
+            'Obl. Grade, Topo-Referenz, Sanierungsjahr 2019 und Tourdatum sind vorhanden.',
         },
       },
       {
@@ -433,6 +572,15 @@ describe('postgres database adapter', () => {
         update: {
           saisonalitaet: { geeignet: [], ungeeignet: [] },
           hinweise: ['Am Einstieg warten'],
+        },
+      },
+    ]);
+    expect(climbingTourBaseUpdates).toEqual([
+      {
+        where: { reportId: 42n },
+        data: {
+          zusammenfassung:
+            'Die Tour bietet gut abgesicherte Plattenkletterei mit kurzem Zustieg und klarer Linie.',
         },
       },
     ]);

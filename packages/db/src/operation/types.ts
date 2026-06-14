@@ -73,6 +73,7 @@ type NamedExtractionItem = {
 };
 
 type ClimbingTourDetailsFields = {
+  zusammenfassung: string | null;
   ausruestung: {
     seil: {
       art: string | null;
@@ -127,6 +128,8 @@ type ClimbingTourDetailsFields = {
       beschreibung: string | null;
     };
     gefahren: Array<NamedExtractionItem & { beschreibung: string | null }>;
+    felsqualitaet: string[];
+    felsqualitaet_anders: string[];
   };
   klettern: {
     schluesselstellen: {
@@ -175,10 +178,19 @@ type ClimbingTourDetailsFields = {
     };
   };
   anreise: {
+    ausgangspunkt: {
+      name: string | null;
+      hoehe_m: number | null;
+    };
     parkplatz: {
       ort: string | null;
+      hoehe_m: number | null;
       kosten: string | null;
       besonderheiten: string | null;
+    };
+    talstation: {
+      name: string | null;
+      hoehe_m: number | null;
     };
     oev: {
       verkehrsmittel: Array<string | NamedExtractionItem>;
@@ -203,6 +215,18 @@ type ClimbingTourDetailsFields = {
       hm_abstieg: number | null;
     };
     verpflegung_typ: string | null;
+  };
+  stuetzpunkt: {
+    typ: string | null;
+    mehrtags: boolean | null;
+  };
+  quellen: {
+    kletterfuehrer: string[];
+    topo_url: string[];
+  };
+  berichtsqualitaet: {
+    score: number | null;
+    begruendung: string | null;
   };
   besonderes: {
     saisonalitaet: string | ClimbingTourSeasonality | null;

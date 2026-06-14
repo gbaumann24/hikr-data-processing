@@ -10,6 +10,7 @@ export async function upsertClimbingTourDetails(
 ): Promise<void> {
   await prisma.$transaction(async (tx) => {
     await assertClimbingTourBaseExists(tx, input.reportId);
+    await persistZusammenfassung(tx, input);
     await persistAusruestung(tx, input);
     await persistZeitbedarf(tx, input);
     await persistAbsicherung(tx, input);
@@ -18,6 +19,9 @@ export async function upsertClimbingTourDetails(
     await persistKlettern(tx, input);
     await persistAnreise(tx, input);
     await persistZustiegUndAbstieg(tx, input);
+    await persistStuetzpunkt(tx, input);
+    await persistQuellen(tx, input);
+    await persistBerichtsqualitaet(tx, input);
     await persistBesonderes(tx, input);
   });
 }
@@ -37,6 +41,17 @@ async function assertClimbingTourBaseExists(
       `Cannot persist climbing tour details for report ${reportId.toString()} without a climbing tour base row`,
     );
   }
+}
+
+// Writes the one-sentence extraction summary onto the climbing tour base row.
+async function persistZusammenfassung(
+  tx: ClimbingTourDetailsTransaction,
+  input: ClimbingTourDetailsSchemaWriteInput,
+): Promise<void> {
+  await tx.climbingTourBaseSchema.update({
+    where: { reportId: input.reportId },
+    data: { zusammenfassung: nullable(input.zusammenfassung) },
+  });
 }
 
 // Writes or clears equipment extraction details for the report.
@@ -171,6 +186,8 @@ async function persistGelaendeUndGefahren(
     charakterFelsart: nullable(details.charakter?.felsart),
     charakterBeschreibung: nullable(details.charakter?.beschreibung),
     gefahren: jsonArray(details.gefahren),
+    felsqualitaet: jsonArray(details.felsqualitaet),
+    felsqualitaetAnders: jsonArray(details.felsqualitaet_anders),
   };
 
   await tx.climbingTourGelaendeUndGefahrenSchema.upsert({
@@ -238,9 +255,14 @@ async function persistAnreise(
   }
 
   const data = {
+    ausgangspunktName: nullable(details.ausgangspunkt?.name),
+    ausgangspunktHoeheM: nullable(details.ausgangspunkt?.hoehe_m),
     parkplatzOrt: nullable(details.parkplatz?.ort),
+    parkplatzHoeheM: nullable(details.parkplatz?.hoehe_m),
     parkplatzKosten: nullable(details.parkplatz?.kosten),
     parkplatzBesonderheiten: nullable(details.parkplatz?.besonderheiten),
+    talstationName: nullable(details.talstation?.name),
+    talstationHoeheM: nullable(details.talstation?.hoehe_m),
     oevVerkehrsmittel: jsonArray(details.oev?.verkehrsmittel),
     oevEndstation: nullable(details.oev?.endstation),
     oevLuftseilbahnMoeglich: nullable(details.oev?.luftseilbahn_moeglich),
@@ -283,6 +305,80 @@ async function persistZustiegUndAbstieg(
   };
 
   await tx.climbingTourZustiegUndAbstiegSchema.upsert({
+    where: { baseId: input.reportId },
+    create: { baseId: input.reportId, ...data },
+    update: data,
+  });
+}
+
+// Writes or clears hut, bivouac, and multi-day extraction details for the report.
+async function persistStuetzpunkt(
+  tx: ClimbingTourDetailsTransaction,
+  input: ClimbingTourDetailsSchemaWriteInput,
+): Promise<void> {
+  const details = input.stuetzpunkt;
+
+  if (!details) {
+    await tx.climbingTourStuetzpunktSchema.deleteMany({ where: { baseId: input.reportId } });
+    return;
+  }
+
+  const data = {
+    typ: nullable(details.typ),
+    mehrtags: nullable(details.mehrtags),
+  };
+
+  await tx.climbingTourStuetzpunktSchema.upsert({
+    where: { baseId: input.reportId },
+    create: { baseId: input.reportId, ...data },
+    update: data,
+  });
+}
+
+// Writes or clears guidebook and topo source extraction details for the report.
+async function persistQuellen(
+  tx: ClimbingTourDetailsTransaction,
+  input: ClimbingTourDetailsSchemaWriteInput,
+): Promise<void> {
+  const details = input.quellen;
+
+  if (!details) {
+    await tx.climbingTourQuellenSchema.deleteMany({ where: { baseId: input.reportId } });
+    return;
+  }
+
+  const data = {
+    kletterfuehrer: jsonArray(details.kletterfuehrer),
+    topoUrl: jsonArray(details.topo_url),
+  };
+
+  await tx.climbingTourQuellenSchema.upsert({
+    where: { baseId: input.reportId },
+    create: { baseId: input.reportId, ...data },
+    update: data,
+  });
+}
+
+// Writes or clears extractor report-quality details for the report.
+async function persistBerichtsqualitaet(
+  tx: ClimbingTourDetailsTransaction,
+  input: ClimbingTourDetailsSchemaWriteInput,
+): Promise<void> {
+  const details = input.berichtsqualitaet;
+
+  if (!details) {
+    await tx.climbingTourBerichtsqualitaetSchema.deleteMany({
+      where: { baseId: input.reportId },
+    });
+    return;
+  }
+
+  const data = {
+    score: nullable(details.score),
+    begruendung: nullable(details.begruendung),
+  };
+
+  await tx.climbingTourBerichtsqualitaetSchema.upsert({
     where: { baseId: input.reportId },
     create: { baseId: input.reportId, ...data },
     update: data,
