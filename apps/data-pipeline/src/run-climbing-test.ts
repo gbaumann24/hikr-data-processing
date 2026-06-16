@@ -122,8 +122,7 @@ function printUsage(): void {
   bun src/run-climbing-test.ts --special-case
 
 Always purges the local Postgres test DB, seeds source posts from SQLite,
-then runs the climbing workflow against the seeded rows. With --special-case,
-it also runs the climbing tour aggregation job afterward.`);
+then runs the climbing workflow and climbing tour aggregation job against the seeded rows.`);
 }
 
 function logProgress(event: ClimbingPipelineProgressEvent): void {
@@ -409,21 +408,19 @@ async function main(): Promise<void> {
     console.log(`\nDone. Processed ${result.total} posts`);
     console.log('Status counts:', result.statusCounts);
 
-    if (args.useSpecialCaseFixture) {
-      console.log('\nRunning climbing tour aggregation job for special-case data...');
-      const { mastra } = await import('agent/mastra');
-      const aggregateResult = await runClimbingTourAggregationService({
-        prisma,
-        summarize: createMastraClimbingTourAggregationSummarizer(
-          mastra.getAgent('climbing-tour-aggregation-agent'),
-        ),
-        onProgress: logAggregationProgress,
-      });
+    console.log('\nRunning climbing tour aggregation job...');
+    const { mastra } = await import('agent/mastra');
+    const aggregateResult = await runClimbingTourAggregationService({
+      prisma,
+      summarize: createMastraClimbingTourAggregationSummarizer(
+        mastra.getAgent('climbing-tour-aggregation-agent'),
+      ),
+      onProgress: logAggregationProgress,
+    });
 
-      console.log(
-        `Aggregation done. Routes seen: ${aggregateResult.totalRoutes}; aggregated: ${aggregateResult.aggregatedRoutes}; skipped: ${aggregateResult.skippedRoutes}; stale deleted: ${aggregateResult.staleDeleted}.`,
-      );
-    }
+    console.log(
+      `Aggregation done. Routes seen: ${aggregateResult.totalRoutes}; aggregated: ${aggregateResult.aggregatedRoutes}; skipped: ${aggregateResult.skippedRoutes}; stale deleted: ${aggregateResult.staleDeleted}.`,
+    );
 
     const counts = await countTestDatabaseRows(prisma);
     console.log(

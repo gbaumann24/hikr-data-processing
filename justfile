@@ -24,11 +24,11 @@ run limit="":
 extract-climbing limit="" job_id="":
     {{ if limit != "" { "LIMIT=" + limit } else { "" } }} {{ if job_id != "" { "EXTRACTION_JOB_ID=" + job_id } else { "" } }} WORKFLOW=climbing bun run apps/data-pipeline/src/run.ts
 
-# Purge local Postgres, seed source posts from SQLite, then run climbing pipeline
+# Purge local Postgres, seed source posts from SQLite, then run climbing pipeline and aggregation
 test-run-climbing limit="":
     bun run apps/data-pipeline/src/run-climbing-test.ts {{ if limit != "" { "--limit " + limit } else { "" } }}
 
-# Purge local Postgres, seed the special-case fixture, then run climbing pipeline
+# Purge local Postgres, seed the special-case fixture, then run climbing pipeline and aggregation
 test-run-climbing-special-case limit="":
     bun run apps/data-pipeline/src/run-climbing-test.ts --special-case {{ if limit != "" { "--limit " + limit } else { "" } }}
 
