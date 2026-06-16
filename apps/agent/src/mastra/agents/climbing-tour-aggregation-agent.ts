@@ -7,13 +7,29 @@ loadRootEnv();
 export const climbingTourAggregationAgentOutputSchema = z
   .object({
     text: z
-      .record(z.string(), z.string())
+      .array(
+        z
+          .object({
+            path: z.string().min(1),
+            text: z.string(),
+          })
+          .strict(),
+      )
       .optional()
-      .describe('Aggregated German present-tense beta summaries keyed by extraction field path.'),
+      .describe(
+        'Aggregated German present-tense beta summaries. Each entry path is an extraction field path.',
+      ),
     gefahren_by_typ: z
-      .record(z.string(), z.string())
+      .array(
+        z
+          .object({
+            typ: z.string().min(1),
+            beschreibung: z.string(),
+          })
+          .strict(),
+      )
       .optional()
-      .describe('Aggregated hazard descriptions keyed by hazard type.'),
+      .describe('Aggregated hazard descriptions. Each entry typ is a hazard type.'),
     schluesselstellen: z
       .array(
         z
@@ -27,10 +43,10 @@ export const climbingTourAggregationAgentOutputSchema = z
       .optional()
       .describe('Deduplicated crux list for the route.'),
     seillaengen_by_nummer: z
-      .record(
-        z.string(),
+      .array(
         z
           .object({
+            nummer: z.string().min(1),
             beschreibung: z.string().nullable().optional(),
           })
           .strict(),
@@ -71,6 +87,9 @@ Rules:
 - Deduplicate semantically repeated statements, but keep materially different details, variants, and warnings.
 - For the "zusammenfassung" entry in "text", write a useful route-level summary in roughly 2-4 concise sentences: route character, seriousness, access/descent, and the most important practical beta when evidenced.
 - Avoid awkward meta wording such as "Keile werden nur vereinzelt erwähnt". Turn frequency information into practical beta only when helpful, e.g. "Einzelne Berichte empfehlen kleine Keile/Friends fuer die groesseren Hakenabstaende im Mittelteil."
-- Return only the structured output. Use field paths exactly as provided for the text map.`,
+- Return only the structured output.
+- For text entries, use path values exactly as provided in the input text map.
+- For gefahren_by_typ entries, use typ values exactly as provided in the input gefahrenByTyp map.
+- For seillaengen_by_nummer entries, use nummer values exactly as provided in the input seillaengenByNummer map.`,
   model: 'openai/gpt-5.4-mini',
 });

@@ -8,6 +8,27 @@ import {
 } from '../src/mastra/tools/climbing-route-lookup-tool';
 
 describe('climbing route lookup tool', () => {
+  // Reproduces LLM tool calls that include unused blank optional fields.
+  test('accepts unused blank summit fields when listing summit names', () => {
+    const inputSchema = climbingRouteLookupTool.inputSchema as unknown as {
+      parse: (input: unknown) => unknown;
+    };
+
+    expect(
+      inputSchema.parse({
+        mode: 'summitsByCanton',
+        canton: 'Uri',
+        summitName: '',
+        heightMeters: null,
+      }),
+    ).toEqual({
+      mode: 'summitsByCanton',
+      canton: 'Uri',
+      summitName: '',
+      heightMeters: null,
+    });
+  });
+
   test('lists all summit names for a canton', async () => {
     const summitInputs: unknown[] = [];
     const requestContext = createRequestContext({

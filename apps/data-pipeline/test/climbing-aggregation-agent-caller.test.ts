@@ -9,9 +9,12 @@ describe('climbing tour aggregation agent caller', () => {
         calls.push({ messages, options });
         return {
           object: {
-            text: {
-              zusammenfassung: 'Die Route bietet kompakte Plattenkletterei.',
-            },
+            text: [
+              {
+                path: 'zusammenfassung',
+                text: 'Die Route bietet kompakte Plattenkletterei.',
+              },
+            ],
           },
         };
       },
@@ -29,9 +32,12 @@ describe('climbing tour aggregation agent caller', () => {
         hinweise: [],
       }),
     ).resolves.toEqual({
-      text: {
-        zusammenfassung: 'Die Route bietet kompakte Plattenkletterei.',
-      },
+      text: [
+        {
+          path: 'zusammenfassung',
+          text: 'Die Route bietet kompakte Plattenkletterei.',
+        },
+      ],
     });
     expect(calls).toHaveLength(1);
   });

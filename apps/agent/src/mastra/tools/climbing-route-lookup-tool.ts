@@ -6,10 +6,7 @@ export const CLIMBING_ROUTE_LOOKUP_CONTEXT_KEY = 'climbingRouteLookup';
 
 export type ClimbingRouteLookup = Pick<
   ClimbingDataPipelineDatabase,
-  | 'findRouteSummitNames'
-  | 'findRouteNames'
-  | 'findRouteCragNames'
-  | 'updateSummitHeightIfMissing'
+  'findRouteSummitNames' | 'findRouteNames' | 'findRouteCragNames' | 'updateSummitHeightIfMissing'
 >;
 
 const lookupInputSchema = z
@@ -21,8 +18,8 @@ const lookupInputSchema = z
       'updateSummitHeight',
     ]),
     canton: z.string().min(1),
-    summitName: z.string().min(1).optional(),
-    heightMeters: z.number().int().positive().optional(),
+    summitName: z.union([z.string().min(1), z.literal('')]).optional(),
+    heightMeters: z.union([z.number().int().positive(), z.null()]).optional(),
   })
   .superRefine((input, context) => {
     if (input.mode === 'routesByCantonAndSummit' && !input.summitName) {
@@ -42,7 +39,7 @@ const lookupInputSchema = z
         });
       }
 
-      if (input.heightMeters === undefined) {
+      if (input.heightMeters === undefined || input.heightMeters === null) {
         context.addIssue({
           code: z.ZodIssueCode.custom,
           message: 'heightMeters is required when mode is updateSummitHeight',
@@ -101,7 +98,7 @@ export const climbingRouteLookupTool = createTool({
     }
 
     if (input.mode === 'updateSummitHeight') {
-      if (!input.summitName || input.heightMeters === undefined) {
+      if (!input.summitName || input.heightMeters === undefined || input.heightMeters === null) {
         throw new Error('summitName and heightMeters are required when mode is updateSummitHeight');
       }
 

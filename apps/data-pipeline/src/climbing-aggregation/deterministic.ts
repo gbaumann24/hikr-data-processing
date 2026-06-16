@@ -447,17 +447,21 @@ export function mergeAgentOutput(
   payload: Record<string, unknown>,
   output: ClimbingTourAggregationAgentOutput,
 ): void {
-  for (const [path, value] of Object.entries(output.text ?? {})) {
-    if (isNonEmptyString(value)) {
-      mergeAggregateObject(payload, path, { summary: value.trim() });
+  for (const entry of output.text ?? []) {
+    if (isNonEmptyString(entry.path) && isNonEmptyString(entry.text)) {
+      mergeAggregateObject(payload, entry.path.trim(), { summary: entry.text.trim() });
     }
   }
 
-  for (const [typ, beschreibung] of Object.entries(output.gefahren_by_typ ?? {})) {
-    if (isNonEmptyString(beschreibung)) {
-      mergeAggregateObject(payload, `gelaende_und_gefahren.gefahren.by_typ.${typ}.beschreibung`, {
-        summary: beschreibung.trim(),
-      });
+  for (const entry of output.gefahren_by_typ ?? []) {
+    if (isNonEmptyString(entry.typ) && isNonEmptyString(entry.beschreibung)) {
+      mergeAggregateObject(
+        payload,
+        `gelaende_und_gefahren.gefahren.by_typ.${entry.typ.trim()}.beschreibung`,
+        {
+          summary: entry.beschreibung.trim(),
+        },
+      );
     }
   }
 
@@ -465,11 +469,11 @@ export function mergeAgentOutput(
     setPath(payload, 'klettern.schluesselstellen.stellen.values', output.schluesselstellen);
   }
 
-  for (const [nummer, pitch] of Object.entries(output.seillaengen_by_nummer ?? {})) {
-    if (isNonEmptyString(pitch.beschreibung)) {
+  for (const pitch of output.seillaengen_by_nummer ?? []) {
+    if (isNonEmptyString(pitch.nummer) && isNonEmptyString(pitch.beschreibung)) {
       mergeAggregateObject(
         payload,
-        `klettern.seillaengen_info.seillaengen.by_nummer.${nummer}.beschreibung`,
+        `klettern.seillaengen_info.seillaengen.by_nummer.${pitch.nummer.trim()}.beschreibung`,
         {
           summary: pitch.beschreibung.trim(),
         },

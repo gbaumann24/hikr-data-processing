@@ -316,12 +316,18 @@ describe('climbing tour aggregation', () => {
     const payload: Record<string, unknown> = {};
 
     mergeAgentOutput(payload, {
-      text: {
-        zusammenfassung: 'Die Route bietet kompakte Plattenkletterei.',
-      },
-      gefahren_by_typ: {
-        steinschlag: 'Steinschlaggefahr besteht im oberen Wandteil.',
-      },
+      text: [
+        {
+          path: 'zusammenfassung',
+          text: 'Die Route bietet kompakte Plattenkletterei.',
+        },
+      ],
+      gefahren_by_typ: [
+        {
+          typ: 'steinschlag',
+          beschreibung: 'Steinschlaggefahr besteht im oberen Wandteil.',
+        },
+      ],
       schluesselstellen: [
         {
           wo: '1. SL',
@@ -329,9 +335,9 @@ describe('climbing tour aggregation', () => {
           evidence_count: 2,
         },
       ],
-      seillaengen_by_nummer: {
-        '1': { beschreibung: 'Die erste Seillänge führt über geneigte Platten.' },
-      },
+      seillaengen_by_nummer: [
+        { nummer: '1', beschreibung: 'Die erste Seillänge führt über geneigte Platten.' },
+      ],
       hinweise: ['Topo mitnehmen.'],
     });
 

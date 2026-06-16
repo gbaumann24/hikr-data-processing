@@ -7,17 +7,51 @@ import type { Prisma, PrismaClient } from '@hikr/db';
 import { seedHikrReportsFromSqlite } from '../src/database/sqlite-source-seed';
 
 describe('SQLite source seeding', () => {
+  // Verifies that the manual special-case fixture stays small and Furka-specific.
+  test('keeps the special-case fixture focused on Furka reports', () => {
+    const sqlitePath = join(import.meta.dir, '..', 'fixtures', 'special-case.sqlite');
+    const db = new Database(sqlitePath, { readonly: true });
+
+    try {
+      const counts = db
+        .query<{ total: number; nonFurkaRows: number }, []>(
+          `
+          SELECT
+            COUNT(*) AS total,
+            COALESCE(
+              SUM(
+                CASE
+                  WHEN lower(
+                    coalesce(title, '') || ' ' ||
+                    coalesce(region_path_csv, '') || ' ' ||
+                    coalesce(geotags_csv, '') || ' ' ||
+                    coalesce(description, '')
+                  ) LIKE '%furka%' THEN 0
+                  ELSE 1
+                END
+              ),
+              0
+            ) AS nonFurkaRows
+          FROM hikr_reports
+        `,
+        )
+        .get();
+
+      expect(counts?.total).toBeGreaterThan(0);
+      expect(counts?.total).toBeLessThanOrEqual(40);
+      expect(counts?.nonFurkaRows).toBe(0);
+    } finally {
+      db.close();
+    }
+  });
+
   test('maps SQLite and ISO timestamps to valid dates', async () => {
     const tempDir = mkdtempSync(join(tmpdir(), 'hikr-sqlite-source-seed-'));
     const sqlitePath = join(tempDir, 'fixture.sqlite');
     const capturedRows: Prisma.HikrOrgPostSchemaCreateManyInput[] = [];
     const prisma = {
       hikrOrgPostSchema: {
-        createMany: async ({
-          data,
-        }: {
-          data: Prisma.HikrOrgPostSchemaCreateManyInput[];
-        }) => {
+        createMany: async ({ data }: { data: Prisma.HikrOrgPostSchemaCreateManyInput[] }) => {
           capturedRows.push(...data);
           return { count: data.length };
         },

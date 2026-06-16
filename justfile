@@ -32,6 +32,10 @@ test-run-climbing limit="":
 test-run-climbing-special-case limit="":
     bun run apps/data-pipeline/src/run-climbing-test.ts --special-case {{ if limit != "" { "--limit " + limit } else { "" } }}
 
+# Run only the climbing aggregation step against the current Postgres data
+test-run-climbing-aggregation:
+    bun run apps/data-pipeline/src/run-climbing-aggregation.ts
+
 # ── DB ────────────────────────────────────────────────────────────────────────
 
 # Generate Prisma client
